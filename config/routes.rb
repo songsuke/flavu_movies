@@ -24,7 +24,8 @@ EasilyxMovie::Application.routes.draw do
   match '/home', to: 'static_pages#home'
 
   resources :posts
-  root :to => 'posts#index'
+  root to: 'static_pages#home'
+ # root :to => 'posts#index'
   match '/getip',    to: 'ip_get#getip'
 
   # The priority is based upon order of creation:

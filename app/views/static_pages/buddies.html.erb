@@ -1,2 +1,42 @@
-<h1>StaticPages#buddies</h1>
-<p>Find me in app/views/static_pages/buddies.html.erb</p>
+<div id ="home-content">
+
+	<div id ="f1">
+		<h11> Followers </h11>
+	</div>
+	<% @fw1.each do |follower|%>
+		<div>
+			<%= follower['follower']['username'] %>
+			<%= follower['follower']['email'] %>
+		</div>
+	<%end%>
+	<div id ="f1">
+		<h11> Following </h11>
+	</div>
+	<% @fw2.each do |followee|%>
+		<div>
+			<%= followee['followee']['username'] %>
+			<%= followee['followee']['email'] %>
+		</div>
+	<%end%>
+	<div id ="f1">
+		<h11> People who want to be your friends </h11>
+	</div>
+	<% @rq.each do |request|%>
+		<div>
+			<%= request['requester']['username'] %>
+			<%= request['requester']['email'] %>
+		</div>
+	<%end%>
+
+		<div>
+			<%if (@bk1= 'nil')%>
+			<h1> No one is blocking you! </h1>
+			
+			<%else%>
+			<%= @bk1['username'] %>
+		</div>
+		<%end%>
+
+
+
+</div>

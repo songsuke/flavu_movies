@@ -7,15 +7,16 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<header id="nav1" class="navbar navbar-fixed-top navbar-inverse">
+<header id="nav1" class="navbar navbar-inverse">
   <div class="navbar-inner">
-    <div class="container">
-		<h1 class = "brand"> <%= link_to "Home", home_path %> </h1>
+    <div class="container fow-fluid">
+		<h1 class = "brand"> <%= link_to "Flavu MoviesX", home_path %> </h1>
 			<ul class = "nav pull-right">
 				<li><%= link_to "Movies", movies_path %> </li>
 				<li><%= link_to "Theatres", theatres_path %> </li>
-				<li><%= link_to "Setting", settings_path %> </li>
 				<li><%= link_to "Buddies", buddies_path %> </li>
+				<li><%= link_to "Preferences", preferences_path %> </li>
+				<li><%= link_to "Setting", settings_path %> </li>
 				<li><%= link_to "Register", register_path %></li>
 				<li><%= link_to "Sign In", signin_path %>  </li>
 			</ul>

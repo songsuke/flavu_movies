@@ -1,3 +1,10 @@
+<html>
+<head>
+	<script src="jquery-1.7.2.min.js"></script>
+<script src="lightbox.js"></script>
+<link href="lightbox.css" rel="stylesheet" />
+</head>
+<body>
 <h1> Liked Theatres </h1>
 <table>
 <tr>
@@ -6,6 +13,7 @@
 <th> Market </th>
 <th> Adult Price </th>
 <th> Child Price </th>
+<th> Map </th>
 </tr>
 
 <% @lt['theatres'].each do |liked| %>
@@ -15,7 +23,9 @@
 		<td> <%= liked['market'] %> </td>
 		<td> <%= liked['adult_price'] %> </td>
 		<td> <%= liked['child_price'] %> </td>
-	
+
+		<td> <a href= "http://maps.googleapis.com/maps/api/staticmap?center=<%=liked['location']['address']%>,<%=liked['location']['city']%>&zoom=15&size=500x500&markers=color:red%7Clabel:S%7C<%=liked['location']['address']%>,<%=liked['location']['city']%>&sensor=false&key=AIzaSyDb5IpzvRHH678YrbdxmQyR4J5opeTKlQk" rel="lightbox" > 
+			<img src="http://maps.googleapis.com/maps/api/staticmap?center=<%=liked['location']['address']%>,<%=liked['location']['city']%>&zoom=11&size=200x200&markers=color:red%7Clabel:S%7C<%=liked['location']['address']%>,<%=liked['location']['city']%>&sensor=false"> Click </td>
 	</tr>
 <%end%>
 </table>
@@ -28,6 +38,7 @@
 <th> Market </th>
 <th> Adult Price </th>
 <th> Child Price </th>
+<th> Map </th>
 </tr>
 
 <% @nt['theatres'].each do |nearby| %>
@@ -37,6 +48,8 @@
 		<td> <%= nearby['market'] %> </td>
 		<td> <%= nearby['adult_price'] %> </td>
 		<td> <%= nearby['child_price'] %> </td>
+		<td> <a href= "http://maps.googleapis.com/maps/api/staticmap?center=<%=nearby['location']['address']%>,<%=nearby['location']['city']%>&zoom=15&size=500x500&markers=color:red%7Clabel:S%7C<%=nearby['location']['address']%>,<%=nearby['location']['city']%>&sensor=false&key=AIzaSyDb5IpzvRHH678YrbdxmQyR4J5opeTKlQk" rel="lightbox" > 
+			<img src="http://maps.googleapis.com/maps/api/staticmap?center=<%=nearby['location']['address']%>,<%=nearby['location']['city']%>&zoom=11&size=200x200&markers=color:red%7Clabel:S%7C<%=nearby['location']['address']%>,<%=nearby['location']['city']%>&sensor=false"> Click </td>
 <%end%>
 </table>
 
@@ -48,6 +61,7 @@
 <th> Market </th>
 <th> Adult Price </th>
 <th> Child Price </th>
+<th> Map </th>
 </tr>
 
 <% @nit['theatres'].each do |nit1| %>
@@ -57,6 +71,9 @@
 		<td> <%= nit1['market'] %> </td>
 		<td> <%= nit1['adult_price'] %> </td>
 		<td> <%= nit1['child_price'] %> </td>
+		<td> <a href= "http://maps.googleapis.com/maps/api/staticmap?center=<%=nit1['location']['address']%>,<%=nit1['location']['city']%>&zoom=15&size=500x500&markers=color:red%7Clabel:S%7C<%=nit1['location']['address']%>,<%=nit1['location']['city']%>&sensor=false&key=AIzaSyDb5IpzvRHH678YrbdxmQyR4J5opeTKlQk" rel="lightbox" > 
+			<img src="http://maps.googleapis.com/maps/api/staticmap?center=<%=nit1['location']['address']%>,<%=nit1['location']['city']%>&zoom=11&size=200x200&markers=color:red%7Clabel:S%7C<%=nit1['location']['address']%>,<%=nit1['location']['city']%>&sensor=false"> Click </td>
 <%end%>	
 </table>
-
+<body>
+<html>

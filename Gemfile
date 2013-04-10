@@ -21,7 +21,6 @@ end
 gem 'bootstrap-sass', '~> 2.3.1.0'
 gem 'jquery-rails'
 gem 'address', '~> 0.9.2'
-
 gem "ipgeolocation", "~> 0.1.0"
 
 # To use ActiveModel has_secure_password

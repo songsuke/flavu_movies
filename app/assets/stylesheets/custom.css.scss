@@ -1,12 +1,17 @@
 @import "bootstrap";
 @import "bootstrap-responsive";
 
+table {
+  border-spacing: 20px;
+
+  border-collapse: separate;
+}
+
 html {
   overflow-y: scroll;
 }
 
 body {
-  padding-top: 60px;
   background-color: #D3D3D3;
 }
 
@@ -46,6 +51,14 @@ h2 {
   color: #999;
 }
 
+h11 {
+  color:black;
+  font-weight: normal;
+  font-size: 18px;
+  margin: 0;
+  padding: 0px;
+  text-shadow: 0 1px 0 #fff;
+}
 p {
   font-size: 1.1em;
   line-height: 1.7em;
@@ -62,8 +75,9 @@ p {
 
 .navbar .nav.pull-right {
 	float: right;
-	margin-right: 50px;
+  padding-top: 8px;
 }
+
 
 .container {
 	width: 1050px;
@@ -83,4 +97,15 @@ div.hidden{
 
 #box_menu { 
 	padding-top: 10px;
+}
+
+#home-content {
+  float: left;
+  margin: 26px 26px 26px 26px;
+  width: 686px;
+}
+
+#f1 {
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
