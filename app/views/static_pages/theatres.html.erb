@@ -1,2 +1,62 @@
-<h1>StaticPages#theatres</h1>
-<p>Find me in app/views/static_pages/theatres.html.erb</p>
+<h1> Liked Theatres </h1>
+<table>
+<tr>
+<th> Name </th>
+<th> Location Description </th>
+<th> Market </th>
+<th> Adult Price </th>
+<th> Child Price </th>
+</tr>
+
+<% @lt['theatres'].each do |liked| %>
+	<tr>
+		<td> <%= liked['name'] %> </td>
+		<td> <%= liked['location_description'] %> </td>
+		<td> <%= liked['market'] %> </td>
+		<td> <%= liked['adult_price'] %> </td>
+		<td> <%= liked['child_price'] %> </td>
+	
+	</tr>
+<%end%>
+</table>
+
+<h1> Nearby Theatres </h1>
+<table>
+<tr>
+<th> Name </th>
+<th> Location Description </th>
+<th> Market </th>
+<th> Adult Price </th>
+<th> Child Price </th>
+</tr>
+
+<% @nt['theatres'].each do |nearby| %>
+	<tr>
+		<td> <%= nearby['name'] %> </td>
+		<td> <%= nearby['location_description'] %> </td>
+		<td> <%= nearby['market'] %> </td>
+		<td> <%= nearby['adult_price'] %> </td>
+		<td> <%= nearby['child_price'] %> </td>
+<%end%>
+</table>
+
+<h1> Not Interested Theatres </h1>
+<table>
+<tr>
+<th> Name </th>
+<th> Location Description </th>
+<th> Market </th>
+<th> Adult Price </th>
+<th> Child Price </th>
+</tr>
+
+<% @nit['theatres'].each do |nit1| %>
+	<tr>
+		<td> <%= nit1['name']%> </td>
+		<td> <%= nit1['location_description'] %> </td>
+		<td> <%= nit1['market'] %> </td>
+		<td> <%= nit1['adult_price'] %> </td>
+		<td> <%= nit1['child_price'] %> </td>
+<%end%>	
+</table>
+

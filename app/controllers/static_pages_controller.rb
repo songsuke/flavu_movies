@@ -13,6 +13,10 @@ class StaticPagesController < ApplicationController
   end
 
   def theatres
+    @theatres=JSON.parse(open("http://flavumovies.herokuapp.com/theatres.json?auth_token=ZhhSqcdR2T6KoVv29UZp").read) 
+    @lt=@theatres['liked_theatres']
+    @nt=@theatres['nearby_theatres']
+    @nit=@theatres['not_interested_theatres']
   end
 
   def preferences
