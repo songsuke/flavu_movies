@@ -1,0 +1,25 @@
+<html>
+
+<head>
+
+<link rel="stylesheet" href="stylesheets/screen.css">
+  <link rel="stylesheet" href="stylesheets/custom.css.scss">
+  <script src="javascripts/jquery.js"></script>
+  <script src="javascripts/easySlider1.7.js"></script>
+
+</head>
+<body>
+<div class = "slider">
+<%= image_tag("a1.jpg") %>
+      <li><%= image_tag("a2.jpg") %>
+
+
+$(document).ready(function(){	
+	$("#slider").easySlider({
+		auto: true,
+		continuous: true 
+	});
+});
+</body>
+
+</html>
