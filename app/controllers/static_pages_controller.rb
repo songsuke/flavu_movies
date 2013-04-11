@@ -22,8 +22,19 @@ class StaticPagesController < ApplicationController
   end
 
   def preferences
-  end
+    @genre_preferences=JSON.parse(open("http://flavumovies.herokuapp.com/genre_preferences.json?auth_token=ZhhSqcdR2T6KoVv29UZp").read) 
+    @director_preferences=JSON.parse(open("http://flavumovies.herokuapp.com/director_preferences.json?auth_token=ZhhSqcdR2T6KoVv29UZp").read) 
+    @actor_preferences=JSON.parse(open("http://flavumovies.herokuapp.com/actor_preferences.json?auth_token=ZhhSqcdR2T6KoVv29UZp").read) 
+    @gp=@genre_preferences['genre_preferences']
+    @dp=@director_preferences['director_preferences']
+    @ap=@actor_preferences['actor_preferences']
 
+  end
+  def edit
+
+    
+    
+  end
   def settings
   end
 

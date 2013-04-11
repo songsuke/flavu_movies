@@ -1,25 +1,40 @@
-<html>
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-
-<link rel="stylesheet" href="stylesheets/screen.css">
-  <link rel="stylesheet" href="stylesheets/custom.css.scss">
-  <script src="javascripts/jquery.js"></script>
-  <script src="javascripts/easySlider1.7.js"></script>
-
+	<title>Easy Slider jQuery Plugin Demo</title>
+	<meta http-equiv="content-type" content="text/html;charset=UTF-8" />    
+	<script type="text/javascript" src="/assets/easySlider1.7.js?body=1"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){	
+			$("#slider").easySlider({
+				auto: true, 
+				continuous: true
+			});
+		});	
+	</script>
+	
+<link href="/assets/screen.css?body=1" rel="stylesheet" type="text/css" />
+	
 </head>
 <body>
-<div class = "slider">
-<%= image_tag("a1.jpg") %>
-      <li><%= image_tag("a2.jpg") %>
 
+<div id="container">
+	<div id="content">
+		<div id="slider" >
+			<ul>				
+				<li><a href="http://templatica.com/preview/30"><img src="/assets/01.jpg" alt="Css Template Preview" /></a></li>
+				<li><a href="http://templatica.com/preview/7"><img src="/assets/02.jpg" alt="Css Template Preview" /></a></li>
+				<li><a href="http://templatica.com/preview/25"><img src="/assets/03.jpg" alt="Css Template Preview" /></a></li>
+				<li><a href="http://templatica.com/preview/26"><img src="/assets/04.jpg" alt="Css Template Preview" /></a></li>
+				<li><a href="http://templatica.com/preview/27"><img src="/assets/05.jpg" alt="Css Template Preview" /></a></li>			
+			</ul>
+		</div>
 
-$(document).ready(function(){	
-	$("#slider").easySlider({
-		auto: true,
-		continuous: true 
-	});
-});
+	
+	
+	</div>
+
+</div>
+
 </body>
-
 </html>

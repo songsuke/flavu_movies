@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130409205624) do
+ActiveRecord::Schema.define(:version => 20130411184242) do
 
   create_table "ip_gets", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -24,6 +24,13 @@ ActiveRecord::Schema.define(:version => 20130409205624) do
   end
 
   create_table "posts", :force => true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "preferences", :force => true do |t|
     t.string   "title"
     t.text     "body"
     t.datetime "created_at", :null => false

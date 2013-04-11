@@ -1,1 +1,47 @@
-aaaa
+<h1> Genre Preferences </h1>
+
+<table>
+<tr>
+<td> Genre </td>
+<td> Score </td>
+</tr>
+	<% @gp.each do |gp1| %>
+<tr>
+		<td> <%= gp1['genre'] %> </td>
+		<td> <%= gp1['score'] %> </td>
+</tr>
+		<%end%>
+		<%= link_to "Edit", edit_path %> </li>
+</table>
+
+<table>
+<h1> Director Preferences </h1>
+
+<tr>
+<td> Director </td>
+<td> Score </td>
+</tr>
+	<% @dp.each do |dp1| %>
+<tr>
+		<td> <%= dp1['director'] %> </td>
+		<td> <%= dp1['score'] %> </td>
+</tr>
+		<%end%>
+</table>
+
+<table>
+<h1> Actor Preferences </h1>
+
+<tr>
+<td> Actor </td>
+<td> Score </td>
+</tr>
+	<% @ap.each do |ap1| %>
+<tr>
+		<td> <%= ap1['director'] %> </td>
+		<td> <%= ap1['score'] %> </td>
+</tr>		
+		<%end%>
+
+
+</table>

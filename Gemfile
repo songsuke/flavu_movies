@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
-
+gem 'sinatra', '1.1.0'
 gem 'rails', '3.2.13'
-
+gem 'devise'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
@@ -22,7 +22,10 @@ gem 'bootstrap-sass', '~> 2.3.1.0'
 gem 'jquery-rails'
 gem 'address', '~> 0.9.2'
 gem "ipgeolocation", "~> 0.1.0"
-
+platforms :jruby do
+  gem 'trinidad'
+  gem 'jruby-openssl'
+end
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

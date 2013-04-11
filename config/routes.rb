@@ -1,4 +1,7 @@
 EasilyxMovie::Application.routes.draw do
+  resources :preferences
+
+
   #get "static_pages/signin"
   match '/signin', to: 'static_pages#signin'
 
@@ -12,7 +15,6 @@ EasilyxMovie::Application.routes.draw do
   match '/theatres', to: 'static_pages#theatres'
 
  # get "static_pages/preferences"
-  match '/preferences', to: 'static_pages#preferences'
 
  # get "static_pages/settings"
   match '/settings', to: 'static_pages#settings'
@@ -22,11 +24,17 @@ EasilyxMovie::Application.routes.draw do
 
   #get "static_pages/home"
   match '/home', to: 'static_pages#home'
+  match '/edit', to: 'static_pages#edit'
+  resources :static_pages
 
-  resources :posts
   root to: 'static_pages#home'
  # root :to => 'posts#index'
   match '/getip',    to: 'ip_get#getip'
+  match '/index', to: 'preferences#index'
+  match '/edit', to: 'preferences#edit'
+  match '/show', to: 'preferences#show'
+  resources :preferences
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

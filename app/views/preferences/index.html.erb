@@ -1,0 +1,75 @@
+<h1> Genre Preferences </h1>
+
+<table>
+<tr>
+<td> Genre </td>
+<td> Score </td>
+</tr>
+  <% @gp.each do |gp1| %>
+<tr>
+
+    <td> <%= gp1['genre'] %> </td>
+    <td> <%= gp1['score'] %> </td>
+    <td><%= link_to 'Show', gp1 %></td>
+    <td><%= link_to 'Edit', edit_preference_path(gp1) %></td>
+</tr>
+    <%end%>
+
+</table>
+
+<table>
+<h1> Director Preferences </h1>
+
+<tr>
+<td> Director </td>
+<td> Score </td>
+</tr>
+  <% @dp.each do |dp1| %>
+<tr>
+    <td> <%= dp1['director'] %> </td>
+    <td> <%= dp1['score'] %> </td>
+</tr>
+    <%end%>
+</table>
+
+<table>
+<h1> Actor Preferences </h1>
+
+<tr>
+<td> Actor </td>
+<td> Score </td>
+</tr>
+  <% @ap.each do |ap1| %>
+<tr>
+    <td> <%= ap1['director'] %> </td>
+    <td> <%= ap1['score'] %> </td>
+</tr>   
+    <%end%>
+
+
+</table>
+
+<h1>Listing preferences</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Body</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @preferences.each do |preference| %>
+  <tr>
+    <a href="<%= preference_path preference %>"
+    <td><%= link_to 'Show', preference %></td>
+    <td><%= link_to 'Edit', edit_preference_path(preference) %></td>
+    <td><%= link_to 'Destroy', preference, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Preference', new_preference_path %>
