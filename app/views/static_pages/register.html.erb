@@ -1,2 +1,44 @@
-<h1>StaticPages#register</h1>
-<p>Find me in app/views/static_pages/register.html.erb</p>
+<h1> Register </h1>
+  <!--<form action = "/signin" method ="post">-->
+  <%= form_tag '/register' do %>
+
+  <div class='control-group'>
+    <div class='controls'>
+      <!--<label for="user_login">Login</label>-->
+      <%= label_tag("Email") %>
+      <!--<input id="user_login" name="user[login]" size="30" type="text">-->
+      <%= text_field_tag "email"%>
+    </div>
+  </div>
+
+  <div class='control-group'>
+    <div class='controls'>
+      <!--<label for="user_login">Login</label>-->
+      <%= label_tag("Email Confirmation") %>
+      <!--<input id="user_login" name="user[login]" size="30" type="text">-->
+      <%= text_field_tag "email"%>
+    </div>
+  </div>
+
+
+  <div class='control-group'>
+    <div class='controls'>
+      <!--<label for="user_password">Password</label>-->
+      <%= label_tag("Password") %>
+      <!--<input id="user_password" name="user[password]" size="30" type="password">-->
+      <%= password_field_tag("password") %>
+    </div>
+  </div>
+
+
+
+
+ 
+  <div class='controls'>
+    <input name="commit" type="submit" value="Confirm">
+
+   </div>
+
+<!--</form>-->
+<%end%>
+

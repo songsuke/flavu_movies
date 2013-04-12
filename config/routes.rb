@@ -21,6 +21,7 @@ EasilyxMovie::Application.routes.draw do
 
   #get "static_pages/buddies"
   match '/buddies', to: 'static_pages#buddies'
+  match '/signout', to: 'static_pages#signout'
 
   #get "static_pages/home"
   match '/home', to: 'static_pages#home'

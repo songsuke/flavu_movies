@@ -29,12 +29,15 @@
 				<li><a href="http://templatica.com/preview/27"><img src="/assets/05.jpg" alt="Css Template Preview" /></a></li>			
 			</ul>
 		</div>
-
-	
-	
 	</div>
-
+</div>
+<%if (session['auth'])%>
+<div><h11>Welcome <%=session['username']%> </h11>
 </div>
 
+<%else%>
+<div><h11><%=link_to "Sing Up Here", register_path%> </h11>
+</div>
+<%end%>
 </body>
 </html>

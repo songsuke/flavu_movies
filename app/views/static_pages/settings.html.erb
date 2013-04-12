@@ -1,2 +1,92 @@
-<h1>StaticPages#settings</h1>
-<p>Find me in app/views/static_pages/settings.html.erb</p>
+<%if @a1 =nil%>
+	<%=link_to "Please Sign In", signin_path%>
+<%else%>
+
+
+<h11> Account Setting </h11>
+
+
+	      
+
+<%=form_tag '/settings' do%>
+
+	<div>
+		<h11> Your currently email is <%=@user['email']%> </h11>
+	</div>
+
+	<div class='control-group'>
+	    <div class='controls'>
+	      <!--<label for="user_login">Login</label>-->
+
+	      <%= label_tag("Email") %>
+	      <!--<input id="user_login" name="user[login]" size="30" type="text">-->
+	      <%= text_field_tag "email"%>
+	    </div>
+  	</div>
+
+	<div>
+		<h11> Your currently username is <%=@user['username']%> </h11>
+	</div>
+	<div class='control-group'>
+	    <div class='controls'>
+	      <!--<label for="user_login">Login</label>-->
+
+	      <%= label_tag("Username") %>
+	      <!--<input id="user_login" name="user[login]" size="30" type="text">-->
+	      <%= text_field_tag "username"%>
+	    </div>
+  	</div>
+
+	<div>
+		<h11> Your currently display name is <%=@user['display_name']%> </h11>
+	</div>
+	<div class='control-group'>
+	    <div class='controls'>
+	      <!--<label for="user_login">Login</label>-->
+
+	      <%= label_tag("Display Name") %>
+	      <!--<input id="user_login" name="user[login]" size="30" type="text">-->
+	      <%= text_field_tag "display_name"%>
+	    </div>
+  	</div>
+
+	<div>
+		<h11> Your currently Phone Number is <%=@user['phone_number']%> </h11>
+	</div>
+	<div class='control-group'>
+	    <div class='controls'>
+	      <!--<label for="user_login">Login</label>-->
+
+	      <%= label_tag("Phone Number (Optional)") %>
+	      <!--<input id="user_login" name="user[login]" size="30" type="text">-->
+	      <%= text_field_tag "phone_number"%>
+	    </div>
+  	</div>
+
+	<div class='control-group'>
+	    <div class='controls'>
+	      <!--<label for="user_login">Login</label>-->
+
+	      <%= label_tag("Password (leave it blank if you don't want to change)") %>
+	      <!--<input id="user_login" name="user[login]" size="30" type="text">-->
+	      <%= text_field_tag "password"%>
+	    </div>
+  	</div>
+
+  	<div class='control-group'>
+	    <div class='controls'>
+	      <!--<label for="user_login">Login</label>-->
+
+	      <%= label_tag("Password Confirmation") %>
+	      <!--<input id="user_login" name="user[login]" size="30" type="text">-->
+	      <%= text_field_tag "password_confirmation"%>
+	    </div>
+  	</div>
+
+
+  <div class='controls'>
+    <input name="commit" type="submit" value="Confirm">
+
+   </div>
+	<%end%>
+<%end%>
