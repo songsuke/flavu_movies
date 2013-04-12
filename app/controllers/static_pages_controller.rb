@@ -1,6 +1,7 @@
 class StaticPagesController < ApplicationController
- 
+require 'httparty'
   def signin
+    HTTParty.post("http://flavumovies.herokuapp.com/users/sign_in.json", body: {user: {login: params[:login], password: params[:password]}}).body
 
   end
 

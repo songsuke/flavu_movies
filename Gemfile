@@ -5,7 +5,7 @@ gem 'devise'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-
+gem "httparty", "~> 0.11.0"
 gem 'pg', '0.12.2'
 # Gems used only for assets and not required
 # in production environments by default.
