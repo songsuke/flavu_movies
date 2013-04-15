@@ -1,3 +1,15 @@
-<tr>
-    <td> <%= @gp %> </td>
-    <td> <%= @gp %> </td>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @preference.title %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%= @preference.body %>
+</p>
+
+
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>

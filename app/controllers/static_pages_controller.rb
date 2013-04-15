@@ -4,6 +4,8 @@ require 'httparty'
     puts "my param #{params[:login]}"
    
     @users =HTTParty.post("http://flavumovies.herokuapp.com/users/sign_in.json", body: {user: {login: params[:login], password: params[:password]}}).parsed_response 
+
+
     puts @users
     @auth_token=@users['auth_token']
     session[:username] = @users['username']
@@ -45,6 +47,7 @@ require 'httparty'
     @nit=@theatres['not_interested_theatres']
   end
   def buddies
+
     @a1=session[:auth]
 
     @url1 = "http://flavumovies.herokuapp.com/followers.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
@@ -64,6 +67,7 @@ require 'httparty'
     @fw2=@followees['followees']
     @rq=@requests['friends_requests']
     @bk1=@blockees['blockees']
+  
   end
 
   def preferences
@@ -105,4 +109,17 @@ require 'httparty'
     reset_session    
     redirect_to root_url
   end
+
+
+  def cover
+    #@guests =HTTParty.post("http://flavumovies.herokuapp.com/users/sign_in.json", body: {user: {guest: 'true'}}).parsed_response 
+    @guests1 =HTTParty.get("http://flavumovies.herokuapp.com/users/sign_in.json", body: {user: {guest: "true"}}).parsed_response 
+    puts @guests1
+    #puts @guests['auth_token']
+
+
+  end
+
+
+
 end

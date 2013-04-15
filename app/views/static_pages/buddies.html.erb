@@ -1,4 +1,6 @@
+<%if @a1%>
 <div id ="home-content">
+
 
 	<div id ="f1">
 		<h11> Followers </h11>
@@ -40,3 +42,8 @@
 
 
 </div>
+
+
+<%else%>
+ <h11> Sign up and enjoy with your friends <%= link_to "Here", register_path%> </h11>
+ <%end%> 

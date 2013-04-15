@@ -1,4 +1,24 @@
 <h1> Genre Preferences </h1>
+<%=form_tag '/index' do %>
+    <div class='control-group'>
+      <div class='controls'>
+        <select id = "genre" name = "genre">
+          <%@all_genres['genres'].each do |all_genre| %>
+          <%@x1= all_genre['name']%>
+
+          <option name = "<%=@x1%>" id=genre value="<%=@x1%>"> <%=@x1%></option>
+          <%end%>
+        </select>
+        
+       
+
+        <%= label_tag("Rate") %>
+        <%= text_field_tag "score"%>
+    </div>
+  </div>
+    <input name="commit" type="submit" value="Update">
+    <%end%>
+
 
 <table>
 <tr>
@@ -12,10 +32,38 @@
     <td> <%= gp1['score'] %> </td>
     <td><%= link_to 'Show', gp1 %></td>
     <td><%= link_to 'Edit', edit_preference_path(gp1) %></td>
+    <%=form_tag '/index' do %>
+
+    <td> 
+      <button id="genre_delete" name="genre_delete" value="<%=gp1['genre']%>">Delete
+      </button>  
+    </td>
+    <%end%>
 </tr>
     <%end%>
-
+    
+  
 </table>
+
+
+<%=form_tag '/index' do %>
+    <div class='control-group'>
+      <div class='controls'>
+        <select id = "genre_create" name = "genre_create">
+          <%@all_genres['genres'].each do |all_genre| %>
+          <%@x1= all_genre['name']%>
+
+          <option name = "<%=@x1%>" id=genre value="<%=@x1%>"> <%=@x1%></option>
+          <%end%>
+        </select>
+        
+        <%= label_tag("Rate") %>
+        <%= text_field_tag "score"%>
+    </div>
+  </div>
+    <input name="commit" type="submit" value="Create Preference" onClick="history.go(0)">
+    <%end%>
+
 
 <table>
 <h1> Director Preferences </h1>

@@ -1,11 +1,4 @@
-<html>
-<head>
-</head>
-<body>
-<h1> Sign In </h1>
-  <!--<form action = "/signin" method ="post">-->
-
-  <%= form_tag '/signin' do %>
+<%= form_tag '/signin' do %>
   <%if (!@auth)%>
   <div class='control-group'>
     <div class='controls'>
@@ -27,18 +20,23 @@
 
     </div>
   </div>
+
   <div class='controls'>
     <input name="commit" type="submit" value="Sign in">
 
    </div>
 
   <div>
-    <h11> please login </h11>
+    <h11> please login or </h11>
   </div>
   <%else%>
     <h11> Your Welcome <%=@username%> </h11>
   <%end%>
 <!--</form>-->
 <%end%>
-</body>
-</html>
+
+<h11> Enter as </h11>
+<%=form_tag '/cover' do %>
+<button id="guest" name="guest" value="ture">Guest
+      </button> 
+<%end%>

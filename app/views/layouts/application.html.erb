@@ -5,8 +5,15 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+
+  <%if @a1 && @guests %>
+  <meta http-equiv="refresh" content="0; url=/cover"> 
+
+<%else%>
 </head>
 <body>
+
+
 <header id="nav1" class="navbar navbar-inverse">
   <div class="navbar-inner">
     <div class="container row-fluid">
@@ -35,5 +42,7 @@
 </div>
 
 
+
+<%end%>
 </body>
 </html>

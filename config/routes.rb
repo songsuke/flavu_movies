@@ -26,6 +26,7 @@ EasilyxMovie::Application.routes.draw do
   #get "static_pages/home"
   match '/home', to: 'static_pages#home'
   match '/edit', to: 'static_pages#edit'
+  match '/cover', to: 'static_pages#cover'
   resources :static_pages
 
   root to: 'static_pages#home'
