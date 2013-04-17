@@ -2,8 +2,6 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    require 'address'
-    @ip = Address.get
     @posts = Post.all
 
     respond_to do |format|
