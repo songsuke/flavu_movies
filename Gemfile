@@ -18,6 +18,7 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 end
+gem 'address'
 gem "rspec", "~> 2.13.0"
 gem 'bootstrap-sass', '~> 2.3.1.0'
 gem 'jquery-rails'
