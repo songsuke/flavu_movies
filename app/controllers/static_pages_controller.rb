@@ -1,5 +1,6 @@
 class StaticPagesController < ApplicationController
 require 'httparty'
+require 'open-uri'
   def signin
     puts "my param #{params[:login]}"
     @users =HTTParty.post("http://flavumovies.herokuapp.com/users/sign_in.json", body: {user: {login: params[:login], password: params[:password]}}).parsed_response 
@@ -104,7 +105,7 @@ require 'httparty'
   end
 
   def home
-    @ip_address=open( 'http://jsonip.com/ ' ){ |s| JSON::parse( s.string())['ip'] }
+    @ip_address=open( "http://jsonip.com/" ){ |s| JSON::parse( s.string())['ip'] }
     @latlong=Geocoder.coordinates(@ip_address)
     session[:latitude]=@latlong[0]
     session[:longitude]=@latlong[1]
