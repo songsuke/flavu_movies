@@ -1,4 +1,6 @@
 EasilyxMovie::Application.routes.draw do
+  match '/cover', to: 'cover#cover'
+
   resources :preferences
 
   #get "static_pages/signin"
@@ -25,7 +27,7 @@ EasilyxMovie::Application.routes.draw do
   #get "static_pages/home"
   match '/home', to: 'static_pages#home'
   match '/edit', to: 'static_pages#edit'
-  match '/cover', to: 'static_pages#cover'
+  #match '/cover', to: 'static_pages#cover'
   resources :static_pages
 
   root to: 'static_pages#home'

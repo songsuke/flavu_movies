@@ -1,3 +1,7 @@
+<%if (!session['auth'])%>
+<meta http-equiv="refresh" content="0; url=/cover"> 
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
@@ -21,12 +25,12 @@
 		</div>
 	</div>
 </div>
-<%if (session['auth'])%>
+
+
+<%else%>
 <div><h11>Welcome <%=session['username']%> </h11>
 </div>
 
-<%else%>
-<div><h11><%=link_to "Sing Up Here", register_path%> </h11>
 </div>
 <%end%>
 </body>
