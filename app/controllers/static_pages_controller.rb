@@ -2,20 +2,17 @@ class StaticPagesController < ApplicationController
 require 'httparty'
   def signin
     puts "my param #{params[:login]}"
-   
     @users =HTTParty.post("http://flavumovies.herokuapp.com/users/sign_in.json", body: {user: {login: params[:login], password: params[:password]}}).parsed_response 
-
-
     puts @users
     @auth_token=@users['auth_token']
     session[:username] = @users['username']
     session[:user] = @users
     session[:auth] = @auth_token
-    session[:latitude] = '49.28385281'
-    session[:longitude] = '-123.1120815'
+    #session[:latitude] = '49.28385281'
+   # session[:longitude] = '-123.1120815'
     @username=session[:username]
     @auth=session[:auth]
-    
+
     
   end
 
@@ -26,14 +23,24 @@ require 'httparty'
   end
 
   def movies
-    @a1=session[:auth]
-    @url = "http://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-    
-    @movies =HTTParty.get(@url, body: {user: {auth_token: @a1}}).parsed_response
 
+    @a1=session[:auth]
+    if(!@movies)
+    @url = "http://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+    @movies =HTTParty.get(@url, body: {user: {auth_token: @a1}}).parsed_response
     @rm=@movies['remaining_movies']
     @im=@movies['interested_movies']
     @nim=@movies['not_interested_movies']
+   
+    else
+    end
+    @liked_movies =HTTParty.post("http://flavumovies.herokuapp.com/interested_movies.json", body: {user: {auth_token: @a1}, interested_movie: { movie_id:params[:liked] ,interested: "true"}}).parsed_response
+    @unliked_movies =HTTParty.post("http://flavumovies.herokuapp.com/not_interested_movies.json", body: {user: {auth_token: @a1}, not_interested_movie: { movie_id:params[:unliked] ,not_interested: "true"}}).parsed_response
+  
+  
+    puts params[:liked]
+    puts @liked_movies
+
   end
 
   def theatres
@@ -71,13 +78,7 @@ require 'httparty'
   end
 
   def preferences
-    @genre_preferences=JSON.parse(open("http://flavumovies.herokuapp.com/genre_preferences.json?auth_token=ZhhSqcdR2T6KoVv29UZp").read) 
-    @director_preferences=JSON.parse(open("http://flavumovies.herokuapp.com/director_preferences.json?auth_token=ZhhSqcdR2T6KoVv29UZp").read) 
-    @actor_preferences=JSON.parse(open("http://flavumovies.herokuapp.com/actor_preferences.json?auth_token=ZhhSqcdR2T6KoVv29UZp").read) 
-    @gp=@genre_preferences['genre_preferences']
-    @dp=@director_preferences['director_preferences']
-    @ap=@actor_preferences['actor_preferences']
-
+  
   end
   def edit
 
@@ -103,6 +104,12 @@ require 'httparty'
   end
 
   def home
+    @ip_address=open( 'http://jsonip.com/ ' ){ |s| JSON::parse( s.string())['ip'] }
+    @latlong=Geocoder.coordinates(@ip_address)
+    session[:latitude]=@latlong[0]
+    session[:longitude]=@latlong[1]
+    puts session[:latitude]
+    puts session[:longitude]
   end
 
   def signout

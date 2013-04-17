@@ -17,7 +17,16 @@
 </head>
 
 <body>
+  <script>
+$(function() {
+  $("#liked").click(function() {
+     $("#box_content1").load("/movies")
+     $("#box_content2").load("/movies")
+  })
+})
+</script>
 
+<%if(session[:auth])%>
 <div id="box_tab" class = "ui-tabs">
       <h11> Movies </h11>
 <ul id="box_menu" name="box_menu" class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
@@ -49,9 +58,26 @@
           <%photo = movie['photos'].first%>
           <div class="wpcf-field-value wpcf-field-image-value wpcf-field-poster-value">
             <img width="140" height="210" src="<%= photo['url']%>" class="attachment-thumbnail">
-            <h11><%= movie['title'] %> </h11>
+            <h11><%= movie['title'] %> 
+                    <%=movie['id']%></h11>
+
+            
           </div>
         <%end%>
+            
+              <%=form_tag '/movies' do %>
+                   <button name="liked" id="liked" value="<%=movie['id']%>" class='btn btn-mini'><i class="icon-thumbs-up" ></i>
+                    <% @y4=@rm['movies'].detect{|x4| x4["id"]== movie['id']} %>
+                    <% @y4index = @rm['movies'].index (@y4) %>
+                    <% @rm['movies'].delete_at (@y4index) %>
+
+                   </button>
+              
+
+              
+                   <button name="unliked" id="unliked" value="<%=movie['id']%>" class='btn btn-mini'><i class="icon-thumbs-down" ></i></button>
+                  <%end%>
+          
       <%end%>
     </div>
   </div>
@@ -76,5 +102,12 @@
   clicktab()
 </script>
 
+<%else%>
+<p> You don't have any permission to select movies. Please 
+  <%=link_to "Sign In", signin_path %> or <%=link_to "Register", register_path%>
+</p>
+
+
+<%end%>
 </body>
 </html>

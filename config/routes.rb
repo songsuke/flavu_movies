@@ -1,7 +1,6 @@
 EasilyxMovie::Application.routes.draw do
   resources :preferences
 
-
   #get "static_pages/signin"
   match '/signin', to: 'static_pages#signin'
 

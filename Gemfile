@@ -18,10 +18,11 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 end
+gem "rspec", "~> 2.13.0"
 gem 'bootstrap-sass', '~> 2.3.1.0'
 gem 'jquery-rails'
-gem 'address', '~> 0.9.2'
-gem "ipgeolocation", "~> 0.1.0"
+gem "geocoder", "~> 1.1.6"
+gem "jquery-ui-rails", "~> 4.0.2"
 platforms :jruby do
   gem 'trinidad'
   gem 'jruby-openssl'
