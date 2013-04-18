@@ -1,5 +1,8 @@
 	<div>
-	<a href = "/home" class="btn btn-large disabled">Enter the website</a>
+		<%=form_tag '/cover' do %>
+	<a href = "/home"><button class="btn btn-large disabled" name="guest" id="guest" value="true"> Enter the website </button></a>
+	<%end%>
 	<a href = "/signin" class="btn btn-large disabled">Sign In</a>
 	<a href = "/register" class="btn btn-large disabled">Sign Up</a>
+	
 </div>

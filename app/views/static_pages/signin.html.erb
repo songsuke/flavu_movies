@@ -4,9 +4,15 @@
 <body>
 <h1> Sign In </h1>
   <!--<form action = "/signin" method ="post">-->
+<%if flash[:error]%>
+  <div class = "alert">
+    <p> <%=flash[:error]%></p>
+  </div>
+<%else%>
+<%end%>
 
   <%= form_tag '/signin' do %>
-  <%if (!@auth)%>
+  <%if (!session[:auth])%>
   <div class='control-group'>
     <div class='controls'>
       <!--<label for="user_login">Login</label>-->
@@ -28,7 +34,7 @@
     </div>
   </div>
   <div class='controls'>
-    <input name="commit" type="submit" value="Sign in">
+  <button name="confirm" id="confirm" value="confirm"> Login </button>
 
    </div>
 
@@ -40,5 +46,6 @@
   <%end%>
 <!--</form>-->
 <%end%>
+
 </body>
 </html>

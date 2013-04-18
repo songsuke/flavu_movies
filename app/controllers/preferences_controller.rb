@@ -2,45 +2,81 @@ class PreferencesController < ApplicationController
   # GET /preferences
   # GET /preferences.json
   def index
+    if (!session[:auth] && !session[:guest_auth])
+      redirect_to cover_path
+    else
+      if session[:check_guest] == 'true'
+        @url1 = "http://flavumovies.herokuapp.com/genre_preferences.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+        @url2 = "http://flavumovies.herokuapp.com/director_preferences.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+        @url3 = "http://flavumovies.herokuapp.com/actor_preferences.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+        @genre_preferences =HTTParty.get(@url1, body: {user: {auth_token: session[:guest_auth]}}).parsed_response
+        @director_preferences =HTTParty.get(@url2, body: {user: {auth_token: session[:guest_auth]}}).parsed_response
+        @actor_preferences =HTTParty.get(@url3, body: {user: {auth_token: session[:guest_auth]}}).parsed_response
+        
 
-    @a1=session[:auth]
-    @url1 = "http://flavumovies.herokuapp.com/genre_preferences.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-    @url2 = "http://flavumovies.herokuapp.com/director_preferences.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-    @url3 = "http://flavumovies.herokuapp.com/actor_preferences.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-    @genre_preferences =HTTParty.get(@url1, body: {user: {auth_token: @a1}}).parsed_response
-    @director_preferences =HTTParty.get(@url2, body: {user: {auth_token: @a1}}).parsed_response
-    @actor_preferences =HTTParty.get(@url3, body: {user: {auth_token: @a1}}).parsed_response
-    
+        @url4 = "http://flavumovies.herokuapp.com/genres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+        @all_genres =HTTParty.get(@url4, body: {user: {auth_token: session[:guest_auth]}}).parsed_response
+        @genre_update =HTTParty.put("http://flavumovies.herokuapp.com/genre_preferences/1.json", body: {user: {auth_token: session[:guest_auth]}, genre_preference: {genre: params[:genre] ,score: params[:score]}}).parsed_response
+        puts @x1
+        puts params[:score]
+        puts params[:genre]
 
-    @url4 = "http://flavumovies.herokuapp.com/genres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-    @all_genres =HTTParty.get(@url4, body: {user: {auth_token: @a1}}).parsed_response
-    @genre_update =HTTParty.put("http://flavumovies.herokuapp.com/genre_preferences/1.json", body: {user: {auth_token: @a1}, genre_preference: {genre: params[:genre] ,score: params[:score]}}).parsed_response
-puts @x1
-puts params[:score]
-puts params[:genre]
-
-    @genre_create =HTTParty.post("http://flavumovies.herokuapp.com/genre_preferences.json", body: {user: {auth_token: @a1}, genre_preference: {genre: params[:genre_create] ,score: params[:score]}}).parsed_response
- 
-    @genre_delete =HTTParty.delete("http://flavumovies.herokuapp.com/genre_preferences/1.json", body: {user: {auth_token: @a1}, genre_preference: {genre: params[:genre_delete] ,score: params[:score]}}).parsed_response
-puts params[:genre_delete]
-    
-    
-    #@genre_update =HTTParty.post("http://flavumovies.herokuapp.com/genre_preferences.json", 
-    #  body: {user: {auth_token: @a1}, genre_preference: {genre: params[:genre],score: params[:score]}}).parsed_response
+        @genre_create =HTTParty.post("http://flavumovies.herokuapp.com/genre_preferences.json", body: {user: {auth_token: session[:guest_auth]}, genre_preference: {genre: params[:genre_create] ,score: params[:score]}}).parsed_response
+     
+        @genre_delete =HTTParty.delete("http://flavumovies.herokuapp.com/genre_preferences/1.json", body: {user: {auth_token: session[:guest_auth]}, genre_preference: {genre: params[:genre_delete] ,score: params[:score]}}).parsed_response
+        puts params[:genre_delete]
+        
+        
+        #@genre_update =HTTParty.post("http://flavumovies.herokuapp.com/genre_preferences.json", 
+        #  body: {user: {auth_token: @a1}, genre_preference: {genre: params[:genre],score: params[:score]}}).parsed_response
 
 
-    puts @a1
-    @preferences=Preference.all
-   #@genre_preferences=JSON.parse(open("http://flavumovies.herokuapp.com/genre_preferences.json?auth_token=kczrVERyuJu6RgevHZCx").read) 
-  # @director_preferences=JSON.parse(open("http://flavumovies.herokuapp.com/director_preferences.json?auth_token=kczrVERyuJu6RgevHZCx").read) 
-   #@actor_preferences=JSON.parse(open("http://flavumovies.herokuapp.com/actor_preferences.json?auth_token=kczrVERyuJu6RgevHZCx").read) 
-    @gp=@genre_preferences['genre_preferences']
-    @dp=@director_preferences['director_preferences']
-    @ap=@actor_preferences['actor_preferences']
-    
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @preferences }
+        puts @a1
+        @preferences=Preference.all
+       #@genre_preferences=JSON.parse(open("http://flavumovies.herokuapp.com/genre_preferences.json?auth_token=kczrVERyuJu6RgevHZCx").read) 
+      # @director_preferences=JSON.parse(open("http://flavumovies.herokuapp.com/director_preferences.json?auth_token=kczrVERyuJu6RgevHZCx").read) 
+       #@actor_preferences=JSON.parse(open("http://flavumovies.herokuapp.com/actor_preferences.json?auth_token=kczrVERyuJu6RgevHZCx").read) 
+        @gp=@genre_preferences['genre_preferences']
+        @dp=@director_preferences['director_preferences']
+        @ap=@actor_preferences['actor_preferences']
+
+
+      else
+        @a1=session[:auth]
+        @url1 = "http://flavumovies.herokuapp.com/genre_preferences.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+        @url2 = "http://flavumovies.herokuapp.com/director_preferences.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+        @url3 = "http://flavumovies.herokuapp.com/actor_preferences.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+        @genre_preferences =HTTParty.get(@url1, body: {user: {auth_token: session[:auth]}}).parsed_response
+        @director_preferences =HTTParty.get(@url2, body: {user: {auth_token: session[:auth]}}).parsed_response
+        @actor_preferences =HTTParty.get(@url3, body: {user: {auth_token: session[:auth]}}).parsed_response
+        
+
+        @url4 = "http://flavumovies.herokuapp.com/genres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+        @all_genres =HTTParty.get(@url4, body: {user: {auth_token: session[:auth]}}).parsed_response
+        @genre_update =HTTParty.put("http://flavumovies.herokuapp.com/genre_preferences/1.json", body: {user: {auth_token: session[:auth]}, genre_preference: {genre: params[:genre] ,score: params[:score]}}).parsed_response
+        puts @x1
+        puts params[:score]
+        puts params[:genre]
+
+        @genre_create =HTTParty.post("http://flavumovies.herokuapp.com/genre_preferences.json", body: {user: {auth_token: session[:auth]}, genre_preference: {genre: params[:genre_create] ,score: params[:score]}}).parsed_response
+     
+        @genre_delete =HTTParty.delete("http://flavumovies.herokuapp.com/genre_preferences/1.json", body: {user: {auth_token: session[:auth]}, genre_preference: {genre: params[:genre_delete] ,score: params[:score]}}).parsed_response
+        puts params[:genre_delete]
+      
+      
+      #@genre_update =HTTParty.post("http://flavumovies.herokuapp.com/genre_preferences.json", 
+      #  body: {user: {auth_token: @session[:auth]}, genre_preference: {genre: params[:genre],score: params[:score]}}).parsed_response
+
+
+        puts session[:auth]
+        @preferences=Preference.all
+     #@genre_preferences=JSON.parse(open("http://flavumovies.herokuapp.com/genre_preferences.json?auth_token=kczrVERyuJu6RgevHZCx").read) 
+    # @director_preferences=JSON.parse(open("http://flavumovies.herokuapp.com/director_preferences.json?auth_token=kczrVERyuJu6RgevHZCx").read) 
+     #@actor_preferences=JSON.parse(open("http://flavumovies.herokuapp.com/actor_preferences.json?auth_token=kczrVERyuJu6RgevHZCx").read) 
+        @gp=@genre_preferences['genre_preferences']
+        @dp=@director_preferences['director_preferences']
+        @ap=@actor_preferences['actor_preferences']
+      end
     end
 
   end

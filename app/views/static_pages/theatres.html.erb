@@ -13,7 +13,7 @@
 <th> Child Price </th>
 <th> Map </th>
 </tr>
-
+<%if(session[:auth] || session[:guest_auth])%>
 <% @lt['theatres'].each do |liked| %>
 	<tr>
 		<td> <%= liked['name'] %> </td>
@@ -73,5 +73,8 @@
 			<img src="http://maps.googleapis.com/maps/api/staticmap?center=<%=nit1['location']['address']%>,<%=nit1['location']['city']%>&zoom=11&size=200x200&markers=color:red%7Clabel:S%7C<%=nit1['location']['address']%>,<%=nit1['location']['city']%>&sensor=false"> Click </td>
 <%end%>	
 </table>
+<%else%>
+<p> please login or register </p>
+<%end%>
 </body>
 </html>

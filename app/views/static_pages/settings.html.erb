@@ -1,5 +1,6 @@
-<%if @a1 =nil%>
-	<%=link_to "Please Sign In", signin_path%>
+<%if(!session[:auth])%>
+<meta http-equiv="refresh" content="5; url=/home"> 
+ <h11> Sign up and enjoy with your friends! (If it does not redirect, please click --><%= link_to "Here", register_path%> )</h11>
 <%else%>
 
 

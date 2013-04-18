@@ -23,12 +23,14 @@
 				<li><%= link_to "Theatres", theatres_path %> </li>
 				<li><%= link_to "Buddies", buddies_path %> </li>
 				<li><%= link_to "Preferences", preferences_path %> </li>
-				<li><%= link_to "Setting", settings_path %> </li>
+
+				
 				<%if (!session['auth'])%>
 				<li><%= link_to "Register", register_path %></li>
 				
 				<li><%= link_to "Sign In", signin_path %>  </li>
 				<%else%>
+				<li><%= link_to "Setting", settings_path %> </li>
 				<li><%= link_to "Sign out", signout_path %>  </li>
 				<%end%>
 

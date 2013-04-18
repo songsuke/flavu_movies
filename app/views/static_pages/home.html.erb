@@ -1,7 +1,7 @@
-<%if (!session['auth'])%>
+<%if (!session[:auth] && !session[:guest_auth])%>
 <meta http-equiv="refresh" content="0; url=/cover"> 
 
-
+<%else%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
@@ -27,7 +27,7 @@
 </div>
 
 
-<%else%>
+
 <div><h11>Welcome <%=session['username']%> </h11>
 </div>
 

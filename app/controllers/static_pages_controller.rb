@@ -1,61 +1,146 @@
 class StaticPagesController < ApplicationController
 require 'httparty'
 require 'open-uri'
-  def signin
-    puts "my param #{params[:login]}"
-    @users =HTTParty.post("http://flavumovies.herokuapp.com/users/sign_in.json", body: {user: {login: params[:login], password: params[:password]}}).parsed_response 
-    puts @users
-    @auth_token=@users['auth_token']
-    session[:username] = @users['username']
-    session[:user] = @users
-    session[:auth] = @auth_token
-    #session[:latitude] = '49.28385281'
-   # session[:longitude] = '-123.1120815'
-    @username=session[:username]
-    @auth=session[:auth]
 
+  def signin
+    if params[:confirm] !="confirm"
+    else
+      puts "my param #{params[:login]}"
+      @users =HTTParty.post("http://flavumovies.herokuapp.com/users/sign_in.json", body: {user: {login: params[:login], password: params[:password]}}).parsed_response 
+      puts @users.first[0]
+      if (@users.first[0]=="error")
+        flash[:error] = "Username or Password is wrong. Please try again"
+      else
+        puts @users
+        @auth_token=@users['auth_token']
+        session[:username] = @users['username']
+        session[:user] = @users
+        session[:auth] = @auth_token
+        #session[:latitude] = '49.28385281'
+       # session[:longitude] = '-123.1120815'
+        @username=session[:username]
+        @auth=session[:auth]
+        redirect_to home_path
+      end
+    end
     
   end
 
   def register
-    @users_registations =HTTParty.post("http://flavumovies.herokuapp.com/users.json", body: {user: {password: params[:password], password_confirmation: params[:password], email: params[:email], username: params[:email], display_name: params[:email]}}).parsed_response
-    puts "my param #{params[:username]}"
-    puts @users_registations
+    if session[:check_guest] == 'true'
+      puts params[:confirm]
+      if params[:confirm] !="confirm"
+      else
+        if (params[:password].length <= 6)
+          flash[:error] = "Your password is too short. It has to be more than 6 characters"
+        elsif params[:email] != params[:email_confirmation]
+          flash[:error] = "Your email does not match. Please try again" 
+        else
+          @users_registations =HTTParty.put("http://flavumovies.herokuapp.com/users.json", body: {user: {auth_token: session[:guest_auth], password: params[:password], password_confirmation: params[:password], email: params[:email], username: params[:email], display_name: params[:email]}}).parsed_response
+          if (@users_registations['errors'])
+            @check_register='false'
+            flash[:error] = "#{params[:email]} has already been taken. Please try again"
+          else
+         # puts @users_registations['errors']['email']
+            flash[:notice] = "Register is successful. Please check you email."
+            redirect_to validate_path
+          end
+     # puts @users_registations
+     # puts params[:email] 
+     # @email=params[:email]
+     # puts params[:password].length
+        end
+      end
+    
+      #puts @users_registations
+      #puts params[:email] 
+      #@email=params[:email]
+      #puts @users_registations['errors']['email']
+      
+    else
+      puts params[:confirm]
+      if params[:confirm] !="confirm"
+      else
+        if (params[:password].length <= 6)
+          flash[:error] = "Your password is too short. It has to be more than 6 characters"
+        elsif params[:email] != params[:email_confirmation]
+          flash[:error] = "Your email does not match. Please try again" 
+        else
+          @users_registations =HTTParty.post("http://flavumovies.herokuapp.com/users.json", body: {user: {password: params[:password], password_confirmation: params[:password], email: params[:email], username: params[:email], display_name: params[:email]}}).parsed_response
+          if (@users_registations['errors'])
+            @check_register='false'
+            flash[:error] = "#{params[:email]} has already been taken. Please try again"
+          else
+         # puts @users_registations['errors']['email']
+            flash[:notice] = "Register is successful. Please check you email."
+            redirect_to validate_path
+          end
+     # puts @users_registations
+     # puts params[:email] 
+     # @email=params[:email]
+     # puts params[:password].length
+        end
+      end
+    end
+
+
   end
 
   def movies
-
-    @a1=session[:auth]
-    if(!@movies)
-    @url = "http://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-    @movies =HTTParty.get(@url, body: {user: {auth_token: @a1}}).parsed_response
-    @rm=@movies['remaining_movies']
-    @im=@movies['interested_movies']
-    @nim=@movies['not_interested_movies']
-   
+    if (!session[:auth] && !session[:guest_auth])
+      redirect_to cover_path
     else
+        #@a1=session[:auth]
+        if session[:check_guest] == 'true'
+          @url = "http://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+          @movies =HTTParty.get(@url, body: {user: {auth_token: session[:guest_auth]}}).parsed_response
+          @rm=@movies['remaining_movies']
+          @im=@movies['interested_movies']
+          @nim=@movies['not_interested_movies']
+          @liked_movies =HTTParty.post("http://flavumovies.herokuapp.com/interested_movies.json", body: {user: {auth_token: session[:guest_auth]}, interested_movie: { movie_id:params[:liked] ,interested: "true"}}).parsed_response
+          @unliked_movies =HTTParty.post("http://flavumovies.herokuapp.com/not_interested_movies.json", body: {user: {auth_token: session[:guest_auth]}, not_interested_movie: { movie_id:params[:unliked] ,not_interested: "true"}}).parsed_response
+      
+        else
+          @url = "http://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+          @movies =HTTParty.get(@url, body: {user: {auth_token: session[:auth]}}).parsed_response
+          @rm=@movies['remaining_movies']
+          @im=@movies['interested_movies']
+          @nim=@movies['not_interested_movies']
+          @liked_movies =HTTParty.post("http://flavumovies.herokuapp.com/interested_movies.json", body: {user: {auth_token: session[:auth]}, interested_movie: { movie_id:params[:liked] ,interested: "true"}}).parsed_response
+          @unliked_movies =HTTParty.post("http://flavumovies.herokuapp.com/not_interested_movies.json", body: {user: {auth_token: session[:auth]}, not_interested_movie: { movie_id:params[:unliked] ,not_interested: "true"}}).parsed_response
+        end
+
+      #puts params[:liked]
+      #puts @liked_movies
     end
-    @liked_movies =HTTParty.post("http://flavumovies.herokuapp.com/interested_movies.json", body: {user: {auth_token: @a1}, interested_movie: { movie_id:params[:liked] ,interested: "true"}}).parsed_response
-    @unliked_movies =HTTParty.post("http://flavumovies.herokuapp.com/not_interested_movies.json", body: {user: {auth_token: @a1}, not_interested_movie: { movie_id:params[:unliked] ,not_interested: "true"}}).parsed_response
-  
-  
-    puts params[:liked]
-    puts @liked_movies
 
   end
 
   def theatres
-    @a1=session[:auth]
-    @url = "http://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-    @theatres =HTTParty.get(@url, body: {user: {auth_token: @a1}}).parsed_response
+    if (!session[:auth] && !session[:guest_auth])
+      redirect_to cover_path
+    else
+      if session[:check_guest] == 'true'
+      @url = "http://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+      @theatres =HTTParty.get(@url, body: {user: {auth_token: session[:guest_auth]}}).parsed_response
 
-    #@theatres=JSON.parse(open("http://flavumovies.herokuapp.com/theatres.json?auth_token=ZhhSqcdR2T6KoVv29UZp").read) 
-    @lt=@theatres['liked_theatres']
-    @nt=@theatres['nearby_theatres']
-    @nit=@theatres['not_interested_theatres']
+      #@theatres=JSON.parse(open("http://flavumovies.herokuapp.com/theatres.json?auth_token=ZhhSqcdR2T6KoVv29UZp").read) 
+      @lt=@theatres['liked_theatres']
+      @nt=@theatres['nearby_theatres']
+      @nit=@theatres['not_interested_theatres']
+      else
+      @url = "http://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+      @theatres =HTTParty.get(@url, body: {user: {auth_token: session[:auth]}}).parsed_response
+
+      #@theatres=JSON.parse(open("http://flavumovies.herokuapp.com/theatres.json?auth_token=ZhhSqcdR2T6KoVv29UZp").read) 
+      @lt=@theatres['liked_theatres']
+      @nt=@theatres['nearby_theatres']
+      @nit=@theatres['not_interested_theatres']
+      end
+    end
   end
   def buddies
-
+    if (session[:auth])
     @a1=session[:auth]
 
     @url1 = "http://flavumovies.herokuapp.com/followers.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
@@ -92,6 +177,9 @@ puts params[:unblock]
     puts params[:follow]
     puts @following
     puts params[:friend_contact_info]
+  else
+    redirect_to cover_path
+  end
   
   end
 
@@ -104,35 +192,44 @@ puts params[:unblock]
     
   end
   def settings 
-
-    @a1=session[:auth]
-    @user=session[:user]
-    puts session[:auth]
-    puts @a1
-    @setting_account =HTTParty.put("http://flavumovies.herokuapp.com/users.json", 
-      body: {user: {auth_token: @a1, 
-        email: params[:email], 
-        username: params[:username], 
-        display_name: params[:display_name],
-        phone_number: params[:phone_number],
-        password: params[:password],
-        password_confirmation: params[:password_confirmation]}}).parsed_response
-    puts @setting_account
+    if (!session[:auth] && !session[:guest_auth])
+      redirect_to cover_path
+    else
+      @a1=session[:auth]
+      @user=session[:user]
+      puts session[:auth]
+      puts @a1
+      @setting_account =HTTParty.put("http://flavumovies.herokuapp.com/users.json", 
+        body: {user: {auth_token: @a1, 
+          email: params[:email], 
+          username: params[:username], 
+          display_name: params[:display_name],
+          phone_number: params[:phone_number],
+          password: params[:password],
+          password_confirmation: params[:password_confirmation]}}).parsed_response
+      puts @setting_account
+    end
 
   end
 
   def home
-    @ip_address=open( "http://jsonip.com/" ){ |s| JSON::parse( s.string())['ip'] }
-    @latlong=Geocoder.coordinates(@ip_address)
-    session[:latitude]=@latlong[0]
-    session[:longitude]=@latlong[1]
-    puts session[:latitude]
-    puts session[:longitude]
+    if (!session[:auth] && !session[:guest_auth])
+      redirect_to cover_path
+    else
+      @ip_address=open( "http://jsonip.com/" ){ |s| JSON::parse( s.string())['ip'] }
+      @latlong=Geocoder.coordinates(@ip_address)
+      session[:latitude]=@latlong[0]
+      session[:longitude]=@latlong[1]
+      puts session[:latitude]
+      puts session[:longitude]
+    end
   end
 
   def signout
-    reset_session    
-    redirect_to root_url
+    reset_session 
+    #session[:check_guest] = "true"
+
+    redirect_to cover_path
   end
 
 
@@ -143,6 +240,13 @@ puts params[:unblock]
     #puts @guests['auth_token']
 
 
+  end
+
+  def validate
+    if (!flash[:notice])
+      redirect_to cover_path
+    else
+    end
   end
 
 

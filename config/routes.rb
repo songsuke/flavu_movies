@@ -2,6 +2,7 @@ EasilyxMovie::Application.routes.draw do
   match '/cover', to: 'cover#cover'
 
   resources :preferences
+  match '/validate', to: 'static_pages#validate'
 
   #get "static_pages/signin"
   match '/signin', to: 'static_pages#signin'

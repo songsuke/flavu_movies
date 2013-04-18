@@ -26,7 +26,7 @@ $(function() {
 })
 </script>
 
-<%if(session[:auth])%>
+<%if(session[:auth] || session[:guest_auth])%>
 <div id="box_tab" class = "ui-tabs">
       <h11> Movies </h11>
 <ul id="box_menu" name="box_menu" class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
