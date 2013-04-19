@@ -93,6 +93,8 @@ require 'open-uri'
     else
         #@a1=session[:auth]
         puts session[:check_guest]
+        puts session[:auth]
+        puts session[:guest_auth]
         if session[:check_guest] == 'true'
           @url = "http://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
           @movies =HTTParty.get(@url, body: {user: {auth_token: session[:guest_auth]}}).parsed_response
