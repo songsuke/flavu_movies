@@ -15,6 +15,7 @@
 //= require 'easySlider1.7'
 //= require 'jquery-1.7.2.min'
 //= require 'lightbox'
+//= require 'geolocation'
 //= require bootstrap
 //= require_tree .
 
