@@ -221,17 +221,19 @@ puts params[:unblock]
   end
 
   def home
+    require 'address'
     if (!session[:auth] && !session[:guest_auth])
       redirect_to cover_path
     else
       #@ip_address=open( "http://jsonip.com/" ){ |s| JSON::parse( s.string())['ip'] }
-      @ip_address = UDPSocket.open {|s| s.connect("64.233.187.99", 1); s.addr.last}
-
+      #@ip_address = UDPSocket.open {|s| s.connect("64.233.187.99", 1); s.addr.last}
+      @ip_address=Address.get
       @latlong=Geocoder.coordinates(@ip_address)
       session[:latitude]=@latlong[0]
       session[:longitude]=@latlong[1]
       puts session[:latitude]
       puts session[:longitude]
+      puts @ip_address
     end
   end
 
