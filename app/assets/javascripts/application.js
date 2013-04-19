@@ -16,7 +16,7 @@
 //= require 'jquery-1.7.2.min'
 //= require 'lightbox'
 //= require 'geolocation'
-//= require bootstrap
+//= require '/js/bootstrap'
 //= require_tree .
 
 
