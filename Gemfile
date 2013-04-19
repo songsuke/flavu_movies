@@ -19,7 +19,7 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 end
-gem "activerecord-jdbcsqlite3-adapter", "~> 1.2.9"
+gem 'activerecord-postgresql-adapter'
 gem 'address'
 gem "rspec", "~> 2.13.0"
 gem 'bootstrap-sass', '~> 2.3.1.0'
