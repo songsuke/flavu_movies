@@ -227,7 +227,8 @@ puts params[:unblock]
     else
       #@ip_address=open( "http://jsonip.com/" ){ |s| JSON::parse( s.string())['ip'] }
       #@ip_address = UDPSocket.open {|s| s.connect("64.233.187.99", 1); s.addr.last}
-      @ip_address=Address.get
+      #@ip_address=Address.get
+      @ip_address="184.70.5.250"
       @latlong=Geocoder.coordinates(@ip_address)
       session[:latitude]=@latlong[0]
       session[:longitude]=@latlong[1]
