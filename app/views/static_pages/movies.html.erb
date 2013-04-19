@@ -31,25 +31,66 @@ $(function () {
 
     <div id="interested" class="tab-pane active" >
       <h1> Interested Movies </h1>
-      <pre> abcd </pre>
+      <pre>  
+        <% @im['movies'].each do |movie| %> 
+          <% if(movie['photos'].length >0) %>
+            <%photo = movie['photos'].first%>
+            <div class="wpcf-field-value wpcf-field-image-value wpcf-field-poster-value">
+              <img width="140" height="210" src="<%= photo['url']%>" class="attachment-thumbnail">
+              <h11><%= movie['title'] %> </h11>
+            </div>
+           <%end%>
+        <%end%>
+      </pre>
     </div>
+
 
     <div id="remaining" class="tab-pane fade" >
       <h1> Remaining Movies </h1>
-      <pre> efgh </pre>
+      <% @rm['movies'].each do |movie| %> 
+        <% if(movie['photos'].length >0) %>
+          <%photo = movie['photos'].first%>
+          <div class="wpcf-field-value wpcf-field-image-value wpcf-field-poster-value">
+            <img width="140" height="210" src="<%= photo['url']%>" class="attachment-thumbnail">
+            <h11><%= movie['title'] %> 
+                    <%=movie['id']%></h11>
+
+          </div>
+        <%end%>
+            <%=form_tag '/movies' do %>
+                   <button name="liked" id="liked" value="<%=movie['id']%>" class='btn btn-mini'><i class="icon-thumbs-up" ></i>
+                    <% @y4=@rm['movies'].detect{|x4| x4["id"]== movie['id']} %>
+                    <% @y4index = @rm['movies'].index (@y4) %>
+                    <% @rm['movies'].delete_at (@y4index) %>
+
+                   </button>
+              
+
+              
+                   <button name="unliked" id="unliked" value="<%=movie['id']%>" class='btn btn-mini'><i class="icon-thumbs-down" ></i></button>
+                  <%end%>
+          
+      <%end%>
     </div>
 
 
   
     <div id="not_interested" class="tab-pane fade" >
       <h1> Not Interested Movies </h1>
-      <pre> ijklm</pre>
-    </div>
+        <% @nim['movies'].each do |movie| %> 
+          <% if(movie['photos'].length >0) %>
+            <%photo = movie['photos'].first%>
+            <div class="wpcf-field-value wpcf-field-image-value wpcf-field-poster-value">
+              <img width="140" height="210" src="<%= photo['url']%>" class="attachment-thumbnail">
+              <h11><%= movie['title'] %> </h11>
+            </div>
+          <%end%>
+        <%end%>
+      </div>
 
-  </div>
+    </div><!--myTabContent-->
 
-
-</div>
+</div><!--tabbable-->
 <%else%>
 <p> You don't have any permission to select movies. Please 
   <%=link_to "Sign In", signin_path %> or <%=link_to "Register", register_path%>
