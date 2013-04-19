@@ -7,11 +7,15 @@
 <head>
 	<title>Easy Slider jQuery Plugin Demo</title>
 
-	
-	
+
 </head>
 <body>
-
+	<%- unless @lat_lng %>
+<script>
+  getGeoLocation();
+</script>
+<%- end %>
+	
 <div id="container">
 	<div id="content">
 		<div id="slider" >
