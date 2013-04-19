@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require 'easySlider1.7'
+//= require '/javascripts/easySlider1.7'
 //= require 'jquery-1.7.2.min'
 //= require 'lightbox'
 //= require 'geolocation'
