@@ -5,6 +5,7 @@ require 'open-uri'
   def signin
     if params[:confirm] !="confirm"
     else
+      reset_session
       puts "my param #{params[:login]}"
       @users =HTTParty.post("http://flavumovies.herokuapp.com/users/sign_in.json", body: {user: {login: params[:login], password: params[:password]}}).parsed_response 
       puts @users.first[0]
@@ -235,8 +236,8 @@ puts params[:unblock]
 
   def cover
     #@guests =HTTParty.post("http://flavumovies.herokuapp.com/users/sign_in.json", body: {user: {guest: 'true'}}).parsed_response 
-    @guests1 =HTTParty.get("http://flavumovies.herokuapp.com/users/sign_in.json", body: {user: {guest: "true"}}).parsed_response 
-    puts @guests1
+    #@guests1 =HTTParty.get("http://flavumovies.herokuapp.com/users/sign_in.json", body: {user: {guest: "true"}}).parsed_response 
+    #puts @guests1
     #puts @guests['auth_token']
 
 
