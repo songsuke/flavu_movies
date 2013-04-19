@@ -7,11 +7,12 @@ class CoverController < ApplicationController
 		redirect_to root_path
 	elsif params[:guest] == 'true'
 		@guest_password=SecureRandom.uuid
-		@guest_email= SecureRandom.uuid + "@" + SecureRandom.uuid + ".com"
-		@guest_username=SecureRandom.uuid
-		@guest_displayname=SecureRandom.uuid
+		@guest_gen=SecureRandom.uuid
+		@guest_email= @guest_gen + "@flavuguest.com"
 
-	  	@guests =HTTParty.post("http://flavumovies.herokuapp.com/users.json", body: {user: {password: @guest_password, password_confirmation: @guest_password, email: @guest_email, username: @guest_username, display_name: @guest_displayname, guest: params[:guest] }}).parsed_response
+		#@guest_displayname=SecureRandom.uuid
+
+	  	@guests =HTTParty.post("http://flavumovies.herokuapp.com/users.json", body: {user: {password: @guest_password, password_confirmation: @guest_password, email: @guest_email, username: @guest_gen, display_name: @guest_gen, guest: params[:guest] }}).parsed_response
 	    puts @guests['id']
 	    puts @guests
 	    session[:guest]=@guests

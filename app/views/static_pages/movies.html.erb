@@ -11,83 +11,45 @@
 
 <body>
 
+<script src="/assets/bootstrap.js?body=1" type="text/javascript">
+$(function () {
+    $('#myTab a:last').tab('show');
+  })
 
-<%if(session[:auth] || session[:guest_auth])%>
-<div id="box_tab" class = "ui-tabs">
-      <h11> Movies </h11>
-<ul id="box_menu" name="box_menu" class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
-        <li id="li1" name="li1" class="t1 ui-state-default ui-corner-top"><a href="javascript:clicktab(1);"> Interested Movies </a></li>
-        <li id="li2" name="li2" class="t2 ui-state-default ui-corner-top"><a href="javascript:clicktab(2);"> Remaining Movies</a></li>
-        <li id="li3" name="li3" class="t3 ui-state-default ui-corner-top"><a href="javascript:clicktab(3);"> Not Interested Movies</a></li>
-</ul>
-
-  <div id="box_content1" name="box_content1" class="panel ui-tabs-panel ui-widget-content ui-corner-bottom" style="display: inline;">
-    <div class="movie_items group">
-      <h1> Interested Movies </h1>
-      <% @im['movies'].each do |movie| %> 
-        <% if(movie['photos'].length >0) %>
-          <%photo = movie['photos'].first%>
-          <div class="wpcf-field-value wpcf-field-image-value wpcf-field-poster-value">
-            <img width="140" height="210" src="<%= photo['url']%>" class="attachment-thumbnail">
-            <h11><%= movie['title'] %> </h11>
-          </div>
-        <%end%>
-      <%end%>
-    </div>
-  </div>
-
-  <div id="box_content2" name="box_content2" class="panel ui-tabs-panel ui-widget-content ui-corner-bottom">
-    <div class="movie_items group">
-      <h1> Remaining Movies </h1>
-      <% @rm['movies'].each do |movie| %> 
-        <% if(movie['photos'].length >0) %>
-          <%photo = movie['photos'].first%>
-          <div class="wpcf-field-value wpcf-field-image-value wpcf-field-poster-value">
-            <img width="140" height="210" src="<%= photo['url']%>" class="attachment-thumbnail">
-            <h11><%= movie['title'] %> 
-                    <%=movie['id']%></h11>
-
-            
-          </div>
-        <%end%>
-            
-              <%=form_tag '/movies' do %>
-                   <button name="liked" id="liked" value="<%=movie['id']%>" class='btn btn-mini'><i class="icon-thumbs-up" ></i>
-                    <% @y4=@rm['movies'].detect{|x4| x4["id"]== movie['id']} %>
-                    <% @y4index = @rm['movies'].index (@y4) %>
-                    <% @rm['movies'].delete_at (@y4index) %>
-
-                   </button>
-              
-
-              
-                   <button name="unliked" id="unliked" value="<%=movie['id']%>" class='btn btn-mini'><i class="icon-thumbs-down" ></i></button>
-                  <%end%>
-          
-      <%end%>
-    </div>
-  </div>
-
-  <div id="box_content3" name="box_content3" class="panel ui-tabs-panel ui-widget-content ui-corner-bottom">
-    <div class="movie_items group">
-      <h1> Not Interested Movies </h1>
-      <% @nim['movies'].each do |movie| %> 
-        <% if(movie['photos'].length >0) %>
-          <%photo = movie['photos'].first%>
-          <div class="wpcf-field-value wpcf-field-image-value wpcf-field-poster-value">
-            <img width="140" height="210" src="<%= photo['url']%>" class="attachment-thumbnail">
-            <h11><%= movie['title'] %> </h11>
-          </div>
-        <%end%>
-      <%end%>
-    </div>
-  </div>
-</div>
-
-<script type="text/javascript">
-  clicktab()
 </script>
+<%if(session[:auth] || session[:guest_auth])%>
 
+<div class = "tabbable">
+  <ul class="nav nav-tabs" id="myTab">
+    <li class ="active"><a href="#interested" data-toggle="tab">Interested Movies</a></li>
+    <li><a href="#remaining" data-toggle="tab">Remaining Movies</a></li>
+    <li><a href="#not_interested" data-toggle="tab">Not Interested Movies</a></li>
+
+  </ul>
+
+  <div id = "myTabContent" class="tab-content">
+
+    <div id="interested" class="tab-pane active" >
+      <h1> Interested Movies </h1>
+      <pre> abcd </pre>
+    </div>
+
+    <div id="remaining" class="tab-pane fade" >
+      <h1> Remaining Movies </h1>
+      <pre> efgh </pre>
+    </div>
+
+
+  
+    <div id="not_interested" class="tab-pane fade" >
+      <h1> Not Interested Movies </h1>
+      <pre> ijklm</pre>
+    </div>
+
+  </div>
+
+
+</div>
 <%else%>
 <p> You don't have any permission to select movies. Please 
   <%=link_to "Sign In", signin_path %> or <%=link_to "Register", register_path%>
@@ -95,5 +57,7 @@
 
 
 <%end%>
+
+
 </body>
 </html>

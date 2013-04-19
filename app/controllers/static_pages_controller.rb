@@ -5,7 +5,7 @@ require 'open-uri'
   def signin
     if params[:confirm] !="confirm"
     else
-      reset_session
+      session[:check_guest] = "false"
       puts "my param #{params[:login]}"
       @users =HTTParty.post("http://flavumovies.herokuapp.com/users/sign_in.json", body: {user: {login: params[:login], password: params[:password]}}).parsed_response 
       puts @users.first[0]
@@ -32,12 +32,12 @@ require 'open-uri'
       puts params[:confirm]
       if params[:confirm] !="confirm"
       else
-        if (params[:password].length <= 6)
+        if (params[:password].length < 6)
           flash[:error] = "Your password is too short. It has to be more than 6 characters"
         elsif params[:email] != params[:email_confirmation]
           flash[:error] = "Your email does not match. Please try again" 
         else
-          @users_registations =HTTParty.put("http://flavumovies.herokuapp.com/users.json", body: {user: {auth_token: session[:guest_auth], password: params[:password], password_confirmation: params[:password], email: params[:email], username: params[:email], display_name: params[:email]}}).parsed_response
+          @users_registations =HTTParty.put("http://flavumovies.herokuapp.com/users.json", body: {user: {auth_token: session[:guest_auth], password: params[:password], password_confirmation: params[:password], email: params[:email], username: params[:email], display_name: params[:email], guest: "false"}}).parsed_response
           if (@users_registations['errors'])
             @check_register='false'
             flash[:error] = "#{params[:email]} has already been taken. Please try again"
@@ -191,14 +191,15 @@ puts params[:unblock]
   
   end
   def edit
-
+    reset_session
+    redirect_to cover_path
     
     
   end
   def settings 
-    if (!session[:auth] && !session[:guest_auth])
-      redirect_to cover_path
-    else
+    
+    
+    if (session[:auth])
       @a1=session[:auth]
       @user=session[:user]
       puts session[:auth]
@@ -212,6 +213,9 @@ puts params[:unblock]
           password: params[:password],
           password_confirmation: params[:password_confirmation]}}).parsed_response
       puts @setting_account
+
+    else
+      redirect_to home_path
     end
 
   end
@@ -220,7 +224,9 @@ puts params[:unblock]
     if (!session[:auth] && !session[:guest_auth])
       redirect_to cover_path
     else
-      @ip_address=open( "http://jsonip.com/" ){ |s| JSON::parse( s.string())['ip'] }
+      #@ip_address=open( "http://jsonip.com/" ){ |s| JSON::parse( s.string())['ip'] }
+      @ip_address = UDPSocket.open {|s| s.connect("64.233.187.99", 1); s.addr.last}
+
       @latlong=Geocoder.coordinates(@ip_address)
       session[:latitude]=@latlong[0]
       session[:longitude]=@latlong[1]
@@ -230,10 +236,11 @@ puts params[:unblock]
   end
 
   def signout
-    reset_session 
-    #session[:check_guest] = "true"
+    #reset_session 
+    session[:check_guest] = "true"
+    session[:auth] = nil
 
-    redirect_to cover_path
+    redirect_to home_path
   end
 
 

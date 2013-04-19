@@ -3,8 +3,8 @@
     <div class='control-group'>
       <div class='controls'>
         <select id = "genre" name = "genre">
-          <%@all_genres['genres'].each do |all_genre| %>
-          <%@x1= all_genre['name']%>
+          <%@genre_preferences['genre_preferences'].each do |all_genre| %>
+          <%@x1= all_genre['genre']%>
 
           <option name = "<%=@x1%>" id=genre value="<%=@x1%>"> <%=@x1%></option>
           <%end%>
