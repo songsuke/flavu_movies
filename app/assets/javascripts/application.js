@@ -12,6 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require 'theme/easySlider1.7'
+//= require 'theme/jquery-1.7.2.min'
+//= require 'theme/lightbox'
 //= require bootstrap
 //= require_tree .
+
 
