@@ -222,8 +222,8 @@ puts params[:unblock]
 
   def home
     require 'address'
-    @lat_lng = cookies[:lat_lng]
-    @lat_lng2 = @lat_lng.split('|')
+    #@lat_lng = cookies[:lat_lng]
+    #@lat_lng2 = @lat_lng.split('|')
     #puts @lat_lng2[0]
 
     #puts @lat_lng
@@ -233,13 +233,13 @@ puts params[:unblock]
       #@ip_address=open( "http://jsonip.com/" ){ |s| JSON::parse( s.string())['ip'] }
       #@ip_address = UDPSocket.open {|s| s.connect("64.233.187.99", 1); s.addr.last}
       #@ip_address=Address.get
-      #@ip_address="184.70.5.250"
-      #@latlong=Geocoder.coordinates(@ip_address)
+      @ip_address="184.70.5.250"
+      @latlong=Geocoder.coordinates(@ip_address)
 
-      #session[:latitude]=@latlong[0]
-      #session[:longitude]=@latlong[1]
-      session[:latitude]=@lat_lng2[0]
-      session[:longitude]=@lat_lng2[1]
+      session[:latitude]=@latlong[0]
+      session[:longitude]=@latlong[1]
+      #session[:latitude]=@lat_lng2[0]
+      #session[:longitude]=@lat_lng2[1]
       #@lat_lng2
       puts session[:latitude]
       puts session[:longitude]
