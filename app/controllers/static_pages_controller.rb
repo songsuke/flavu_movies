@@ -182,7 +182,7 @@ puts params[:unblock]
     puts @following
     puts params[:friend_contact_info]
   else
-    redirect_to cover_path
+    
   end
   
   end
