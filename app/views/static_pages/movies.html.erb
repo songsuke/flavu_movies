@@ -17,14 +17,7 @@
 </head>
 
 <body>
-  <script>
-$(function() {
-  $("#liked").click(function() {
-     $("#box_content1").load("/movies")
-     $("#box_content2").load("/movies")
-  })
-})
-</script>
+
 
 <%if(session[:auth] || session[:guest_auth])%>
 <div id="box_tab" class = "ui-tabs">
