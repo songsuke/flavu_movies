@@ -11,13 +11,13 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 
-//= require 'easySlider1.7'
-//= require 'jquery-1.7.2.min'
-//= require 'lightbox'
-//= require 'geolocation'
-//= require 'bootstrap'
+//= require easySlider1.7
+//= require jquery-1.7.2.min
+//= require lightbox
+//= require geolocation
+//= require bootstrap/js//bootstrap
 //= require jquery
-//= require jquery_ujs
+//= require jquery_ujs 	
 //= require_tree .
 
 
