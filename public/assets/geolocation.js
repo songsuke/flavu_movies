@@ -1,0 +1,1 @@
+function getGeoLocation(){navigator.geolocation.getCurrentPosition(setGeoCookie)}function setGeoCookie(t){var e=t.coords.latitude+"|"+t.coords.longitude;document.cookie="lat_lng="+escape(e)}
