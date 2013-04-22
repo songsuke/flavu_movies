@@ -1,41 +1,64 @@
+<html>
+<head>
+
 <%if (!session[:auth] && !session[:guest_auth])%>
 <meta http-equiv="refresh" content="0; url=/cover"> 
 
 <%else%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
-<head>
-	<title>Easy Slider jQuery Plugin Demo</title>
 
 
-</head>
-<body>
-	<%- unless @lat_lng %>
+	<title></title>
+  <%= javascript_include_tag "bootstrap-carousel" %>
+
+<script type="text/javascript">
+$('.carousel').carousel()
+
+</script>
+
+<% unless @lat_lng %>
 <script>
   getGeoLocation();
 </script>
-<%- end %>
+<% end %>
+</head>
+<body>
 	
-<div id="container">
+	
+<div id="slider">
 	<div id="content">
-		<div id="slider" >
-			<ul>				
-				<li><a href="http://templatica.com/preview/30"><img src="/assets/01.jpg" alt="Css Template Preview" /></a></li>
-				<li><a href="http://templatica.com/preview/7"><img src="/assets/02.jpg" alt="Css Template Preview" /></a></li>
-				<li><a href="http://templatica.com/preview/25"><img src="/assets/03.jpg" alt="Css Template Preview" /></a></li>
-				<li><a href="http://templatica.com/preview/26"><img src="/assets/04.jpg" alt="Css Template Preview" /></a></li>
-				<li><a href="http://templatica.com/preview/27"><img src="/assets/05.jpg" alt="Css Template Preview" /></a></li>			
-			</ul>
+		<div id="myCarousel" class="carousel slide">
+		  <ol class="carousel-indicators">
+		    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+		    <li data-target="#myCarousel" data-slide-to="1"></li>
+		    <li data-target="#myCarousel" data-slide-to="2"></li>
+		  </ol>
+		  <!-- Carousel items -->
+		  <div class="carousel-inner">
+		    <div class="active item" id = "slider">
+		    	<img src="/assets/iron-man-3.jpg" alt>
+		    </div>
+		    <div class="item" id="slider">    	
+		    	<img src="/assets/hulk.jpg" alt>
+			</div>
+		    <div class="item" id="slider">
+		    	<img src="/assets/captain-america.jpg" alt>
+		    </div>
+		  </div>
+		  <!-- Carousel nav -->
+		  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+		  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
 		</div>
 	</div>
 </div>
 
 
-
 <div><h11>Welcome <%=session['username']%> </h11>
 </div>
 
-</div>
 <%end%>
+
+
+
 </body>
 </html>
