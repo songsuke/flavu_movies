@@ -2,8 +2,11 @@
 <html>
 <head>
   <title>EasilyxMovie</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "bootstrap/js/bootstrap" %>
+  <%= javascript_include_tag "bootstrap/js/bootstrap.min" %>
+  <%= stylesheet_link_tag "bootstrap/css/bootstrap", :media => "all" %>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= csrf_meta_tags %>
 
   <%if @a1 && @guests %>
