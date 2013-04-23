@@ -23,38 +23,122 @@ $('.carousel').carousel()
 <% end %>
 </head>
 <body>
-	
-	
-<div id="slider">
-	<div id="content">
-		<div id="myCarousel" class="carousel slide">
-		  <ol class="carousel-indicators">
-		    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-		    <li data-target="#myCarousel" data-slide-to="1"></li>
-		    <li data-target="#myCarousel" data-slide-to="2"></li>
-		  </ol>
-		  <!-- Carousel items -->
-		  <div class="carousel-inner">
-		    <div class="active item" id = "slider">
-		    	<img src="/assets/iron-man-3.jpg" alt>
-		    </div>
-		    <div class="item" id="slider">    	
-		    	<img src="/assets/hulk.jpg" alt>
+
+	<div id="quick-showtime">
+		<h1>Show time</h1>
+		<div id="quick-showtime-form">
+			<%=form_tag '/home' do %>
+		    	<div id="quick-movies">
+			        <select id = "movie" name = "movie">
+			        <option name = "all_movies" id=movie value="all_movies"> All Movies</option><h1>at</h1>
+			        <%@rm['movies'].each do |movie| %>
+			        <%@xmovies= movie['title']%>
+			        <option name = "<%=@xmovies%>" id=movie value="<%=@xmovies%>"> <%=@xmovies%></option>
+			        <%end%>
+			        </select>
+		     	</div>
+
+		     	<div id="quick-theatres">
+			        <select id = "theatre" name = "theatre">
+			        <option name = "all_theatres" id=movie value="all_theatres"> All Theatres</option>
+			          <%@nt['theatres'].each do |theatre| %>
+			          <%@xtheatres= theatre['name']%>
+
+			          <option name = "<%=@xtheatres%>" id=movie value="<%=@xtheatres%>"> <%=@xtheatres%></option>
+			          <%end%>
+			        </select>
+		     	</div>
+
+		    <input class="btn btn-danger" name="commit" type="submit" value=" SHOWTIME ">
+		    <%end%>
+
+
+		</div>
+	</div>
+
+<div id="main" class="group" role="main">
+	<div id="slider">
+		<div id="content">
+			<div id="myCarousel" class="carousel slide">
+			  <ol class="carousel-indicators">
+			    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+			    <li data-target="#myCarousel" data-slide-to="1"></li>
+			    <li data-target="#myCarousel" data-slide-to="2"></li>
+			  </ol>
+			  <!-- Carousel items -->
+			  <div class="carousel-inner">
+			    <div class="active item" id = "slider">
+			    	<img src="/assets/iron-man-3.jpg" alt>
+			    </div>
+			    <div class="item" id="slider">    	
+			    	<img src="/assets/hulk.jpg" alt>
+				</div>
+			    <div class="item" id="slider">
+			    	<img src="/assets/captain-america.jpg" alt>
+			    </div>
+			  </div>
+			  <!-- Carousel nav -->
+			  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+			  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
 			</div>
-		    <div class="item" id="slider">
-		    	<img src="/assets/captain-america.jpg" alt>
-		    </div>
-		  </div>
-		  <!-- Carousel nav -->
-		  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-		  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+		</div>
+	</div>
+
+
+	<div id="side">
+		<div id="side-login-box">
+			<div class="navbar-inner">
+				<h3> Flavu Member </h3>
+			</div>
+<!--login-->
+<%if flash[:error]%>
+  <div class = "alert">
+    <p> <%=flash[:error]%></p>
+  </div>
+<%else%>
+<%end%>
+
+  <%= form_tag '/signin' do %>
+  <%if (!session[:auth])%>
+  <div class='control-group'>
+    <div class='controls'>
+      <!--<label for="user_login">Login</label>-->
+      <%= label_tag("Login") %>
+      <!--<input id="user_login" name="user[login]" size="30" type="text">-->
+      <%= text_field_tag "login"%>
+    </div>
+  </div>
+
+  <div class='control-group'>
+    <div class='controls'>
+      <!--<label for="user_password">Password</label>-->
+      <%= label_tag("Password") %>
+
+      <!--<input id="user_password" name="user[password]" size="30" type="password">-->
+      <%= password_field_tag("password") %>
+
+
+    </div>
+  </div>
+  <div class='controls'>
+  <button name="confirm" id="confirm" value="confirm"> Login </button>
+
+   </div>
+
+  <div>
+    <h11> please login </h11>
+  </div>
+  <%else%>
+    <h11> Your Welcome <%=session['username']%></h11>
+  <%end%>
+<%end%>
+<!--end of login-->
+
+
 		</div>
 	</div>
 </div>
 
-
-<div><h11>Welcome <%=session['username']%> </h11>
-</div>
 
 <%end%>
 
