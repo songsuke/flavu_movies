@@ -8,9 +8,7 @@
     width: 100%;
   }
 
-  img {
-    width: 100%;
-  }
+
 }
 
 /* Portrait tablet to landscape and desktop */
@@ -74,6 +72,22 @@ body {
   color: white;
 }
 
+#foot {
+  background-color: rgba(0,0,0,.85);
+  padding: 25px 25px 18px;
+  box-shadow: 0 0 8px rgba(0,0,0,.2);
+  border-radius: 0 0 3px 3px;
+  font-size: 12px;
+  line-height: 1.8em;
+  z-index: 0;
+  position: relative;
+}
+
+#copy {
+  p {
+    color: white;
+  }
+}
 #logo { 
   float: left;
   width: 176px;
@@ -169,6 +183,7 @@ body {
   z-index: 1;
   position: relative;
   min-height: 700px;
+  overflow: auto;
 }
 
 #slider {
@@ -176,17 +191,81 @@ body {
   height: 320px;
 }
 
+.carousel-indicators {
+  top: 105%;
+  left: 50%;
+  li {
+    background-color: black;
+
+  }
+ }
+
 #side {
   width: 260px;
   float: left;
-  margin: 26px 26px 0;
+  margin: 40px 26px 0;
+  h1 { 
+    float: left;
+    margin: 0;
+    padding: 0 0 0 10px;
+    text-shadow: 0 1px 0 #fff;
+  }
 }
 
 #side-login-box {
+  clear: both;
   border-radius: 3px;
   margin: 0 0 25px;
   box-shadow: 0 1px 3px rgba(25,25,25,.4);
-  background-color: #ccc;
+  background-color: #fff;
+}
+
+#home-content {
+  float: right;
+  margin: 40px 26px 0 0;
+  width: 686px;
+  h1 {
+    float: left;
+margin: 0;
+padding: 0 0 0 10px;
+text-shadow: 0 1px 0 #fff;
+  }
+}
+
+#nowshowing {
+  clear: both;
+  border-radius: 3px;
+  padding: 7px 10px;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(25,25,25,.5);
+  margin-bottom: 26px;
+  min-height: 600px;
+  overflow: auto;
+}
+
+#movies .group {
+  padding: 13px 13px 10px;
+
+}
+
+.movie-items{
+  float: left;
+  padding: 5px;
+  margin: 3px;
+  border: 1px solid #fff;
+  border-radius: 3px;
+  display: block;
+  width: 142px;
+  height: 274px;
+  overflow: hidden;
+  position: relative;
+  text-shadow: 0 1px 0 #fff;
+  h3 {
+    color: #333;
+    margin: 6px 0 0;
+    font: 15px/1em sans-serif;
+    padding-left: 2px;
+  }
 }
 
 .navbar {
@@ -194,21 +273,7 @@ body {
 }
 
 
-section {
-  overflow: auto;
-}
 
-textarea {
-  resize: vertical;
-}
-
-.center {
-  text-align: center;
-}
-
-.center h1 {
-  margin-bottom: 10px;
-}
 
 h1 {
   font-size: 20px;
@@ -256,11 +321,7 @@ div.hidden{
 	display:none;
 }
 
-#home-content {
-  float: left;
-  margin: 26px 26px 26px 26px;
-  width: 686px;
-}
+
 
 #f1 {
   padding-top: 10px;

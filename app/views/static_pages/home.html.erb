@@ -86,10 +86,10 @@ $('.carousel').carousel()
 
 
 	<div id="side">
-		<div id="side-login-box">
-			<div class="navbar-inner">
-				<h3> Flavu Member </h3>
-			</div>
+		<div id="member">
+			<h1> Flavu Member </h1>
+			<div id="side-login-box">
+			
 <!--login-->
 <%if flash[:error]%>
   <div class = "alert">
@@ -135,10 +135,31 @@ $('.carousel').carousel()
 <!--end of login-->
 
 
-		</div>
-	</div>
-</div>
+			</div>
+		</div><!--member-->
+	</div><!--side-->
 
+	<div id="home-content">
+		<div id="movies">
+			<h1> Movies </h1>
+			<div id="nowshowing" class="panel ui-tabs-panel ui-widget-content ui-corner-bottom">
+				<div class="group">
+				<% @rm['movies'].each do |movie| %> 
+        		<% if(movie['photos'].length >0) %>
+          			<%photo = movie['photos'].first%>
+          			<div class="movie-items">
+            		<img width="140" height="210" src="<%= photo['url']%>">
+            		<h3><%= movie['title'] %></h3>
+                    </div>
+        <%end%>
+        <%end%>
+        		</div>
+
+			</div>
+		</div><!--movies-->
+	</div><!--home-content-->
+
+</div><!--main-->
 
 <%end%>
 
