@@ -24,6 +24,7 @@ class CoverController < ApplicationController
 	    puts @guests['auth_token']
 	    redirect_to home_path
 
+		
 	else
 
 	end

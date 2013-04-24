@@ -13,6 +13,7 @@
 
 <script type="text/javascript">
 $('.carousel').carousel()
+  interval: 2000
 
 </script>
 
@@ -24,37 +25,7 @@ $('.carousel').carousel()
 </head>
 <body>
 
-	<div id="quick-showtime">
-		<h1>Show time</h1>
-		<div id="quick-showtime-form">
-			<%=form_tag '/home' do %>
-		    	<div id="quick-movies">
-			        <select id = "movie" name = "movie">
-			        <option name = "all_movies" id=movie value="all_movies"> All Movies</option><h1>at</h1>
-			        <%@rm['movies'].each do |movie| %>
-			        <%@xmovies= movie['title']%>
-			        <option name = "<%=@xmovies%>" id=movie value="<%=@xmovies%>"> <%=@xmovies%></option>
-			        <%end%>
-			        </select>
-		     	</div>
 
-		     	<div id="quick-theatres">
-			        <select id = "theatre" name = "theatre">
-			        <option name = "all_theatres" id=movie value="all_theatres"> All Theatres</option>
-			          <%@nt['theatres'].each do |theatre| %>
-			          <%@xtheatres= theatre['name']%>
-
-			          <option name = "<%=@xtheatres%>" id=movie value="<%=@xtheatres%>"> <%=@xtheatres%></option>
-			          <%end%>
-			        </select>
-		     	</div>
-
-		    <input class="btn btn-danger" name="commit" type="submit" value=" SHOWTIME ">
-		    <%end%>
-
-
-		</div>
-	</div>
 
 <div id="main" class="group" role="main">
 	<div id="slider">
@@ -142,7 +113,7 @@ $('.carousel').carousel()
 	<div id="home-content">
 		<div id="movies">
 			<h1> Movies </h1>
-			<div id="nowshowing" class="panel ui-tabs-panel ui-widget-content ui-corner-bottom">
+			<div id="nowshowing">
 				<div class="group">
 				<% @rm['movies'].each do |movie| %> 
         		<% if(movie['photos'].length >0) %>

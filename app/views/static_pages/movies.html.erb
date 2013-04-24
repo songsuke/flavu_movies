@@ -1,12 +1,15 @@
-<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title></title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width">
+  <%if(session[:auth] || session[:guest_auth])%>
 
+  <%= javascript_include_tag "bootstrap-tab" %>
+
+<script type="text/javascript">
+$(function () {
+    $('#myTab a:last').tab('show');
+  })
+
+</script>
 
 
 
@@ -14,92 +17,137 @@
 
 <body>
 
-  <script>
-$(function () {
-    $('#myTab a:last').tab('show');
-  })
-
-</script>
-<%if(session[:auth] || session[:guest_auth])%>
-
-<div class = "tabbable">
-  <ul class="nav nav-tabs" id="myTab">
-    <li class ="active"><a href="#interested" data-toggle="tab">Interested Movies</a></li>
-    <li><a href="#remaining" data-toggle="tab">Remaining Movies</a></li>
-    <li><a href="#not_interested" data-toggle="tab">Not Interested Movies</a></li>
-
-  </ul>
-
-  <div id = "myTabContent" class="tab-content">
-
-    <div id="interested" class="tab-pane active" >
-      <h1> Interested Movies </h1>
-      <pre>  
-        <% @im['movies'].each do |movie| %> 
-          <% if(movie['photos'].length >0) %>
-            <%photo = movie['photos'].first%>
-            <div class="wpcf-field-value wpcf-field-image-value wpcf-field-poster-value">
-              <img width="140" height="210" src="<%= photo['url']%>" class="attachment-thumbnail">
-              <h11><%= movie['title'] %> </h11>
-            </div>
-           <%end%>
-        <%end%>
-      </pre>
-    </div>
-
-
-    <div id="remaining" class="tab-pane fade" >
-      <h1> Remaining Movies </h1>
-      <% @rm['movies'].each do |movie| %> 
-        <% if(movie['photos'].length >0) %>
-          <%photo = movie['photos'].first%>
-          <div class="wpcf-field-value wpcf-field-image-value wpcf-field-poster-value">
-            <img width="140" height="210" src="<%= photo['url']%>" class="attachment-thumbnail">
-            <h11><%= movie['title'] %> 
-                    <%=movie['id']%></h11>
-
-          </div>
-        <%end%>
-            <%=form_tag '/movies' do %>
-                   <button name="liked" id="liked" value="<%=movie['id']%>" class='btn btn-mini'><i class="icon-thumbs-up" ></i>
-                    <% @y4=@rm['movies'].detect{|x4| x4["id"]== movie['id']} %>
-                    <% @y4index = @rm['movies'].index (@y4) %>
-                    <% @rm['movies'].delete_at (@y4index) %>
-
-                   </button>
-              
-
-              
-                   <button name="unliked" id="unliked" value="<%=movie['id']%>" class='btn btn-mini'><i class="icon-thumbs-down" ></i></button>
-                  <%end%>
-          
-      <%end%>
-    </div>
-
-
   
-    <div id="not_interested" class="tab-pane fade" >
-      <h1> Not Interested Movies </h1>
-        <% @nim['movies'].each do |movie| %> 
-          <% if(movie['photos'].length >0) %>
-            <%photo = movie['photos'].first%>
-            <div class="wpcf-field-value wpcf-field-image-value wpcf-field-poster-value">
-              <img width="140" height="210" src="<%= photo['url']%>" class="attachment-thumbnail">
-              <h11><%= movie['title'] %> </h11>
+<div id="main" class="group" role="main">
+  <div id="side">
+    <div id="member">
+      <h1> Flavu Member </h1>
+      <div id="side-login-box">
+        <!--login-->
+        <%if flash[:error]%>
+          <div class = "alert">
+            <p> <%=flash[:error]%></p>
+          </div>
+        <%else%>
+        <%end%>
+        <%= form_tag '/signin' do %>
+        <%if (!session[:auth])%>
+          <div class="control-group">
+            <div class="controls">
+              <!--<label for="user_login">Login</label>-->
+              <%= label_tag("Login") %>
+              <!--<input id="user_login" name="user[login]" size="30" type="text">-->
+              <%= text_field_tag "login"%>
             </div>
+          </div>
+
+          <div class="control-group">
+            <div class="controls">
+              <!--<label for="user_password">Password</label>-->
+              <%= label_tag("Password") %>
+              <!--<input id="user_password" name="user[password]" size="30" type="password">-->
+              <%= password_field_tag("password") %>
+            </div>
+          </div>
+          <div class="controls">
+            <button name="confirm" id="confirm" value="confirm"> Login </button>
+          </div>
+
+          <%else%>
+            <h11> Your Welcome <%=session['username']%></h11>
           <%end%>
         <%end%>
+        <!--end of login-->
+
+
       </div>
-
-    </div><!--myTabContent-->
-
-</div><!--tabbable-->
-<%else%>
-<p> You don't have any permission to select movies. Please 
-  <%=link_to "Sign In", signin_path %> or <%=link_to "Register", register_path%>
-</p>
+    </div><!--member-->
+  </div><!--side-->
 
 
+  <div id="home-content">
+    <div id="movies">
+      <h1> Movies </h1>
+      <div id="nowshowing">
+        <div class="tabbable">
+          <ul class="nav nav-tabs" id="myTab">
+            <li class ="active"><a href="#interested" data-toggle="tab">Interested Movies</a></li>
+            <li><a href="#remaining" data-toggle="tab">Remaining Movies</a></li>
+            <li><a href="#not_interested" data-toggle="tab">Not Interested Movies</a></li>
+
+          </ul>
+
+          <div id ="myTabContent" class="tab-content">
+            <div id="interested" class="tab-pane active">
+              <div class="group">
+                <% @im['movies'].each do |movie| %> 
+                  <% if(movie['photos'].length >0) %>
+                    <%photo = movie['photos'].first%>
+                  <div class="movie-items">
+                    <img width="140" height="210" src="<%= photo['url']%>">
+                    <h3><%= movie['title'] %> </h3>
+                  </div>
+                  <%end%>
+                <%end%>
+              </div>
+            </div>
+
+
+          <div id="remaining" class="tab-pane fade">
+            <div class="group">
+              <%=form_tag '/movies' do %>
+                <% @rm['movies'].each do |movie| %> 
+                  <% if(movie['photos'].length >0) %>
+                    <%photo = movie['photos'].first%>
+                    <div class="movie-items">
+                      <img width="140" height="210" src="<%= photo['url']%>">
+                      <h3><%= movie['title'] %> </h3>
+                    
+                  <%end%>
+                      <div id="button2">
+                        <button name="liked" id="liked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-up"></i>
+                        <% @y4=@rm['movies'].detect{|x4| x4["id"]== movie['id']} %>
+                        <% @y4index = @rm['movies'].index (@y4) %>
+                        <% @rm['movies'].delete_at (@y4index) %>
+                        </button>
+
+                        <button name="unliked" id="unliked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-down"></i>
+                  
+                        </button>
+                      </div>
+                    </div>
+                <%end%>
+              <%end%>
+            </div>
+          </div>
+
+          <div id="not_interested" class="tab-pane fade">
+            <div class="group">
+              <% @nim['movies'].each do |movie| %> 
+                <% if(movie['photos'].length >0) %>
+                  <%photo = movie['photos'].first%>
+                  <div class="movie-items">
+                    <img width="140" height="210" src="<%= photo['url']%>">
+                    <h3><%= movie['title'] %> </h3>
+                  </div>
+                <%end%>
+              <%end%>
+            </div>
+          </div>
+
+          </div><!--myTabContent-->
+
+        </div><!--tabbable-->
+      </div><!--nowshowing-->
+    </div><!--movies-->
+
+  </div><!--home-content-->
+</div> <!--main-->
+  <%else%>
+  <p> You do not have any permission to select movies. Please 
+    <%=link_to "Sign In", signin_path %> or <%=link_to "Register", register_path%>
+  </p>
+  
 <%end%>
 
 

@@ -1,3 +1,62 @@
 // Place all the styles related to the cover controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import "bootstrap";
+@import "bootstrap-responsive";
+
+body {
+	background-color: gray;
+}
+
+.wrapper {
+	margin: 0 auto;
+	width: 1024px;
+	position: relative;
+}
+
+#header {
+margin-top: 50px;
+margin-bottom: 2em;
+}
+
+#logo {
+	float: left;
+	margin-bottom: 30px;
+}
+#login-menu {
+	float: right;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+#password1, #login1 {
+	display: inline;
+	padding-right: 10px;
+	width: 140px;
+	label {
+		display: inline;
+		width: 140px;
+	}
+}
+
+
+.content {
+	clear: both;
+	margin: 0 auto;
+}
+
+#cover-content {
+	background-color: black;
+	width: 1024px;
+	height: 500px;
+	margin-bottom: 1em;
+	text-align: center;
+	/*background-image: ;*/
+	iframe {
+		margin-top: 60px;
+	}
+}
+#bottom-content {
+	float: right;
+	
+}

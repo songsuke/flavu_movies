@@ -40,7 +40,13 @@ class PreferencesController < ApplicationController
         @gp=@genre_preferences['genre_preferences']
         @dp=@director_preferences['director_preferences']
         @ap=@actor_preferences['actor_preferences']
-
+#showtime
+          @url_theatre = "http://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+          @theatres =HTTParty.get(@url_theatre, body: {user: {auth_token: session[:guest_auth]}}).parsed_response
+          @nt=@theatres['nearby_theatres']
+          @url_movie = "http://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+          @movies =HTTParty.get(@url_movie, body: {user: {auth_token: session[:guest_auth]}}).parsed_response
+          @rm=@movies['remaining_movies']
 
       else
         @a1=session[:auth]
@@ -78,6 +84,15 @@ class PreferencesController < ApplicationController
         @gp=@genre_preferences['genre_preferences']
         @dp=@director_preferences['director_preferences']
         @ap=@actor_preferences['actor_preferences']
+
+        #showtime
+          @url_theatre = "http://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+          @theatres =HTTParty.get(@url_theatre, body: {user: {auth_token: session[:auth]}}).parsed_response
+          @nt=@theatres['nearby_theatres']
+          @url_movie = "http://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+          @movies =HTTParty.get(@url_movie, body: {user: {auth_token: session[:auth]}}).parsed_response
+          @rm=@movies['remaining_movies']
+
       end
     end
 

@@ -3,6 +3,7 @@
  <h11> Sign up and enjoy with your friends! (If it does not redirect, please click --><%= link_to "Here", register_path%> )</h11>
 <%else%>
 
+<div id="main" class="group" role="main">
 
 <h11> Account Setting </h11>
 
@@ -10,7 +11,6 @@
 	      
 
 <%=form_tag '/settings' do%>
-
 	<div>
 		<h11> Your currently email is <%=@user['email']%> </h11>
 	</div>
@@ -90,4 +90,5 @@
 
    </div>
 	<%end%>
+</div>
 <%end%>
