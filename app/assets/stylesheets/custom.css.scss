@@ -214,7 +214,7 @@ body {
   }
 }
 
-#side-login-box {
+#side-login-box ,#side-buddy-box{
   clear: both;
   border-radius: 3px;
   margin: 0 0 25px;
@@ -371,11 +371,11 @@ div.hidden{
   float: left;
 }
 
-h1.title {
-  height: 55px;
-  margin: 5px 0 15px;
-  font-size: 36px;
-  line-height: .8em;
+h4.title {
+  
+  margin: 0px;
+  font-size: 28px;
+  color: #9e0000;
 }
 
 #showmovie-content{
@@ -386,7 +386,8 @@ h1.title {
   box-shadow: 0 1px 3px rgba(25,25,25,.5);
   margin-bottom: 25px;
   min-height: 400px;
-  margin-top: 40px;
+  margin-top: 20px;
+  overflow: auto;
 }
 
 #trailer {
@@ -396,10 +397,41 @@ h1.title {
   width: 640px;
 }
 
-#slide-bar {
+#movie-pic {
   padding-top: 20px;
-  #slider {
-    width :150px;
-    height:250px;
+  float: left;
+  
+}
+#movie-details {
+  margin-left: 20px;
+  padding-top: 28px;
+  padding-right: 0;
+  float: right;
+  #content {
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(25, 25, 25, 0.5) ;
+    width:450px;
+    height: 420px;
+  }
+  h1{
+    font-size: 18px;
+    color: #9e0000;
+    margin: 0;
+    text-align: left;
+    width: 100%;
+  }
+    
+  h3{
+    font-size: 14px;
+    margin:0;
+    color: #333;
+    text-align: left;
+    padding-left: 10px;
+  }
+  p{
+    font-size: 14px;
+    margin-top: -6px;
+    margin-bottom:2px;
+    padding-left: 11px;
   }
 }
