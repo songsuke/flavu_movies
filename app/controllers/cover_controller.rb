@@ -3,7 +3,7 @@ class CoverController < ApplicationController
 
   def cover
   	puts params[:guest]
-	if session[:check_guest] == 'true' && params[:guest] == 'true'
+	if session[:check_guest] == 'true' && params[:guest] == 'true' && session[:guest_auth]
 		redirect_to root_path
 	elsif params[:guest] == 'true'
 		@guest_password=SecureRandom.uuid
@@ -23,6 +23,8 @@ class CoverController < ApplicationController
 	    puts session[:guest_auth]
 	    puts @guests['auth_token']
 	    redirect_to home_path
+	elsif session[:auth] || session[:guest_auth]
+		redirect_to home_path
 
 		
 	else

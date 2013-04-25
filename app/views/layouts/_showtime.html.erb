@@ -1,13 +1,14 @@
 <div id="quick-showtime">
 		<h1>Show time</h1>
 		<div id="quick-showtime-form">
-			<%=form_tag '/home' do %>
+			<%=form_tag '/showtime' do %>
 		    	<div id="quick-movies">
 			        <select id = "movie" name = "movie">
 			        <option name = "all_movies" id=movie value="all_movies"> All Movies</option><h1>at</h1>
 			        <%@rm['movies'].each do |movie| %>
 			        <%@xmovies= movie['title']%>
-			        <option name = "<%=@xmovies%>" id=movie value="<%=@xmovies%>"> <%=@xmovies%></option>
+			        <%@id_movie= movie['id']%>
+			        <option name = "<%=@id_movie%>" id=movie value="<%=@id_movie%>"> <%=@xmovies%></option>
 			        <%end%>
 			        </select>
 		     	</div>
@@ -17,8 +18,8 @@
 			        <option name = "all_theatres" id=movie value="all_theatres"> All Theatres</option>
 			          <%@nt['theatres'].each do |theatre| %>
 			          <%@xtheatres= theatre['name']%>
-
-			          <option name = "<%=@xtheatres%>" id=movie value="<%=@xtheatres%>"> <%=@xtheatres%></option>
+			          <%@id_theatre= theatre['id']%>
+			          <option name = "<%=@id_theatre%>" id=movie value="<%=@id_theatre%>"> <%=@xtheatres%></option>
 			          <%end%>
 			        </select>
 		     	</div>

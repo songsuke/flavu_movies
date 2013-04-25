@@ -1,0 +1,53 @@
+<script type="text/javascript">
+$('.carousel').carousel({
+	interval: 2000
+
+})
+  
+
+</script>
+
+<div id="home-content">
+
+	<%@rm['movies'].each do |a1|%>
+	<%if a1['id'] == @id_showmovie%> 
+	<h1 class="title">
+		<%=a1['title']%>
+	</h1>
+	<div id="showmovie-content">
+		<div id="trailer">
+			<iframe width="640" height="360" src="http://www.youtube.com/embed/5EjG-1U3wqA?autoplay=1&vq=hd1080 " frameborder="0" allowfullscreen></iframe>
+		</div>
+
+		<div id="slide-bar">
+			<div id="slider">
+				<div id="content">
+					<div id="myCarousel" class="carousel slide">
+					  <ol class="carousel-indicators">
+					    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+					    <li data-target="#myCarousel" data-slide-to="1"></li>
+					    <li data-target="#myCarousel" data-slide-to="2"></li>
+					  </ol>
+					  <!-- Carousel items -->
+					  <div class="carousel-inner">
+					    <div class="active item" id = "slider">
+					    	<img src="/assets/iron-man-3.jpg" alt>
+					    </div>
+					    <div class="item" id="slider">    	
+					    	<img src="/assets/hulk.jpg" alt>
+						</div>
+					    <div class="item" id="slider">
+					    	<img src="/assets/captain-america.jpg" alt>
+					    </div>
+					  </div>
+					  <!-- Carousel nav -->
+					 
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	<%end%>
+	<%end%>
+</div>

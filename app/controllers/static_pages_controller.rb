@@ -88,6 +88,7 @@ require 'open-uri'
   end
 
   def movies
+
     if (!session[:auth] && !session[:guest_auth])
       redirect_to cover_path
     else
@@ -96,7 +97,6 @@ require 'open-uri'
         puts session[:auth]
         puts session[:guest_auth]
 
-      
 
         if session[:check_guest] == "true"
           @url = "http://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
@@ -113,6 +113,14 @@ require 'open-uri'
           @url_movie = "http://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
           @movies =HTTParty.get(@url_movie, body: {user: {auth_token: session[:guest_auth]}}).parsed_response
           @rm=@movies['remaining_movies']
+          if params[:showid]
+            session[:showid] = params[:showid]
+            params[:showid]
+            session[:showid]
+            redirect_to showmovie_path
+          else
+          end
+
 
         else
           @url = "http://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
@@ -129,7 +137,11 @@ require 'open-uri'
           @url_movie = "http://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
           @movies =HTTParty.get(@url_movie, body: {user: {auth_token: session[:auth]}}).parsed_response
           @rm=@movies['remaining_movies']
-
+          if params[:showid]
+            session[:showid] = params[:showid]
+            redirect_to showmovie_path
+          else
+          end
         end
 
       #puts params[:liked]
@@ -342,6 +354,79 @@ puts params[:unblock]
     end
   end
 
+  def showtime
+    puts params[:movie]
+    puts params[:theatre]
+    if session[:check_guest] == 'true'
+
+    @url_theatre = "http://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+    @theatres =HTTParty.get(@url_theatre, body: {user: {auth_token: session[:guest_auth]}}).parsed_response
+    @nt=@theatres['nearby_theatres']
+    @url_movie = "http://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+    @movies =HTTParty.get(@url_movie, body: {user: {auth_token: session[:guest_auth]}}).parsed_response
+    @rm=@movies['remaining_movies']
+    else
+    @url_theatre = "http://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+    @theatres =HTTParty.get(@url_theatre, body: {user: {auth_token: session[:auth]}}).parsed_response
+    @nt=@theatres['nearby_theatres']
+    @url_movie = "http://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+    @movies =HTTParty.get(@url_movie, body: {user: {auth_token: session[:auth]}}).parsed_response
+    @rm=@movies['remaining_movies']
+          showtimes =HTTParty.get("https://flavumovies.herokuapp.com/showtimes.json", body: {user:{auth_token: session[:auth]}}).parsed_response 
+          showtimes['showtimes'].each do |showtime|
+          if showtime['movie_id'] == params[:movie] && showtime['theatre_id'] == params[:theatre]
+            puts showtime['start_time']
+          end
+          end
+        end
+
+  end
+
+  def showmovie
+    if (!session[:auth] && !session[:guest_auth])
+      redirect_to cover_path
+    else
+        #@a1=session[:auth]
+        puts session[:check_guest]
+        puts session[:auth]
+        puts session[:guest_auth]
+
+        @id_showmovie=session[:showid].to_i
+        if session[:check_guest] == "true"
+          @url = "http://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+          @movies =HTTParty.get(@url, body: {user: {auth_token: session[:guest_auth]}}).parsed_response
+          @rm=@movies['remaining_movies']
+          
+          #showtime
+          @url_theatre = "http://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+          @theatres =HTTParty.get(@url_theatre, body: {user: {auth_token: session[:guest_auth]}}).parsed_response
+          @nt=@theatres['nearby_theatres']
+          @url_movie = "http://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+          @movies =HTTParty.get(@url_movie, body: {user: {auth_token: session[:guest_auth]}}).parsed_response
+          @rm=@movies['remaining_movies']
+        
+
+
+        else
+          @url = "http://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+          @movies =HTTParty.get(@url, body: {user: {auth_token: session[:auth]}}).parsed_response
+          @rm=@movies['remaining_movies']
+          
+          #showtime
+          @url_theatre = "http://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+          @theatres =HTTParty.get(@url_theatre, body: {user: {auth_token: session[:auth]}}).parsed_response
+          @nt=@theatres['nearby_theatres']
+          @url_movie = "http://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+          @movies =HTTParty.get(@url_movie, body: {user: {auth_token: session[:auth]}}).parsed_response
+          @rm=@movies['remaining_movies']
+      
+        end
+
+      #puts params[:liked]
+      #puts @liked_movies
+    end
+
+  end
 
 
 end

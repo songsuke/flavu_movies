@@ -18,59 +18,16 @@ $(function () {
 <body>
 
   
-<div id="main" class="group" role="main">
-  <div id="side">
-    <div id="member">
-      <h1> Flavu Member </h1>
-      <div id="side-login-box">
-        <!--login-->
-        <%if flash[:error]%>
-          <div class = "alert">
-            <p> <%=flash[:error]%></p>
-          </div>
-        <%else%>
-        <%end%>
-        <%= form_tag '/signin' do %>
-        <%if (!session[:auth])%>
-          <div class="control-group">
-            <div class="controls">
-              <!--<label for="user_login">Login</label>-->
-              <%= label_tag("Login") %>
-              <!--<input id="user_login" name="user[login]" size="30" type="text">-->
-              <%= text_field_tag "login"%>
-            </div>
-          </div>
-
-          <div class="control-group">
-            <div class="controls">
-              <!--<label for="user_password">Password</label>-->
-              <%= label_tag("Password") %>
-              <!--<input id="user_password" name="user[password]" size="30" type="password">-->
-              <%= password_field_tag("password") %>
-            </div>
-          </div>
-          <div class="controls">
-            <button name="confirm" id="confirm" value="confirm"> Login </button>
-          </div>
-
-          <%else%>
-            <h11> Your Welcome <%=session['username']%></h11>
-          <%end%>
-        <%end%>
-        <!--end of login-->
-
-
-      </div>
-    </div><!--member-->
-  </div><!--side-->
+<!--<div id="main" class="group" role="main">-->
+  
 
 
   <div id="home-content">
     <div id="movies">
-      <h1> Movies </h1>
-      <div id="nowshowing">
+      <div id="nowshowing1">
         <div class="tabbable">
           <ul class="nav nav-tabs" id="myTab">
+            <h1> Movies </h1>
             <li class ="active"><a href="#interested" data-toggle="tab">Interested Movies</a></li>
             <li><a href="#remaining" data-toggle="tab">Remaining Movies</a></li>
             <li><a href="#not_interested" data-toggle="tab">Not Interested Movies</a></li>
@@ -96,13 +53,14 @@ $(function () {
           <div id="remaining" class="tab-pane fade">
             <div class="group">
               <%=form_tag '/movies' do %>
+
                 <% @rm['movies'].each do |movie| %> 
                   <% if(movie['photos'].length >0) %>
                     <%photo = movie['photos'].first%>
                     <div class="movie-items">
-                      <img width="140" height="210" src="<%= photo['url']%>">
-                      <h3><%= movie['title'] %> </h3>
-                    
+                      <button class="btn btn-link" name="showid" id="showid" value="<%=movie['id']%>">
+                      <img class="img-rounded" width="140" height="210" src="<%= photo['url']%>">
+                      <h3><%= movie['title'] %> </h3></button>
                   <%end%>
                       <div id="button2">
                         <button name="liked" id="liked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-up"></i>
@@ -142,7 +100,7 @@ $(function () {
     </div><!--movies-->
 
   </div><!--home-content-->
-</div> <!--main-->
+<!--</div> main-->
   <%else%>
   <p> You do not have any permission to select movies. Please 
     <%=link_to "Sign In", signin_path %> or <%=link_to "Register", register_path%>

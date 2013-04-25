@@ -12,7 +12,13 @@
 				<h1> LOGO </h1>
 			</div>
 			<div id="login-menu">
-				  	<%= form_tag '/signin' do %>
+				<%if flash[:error]%>
+					<div class = "alert">
+				    	<p> <%=flash[:error]%></p>
+				 	</div>
+				<%else%>
+				<%end%>
+				  	<%= form_tag '/checklogin' do %>
 					    <div id="login1">
 					      <!--<label for="user_login">Login</label>-->
 					    	<!--<%= label_tag("login") %>-->
