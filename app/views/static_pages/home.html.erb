@@ -67,15 +67,18 @@ $('.carousel').carousel({
 			<h1> Movies </h1>
 			<div id="nowshowing">
 				<div class="group">
-				<% @rm['movies'].each do |movie| %> 
-        		<% if(movie['photos'].length >0) %>
-          			<%photo = movie['photos'].first%>
-          			<div class="movie-items">
-            		<img width="140" height="210" src="<%= photo['url']%>">
-            		<h3><%= movie['title'] %></h3>
-                    </div>
-        <%end%>
-        <%end%>
+				<%=form_tag '/movies' do %>
+					<% @rm['movies'].each do |movie| %> 
+		        		<% if(movie['photos'].length >0) %>
+		          			<%photo = movie['photos'].first%>
+		          			<div class="movie-items">
+		          			<button class="btn btn-link" name="showid" id="showid" value="<%=movie['id']%>">
+		            		<img src="<%= photo['url']%>">
+		            		<h3><%= movie['title'] %></h3> </button>
+		                    </div>
+        				<%end%>
+        			<%end%>
+        		<%end%>
         		</div>
 
 			</div>

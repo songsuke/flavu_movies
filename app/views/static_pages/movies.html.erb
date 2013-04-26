@@ -43,7 +43,7 @@ $(function () {
                 <% @im['movies'].each do |movie| %> 
                   <% if(movie['photos'].length >0 && movie['watched']==true) %>
                     <%photo = movie['photos'].first%>
-                    <div class="movie-items">
+                    <div class="movie-items1">
                       <button class="btn btn-link" name="showid" id="showid" value="<%=movie['id']%>">
                       <img class="img-rounded" width="140" height="210" src="<%= photo['url']%>">
                       <h3><%= movie['title'] %> </h3></button>
@@ -76,7 +76,7 @@ $(function () {
                   <% @im['movies'].each do |movie| %> 
                   <% if(movie['photos'].length >0 && movie['watched']==false) %>
                     <%photo = movie['photos'].first%>
-                    <div class="movie-items">
+                    <div class="movie-items1">
                       <button class="btn btn-link" name="showid" id="showid" value="<%=movie['id']%>">
                       <img class="img-rounded" width="140" height="210" src="<%= photo['url']%>">
                       <h3><%= movie['title'] %> </h3></button>
@@ -115,7 +115,7 @@ $(function () {
                 <% @rm['movies'].each do |movie| %> 
                   <% if(movie['photos'].length >0 && movie['watched']==true) %>
                     <%photo = movie['photos'].first%>
-                    <div class="movie-items">
+                    <div class="movie-items1">
                       <button class="btn btn-link" name="showid" id="showid" value="<%=movie['id']%>">
                       <img class="img-rounded" width="140" height="210" src="<%= photo['url']%>">
                       <h3><%= movie['title'] %> </h3></button>
@@ -148,7 +148,7 @@ $(function () {
                   <% @rm['movies'].each do |movie| %> 
                   <% if(movie['photos'].length >0 && movie['watched']==false) %>
                     <%photo = movie['photos'].first%>
-                    <div class="movie-items">
+                    <div class="movie-items1">
                       <button class="btn btn-link" name="showid" id="showid" value="<%=movie['id']%>">
                       <img class="img-rounded" width="140" height="210" src="<%= photo['url']%>">
                       <h3><%= movie['title'] %> </h3></button>
@@ -186,7 +186,7 @@ $(function () {
                 <% @nim['movies'].each do |movie| %> 
                   <% if(movie['photos'].length >0 && movie['watched']==true) %>
                     <%photo = movie['photos'].first%>
-                    <div class="movie-items">
+                    <div class="movie-items1">
                       <button class="btn btn-link" name="showid" id="showid" value="<%=movie['id']%>">
                       <img class="img-rounded" width="140" height="210" src="<%= photo['url']%>">
                       <h3><%= movie['title'] %> </h3></button>
@@ -219,7 +219,7 @@ $(function () {
                   <% @nim['movies'].each do |movie| %> 
                   <% if(movie['photos'].length >0 && movie['watched']==false) %>
                     <%photo = movie['photos'].first%>
-                    <div class="movie-items">
+                    <div class="movie-items1">
                       <button class="btn btn-link" name="showid" id="showid" value="<%=movie['id']%>">
                       <img class="img-rounded" width="140" height="210" src="<%= photo['url']%>">
                       <h3><%= movie['title'] %> </h3></button>
