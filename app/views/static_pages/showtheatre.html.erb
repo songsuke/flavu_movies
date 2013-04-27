@@ -17,7 +17,7 @@ $('.carousel').carousel({
   
 <div id="home-content">
 	<div id="showmovie-content">
-		<%@nt['theatres'].each do |nearby|%>
+		<%@st['theatres'].each do |nearby|%>
 			<%if nearby['id'] == @id_showtheatre%> 
 				<h4 class="title">
 					<%=nearby['name']%>
