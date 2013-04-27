@@ -292,6 +292,9 @@ body {
     font: 15px/1em sans-serif;
     padding-left: 2px;
   }
+  img {
+    width: 150px;
+  }
 }
 
 .movie-items1{
@@ -312,6 +315,7 @@ body {
     font: 15px/1em sans-serif;
     padding-left: 2px;
   }
+
 }
 
 #button2 {
@@ -461,4 +465,29 @@ h4.title {
 #movie-cat {
   position: relative;
   overflow: auto;
+}
+
+#theatre-detail {
+  float: left;
+  margin: 15px 0px 0px 10px;
+  border-radius: 3px;
+  box-shadow: 0 1px 3px rgba(25, 25, 25, 0.5);
+  width: 450px;
+  height: 420px;
+  #content {
+    
+  }
+  .cinema-name {
+    margin: 0 0 10px;
+    border-radius: 3px;
+    color: #febf34;
+    padding: 4px 15px;
+    background: url(images/title.png) repeat-x #2a2a2a;
+  }
+}
+#result-item {
+  border: 1px solid #bbb;
+  margin: 0 0 10px;
+  background: url(images/theater-bg.png) repeat-x #7c7d7c;
+  border-radius: 3px 4px 4px 3px;
 }

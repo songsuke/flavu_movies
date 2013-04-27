@@ -17,8 +17,17 @@
 </tr>
 <%if(session[:auth] || session[:guest_auth])%>
 <% @lt['theatres'].each do |liked| %>
+<%=form_tag '/showtheatre' do %>
+
 	<tr>
-		<td> <%= liked['name'] %> </td>
+		<td> <button class="btn btn-link" name="showid1" id="showid1" value="<%=liked['id']%>">  <%= liked['name'] %> 
+		</button>
+		<%end%>
+		<%=form_tag '/theatres' do %>
+		<button name="soso1" id="soso1" value="<%=liked['id']%>" class='btn btn-mini'> <i class="icon-remove"></i></button>
+        <button name="unliked" id="unliked" value="<%=liked['id']%>" class='btn btn-mini'> <i class="icon-thumbs-down"></i></button></td>
+		<%end%>
+
 		<td> <%= liked['location_description'] %> </td>
 		<td> <%= liked['market'] %> </td>
 		<td> <%= liked['adult_price'] %> </td>
@@ -42,14 +51,24 @@
 </tr>
 
 <% @nt['theatres'].each do |nearby| %>
+<%=form_tag '/showtheatre' do %>
 	<tr>
-		<td> <%= nearby['name'] %> </td>
+		<td><button class="btn btn-link" name="showid2" id="showid2" value="<%=nearby['id']%>"> <%= nearby['name'] %>  
+		</button>
+		<%end%>
+		<%=form_tag '/theatres' do %>
+
+		<button name="liked" id="liked" value="<%=nearby['id']%>" class='btn btn-mini'> <i class="icon-thumbs-up"></i></button>
+        <button name="unliked" id="unliked" value="<%=nearby['id']%>" class='btn btn-mini'> <i class="icon-thumbs-down"></i></button></td>
+<%end%>
+		</td>
 		<td> <%= nearby['location_description'] %> </td>
 		<td> <%= nearby['market'] %> </td>
 		<td> <%= nearby['adult_price'] %> </td>
 		<td> <%= nearby['child_price'] %> </td>
 		<td> <a href= "http://maps.googleapis.com/maps/api/staticmap?center=<%=nearby['location']['address']%>,<%=nearby['location']['city']%>&zoom=15&size=500x500&markers=color:red%7Clabel:S%7C<%=nearby['location']['address']%>,<%=nearby['location']['city']%>&sensor=false&key=AIzaSyDb5IpzvRHH678YrbdxmQyR4J5opeTKlQk"  > 
 			<img src="http://maps.googleapis.com/maps/api/staticmap?center=<%=nearby['location']['address']%>,<%=nearby['location']['city']%>&zoom=11&size=200x200&markers=color:red%7Clabel:S%7C<%=nearby['location']['address']%>,<%=nearby['location']['city']%>&sensor=false"> Click </a></td>
+
 <%end%>
 </table>
 
@@ -65,8 +84,16 @@
 </tr>
 
 <% @nit['theatres'].each do |nit1| %>
+<%=form_tag '/showtheatre' do %>
+
 	<tr>
-		<td> <%= nit1['name']%> </td>
+		<td><button class="btn btn-link" name="showid3" id="showid3" value="<%=nit1['id']%>"> <%= nit1['name']%> </button>
+				<%end%>
+		<%=form_tag '/theatres' do %>
+		<button name="liked" id="liked" value="<%=nit1['id']%>" class='btn btn-mini'> <i class="icon-thumbs-up"></i></button>
+        <button name="soso2" id="soso2" value="<%=nit1['id']%>" class='btn btn-mini'> <i class="icon-remove"></i></button></td>
+		<%end%>
+
 		<td> <%= nit1['location_description'] %> </td>
 		<td> <%= nit1['market'] %> </td>
 		<td> <%= nit1['adult_price'] %> </td>

@@ -16,48 +16,68 @@ $('.carousel').carousel({
   </div>
   
 <div id="home-content">
-
-	<%@rm['movies'].each do |a1|%>
-	<%if a1['id'] == @id_showmovie%> 
-	<h4 class="title">
-		<%=a1['title']%>
-	</h4>
 	<div id="showmovie-content">
-		<div id="trailer">
-			<iframe width="640" height="360" src="http://www.youtube.com/embed/5EjG-1U3wqA?autoplay=1&vq=hd1080 " frameborder="0" allowfullscreen></iframe>
-		</div>
-		<div id="movie-pic">
-			<% if(a1['photos'].length >0) %>
-                <%photo = a1['photos'].first%>
-                <div class="movie-items">
-                <img class="img-rounded" width="140" height="210" src="<%= photo['url']%>">
-            <%end%>
+		<%@sm['movies'].each do |a1|%>
+			<%if a1['id'] == @id_showmovie%> 
+				<h4 class="title">
+					<%=a1['title']%>
+				</h4>
+				<div id="trailer">
+					<iframe width="640" height="360" src="http://www.youtube.com/embed/5EjG-1U3wqA?autoplay=1&vq=hd1080 " frameborder="0" allowfullscreen></iframe>
 				</div>
-		</div>
-		<div id="movie-details">
+				<div id="movie-pic">
+					<% if(a1['photos'].length >0) %>
+		                <%photo = a1['photos'].first%>
+		                <div class="movie-items">
+		                <img class="img-rounded" width="140" height="210" src="<%= photo['url']%>">
+		                </div>
+		            <%elsif(a1['photos'].length ==0) %>
+		            	<%photo = a1['photos'].first%>
+		            	<div class="movie-items">
+		                <img class="img-rounded" width="140" height="210" src="/assets/no_img">
+		                </div>
+		            <%end%>
+						
+				</div>
+				<div id="movie-details">
+					<div id="content">
+					<h1> Information </h1>
+					<h3> Release Date </h3>
+					<h3> Genres </h3>
+					<%a1['genres'].each do |a2|%>
+						<p><%=a2['name']%></p>
+					<%end%>
+					<h3> Director </h3>
+					<%a1['directors'].each do |a2|%>
+						<p><%=a2['name']%></p>
+					<%end%>
+					<h3> Actors </h3>
+					<%a1['actors'].each do |a2|%>
+						<p><%=a2['name']%></p>
+					<%end%>
+					<h3> Rate </h3>
+					<p><%=a1['rating']%></p>
+					</div>
+				</div>
+			<%end%>
+		<%end%>
+
+		<div id="theatre-detail">
 			<div id="content">
-			<h1> Information </h1>
-			<h3> Release Date </h3>
-			<h3> Genres </h3>
-			<%a1['genres'].each do |a2|%>
-				<p><%=a2['name']%></p>
-			<%end%>
-			<h3> Director </h3>
-			<%a1['directors'].each do |a2|%>
-				<p><%=a2['name']%></p>
-			<%end%>
-			<h3> Actors </h3>
-			<%a1['actors'].each do |a2|%>
-				<p><%=a2['name']%></p>
-			<%end%>
-			<h3> Rate </h3>
-			<p><%=a1['rating']%></p>
+				<%@theatres_for_movie['theatres'].each do |tfm|%>
+					<h2 class="cinema-name"> <%=tfm['name']%> </h>
+						<div id="result-item">
+							<%tfm['showtimes'].each do |showtime|%>
+								<p>Date : <%=showtime['date']%></p>
+								<p>Time : <%=showtime['start_time']%></p>
+							<%end%>
+							<a href= "http://maps.googleapis.com/maps/api/staticmap?center=<%=tfm['location']['address']%>,<%=tfm['location']['city']%>&zoom=15&size=500x500&markers=color:red%7Clabel:S%7C<%=tfm['location']['address']%>,<%=tfm['location']['city']%>&sensor=false&key=AIzaSyDb5IpzvRHH678YrbdxmQyR4J5opeTKlQk" > 
+			<img width="200" height="200"src="http://maps.googleapis.com/maps/api/staticmap?center=<%=tfm['location']['address']%>,<%=tfm['location']['city']%>&zoom=11&size=200x200&markers=color:red%7Clabel:S%7C<%=tfm['location']['address']%>,<%=tfm['location']['city']%>&sensor=false"> Click </a>
+						</div>
+				<%end%>
 			</div>
 		</div>
-
-
-		
 	</div>
-	<%end%>
-	<%end%>
 </div>
+
+

@@ -1,0 +1,56 @@
+<script type="text/javascript">
+$('.carousel').carousel({
+	interval: 2000
+
+})
+  
+
+</script>
+<div id="side">
+    <div id="buddy-side">
+      <h1> Buddies </h1>
+      <div id="side-buddy-box">
+        <p> Query buddies here, if not member says you have no buddies please register</p>
+      </div>
+    </div>
+  </div>
+  
+<div id="home-content">
+	<div id="showmovie-content">
+		<%@nt['theatres'].each do |nearby|%>
+			<%if nearby['id'] == @id_showtheatre%> 
+				<h4 class="title">
+					<%=nearby['name']%>
+				
+				<%= nearby['location_description'] %> 
+		 		<%= nearby['market'] %> </td>
+				<%= nearby['adult_price'] %> 
+		 		<%= nearby['child_price'] %>  </h4>
+		 		<%=form_tag '/showmovie' do %>
+
+				<%nearby['movies'].each do |a2|%>
+				<div id="movie-pic">
+					<div class="movie-items">
+					<button class="btn btn-link" name="showid" id="showid" value="<%=a2['id']%>">
+					<% if(a2['photos'].length >0) %>
+		                <%photo = a2['photos'].first%>
+		                <img class="img-rounded" width="140" height="210" src="<%= photo['url']%>">
+		            <%else%> 
+		                <img class="img-rounded" width="140" height="210" src="/assets/no_image.gif">
+
+		            <%end%>	
+		            		                <h1> <%=a2['title'] %> </h1>
+		                </button>
+		                </div>
+
+				</div>
+				<%end%>
+				<%end%>
+			<%end%>
+		<%end%>
+
+		
+	</div>
+</div>
+
+

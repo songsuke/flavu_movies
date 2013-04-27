@@ -7,6 +7,7 @@ EasilyxMovie::Application.routes.draw do
   match '/checklogin', to: 'checklogin#checklogin'
   match '/free', to: 'free#free'
   match '/showmovie', to: 'static_pages#showmovie'
+  match '/showtheatre', to: 'static_pages#showtheatre'
 
   #get "static_pages/signin"
   match '/signin', to: 'static_pages#signin'

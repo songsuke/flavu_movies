@@ -34,19 +34,27 @@ $(function () {
           </ul>
 
           <div id ="myTabContent" class="tab-content">
+
             <div id="interested" class="tab-pane active">
               <div class="group">
-              <%=form_tag '/movies' do %>
+              <%=form_tag '/showmovie' do %>
               <div id="movie-cat">
                 <h3> Watched </h3>
                 <!--watched-->
                 <% @im['movies'].each do |movie| %> 
+                <div class="movie-items1">
+                  <button class="btn btn-link" name="showid1" id="showid1" value="<%=movie['id']%>">
                   <% if(movie['photos'].length >0 && movie['watched']==true) %>
                     <%photo = movie['photos'].first%>
-                    <div class="movie-items1">
-                      <button class="btn btn-link" name="showid" id="showid" value="<%=movie['id']%>">
+                    
+                      
                       <img class="img-rounded" width="140" height="210" src="<%= photo['url']%>">
-                      <h3><%= movie['title'] %> </h3></button>
+                      <%elsif movie['photos'].length==0 && movie['watched']==true%>
+                      <img class="img-rounded" width="140" height="210" src="/assets/no_image.gif">
+                      <%end%>
+                      <%if movie['watched']==true%>
+                      <h3><%= movie['title'] %> </h3>
+                    </button>
                       
                       <div id="button2">
                         <button name="liked" id="liked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-up"></i>
@@ -64,9 +72,10 @@ $(function () {
                         <%elsif movie['available']==false %>
                         <%end%>
 
-                      </div>
-                    </div>
+                      </div><!--button2-->
+                    
                   <%end%> <!--if watched-->
+                  </div><!--movie-item1-->
                 <%end%> <!--im loop-->
               </div><!--movie-cat-->
 
@@ -74,12 +83,20 @@ $(function () {
                 <div id="movie-cat">
                   <h3> Other Movies </h3>
                   <% @im['movies'].each do |movie| %> 
+                  <div class="movie-items1">
+                    <button class="btn btn-link" name="showid1" id="showid1" value="<%=movie['id']%>">
                   <% if(movie['photos'].length >0 && movie['watched']==false) %>
                     <%photo = movie['photos'].first%>
-                    <div class="movie-items1">
-                      <button class="btn btn-link" name="showid" id="showid" value="<%=movie['id']%>">
+                    
                       <img class="img-rounded" width="140" height="210" src="<%= photo['url']%>">
-                      <h3><%= movie['title'] %> </h3></button>
+                  
+                    <%elsif movie['photos'].length ==0 && movie['watched']==false%>
+                      <img class="img-rounded" width="140" height="210" src="/assets/no_image.gif">
+                      <%end%>
+
+                      <%if movie['watched']==false%>
+                      <h3><%= movie['title'] %> </h3>
+                    </button>
                       
                       <div id="button2">
                         <button name="liked" id="liked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-up"></i>
@@ -97,29 +114,37 @@ $(function () {
                         <%elsif movie['available']==false %>
                         <%end%>
                       </div>
-                    </div>
+                    
                     <%end%> <!--if watched and unwatched-->
+                    </div><!--movie-item1-->
                   <%end%> <!--im loop-->
                 <%end%><!--form-->
-                </div>
-              </div>
-            </div>
+                </div><!--movie-cat-->
+              </div><!--group-->
+            </div><!--interested-->
 
 
           <div id="remaining" class="tab-pane fade">
             <div class="group">
-              <%=form_tag '/movies' do %>
+
+              <%=form_tag '/showmovie' do %>
               <div id="movie-cat">
                 <h3> Watched </h3>
                 <!--watched-->
                 <% @rm['movies'].each do |movie| %> 
+                  <div class="movie-items1">
+                    <button class="btn btn-link" name="showid2" id="showid2" value="<%=movie['id']%>">
                   <% if(movie['photos'].length >0 && movie['watched']==true) %>
                     <%photo = movie['photos'].first%>
-                    <div class="movie-items1">
-                      <button class="btn btn-link" name="showid" id="showid" value="<%=movie['id']%>">
                       <img class="img-rounded" width="140" height="210" src="<%= photo['url']%>">
-                      <h3><%= movie['title'] %> </h3></button>
-                      
+
+                  <%elsif movie['photos'].length ==0 && movie['watched']==true%>
+                      <img class="img-rounded" width="140" height="210" src="/assets/no_image.gif">
+
+                  <%end%>
+                      <%if (movie['watched']==true) %>
+                      <h3><%= movie['title'] %> </h3>
+                    </button>
                       <div id="button2">
                         <button name="liked" id="liked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-up"></i>
                         </button>
@@ -137,22 +162,27 @@ $(function () {
                         <%end%>
 
                       </div>
-                    </div>
+                    
                   <%end%> <!--if watched-->
+                  </div><!--movie-item1-->
                 <%end%> <!--rm loop-->
-              </div><!--movie-cat-->
+                  </div><!--movie-cat-->
 
                     <!--unwatched-->
                 <div id="movie-cat">
                   <h3> Other Movies </h3>
                   <% @rm['movies'].each do |movie| %> 
+                  <div class="movie-items1">
+                    <button class="btn btn-link" name="showid2" id="showid2" value="<%=movie['id']%>">
                   <% if(movie['photos'].length >0 && movie['watched']==false) %>
                     <%photo = movie['photos'].first%>
-                    <div class="movie-items1">
-                      <button class="btn btn-link" name="showid" id="showid" value="<%=movie['id']%>">
                       <img class="img-rounded" width="140" height="210" src="<%= photo['url']%>">
-                      <h3><%= movie['title'] %> </h3></button>
-                      
+                    <%elsif movie['photos'].length ==0 && movie['watched']==false%>
+                      <img class="img-rounded" width="140" height="210" src="/assets/no_image.gif">
+                    <%end%>
+                    <%if (movie['watched']==false) %>
+                      <h3><%= movie['title'] %> </h3>
+                    </button>
                       <div id="button2">
                         <button name="liked" id="liked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-up"></i>
                         </button>
@@ -169,27 +199,36 @@ $(function () {
                         <%elsif movie['available']==false %>
                         <%end%>
                       </div>
-                    </div>
+                    
                     <%end%> <!--if watched and unwatched-->
+                    </div>
                   <%end%> <!--rm loop-->
                 <%end%><!--form-->
-                </div>
+                </div><!--movie-cat-->
               </div>
-            </div>
+            </div><!--remaining-->
 
           <div id="not_interested" class="tab-pane fade">
             <div class="group">
-              <%=form_tag '/movies' do %>
+              <%=form_tag '/showmovie' do %>
               <div id="movie-cat">
                 <h3> Watched </h3>
                 <!--watched-->
+
                 <% @nim['movies'].each do |movie| %> 
+                <div class="movie-items1">
+                    <button class="btn btn-link" name="showid3" id="showid3" value="<%=movie['id']%>">
+
                   <% if(movie['photos'].length >0 && movie['watched']==true) %>
                     <%photo = movie['photos'].first%>
-                    <div class="movie-items1">
-                      <button class="btn btn-link" name="showid" id="showid" value="<%=movie['id']%>">
+                    
                       <img class="img-rounded" width="140" height="210" src="<%= photo['url']%>">
-                      <h3><%= movie['title'] %> </h3></button>
+                      <%elsif movie['photos'].length ==0 && movie['watched']==true%>
+                      <img class="img-rounded" width="140" height="210" src="/assets/no_image.gif">
+                      <%end%>
+                      <% if (movie['watched']==true) %>
+                      <h3><%= movie['title'] %> </h3>
+                    </button>
                       
                       <div id="button2">
                         <button name="liked" id="liked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-up"></i>
@@ -208,8 +247,9 @@ $(function () {
                         <%end%>
 
                       </div>
-                    </div>
+                    
                   <%end%> <!--if watched-->
+                  </div>
                 <%end%> <!--nim loop-->
               </div><!--movie-cat-->
 
@@ -217,12 +257,19 @@ $(function () {
                 <div id="movie-cat">
                   <h3> Other Movies </h3>
                   <% @nim['movies'].each do |movie| %> 
+                  <div class="movie-items1">
+                  <button class="btn btn-link" name="showid3" id="showid3" value="<%=movie['id']%>">
+
                   <% if(movie['photos'].length >0 && movie['watched']==false) %>
                     <%photo = movie['photos'].first%>
-                    <div class="movie-items1">
-                      <button class="btn btn-link" name="showid" id="showid" value="<%=movie['id']%>">
+                    
                       <img class="img-rounded" width="140" height="210" src="<%= photo['url']%>">
-                      <h3><%= movie['title'] %> </h3></button>
+                  <%elsif movie['photos'].length ==0 && movie['watched']==false%>
+                      <img class="img-rounded" width="140" height="210" src="/assets/no_image.gif">
+                      <%end%>
+                      <% if (movie['watched']==false) %>
+                      <h3><%= movie['title'] %> </h3>
+                    </button>
                       
                       <div id="button2">
                         <button name="liked" id="liked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-up"></i>
@@ -240,8 +287,9 @@ $(function () {
                         <%elsif movie['available']==false %>
                         <%end%>
                       </div>
-                    </div>
+                    
                     <%end%> <!--if watched and unwatched-->
+                    </div>
                   <%end%> <!--nim loop-->
                 <%end%><!--form-->
                 </div>
