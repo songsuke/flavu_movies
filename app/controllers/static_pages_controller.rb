@@ -431,7 +431,16 @@ puts params[:unblock]
     #@lat_lng = cookies[:lat_lng]
     #@lat_lng2 = @lat_lng.split('|')
     #puts @lat_lng2[0]
-
+ip = request.remote_ip
+puts ip
+request.remote_ip
+#@remote_ip = request.env["HTTP_X_FORWARDED_FOR"]
+#puts @remote_ip
+UDPSocket.open do |s|
+      s.connect '64.233.187.99', 1
+      @i2=s.addr.last
+    end
+puts @i2
     #puts @lat_lng
     if (!session[:auth] && !session[:guest_auth])
       redirect_to cover_path
