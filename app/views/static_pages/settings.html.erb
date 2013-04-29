@@ -2,8 +2,190 @@
 <meta http-equiv="refresh" content="5; url=/home"> 
  <h11> Sign up and enjoy with your friends! (If it does not redirect, please click --><%= link_to "Here", register_path%> )</h11>
 <%else%>
+  <%= javascript_include_tag "bootstrap-tab" %>
+  <%= javascript_include_tag "bootstrap-collapse" %>
+
+<script type="text/javascript">
+$(function () {
+    $('#myTab1 a:first').tab('show');
+  })
+</script>
+
+<script type="text/javascript">
+$('#myCollapsible').collapse({
+  toggle: false
+})
+</script>
 
 <div id="main" class="group" role="main">
+
+<div id="side">
+	<div id="setting">
+		<div id="side-setting-box">
+			<ul id="myTab1">
+			  <li class="active"><a href="#account_settings" data-toggle="tab">Account Settings</a></li>
+			  <li><a href="#options_settings" data-toggle="tab">Options Settings</a></li>
+			  <li><a href="#privacy" data-toggle="tab">Privacy</a></li>
+			</ul>
+
+		</div> <!--side-setting-box-->
+	</div> <!--setting-->
+</div> <!--side-->
+
+
+<div id="setting-content">
+	<div id="content">
+		<div id="setting-detail">
+
+			<div id="myTabContent" class="tab-content">
+				<div class="tab-pane active" id="account_settings">
+<%=form_tag '/settings' do %>
+<div class="accordion" id="accordion2">
+
+  <div class="accordion-group"> <!--email-->
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+        <p id="setting_to_left"> Email </p>
+        <p id="setting_to_right"> Edit </p>
+        <p id="setting_to_center"> <%=@user['email']%> </p>
+      </a>
+    </div>
+    <div id="collapseOne" class="accordion-body collapse">
+      <div class="accordion-inner">
+      	<div id="arrange">
+			<%= label_tag 'Email : ' ,nil, :class => 'inline_label'%>
+	    	<%= text_field_tag "email" , "#{@user['email']}", :class=>'setting-text'%>      
+	 	</div>
+	  </div>
+    </div>
+  </div>
+
+  <div class="accordion-group"> <!--username-->
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+		<p id="setting_to_left"> Username </p>
+        <p id="setting_to_right"> Edit </p>
+        <p id="setting_to_center"> <%=@user['username']%> </p>      
+      </a>
+    </div>
+    <div id="collapseTwo" class="accordion-body collapse">
+      <div class="accordion-inner">
+		<div id="arrange">
+			<%= label_tag 'Username : ' ,nil, :class => 'inline_label'%>
+	    	<%= text_field_tag "username" , "#{@user['username']}", :class=>'setting-text'%>      
+	 	</div>
+	  </div>
+    </div>
+  </div>
+
+  <div class="accordion-group"> <!--display name-->
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
+		<p id="setting_to_left"> Display Name </p>
+        <p id="setting_to_right"> Edit </p>
+        <p id="setting_to_center"> <%=@user['display_name']%> </p>
+      </a>
+    </div>
+    <div id="collapseThree" class="accordion-body collapse">
+      <div class="accordion-inner">
+        <div id="arrange">
+			<%= label_tag 'Display Name : ' ,nil, :class => 'inline_label'%>
+	    	<%= text_field_tag "display_name" , "#{@user['display_name']}", :class=>'setting-text'%>      
+	 	</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion-group"> <!--phone number-->
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseFour">
+		<p id="setting_to_left"> Phone Number </p>
+        <p id="setting_to_right"> Edit </p>
+        <p id="setting_to_center"> <%=@account['phone_number']%> </p>
+      </a>
+    </div>
+    <div id="collapseFour" class="accordion-body collapse">
+      <div class="accordion-inner">
+        <div id="arrange">
+			<%= label_tag 'Phone Number : ' ,nil, :class => 'inline_label'%>
+	    	<%= text_field_tag "phone_number" , "#{@user['phone_number']}", :class=>'setting-text'%>      
+	 	</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion-group"> <!--password-->
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseFive">
+		<p id="setting_to_left"> Password </p>
+        <p id="setting_to_right"> Edit </p>
+        <p id="setting_to_center"> Change Password </p>
+      </a>
+    </div>
+    <div id="collapseFive" class="accordion-body collapse">
+      <div class="accordion-inner">
+        <div id="arrange">
+			     
+	    	<%= label_tag 'Password : ' ,nil, :class => 'inline_label' %>
+			<%= password_field_tag "password" ,nil ,:class=>'setting-text' %>
+	 	</div>
+
+	 	 <div id="arrange">
+			     
+	    	<%= label_tag 'Password Confirmation : ' ,nil, :class => 'inline_label' %>
+			<%= password_field_tag "password_confirmation" ,nil ,:class=>'setting-text' %>
+	 	</div>
+      </div>
+    </div>
+  </div>
+
+
+
+</div><!--accordion2-->
+<div class='controls'>
+    <input name="commit" id="commit" type="submit" class="btn btn-primary" value="Update" style="float:right; padding-right:10px;">
+</div>
+<%end%>
+				</div><!--account_settings-->
+
+				<div class="tab-pane" id="options_settings">
+<div class="accordion" id="accordion3">
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapseSeven">
+        Collapsible Group Item #3
+      </a>
+    </div>
+    <div id="collapseSeven" class="accordion-body collapse in">
+      <div class="accordion-inner">
+        Anim pariatur cliche...aaa
+      </div>
+    </div>
+  </div>
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapseEight">
+        Collapsible Group Item #4
+      </a>
+    </div>
+    <div id="collapseEight" class="accordion-body collapse">
+      <div class="accordion-inner">
+        Anim pariatur cliche...aaa
+      </div>
+    </div>
+  </div>
+</div>
+				</div><!--options_settings-->
+
+				<div class="tab-pane" id="privacy">
+					<p>hij</p>
+
+				</div><!--privacy-->
+			</div><!--tab-content-->
+
+		</div><!--setting-detail-->
+	</div><!--content-->
+</div><!--setting-content-->
 
 <h11> Account Setting </h11>
 
@@ -21,7 +203,7 @@
 
 	      <%= label_tag("Email") %>
 	      <!--<input id="user_login" name="user[login]" size="30" type="text">-->
-	      <%= text_field_tag "email"%>
+	      <%= text_field_tag "email" , 'palm'%>
 	    </div>
   	</div>
 

@@ -215,7 +215,7 @@ body {
   }
 }
 
-#side-login-box ,#side-buddy-box{
+#side-login-box ,#side-buddy-box ,#side-setting-box{
   clear: both;
   border-radius: 3px;
   margin: 0 0 25px;
@@ -224,7 +224,7 @@ body {
   overflow: auto;
 }
 
-#home-content {
+#home-content ,#setting-content{
   float: right;
   margin: 40px 26px 0 0;
   width: 686px;
@@ -368,6 +368,7 @@ p {
 
 
 
+
 .container {
 	width: 1024px;
 }
@@ -490,4 +491,43 @@ h4.title {
   margin: 0 0 10px;
   background: url(images/theater-bg.png) repeat-x #7c7d7c;
   border-radius: 3px 4px 4px 3px;
+}
+
+#setting-detail {
+  clear: both;
+  border-radius: 3px;
+  padding: 7px 0px;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(25,25,25,.5);
+  margin-bottom: 26px;
+  min-height: 600px;
+  overflow: auto;
+}
+
+#setting_to_left {
+  float: left;
+}
+
+#setting_to_right {
+  float: right;
+  text-align: right;
+}
+
+#setting_to_center {
+  margin-left: 200px;
+  font-weight: bold;
+
+}
+
+#arrange {
+}
+
+.inline_label {
+  display:inline;
+  padding-right: 5px;
+}
+
+.setting-text {
+  width: 160px;
+
 }

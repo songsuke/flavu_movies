@@ -6,7 +6,7 @@
 
 <script type="text/javascript">
 $(function () {
-    $('#myTab a:last').tab('show');
+    $('#myTab a:first').tab('show');
   })
 
 </script>
@@ -37,25 +37,33 @@ $(function () {
 
             <div id="interested" class="tab-pane active">
               <div class="group">
-              <%=form_tag '/showmovie' do %>
+              <!--<%=form_tag '/showmovie' do %> -->
               <div id="movie-cat">
                 <h3> Watched </h3>
                 <!--watched-->
                 <% @im['movies'].each do |movie| %> 
                 <div class="movie-items1">
-                  <button class="btn btn-link" name="showid1" id="showid1" value="<%=movie['id']%>">
+
+                  <!--<button class="btn btn-link" name="showid1" id="showid1" value="<%=movie['id']%>">-->
+                  
                   <% if(movie['photos'].length >0 && movie['watched']==true) %>
                     <%photo = movie['photos'].first%>
                     
-                      
-                      <img class="img-rounded" width="140" height="210" src="<%= photo['url']%>">
+                      <%= link_to image_tag("#{photo['url']}" ,:class =>'img-rounded') +"#{movie['title']}" , {:controller => "static_pages" ,:action => "showmovie" ,:showid1 => movie['id']}  %>
+
+
+                      <img class="img-rounded" width="140" height="210" src="<%=photo['url']%>">
                       <%elsif movie['photos'].length==0 && movie['watched']==true%>
+                      
                       <img class="img-rounded" width="140" height="210" src="/assets/no_image.gif">
+                      
                       <%end%>
                       <%if movie['watched']==true%>
                       <h3><%= movie['title'] %> </h3>
-                    </button>
+                    <!--</button>-->
+                      <%end%> <!--if watched--> 
                       
+
                       <div id="button2">
                         <button name="liked" id="liked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-up"></i>
                         </button>
@@ -74,7 +82,7 @@ $(function () {
 
                       </div><!--button2-->
                     
-                  <%end%> <!--if watched-->
+                  
                   </div><!--movie-item1-->
                 <%end%> <!--im loop-->
               </div><!--movie-cat-->
@@ -118,7 +126,7 @@ $(function () {
                     <%end%> <!--if watched and unwatched-->
                     </div><!--movie-item1-->
                   <%end%> <!--im loop-->
-                <%end%><!--form-->
+                <!--<%end%><!--form-->
                 </div><!--movie-cat-->
               </div><!--group-->
             </div><!--interested-->

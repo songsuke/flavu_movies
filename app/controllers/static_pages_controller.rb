@@ -403,6 +403,7 @@ puts params[:unblock]
       @user=session[:user]
       puts session[:auth]
       puts @a1
+      if params[:commit] == "Update"
       @setting_account =HTTParty.put("http://flavumovies.herokuapp.com/users.json", 
         body: {user: {auth_token: @a1, 
           email: params[:email], 
@@ -412,6 +413,11 @@ puts params[:unblock]
           password: params[:password],
           password_confirmation: params[:password_confirmation]}}).parsed_response
       puts @setting_account
+      else
+      end
+      @account =HTTParty.put("http://flavumovies.herokuapp.com/users.json", 
+        body: {user: {auth_token: @a1}}).parsed_response
+      #puts @account
 #showtime
           @url_theatre = "http://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
           @theatres =HTTParty.get(@url_theatre, body: {user: {auth_token: session[:auth]}}).parsed_response
@@ -448,8 +454,11 @@ UDPSocket.open do |s|
       #@ip_address=open( "http://jsonip.com/" ){ |s| JSON::parse( s.string())['ip'] }
       #@ip_address = UDPSocket.open {|s| s.connect("64.233.187.99", 1); s.addr.last}
       #@ip_address=Address.get
-      @ip_address=@ip
-      @latlong=Geocoder.coordinates(@ip)
+      #real version
+      #@ip_address=@ip 
+      #test version
+      @ip_address="184.70.5.250"
+      @latlong=Geocoder.coordinates(@ip_address)
 
       session[:latitude]=@latlong[0]
       session[:longitude]=@latlong[1]
