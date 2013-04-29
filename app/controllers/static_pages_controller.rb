@@ -431,8 +431,8 @@ puts params[:unblock]
     #@lat_lng = cookies[:lat_lng]
     #@lat_lng2 = @lat_lng.split('|')
     #puts @lat_lng2[0]
-ip = request.remote_ip
-puts ip
+@ip = request.remote_ip
+puts @ip
 request.remote_ip
 #@remote_ip = request.env["HTTP_X_FORWARDED_FOR"]
 #puts @remote_ip
@@ -440,7 +440,7 @@ UDPSocket.open do |s|
       s.connect '64.233.187.99', 1
       @i2=s.addr.last
     end
-puts @i2
+#puts @i2
     #puts @lat_lng
     if (!session[:auth] && !session[:guest_auth])
       redirect_to cover_path
@@ -448,8 +448,8 @@ puts @i2
       #@ip_address=open( "http://jsonip.com/" ){ |s| JSON::parse( s.string())['ip'] }
       #@ip_address = UDPSocket.open {|s| s.connect("64.233.187.99", 1); s.addr.last}
       #@ip_address=Address.get
-      @ip_address="184.70.5.250"
-      @latlong=Geocoder.coordinates(@ip_address)
+      @ip_address=@ip
+      @latlong=Geocoder.coordinates(@ip)
 
       session[:latitude]=@latlong[0]
       session[:longitude]=@latlong[1]
