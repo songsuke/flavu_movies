@@ -527,7 +527,7 @@ UDPSocket.open do |s|
       s.connect '64.233.187.99', 1
       @i2=s.addr.last
     end
-puts @i2
+#puts @i2
     #puts @lat_lng
     if (!session[:auth] && !session[:guest_auth])
       redirect_to cover_path
@@ -536,15 +536,16 @@ puts @i2
       #@ip_address = UDPSocket.open {|s| s.connect("64.233.187.99", 1); s.addr.last}
       #@ip_address=Address.get
       #real version
-      @ip_address=@ip 
+      #@ip_address=@ip 
       #test version
       #@ip_address="184.70.5.250"
-      @latlong=Geocoder.coordinates(@ip_address)
+      #@latlong=Geocoder.coordinates(@ip_address)
 
-      session[:latitude]=@latlong[0]
-      session[:longitude]=@latlong[1]
-      #session[:latitude]=@lat_lng2[0]
-      #session[:longitude]=@lat_lng2[1]
+      #session[:latitude]=@latlong[0]
+      #session[:longitude]=@latlong[1]
+      #30.267447, -97.739513
+      session[:latitude]="30.267447"
+      session[:longitude]="-97.739513"
       #@lat_lng2
       puts session[:latitude]
       puts session[:longitude]

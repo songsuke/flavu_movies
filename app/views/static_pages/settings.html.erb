@@ -36,12 +36,11 @@ $('#myCollapsible').collapse({
 <div id="setting-content">
 	<div id="content">
 		<div id="setting-detail">
-			<div id="setting-head">
-				<h1>General Account Setting</h1>
-			</div>
-			
 			<div id="myTabContent" class="tab-content">
 				<div class="tab-pane active" id="account_settings">
+					<div id="setting-head">
+						<h1>General Account Setting</h1>
+					</div>
 					<%if flash[:error]%>
 				    	<div class="alert alert-error"><%= flash[:error]%></div>
 				    <%elsif flash[:notice]%>
@@ -178,6 +177,9 @@ $('#myCollapsible').collapse({
 				</div><!--account_settings-->
 
 				<div class="tab-pane" id="options_settings">
+					<div id="setting-head">
+						<h1>Options Setting</h1>
+					</div>
 <div class="accordion" id="accordion3">
   <div class="accordion-group">
     <div class="accordion-heading">
@@ -257,7 +259,9 @@ $('#myCollapsible').collapse({
 				</div><!--options_settings-->
 
 				<div class="tab-pane" id="privacy">
-					<p>hij</p>
+					<div id="setting-head">
+						<h1>Privacy</h1>
+					</div>
 
 				</div><!--privacy-->
 			</div><!--tab-content-->
