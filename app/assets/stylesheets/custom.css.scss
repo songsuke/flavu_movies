@@ -502,8 +502,17 @@ h4.title {
   margin-bottom: 26px;
   min-height: 600px;
   overflow: auto;
+  h1 {
+    margin: 0;
+    font-size: 20px;
+    text-decoration: none;
+  }
 }
 
+#setting-head {
+  height: 50px;
+  width: 250px;
+}
 #setting_to_left {
   float: left;
 }

@@ -3,6 +3,8 @@ require 'httparty'
 require 'open-uri'
 
   def signin
+    #if (session[:auth] && session[:guest_auth])
+     # redirect_to home_path
     if params[:confirm] !="confirm"
     else
       session[:check_guest] = "false"
@@ -397,27 +399,106 @@ puts params[:unblock]
   end
   def settings 
     
-    
+
     if (session[:auth])
       @a1=session[:auth]
       @user=session[:user]
       puts session[:auth]
       puts @a1
-      if params[:commit] == "Update"
-      @setting_account =HTTParty.put("http://flavumovies.herokuapp.com/users.json", 
-        body: {user: {auth_token: @a1, 
-          email: params[:email], 
-          username: params[:username], 
-          display_name: params[:display_name],
-          phone_number: params[:phone_number],
-          password: params[:password],
+     
+      if params[:commit1] == "Update"
+        @setting_account =HTTParty.put("http://flavumovies.herokuapp.com/users.json", 
+        body: {user: {auth_token: @a1, email: params[:email]}}).parsed_response
+        #puts @setting_account['errors']['email'].first
+        if (@setting_account['errors'])
+          flash[:error] = "Update email is error. Please try again" 
+          flash[:notice] = nil
+        else
+          flash[:notice] = "Update your email is successful"
+          flash[:error] = nil
+        end
+
+      elsif params[:commit2] == "Update"
+        @setting_account =HTTParty.put("http://flavumovies.herokuapp.com/users.json", 
+        body: {user: {auth_token: @a1, username: params[:username]}}).parsed_response
+        if (@setting_account['errors'])
+          flash[:error] = "Update username is error. Please try again"
+          flash[:notice] = nil
+        else
+          flash[:notice] = "Update your username is successful"   
+          flash[:error] = nil  
+        end
+
+      elsif params[:commit3] == "Update"
+        @setting_account =HTTParty.put("http://flavumovies.herokuapp.com/users.json", 
+        body: {user: {auth_token: @a1, display_name: params[:display_name]}}).parsed_response
+        flash[:notice] = "Update your display name is successful"
+        flash[:notice] = nil
+
+      elsif params[:commit4] == "Update"
+        @setting_account =HTTParty.put("http://flavumovies.herokuapp.com/users.json", 
+        body: {user: {auth_token: @a1, phone_number: params[:phone_number]}}).parsed_response
+        if (@setting_account['errors'])
+          flash[:error] = "Your phone number has something wrong. Please try again" 
+          flash[:notice] = nil
+        else
+          flash[:notice] = "Update your phone number is successful"
+          flash[:error] = nil
+        end
+
+      elsif params[:commit5] == "Update"
+        @setting_account =HTTParty.put("http://flavumovies.herokuapp.com/users.json", 
+        body: {user: {auth_token: @a1, password: params[:password],
           password_confirmation: params[:password_confirmation]}}).parsed_response
-      puts @setting_account
-      else
+        if (params[:password].length <= 6)
+          flash[:error] = "Your password is too short. It has to be more than 6 characters"
+          flash[:notice] = nil
+        elsif params[:password] != params[:password_confirmation]
+          flash[:error] = "Your password do not match. Please try again"
+          flash[:notice] = nil
+        else
+          flash[:notice] = "Update your password is successful" 
+          flash[:error] = nil
+        end
+
+      elsif params[:commitSO] == "Update"
+
+
+        @user_preference =HTTParty.get("http://flavumovies.herokuapp.com/user_preferences.json", body: {user: {auth_token: @a1}}).parsed_response
+        @radius_id = @user_preference['user_preferences'].third['id'].to_i
+        @unit_id = @user_preference['user_preferences'].last['id'].to_i
+        puts @radius_id
+        puts @unit_id
+        @radius2 =HTTParty.put("http://flavumovies.herokuapp.com/user_preferences/#{@radius_id}.json", 
+          body: {
+          user: {auth_token: @a1} ,
+          user_preference: {preference: "search radius", value: params[:radius]} 
+          }).parsed_response      
+        @unit2 =HTTParty.put("http://flavumovies.herokuapp.com/user_preferences/#{@unit_id}.json", 
+          body: {
+          user: {auth_token: @a1} ,
+          user_preference: {preference: "unit of measure", value: params[:unit]} 
+          }).parsed_response  
+
+        #puts @radius2
+        #puts @unit2
+
       end
+
+
       @account =HTTParty.put("http://flavumovies.herokuapp.com/users.json", 
-        body: {user: {auth_token: @a1}}).parsed_response
-      #puts @account
+      body: {user: {auth_token: @a1}}).parsed_response
+      @user_preference =HTTParty.get("http://flavumovies.herokuapp.com/user_preferences.json", body: {user: {auth_token: @a1}}).parsed_response
+      #@radius_id = @user_preference['user_preferences'].third['id'].to_i
+      #@unit_id = @user_preference['user_preferences'].last['id'].to_i
+      #puts @radius_id
+      #puts @unit_id
+     #puts @account
+      #@radius =HTTParty.get("http://flavumovies.herokuapp.com/user_preferences/#{@radius_id}.json", body: {user: {auth_token: @a1}}).parsed_response
+      #puts @user_preference7 #['user_preference']['value']
+      #@unit =HTTParty.get("http://flavumovies.herokuapp.com/user_preferences/#{@unit_id}.json", body: {user: {auth_token: @a1}}).parsed_response
+
+      
 #showtime
           @url_theatre = "http://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
           @theatres =HTTParty.get(@url_theatre, body: {user: {auth_token: session[:auth]}}).parsed_response
@@ -446,7 +527,7 @@ UDPSocket.open do |s|
       s.connect '64.233.187.99', 1
       @i2=s.addr.last
     end
-#puts @i2
+puts @i2
     #puts @lat_lng
     if (!session[:auth] && !session[:guest_auth])
       redirect_to cover_path
@@ -455,9 +536,9 @@ UDPSocket.open do |s|
       #@ip_address = UDPSocket.open {|s| s.connect("64.233.187.99", 1); s.addr.last}
       #@ip_address=Address.get
       #real version
-      #@ip_address=@ip 
+      @ip_address=@ip 
       #test version
-      @ip_address="184.70.5.250"
+      #@ip_address="184.70.5.250"
       @latlong=Geocoder.coordinates(@ip_address)
 
       session[:latitude]=@latlong[0]
