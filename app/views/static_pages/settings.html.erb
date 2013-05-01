@@ -195,7 +195,7 @@ $('#myCollapsible').collapse({
     <div id="collapseSO" class="accordion-body collapse">
       <div class="accordion-inner">
 
-		<%=form_tag '/settings' do %>
+		  <%=form_tag '/settings' do %>
         <p style="display:block; margin-bottom:0px; margin-top:5px">Radius</p>
         <%= radio_button_tag(:radius, "5") %>
         <%= label_tag '5' ,nil, :class => 'inline_label' %>
@@ -211,9 +211,9 @@ $('#myCollapsible').collapse({
         <%= label_tag 'Miles' ,nil, :class => 'inline_label' %>
 
         <div class='controls'>
-		    <input name="commitSO" id="commitSO" type="submit" class="btn btn-primary" value="Update" style="float:right; margin-right:20px; margin-bottom:10px;">
-		</div>
-        <%end%>
+		      <input name="commitSO" id="commitSO" type="submit" class="btn btn-primary" value="Update" style="float:right; margin-right:20px; margin-bottom:10px;">
+		    </div>
+      <%end%>
       </div>
     </div>
   </div>
@@ -226,19 +226,111 @@ $('#myCollapsible').collapse({
     </div>
     <div id="collapseMLO" class="accordion-body collapse">
       <div class="accordion-inner">
-        Anim pariatur cliche...aaa
+        <%=form_tag '/settings' do %>
+          <p style="display:block; margin-bottom:0px; margin-top:5px">Genres option is 
+            <% if session[:MLO_genres]=="off"%>
+              <span class="badge">off</span>
+            <% else %>
+              <span class="badge">on</span>
+            <%end%>
+          </p>
+          <%= radio_button_tag(:genres, "on") %>
+          <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+          <%= radio_button_tag(:genres, "off") %>
+          <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+
+          <p style="display:block; margin-bottom:0px; margin-top:5px">Actors options is
+            <% if session[:MLO_actors]=="off"%>
+              <span class="badge">off</span>
+            <% else %>
+              <span class="badge">on</span>
+            <%end%>
+          </p>
+          <%= radio_button_tag(:actors, "on") %>
+          <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+          <%= radio_button_tag(:actors, "off") %>
+          <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+
+          <p style="display:block; margin-bottom:0px; margin-top:5px">Directors option is
+          <% if session[:MLO_directors]=="off"%>
+              <span class="badge">off</span>
+            <% else %>
+              <span class="badge">on</span>
+            <%end%>
+          </p>
+          <%= radio_button_tag(:directors, "on") %>
+          <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+          <%= radio_button_tag(:directors, "off") %>
+          <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+
+          <p style="display:block; margin-bottom:0px; margin-top:5px">Rating and Runtime option is
+            <% if session[:MLO_raterun]=="off"%>
+              <span class="badge">off</span>
+            <% else %>
+              <span class="badge">on</span>
+            <%end%>
+          </p>
+          <%= radio_button_tag(:raterun, "on") %>
+          <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+          <%= radio_button_tag(:raterun, "off") %>
+          <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+
+          <div class='controls'>
+            <input name="commitMLO" id="commitMLO" type="submit" class="btn btn-primary" value="Update" style="float:right; margin-right:20px; margin-bottom:10px;">
+          </div>
+        <%end%>
       </div>
     </div>
   </div>
 <div class="accordion-group">
     <div class="accordion-heading">
       <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapseTLO">
-        Theawtres List Options
+        Theatres List Options
       </a>
     </div>
     <div id="collapseTLO" class="accordion-body collapse">
       <div class="accordion-inner">
-        Anim pariatur cliche...aaa
+        <%=form_tag '/settings' do %>
+          <p style="display:block; margin-bottom:0px; margin-top:5px">Address option is
+            <% if session[:TLO_address]=="off"%>
+              <span class="badge">off</span>
+            <% else %>
+              <span class="badge">on</span>
+            <%end%>
+          </p>
+          <%= radio_button_tag(:address, "on") %>
+          <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+          <%= radio_button_tag(:address, "off") %>
+          <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+
+          <p style="display:block; margin-bottom:0px; margin-top:5px">Phone Number option is
+            <% if session[:TLO_phone_number]=="off"%>
+              <span class="badge">off</span>
+            <% else %>
+              <span class="badge">on</span>
+            <%end%>
+          </p>
+          <%= radio_button_tag(:phone_number, "on") %>
+          <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+          <%= radio_button_tag(:phone_number, "off") %>
+          <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+
+          <p style="display:block; margin-bottom:0px; margin-top:5px">Distance option is
+            <% if session[:TLO_distance]=="off"%>
+              <span class="badge">off</span>
+            <% else %>
+              <span class="badge">on</span>
+            <%end%>
+          </p>
+          <%= radio_button_tag(:distance, "on") %>
+          <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+          <%= radio_button_tag(:distance, "off") %>
+          <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+
+          <div class='controls'>
+            <input name="commitTLO" id="commitTLO" type="submit" class="btn btn-primary" value="Update" style="float:right; margin-right:20px; margin-bottom:10px;">
+          </div>
+        <%end%>
       </div>
     </div>
   </div>
@@ -250,7 +342,46 @@ $('#myCollapsible').collapse({
     </div>
     <div id="collapseMO" class="accordion-body collapse">
       <div class="accordion-inner">
-        Anim pariatur cliche...aaa
+        <%=form_tag '/settings' do %>
+          <p style="display:block; margin-bottom:0px; margin-top:5px">Liked Theatres option is
+          <% if session[:MO_likedt]=="off"%>
+              <span class="badge">off</span>
+            <% else %>
+              <span class="badge">on</span>
+            <%end%>
+          </p>
+          <%= radio_button_tag(:likedt, "on") %>
+          <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+          <%= radio_button_tag(:likedt, "off") %>
+          <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+
+          <p style="display:block; margin-bottom:0px; margin-top:5px">Nearby Theatres option is
+            <% if session[:MO_near]=="off"%>
+              <span class="badge">off</span>
+            <% else %>
+              <span class="badge">on</span>
+            <%end%>
+          </p>
+          <%= radio_button_tag(:near, "on") %>
+          <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+          <%= radio_button_tag(:near, "off") %>
+          <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+
+          <p style="display:block; margin-bottom:0px; margin-top:5px">Disliked Theatres option is
+            <% if session[:MO_dist]=="off"%>
+              <span class="badge">off</span>
+            <% else %>
+              <span class="badge">on</span>
+            <%end%>
+          </p>
+          <%= radio_button_tag(:dist, "on") %>
+          <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+          <%= radio_button_tag(:dist, "off") %>
+          <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <div class='controls'>
+            <input name="commitMO" id="commitMO" type="submit" class="btn btn-primary" value="Update" style="float:right; margin-right:20px; margin-bottom:10px;">
+          </div>
+        <%end%>
       </div>
     </div>
   </div>

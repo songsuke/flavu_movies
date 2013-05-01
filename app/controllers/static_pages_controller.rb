@@ -462,8 +462,6 @@ puts params[:unblock]
         end
 
       elsif params[:commitSO] == "Update"
-
-
         @user_preference =HTTParty.get("http://flavumovies.herokuapp.com/user_preferences.json", body: {user: {auth_token: @a1}}).parsed_response
         @radius_id = @user_preference['user_preferences'].third['id'].to_i
         @unit_id = @user_preference['user_preferences'].last['id'].to_i
@@ -480,8 +478,50 @@ puts params[:unblock]
           user_preference: {preference: "unit of measure", value: params[:unit]} 
           }).parsed_response  
 
-        #puts @radius2
-        #puts @unit2
+      elsif params[:commitMLO] == "Update"
+
+        if params[:genres]
+          session[:MLO_genres] = params[:genres]
+          puts "genres is #{session[:MLO_genres]}"
+        end
+        if params[:actors]
+          session[:MLO_actors] = params[:actors]
+          puts "actors is #{session[:MLO_actors]}"
+        end
+        if params[:directors]
+          session[:MLO_directors] = params[:directors]
+        end
+        if params[:raterun]
+          session[:MLO_raterun] = params[:raterun]
+        end
+
+      elsif params[:commitTLO] == "Update"
+
+        if params[:address]
+          session[:TLO_address] = params[:address]
+          puts "address is #{session[:TLO_address]}"
+        end
+        if params[:phone_number]
+          session[:TLO_phone_number] = params[:phone_number]
+          puts "phone number is #{session[:TLO_phone_number]}"
+        end
+        if params[:distance]
+          session[:TLO_distance] = params[:distance]
+        end
+
+      elsif params[:commitMO] == "Update"
+
+        if params[:likedt]
+          session[:MO_likedt] = params[:likedt]
+          puts "liked teatres is #{session[:MO_likedt]}"
+        end
+        if params[:near]
+          session[:MO_near] = params[:near]
+          puts "nearby theatres is #{session[:MO_near]}"
+        end
+        if params[:dist]
+          session[:MO_dist] = params[:dist]
+        end
 
       end
 

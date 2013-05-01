@@ -10,16 +10,9 @@
 
 	<title></title>
   <%= javascript_include_tag "bootstrap-carousel" %>
+  <%= javascript_include_tag "bootstrap-transition" %>
 
-<script type="text/javascript">
-$('.carousel').carousel({
-	interval: 2000
-	, pause: 'hover'
 
-})
-  
-
-</script>
 
 <% unless @lat_lng %>
 <script>
@@ -28,6 +21,11 @@ $('.carousel').carousel({
 <% end %>
 </head>
 <body>
+<script type="text/javascript">
+$('.carousel').carousel({
+  interval: 2000
+})
+</script>
 
 
 
@@ -88,7 +86,6 @@ $('.carousel').carousel({
 <!--</div>main-->
 
 <%end%>
-
 
 
 </body>
