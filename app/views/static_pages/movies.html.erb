@@ -3,6 +3,7 @@
   <%if(session[:auth] || session[:guest_auth])%>
 
   <%= javascript_include_tag "bootstrap-tab" %>
+  <%= javascript_include_tag "bootstrap-tooltip" %>
 
 <script type="text/javascript">
 $(function () {
@@ -16,7 +17,6 @@ $(function () {
 
 <body>
 
-  
 <!--<div id="main" class="group" role="main">-->
 
 
@@ -37,33 +37,20 @@ $(function () {
 
             <div id="interested" class="tab-pane active">
               <div class="group">
-              <!--<%=form_tag '/showmovie' do %> -->
               <div id="movie-cat">
                 <h3> Watched </h3>
                 <!--watched-->
                 <% @im['movies'].each do |movie| %> 
-                <div class="movie-items1">
-
-                  <!--<button class="btn btn-link" name="showid1" id="showid1" value="<%=movie['id']%>">-->
-                  
                   <% if(movie['photos'].length >0 && movie['watched']==true) %>
                     <%photo = movie['photos'].first%>
-                    
-                      <%= link_to image_tag("#{photo['url']}" ,:class =>'img-rounded') +"#{movie['title']}" , {:controller => "static_pages" ,:action => "showmovie" ,:showid1 => movie['id']}  %>
-
-
-                      <img class="img-rounded" width="140" height="210" src="<%=photo['url']%>">
-                      <%elsif movie['photos'].length==0 && movie['watched']==true%>
-                      
-                      <img class="img-rounded" width="140" height="210" src="/assets/no_image.gif">
-                      
+                    <div class="movie-items2">
+                      <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid1 => movie['id'] do%>
+                          <div class="movie-items1">
+                            <img src="<%=photo['url']%>">             
+                            <%=movie['title']%>
+                          </div>
                       <%end%>
-                      <%if movie['watched']==true%>
-                      <h3><%= movie['title'] %> </h3>
-                    <!--</button>-->
-                      <%end%> <!--if watched--> 
-                      
-
+                    <%=form_tag '/movies' do %>
                       <div id="button2">
                         <button name="liked" id="liked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-up"></i>
                         </button>
@@ -72,18 +59,41 @@ $(function () {
                         </button>
 
                         <%if movie['watched'] == false && movie['available']==true%>
-                        <button name="watched" id="watched" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-ok"></i>
-                        </button>
+                          <button name="watched" id="watched" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-ok"></i>
+                          </button>
                         <%elsif movie['watched'] == true && movie['available']==true%>
-                        <button name="unwatched" id="unwatched" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-remove"></i>
-                        </button>
+                          <button name="unwatched" id="unwatched" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-remove"></i>
+                          </button>
+                        <%elsif movie['available']==false %>
+                        <%end%>
+                      </div><!--button2-->
+                    <%end%><!--form tag movies-->
+                  </div><!--movie-item2-->
+
+                  <%elsif movie['photos'].length==0 && movie['watched']==true%>
+                    <div class="movie-items2">
+                      <%= link_to image_tag("/assets/no_image.gif" ,:class =>'img-rounded') +"#{movie['title']}" , {:controller => "static_pages" ,:action => "showmovie" ,:showid1 => movie['id']} , :class=>'movie-items1' %>
+                      <%=form_tag '/movies' do %>
+                        <div id="button2">
+                          <button name="liked" id="liked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-up"></i>
+                          </button>
+                          <button name="unliked" id="unliked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-down"></i>
+                          </button>
+
+                        <%if movie['watched'] == false && movie['available']==true%>
+                          <button name="watched" id="watched" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-ok"></i>
+                          </button>
+                        <%elsif movie['watched'] == true && movie['available']==true%>
+                          <button name="unwatched" id="unwatched" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-remove"></i>
+                          </button>
                         <%elsif movie['available']==false %>
                         <%end%>
 
                       </div><!--button2-->
-                    
-                  
+                    <%end%><!--form tag movies-->
                   </div><!--movie-item1-->
+                  <%end%>          
+        
                 <%end%> <!--im loop-->
               </div><!--movie-cat-->
 
@@ -91,42 +101,58 @@ $(function () {
                 <div id="movie-cat">
                   <h3> Other Movies </h3>
                   <% @im['movies'].each do |movie| %> 
-                  <div class="movie-items1">
-                    <button class="btn btn-link" name="showid1" id="showid1" value="<%=movie['id']%>">
-                  <% if(movie['photos'].length >0 && movie['watched']==false) %>
-                    <%photo = movie['photos'].first%>
-                    
-                      <img class="img-rounded" width="140" height="210" src="<%= photo['url']%>">
-                  
-                    <%elsif movie['photos'].length ==0 && movie['watched']==false%>
-                      <img class="img-rounded" width="140" height="210" src="/assets/no_image.gif">
-                      <%end%>
-
-                      <%if movie['watched']==false%>
-                      <h3><%= movie['title'] %> </h3>
-                    </button>
-                      
-                      <div id="button2">
-                        <button name="liked" id="liked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-up"></i>
-                        </button>
-
-                        <button name="unliked" id="unliked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-down"></i>
-                        </button>
-
-                        <%if movie['watched'] == false && movie['available']==true%>
-                        <button name="watched" id="watched" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-ok"></i>
-                        </button>
-                        <%elsif movie['watched'] == true && movie['available']==true%>
-                        <button name="unwatched" id="unwatched" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-remove"></i>
-                        </button>
-                        <%elsif movie['available']==false %>
+                    <%if(movie['photos'].length >0 && movie['watched']==false) %>
+                      <%photo = movie['photos'].first%>
+                      <div class="movie-items2">
+                      <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid1 => movie['id'] do%>
+                          <div class="movie-items1">
+                            <img src="<%=photo['url']%>">             
+                            <%=movie['title']%>
+                          </div>
                         <%end%>
-                      </div>
-                    
-                    <%end%> <!--if watched and unwatched-->
-                    </div><!--movie-item1-->
+                        <%=form_tag '/movies' do %> 
+                          <div id="button2">
+                            <button name="liked" id="liked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-up"></i>
+                            </button>
+
+                            <button name="unliked" id="unliked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-down"></i>
+                            </button>
+
+                            <%if movie['watched'] == false && movie['available']==true%>
+                              <button name="watched" id="watched" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-ok"></i>
+                              </button>
+                            <%elsif movie['watched'] == true && movie['available']==true%>
+                              <button name="unwatched" id="unwatched" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-remove"></i>
+                              </button>
+                            <%elsif movie['available']==false %>
+                            <%end%>
+                          </div>
+                        <%end%>
+                      </div><!--movie-item2-->
+
+                    <%elsif movie['photos'].length ==0 && movie['watched']==false%>
+                      <div class="movie-items2">
+                        <%= link_to image_tag("/assets/no_image.gif" ,:class =>'img-rounded') +"#{movie['title']}" , {:controller => "static_pages" ,:action => "showmovie" ,:showid1 => movie['id']}, :class=>'movie-items1'  %>
+                        <%=form_tag '/movies' do %> 
+                          <div id="button2">
+                            <button name="liked" id="liked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-up"></i>
+                            </button>
+                            <button name="unliked" id="unliked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-down"></i>
+                            </button>
+
+                          <%if movie['watched'] == false && movie['available']==true%>
+                            <button name="watched" id="watched" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-ok"></i>
+                            </button>
+                          <%elsif movie['watched'] == true && movie['available']==true%>
+                            <button name="unwatched" id="unwatched" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-remove"></i>
+                            </button>
+                          <%elsif movie['available']==false %>
+                          <%end%>
+                          </div>
+                        <%end%>
+                      </div><!--movie-item2-->
+                    <%end%>
                   <%end%> <!--im loop-->
-                <!--<%end%><!--form-->
                 </div><!--movie-cat-->
               </div><!--group-->
             </div><!--interested-->
@@ -135,44 +161,63 @@ $(function () {
           <div id="remaining" class="tab-pane fade">
             <div class="group">
 
-              <%=form_tag '/showmovie' do %>
               <div id="movie-cat">
                 <h3> Watched </h3>
                 <!--watched-->
                 <% @rm['movies'].each do |movie| %> 
-                  <div class="movie-items1">
-                    <button class="btn btn-link" name="showid2" id="showid2" value="<%=movie['id']%>">
                   <% if(movie['photos'].length >0 && movie['watched']==true) %>
                     <%photo = movie['photos'].first%>
-                      <img class="img-rounded" width="140" height="210" src="<%= photo['url']%>">
+                    <div class="movie-items2">
+                      <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid2 => movie['id'] do%>
+                        <div class="movie-items1">
+                          <img src="<%=photo['url']%>">             
+                          <%=movie['title']%>
+                        </div>
+                      <%end%>
+                      <%=form_tag '/movies' do%>
+                        <div id="button2">
+                          <button name="liked" id="liked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-up"></i>
+                          </button>
+
+                          <button name="unliked" id="unliked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-down"></i>
+                          </button>
+
+                          <%if movie['watched'] == false && movie['available']==true%>
+                            <button name="watched" id="watched" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-ok"></i>
+                          </button>
+                          <%elsif movie['watched'] == true && movie['available']==true%>
+                            <button name="unwatched" id="unwatched" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-remove"></i>
+                            </button>
+                          <%elsif movie['available']==false %>
+                          <%end%>
+                        </div>
+                      <%end%>
+                    </div><!--movie-item2-->
 
                   <%elsif movie['photos'].length ==0 && movie['watched']==true%>
-                      <img class="img-rounded" width="140" height="210" src="/assets/no_image.gif">
+                    <div class="movie-items2">
+                      <%= link_to image_tag("/assets/no_image.gif" ,:class =>'img-rounded') +"#{movie['title']}" , {:controller => "static_pages" ,:action => "showmovie" ,:showid2 => movie['id']} , :class=>'movie-items1' %>
+                      <%=form_tag '/movies' do%>
+                        <div id="button2">
+                          <button name="liked" id="liked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-up"></i>
+                          </button>
 
+                          <button name="unliked" id="unliked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-down"></i>
+                          </button>
+
+                          <%if movie['watched'] == false && movie['available']==true%>
+                            <button name="watched" id="watched" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-ok"></i>
+                          </button>
+                          <%elsif movie['watched'] == true && movie['available']==true%>
+                            <button name="unwatched" id="unwatched" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-remove"></i>
+                            </button>
+                          <%elsif movie['available']==false %>
+                          <%end%>
+                        </div>
+                      <%end%><!--form-->
+                    </div><!--movie-item2-->
                   <%end%>
-                      <%if (movie['watched']==true) %>
-                      <h3><%= movie['title'] %> </h3>
-                    </button>
-                      <div id="button2">
-                        <button name="liked" id="liked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-up"></i>
-                        </button>
-
-                        <button name="unliked" id="unliked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-down"></i>
-                        </button>
-
-                        <%if movie['watched'] == false && movie['available']==true%>
-                        <button name="watched" id="watched" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-ok"></i>
-                        </button>
-                        <%elsif movie['watched'] == true && movie['available']==true%>
-                        <button name="unwatched" id="unwatched" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-remove"></i>
-                        </button>
-                        <%elsif movie['available']==false %>
-                        <%end%>
-
-                      </div>
                     
-                  <%end%> <!--if watched-->
-                  </div><!--movie-item1-->
                 <%end%> <!--rm loop-->
                   </div><!--movie-cat-->
 
@@ -180,84 +225,119 @@ $(function () {
                 <div id="movie-cat">
                   <h3> Other Movies </h3>
                   <% @rm['movies'].each do |movie| %> 
-                  <div class="movie-items1">
-                    <button class="btn btn-link" name="showid2" id="showid2" value="<%=movie['id']%>">
-                  <% if(movie['photos'].length >0 && movie['watched']==false) %>
-                    <%photo = movie['photos'].first%>
-                      <img class="img-rounded" width="140" height="210" src="<%= photo['url']%>">
-                    <%elsif movie['photos'].length ==0 && movie['watched']==false%>
-                      <img class="img-rounded" width="140" height="210" src="/assets/no_image.gif">
-                    <%end%>
-                    <%if (movie['watched']==false) %>
-                      <h3><%= movie['title'] %> </h3>
-                    </button>
-                      <div id="button2">
-                        <button name="liked" id="liked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-up"></i>
-                        </button>
-
-                        <button name="unliked" id="unliked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-down"></i>
-                        </button>
-
-                        <%if movie['watched'] == false && movie['available']==true%>
-                        <button name="watched" id="watched" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-ok"></i>
-                        </button>
-                        <%elsif movie['watched'] == true && movie['available']==true%>
-                        <button name="unwatched" id="unwatched" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-remove"></i>
-                        </button>
-                        <%elsif movie['available']==false %>
+                    <%if(movie['photos'].length >0 && movie['watched']==false) %>
+                      <%photo = movie['photos'].first%> 
+                      <div class="movie-items2">
+                        <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid2 => movie['id'] do%>
+                          <div class="movie-items1">
+                            <img src="<%=photo['url']%>">             
+                            <%=movie['title']%>
+                          </div>
                         <%end%>
-                      </div>
-                    
-                    <%end%> <!--if watched and unwatched-->
-                    </div>
+                  
+                        <%=form_tag '/movies' do%>
+                          <div id="button2">
+                            <button name="liked" id="liked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-up"></i>
+                            </button>
+
+                            <button name="unliked" id="unliked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-down"></i>
+                            </button>
+
+                            <%if movie['watched'] == false && movie['available']==true%>
+                              <button name="watched" id="watched" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-ok"></i>
+                            </button>
+                            <%elsif movie['watched'] == true && movie['available']==true%>
+                              <button name="unwatched" id="unwatched" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-remove"></i>
+                              </button>
+                            <%elsif movie['available']==false %>
+                            <%end%>
+                          </div>
+                        <%end%>
+                      </div><!--movie-items2-->
+                    <%elsif movie['photos'].length ==0 && movie['watched']==false%>
+                      <div class="movie-items2">
+                        <%= link_to image_tag("/assets/no_image.gif" ,:class =>'img-rounded') +"#{movie['title']}" , {:controller => "static_pages" ,:action => "showmovie" ,:showid2 => movie['id']} ,:class=>'movie-items1' %>
+                        <%=form_tag 'movies' do%>
+                          <div id="button2">
+                            <button name="liked" id="liked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-up"></i>
+                            </button>
+
+                            <button name="unliked" id="unliked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-down"></i>
+                            </button>
+
+                            <%if movie['watched'] == false && movie['available']==true%>
+                            <button name="watched" id="watched" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-ok"></i>
+                            </button>
+                            <%elsif movie['watched'] == true && movie['available']==true%>
+                            <button name="unwatched" id="unwatched" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-remove"></i>
+                            </button>
+                            <%elsif movie['available']==false %>
+                            <%end%>
+                          </div>
+                        <%end%><!--form-->
+                      </div><!--movie-items2-->
+                    <%end%>
                   <%end%> <!--rm loop-->
-                <%end%><!--form-->
                 </div><!--movie-cat-->
               </div>
             </div><!--remaining-->
 
           <div id="not_interested" class="tab-pane fade">
             <div class="group">
-              <%=form_tag '/showmovie' do %>
               <div id="movie-cat">
                 <h3> Watched </h3>
                 <!--watched-->
 
                 <% @nim['movies'].each do |movie| %> 
-                <div class="movie-items1">
-                    <button class="btn btn-link" name="showid3" id="showid3" value="<%=movie['id']%>">
-
                   <% if(movie['photos'].length >0 && movie['watched']==true) %>
                     <%photo = movie['photos'].first%>
-                    
-                      <img class="img-rounded" width="140" height="210" src="<%= photo['url']%>">
-                      <%elsif movie['photos'].length ==0 && movie['watched']==true%>
-                      <img class="img-rounded" width="140" height="210" src="/assets/no_image.gif">
-                      <%end%>
-                      <% if (movie['watched']==true) %>
-                      <h3><%= movie['title'] %> </h3>
-                    </button>
-                      
-                      <div id="button2">
-                        <button name="liked" id="liked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-up"></i>
-                        </button>
-
-                        <button name="unliked" id="unliked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-down"></i>
-                        </button>
-
-                        <%if movie['watched'] == false && movie['available']==true%>
-                        <button name="watched" id="watched" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-ok"></i>
-                        </button>
-                        <%elsif movie['watched'] == true && movie['available']==true%>
-                        <button name="unwatched" id="unwatched" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-remove"></i>
-                        </button>
-                        <%elsif movie['available']==false %>
+                    <div class="movie-items2">
+                      <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid3 => movie['id'] do%>
+                          <div class="movie-items1">
+                            <img src="<%=photo['url']%>">             
+                            <%=movie['title']%>
+                          </div>
                         <%end%>
+                        <%=form_tag 'movies' do%>      
+                          <div id="button2">
+                            <button name="liked" id="liked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-up"></i>
+                            </button>
 
-                      </div>
-                    
-                  <%end%> <!--if watched-->
-                  </div>
+                            <button name="unliked" id="unliked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-down"></i>
+                            </button>
+
+                            <%if movie['watched'] == false && movie['available']==true%>
+                              <button name="watched" id="watched" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-ok"></i>
+                              </button>
+                            <%elsif movie['watched'] == true && movie['available']==true%>
+                              <button name="unwatched" id="unwatched" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-remove"></i>
+                              </button>
+                            <%elsif movie['available']==false %>
+                            <%end%>
+                          </div>
+                        <%end%> 
+                    </div>
+                  <%elsif movie['photos'].length ==0 && movie['watched']==true%>
+                    <div class="movie-items2">
+                      <%= link_to image_tag("/assets/no_image.gif" ,:class =>'img-rounded') +"#{movie['title']}" , {:controller => "static_pages" ,:action => "showmovie" ,:showid3 => movie['id']} ,:class=>'movie-items1' %>
+                      <%=form_tag 'movies' do%>      
+                        <div id="button2">
+                          <button name="liked" id="liked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-up"></i>
+                          </button>
+                          <button name="unliked" id="unliked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-down"></i>
+                          </button>
+                          <%if movie['watched'] == false && movie['available']==true%>
+                            <button name="watched" id="watched" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-ok"></i>
+                            </button>
+                          <%elsif movie['watched'] == true && movie['available']==true%>
+                            <button name="unwatched" id="unwatched" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-remove"></i>
+                            </button>
+                          <%elsif movie['available']==false %>
+                          <%end%>
+                        </div>
+                      <%end%>
+                    </div><!--movie-items2-->
+                  <%end%>
                 <%end%> <!--nim loop-->
               </div><!--movie-cat-->
 
@@ -265,42 +345,60 @@ $(function () {
                 <div id="movie-cat">
                   <h3> Other Movies </h3>
                   <% @nim['movies'].each do |movie| %> 
-                  <div class="movie-items1">
-                  <button class="btn btn-link" name="showid3" id="showid3" value="<%=movie['id']%>">
 
-                  <% if(movie['photos'].length >0 && movie['watched']==false) %>
-                    <%photo = movie['photos'].first%>
-                    
-                      <img class="img-rounded" width="140" height="210" src="<%= photo['url']%>">
-                  <%elsif movie['photos'].length ==0 && movie['watched']==false%>
-                      <img class="img-rounded" width="140" height="210" src="/assets/no_image.gif">
-                      <%end%>
-                      <% if (movie['watched']==false) %>
-                      <h3><%= movie['title'] %> </h3>
-                    </button>
-                      
-                      <div id="button2">
-                        <button name="liked" id="liked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-up"></i>
-                        </button>
-
-                        <button name="unliked" id="unliked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-down"></i>
-                        </button>
-
-                        <%if movie['watched'] == false && movie['available']==true%>
-                        <button name="watched" id="watched" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-ok"></i>
-                        </button>
-                        <%elsif movie['watched'] == true && movie['available']==true%>
-                        <button name="unwatched" id="unwatched" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-remove"></i>
-                        </button>
-                        <%elsif movie['available']==false %>
+                    <% if(movie['photos'].length >0 && movie['watched']==false) %>
+                      <%photo = movie['photos'].first%>
+                      <div class="movie-items2">
+                        <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid3 => movie['id'] do%>
+                          <div class="movie-items1">
+                            <img src="<%=photo['url']%>">             
+                            <%=movie['title']%>
+                          </div>
                         <%end%>
-                      </div>
-                    
-                    <%end%> <!--if watched and unwatched-->
-                    </div>
+                        <%=form_tag 'movies' do%>
+                          <div id="button2">
+                            <button name="liked" id="liked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-up"></i>
+                            </button>
+                            <button name="unliked" id="unliked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-down"></i>
+                            </button>
+
+                            <%if movie['watched'] == false && movie['available']==true%>
+                              <button name="watched" id="watched" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-ok"></i>
+                              </button>
+                            <%elsif movie['watched'] == true && movie['available']==true%>
+                              <button name="unwatched" id="unwatched" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-remove"></i>
+                              </button>
+                            <%elsif movie['available']==false %>
+                            <%end%>
+                          </div>
+                        <%end%> <!--form-->
+                      </div><!--movie-items2-->
+
+                    <%elsif movie['photos'].length ==0 && movie['watched']==false%>
+                      <div class="movie-items2">
+                        <%= link_to image_tag("/assets/no_image.gif" ,:class =>'img-rounded') +"#{movie['title']}" , {:controller => "static_pages" ,:action => "showmovie" ,:showid3 => movie['id']} ,:class=>'movie-items1' %>
+                        <%=form_tag 'movies' do%>
+                          <div id="button2">
+                            <button name="liked" id="liked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-up"></i>
+                            </button>
+                            <button name="unliked" id="unliked" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-thumbs-down"></i>
+                            </button>
+
+                            <%if movie['watched'] == false && movie['available']==true%>
+                              <button name="watched" id="watched" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-ok"></i>
+                              </button>
+                            <%elsif movie['watched'] == true && movie['available']==true%>
+                              <button name="unwatched" id="unwatched" value="<%=movie['id']%>" class='btn btn-mini'> <i class="icon-remove"></i>
+                              </button>
+                            <%elsif movie['available']==false %>
+                            <%end%>
+                          </div>
+                        <%end%> <!--form-->
+                      </div><!--movie-items2-->
+                    <%end%>
+                      
                   <%end%> <!--nim loop-->
-                <%end%><!--form-->
-                </div>
+                </div><!--cat-->
               </div>
           </div>
 

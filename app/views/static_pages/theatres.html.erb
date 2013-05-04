@@ -5,8 +5,48 @@
 <body>
 	<!--<div id="main" class="group" role="main">-->
 
-<h1> Liked Theatres </h1>
-<table>
+
+
+<div id="theatre-content">
+	<div id="content">
+		<h1 class="title"> Theatres </h1>
+		<div id="theatre-show">
+			<div class="theatres-list group">
+				<div class="theatres-filters">
+					<div class="by-liked">
+						<h2> Liked </h2>
+							<ul>
+
+								<% @nt['theatres'].each do |liked| %>
+								<li id="liked_arrange">
+								<a href="#" id="<%=liked['id']%>" data-toggle="popover" data-placement="right" data-original-title="<%=liked['name']%>" data-content="<%= liked['location']['city'] %>
+								<%= liked['location']['address'] %> 
+								<%= liked['phone_number'] %>">
+									<%=liked['name']%></a>
+								</li>
+
+<script>
+    $(document).ready(function() {
+    	$(function () {
+    		$("#<%=liked['id']%>").popover()
+
+	}) 
+}); 
+</script>
+<%end%>
+						</div>
+					</div><!--by-liked-->
+				</div><!--theatres-filters-->
+			</div><!--theatres-list group-->
+
+
+
+			<h1> Liked Theatres </h1>
+
+  
+
+   
+        <table>
 <tr>
 <th> Name </th>
 <th> Location Description </th>
@@ -105,6 +145,8 @@
 <%else%>
 <p> please login or register </p>
 <%end%>
-<!--</div>main-->
+		</div>
+	</div>
+</div>
 </body>
 </html>

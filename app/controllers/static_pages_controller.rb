@@ -114,20 +114,20 @@ require 'open-uri'
       redirect_to cover_path
     else
         #@a1=session[:auth]
-        puts session[:check_guest]
-        puts session[:auth]
-        puts session[:guest_auth]
+        #puts session[:check_guest]
+        #puts session[:auth]
+        #puts session[:guest_auth]
 
 
         if session[:check_guest] == "true"
-          puts params[:liked]
+          #puts params[:liked]
           if params[:liked]
             @liked_movies =HTTParty.post("http://flavumovies.herokuapp.com/interested_movies.json", body: {user: {auth_token: session[:guest_auth]}, interested_movie: { movie_id:params[:liked] ,interested: "true", not_interested: "false"}}).parsed_response
           elsif params[:unliked]
             @unliked_movies =HTTParty.post("http://flavumovies.herokuapp.com/not_interested_movies.json", body: {user: {auth_token: session[:guest_auth]}, not_interested_movie: { movie_id:params[:unliked] ,not_interested: "true", interested: "false"}}).parsed_response
           else
           end
-          puts params[:watched]
+          #puts params[:watched]
           if params[:watched]
             @watched_movies =HTTParty.post("http://flavumovies.herokuapp.com/watched_movies.json", body: {user: {auth_token: session[:auth]}, watched_movie: {movie_id:params[:watched] }}).parsed_response
           elsif params[:unwatched]
@@ -153,14 +153,14 @@ require 'open-uri'
 
 
         else
-          puts params[:liked]
+          #puts params[:liked]
           if params[:liked]
             @liked_movies =HTTParty.post("http://flavumovies.herokuapp.com/interested_movies.json", body: {user: {auth_token: session[:auth]}, interested_movie: { movie_id:params[:liked] ,interested: "true", not_interested: "false"}}).parsed_response
           elsif params[:unliked]
             @unliked_movies =HTTParty.post("http://flavumovies.herokuapp.com/not_interested_movies.json", body: {user: {auth_token: session[:auth]}, not_interested_movie: { movie_id:params[:unliked] ,not_interested: "true", interested: "false"}}).parsed_response
           else
           end
-          puts params[:watched]
+          #puts params[:watched]
           if params[:watched]
             @watched_movies =HTTParty.post("http://flavumovies.herokuapp.com/watched_movies.json", body: {user: {auth_token: session[:auth]}, watched_movie: {movie_id:params[:watched] }}).parsed_response
           elsif params[:unwatched]
@@ -248,7 +248,7 @@ require 'open-uri'
         end
       @url = "http://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
       @theatres =HTTParty.get(@url, body: {user: {auth_token: session[:auth]}, browser: "1"}).parsed_response
-
+      #puts @theatres
       #@theatres=JSON.parse(open("http://flavumovies.herokuapp.com/theatres.json?auth_token=ZhhSqcdR2T6KoVv29UZp").read) 
       @lt=@theatres['liked_theatres']
       @nt=@theatres['nearby_theatres']
@@ -299,7 +299,7 @@ require 'open-uri'
 
 
       else
-      puts params[:showid]
+      #puts params[:showid]
       if params[:showid1]
         session[:id_showtheatre] = params[:showid1]
         @id_showtheatre = session[:id_showtheatre].to_i
@@ -378,10 +378,10 @@ require 'open-uri'
     #@unblocking =HTTParty.post("http://flavumovies.herokuapp.com/friendships/unblock.json?id=#{params[:unblock]}", body: {user: {auth_token: @a1}}).parsed_response
     @requesting =HTTParty.post("http://flavumovies.herokuapp.com/send_request.json", body: {user: {auth_token: @a1}, friend_contact_info:params[:friend_contact_info]}).parsed_response
     #HTTParty.post("http://flavumovies.herokuapp.com/send_request.json", body: {user: {auth_token: "pb3BiqsJkvxbv2P3jnTR", friend_contact_info:"user1"}}).parsed_response
-puts params[:unblock]
-    puts params[:follow]
-    puts @following
-    puts params[:friend_contact_info]
+#puts params[:unblock]
+   # puts params[:follow]
+    #puts @following
+   # puts params[:friend_contact_info]
   else
     
   end
@@ -401,14 +401,14 @@ puts params[:unblock]
     
 
     if (session[:auth])
-      @a1=session[:auth]
+      #@a1=session[:auth]
       @user=session[:user]
-      puts session[:auth]
-      puts @a1
+     # puts session[:auth]
+     # puts @a1
      
       if params[:commit1] == "Update"
         @setting_account =HTTParty.put("http://flavumovies.herokuapp.com/users.json", 
-        body: {user: {auth_token: @a1, email: params[:email]}}).parsed_response
+        body: {user: {auth_token: session[:auth], email: params[:email]}}).parsed_response
         #puts @setting_account['errors']['email'].first
         if (@setting_account['errors'])
           flash[:error] = "Update email is error. Please try again" 
@@ -420,7 +420,7 @@ puts params[:unblock]
 
       elsif params[:commit2] == "Update"
         @setting_account =HTTParty.put("http://flavumovies.herokuapp.com/users.json", 
-        body: {user: {auth_token: @a1, username: params[:username]}}).parsed_response
+        body: {user: {auth_token: session[:auth], username: params[:username]}}).parsed_response
         if (@setting_account['errors'])
           flash[:error] = "Update username is error. Please try again"
           flash[:notice] = nil
@@ -431,13 +431,13 @@ puts params[:unblock]
 
       elsif params[:commit3] == "Update"
         @setting_account =HTTParty.put("http://flavumovies.herokuapp.com/users.json", 
-        body: {user: {auth_token: @a1, display_name: params[:display_name]}}).parsed_response
+        body: {user: {auth_token: session[:auth], display_name: params[:display_name]}}).parsed_response
         flash[:notice] = "Update your display name is successful"
         flash[:notice] = nil
 
       elsif params[:commit4] == "Update"
         @setting_account =HTTParty.put("http://flavumovies.herokuapp.com/users.json", 
-        body: {user: {auth_token: @a1, phone_number: params[:phone_number]}}).parsed_response
+        body: {user: {auth_token: session[:auth], phone_number: params[:phone_number]}}).parsed_response
         if (@setting_account['errors'])
           flash[:error] = "Your phone number has something wrong. Please try again" 
           flash[:notice] = nil
@@ -448,7 +448,7 @@ puts params[:unblock]
 
       elsif params[:commit5] == "Update"
         @setting_account =HTTParty.put("http://flavumovies.herokuapp.com/users.json", 
-        body: {user: {auth_token: @a1, password: params[:password],
+        body: {user: {auth_token: session[:auth], password: params[:password],
           password_confirmation: params[:password_confirmation]}}).parsed_response
         if (params[:password].length <= 6)
           flash[:error] = "Your password is too short. It has to be more than 6 characters"
@@ -469,12 +469,12 @@ puts params[:unblock]
         puts @unit_id
         @radius2 =HTTParty.put("http://flavumovies.herokuapp.com/user_preferences/#{@radius_id}.json", 
           body: {
-          user: {auth_token: @a1} ,
+          user: {auth_token: session[:auth]} ,
           user_preference: {preference: "search radius", value: params[:radius]} 
           }).parsed_response      
         @unit2 =HTTParty.put("http://flavumovies.herokuapp.com/user_preferences/#{@unit_id}.json", 
           body: {
-          user: {auth_token: @a1} ,
+          user: {auth_token: session[:auth]} ,
           user_preference: {preference: "unit of measure", value: params[:unit]} 
           }).parsed_response  
 
@@ -527,16 +527,16 @@ puts params[:unblock]
 
 
       @account =HTTParty.put("http://flavumovies.herokuapp.com/users.json", 
-      body: {user: {auth_token: @a1}}).parsed_response
-      @user_preference =HTTParty.get("http://flavumovies.herokuapp.com/user_preferences.json", body: {user: {auth_token: @a1}}).parsed_response
+      body: {user: {auth_token: session[:auth]}}).parsed_response
+      @user_preference =HTTParty.get("http://flavumovies.herokuapp.com/user_preferences.json", body: {user: {auth_token: session[:auth]}}).parsed_response
       #@radius_id = @user_preference['user_preferences'].third['id'].to_i
       #@unit_id = @user_preference['user_preferences'].last['id'].to_i
       #puts @radius_id
       #puts @unit_id
      #puts @account
-      #@radius =HTTParty.get("http://flavumovies.herokuapp.com/user_preferences/#{@radius_id}.json", body: {user: {auth_token: @a1}}).parsed_response
+      #@radius =HTTParty.get("http://flavumovies.herokuapp.com/user_preferences/#{@radius_id}.json", body: {user: {auth_token: session[:auth]}}).parsed_response
       #puts @user_preference7 #['user_preference']['value']
-      #@unit =HTTParty.get("http://flavumovies.herokuapp.com/user_preferences/#{@unit_id}.json", body: {user: {auth_token: @a1}}).parsed_response
+      #@unit =HTTParty.get("http://flavumovies.herokuapp.com/user_preferences/#{@unit_id}.json", body: {user: {auth_token: session[:auth]}}).parsed_response
 
       
 #showtime
@@ -598,6 +598,8 @@ UDPSocket.open do |s|
         @url_movie = "http://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
         @movies =HTTParty.get(@url_movie, body: {user: {auth_token: session[:guest_auth]}, browser: "1"}).parsed_response
         @rm=@movies['remaining_movies']
+        @im=@movies['interested_movies']
+        @nim=@movies['not_interested_movies']
         #session[:rm]=@movies['remaining_movies']
       else 
         @url_theatre = "http://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
@@ -607,6 +609,8 @@ UDPSocket.open do |s|
         @url_movie = "http://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
         @movies =HTTParty.get(@url_movie, body: {user: {auth_token: session[:auth]}, browser: "1"}).parsed_response
         @rm=@movies['remaining_movies']
+        @im=@movies['interested_movies']
+        @nim=@movies['not_interested_movies']
        # session[:rm]=@movies['remaining_movies']
 
       end

@@ -224,7 +224,7 @@ body {
   overflow: auto;
 }
 
-#home-content ,#setting-content{
+#home-content ,#setting-content ,#theatre-content{
   float: right;
   margin: 40px 26px 0 0;
   width: 686px;
@@ -305,22 +305,47 @@ body {
   border-radius: 3px;
   display: block;
   width: 158px;
-  height: 300px;
+  height: 275px;
   overflow: hidden;
   position: relative;
   text-shadow: 0 1px 0 #fff;
+  text-align: center;
   h3 {
     color: #333;
     margin: 0;
     font: 15px/1em sans-serif;
     padding-left: 2px;
   }
+  a {
+    color: black;
+  }
+  img {
+    width: 150px;
+    height: 210px;
+  }
+}
+.movie-items1:hover {
+background-color: #ddd;
+border: 1px solid #ccc;
+}
 
+.movie-items2{
+  float: left;
+  padding: 0px;
+  margin: 0px;
+  border: 1px solid #fff;
+  border-radius: 3px;
+  display: block;
+  width: 158px;
+  height: 315px;
+  overflow: hidden;
+  position: relative;
+  text-shadow: 0 1px 0 #fff;
+  text-align: center;
 }
 
 #button2 {
   margin-top: 7px;
-  margin-left: 17px;
 }
 
 .navbar {
@@ -393,6 +418,14 @@ div.hidden{
 #remember-but {
   padding: 8px 25px 10px 18px;
   float: left;
+}
+
+h1.title {
+  margin-bottom: 10px;
+  padding-left: 5px;
+  line-height: .8em;
+  text-shadow: 0 1px 0 #fff;
+  font-size: 32px;
 }
 
 h4.title {
@@ -535,5 +568,40 @@ h4.title {
 
 .setting-text {
   width: 160px;
-
 }
+
+.theatres-filters {
+  float: left;
+  width: 260px;
+  text-shadow: 0 1px 0 #fff;
+  h2 {
+    padding: 0 10px;
+    margin: 0;
+    height: 40px;
+    line-height: 40px;
+    color: #666;
+    background: url('/assets/theatres-list.png') no-repeat right top;
+    border-radius: 3px 3px 0 0;
+    border-bottom: 1px solid #fff;
+  }
+}
+
+.by-liked, .by-near, .by-unliked {
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+  border-radius: 3px;
+}
+
+#theatre-show {
+  border-radius: 3px;
+  padding: 23px;
+  width: 640px;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(25,25,25,.5);
+  margin-bottom: 48px;
+  min-height: 400px;
+  element.style {
+    left: 595px;
+  }
+}
+

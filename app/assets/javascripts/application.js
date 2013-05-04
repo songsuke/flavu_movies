@@ -14,8 +14,8 @@
 //= require jquery-1.7.2.min
 //= require geolocation
 //= require bootstrap
+//= require jquery_ujs 
 //= require jquery
-//= require jquery_ujs 	
 //= require_tree .
 
 

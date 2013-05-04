@@ -28,6 +28,7 @@ gem 'jquery-rails', '~> 2.1'
 gem "geocoder", "~> 1.1.6"
 gem "jquery-ui-rails", "~> 4.0.2"
 gem "wifi_location", "~> 0.0.6"
+gem "hpricot", "~> 0.8.6"
 platforms :jruby do
   gem 'trinidad'
   gem 'jruby-openssl'
