@@ -3,18 +3,11 @@
  <h11> Sign up and enjoy with your friends! (If it does not redirect, please click --><%= link_to "Here", register_path%> )</h11>
 <%else%>
   <%= javascript_include_tag "bootstrap-tab" %>
-  <%= javascript_include_tag "bootstrap-collapse" %>
 
 <script type="text/javascript">
 $(function () {
     $('#myTab1 a:first').tab('show');
   })
-</script>
-
-<script type="text/javascript">
-$('#myCollapsible').collapse({
-  toggle: false
-})
 </script>
 
 <!--<div id="main" class="group" role="main">-->
@@ -48,7 +41,6 @@ $('#myCollapsible').collapse({
 				    <%end%>
 <%=form_tag '/settings' do %>
 <div class="accordion" id="accordion2">
-
   <div class="accordion-group"> <!--email-->
     <div class="accordion-heading">
       <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
@@ -57,7 +49,7 @@ $('#myCollapsible').collapse({
         <p id="setting_to_center"> <%=@account['email']%> </p>
       </a>
     </div>
-    <div id="collapseOne" class="accordion-body collapse">
+    <div id="collapseOne" class="accordion-body collapse" style="height:0px;">
       <div class="accordion-inner">
       	<div id="arrange">
 			<%= label_tag 'Email : ' ,nil, :class => 'inline_label'%>

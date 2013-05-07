@@ -47,10 +47,25 @@
 }
 
 
+h1.title {
+  margin-bottom: 10px;
+  padding-left: 5px;
+  line-height: .8em;
+  text-shadow: 0 1px 0 #fff;
+  font-size: 21px;
+  color: #9e0000;
+  font-weight: normal;
+  font-family: 'DBHelvethaicaX55Regular',sans-serif;
+}
 
-table {
-  border-spacing: 20px;
-  border-collapse: separate;
+h1 {
+  margin-bottom: 10px;
+  padding-left: 5px;
+  line-height: .8em;
+  text-shadow: 0 1px 0 #fff;
+  font-size: 21px;
+  font-weight: normal;
+  font-family: 'DBHelvethaicaX55Regular',sans-serif;
 }
 
 html {
@@ -58,7 +73,7 @@ html {
 }
 
 body {
-  background-color: #D3D3D3;
+  background-color: #000;
   background-image: url('/assets/iron-man3-bg.jpg');
   background-repeat: no-repeat;
   background-position: top center;
@@ -117,7 +132,8 @@ body {
     text-shadow: 1px 1px 0 rgba(0,0,0,.23);
   }
   a:hover {
-    color: #eacb88;
+    color: #999;
+    text-decoration: none;
   }
 }
 #quick-showtime {
@@ -208,10 +224,12 @@ body {
   float: left;
   margin: 40px 26px 0;
   h1 { 
-    float: left;
-    margin: 0;
-    padding: 0 0 0 10px;
+    margin-bottom: 10px;
+    padding-left: 5px;
+    line-height: .8em;
     text-shadow: 0 1px 0 #fff;
+    font-size: 21px;
+    color: #9e0000;
   }
 }
 
@@ -229,10 +247,12 @@ body {
   margin: 40px 26px 0 0;
   width: 686px;
   h1 {
-    float: left;
-    margin: 0;
-    padding: 0 0 0 10px;
+    margin-bottom: 10px;
+    padding-left: 5px;
+    line-height: .8em;
     text-shadow: 0 1px 0 #fff;
+    font-size: 21px;
+    color: #9e0000;
   }
 }
 
@@ -250,10 +270,10 @@ body {
 #nowshowing1 {
   clear: both;
   border-radius: 3px;
-  padding: 7px 10px;
+  padding: 0;
   background-color: #eee;
   /*box-shadow: 0 1px 3px rgba(25,25,25,.5);*/
-  margin-bottom: 26px;
+  margin: 0;
   min-height: 600px;
   overflow: auto;
 }
@@ -352,13 +372,6 @@ border: 1px solid #ccc;
   padding: 0 0 0 0;
 }
 
-
-
-
-h1 {
-  font-size: 20px;
-}
-
 h2 {
   font-size: 20px;
   letter-spacing: -1px;
@@ -420,21 +433,6 @@ div.hidden{
   float: left;
 }
 
-h1.title {
-  margin-bottom: 10px;
-  padding-left: 5px;
-  line-height: .8em;
-  text-shadow: 0 1px 0 #fff;
-  font-size: 32px;
-}
-
-h4.title {
-  
-  margin: 0px;
-  font-size: 28px;
-  color: #9e0000;
-}
-
 #showmovie-content{
   border-radius: 3px;
   padding: 23px;
@@ -445,6 +443,10 @@ h4.title {
   min-height: 400px;
   margin-top: 20px;
   overflow: auto;
+  li {
+    list-style: none;
+    margin: 1px;
+  }
 }
 
 #trailer {
@@ -471,11 +473,12 @@ h4.title {
     height: 420px;
   }
   h1{
-    font-size: 18px;
+    margin-bottom: 10px;
+    padding-left: 5px;
+    line-height: .8em;
+    text-shadow: 0 1px 0 #fff;
+    font-size: 21px;
     color: #9e0000;
-    margin: 0;
-    text-align: left;
-    width: 100%;
   }
     
   h3{
@@ -558,8 +561,6 @@ h4.title {
 
 }
 
-#arrange {
-}
 
 .inline_label {
   display:inline;
@@ -570,11 +571,13 @@ h4.title {
   width: 160px;
 }
 
+/*theatres page*/
 .theatres-filters {
   float: left;
-  width: 260px;
+  width: 290px;
   text-shadow: 0 1px 0 #fff;
   h2 {
+    text-align: left;
     padding: 0 10px;
     margin: 0;
     height: 40px;
@@ -590,6 +593,27 @@ h4.title {
   border: 1px solid #ccc;
   margin-bottom: 20px;
   border-radius: 3px;
+  width: 290px;
+  ul {
+    list-style: none;
+    margin: 0;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    a:hover {
+      text-decoration:none;
+      color: #999;
+    }
+    a {
+        color: #333;
+    }
+    li {
+      padding-left: 18px;
+      line-height: 32px;
+    }
+    li.active {
+      background: url('/assets/theatres-list-active.png') no-repeat right center;
+    }
+  }
 }
 
 #theatre-show {
@@ -605,3 +629,36 @@ h4.title {
   }
 }
 
+.theatres-info {
+  float: right;
+  width: 300px;
+  .tab-pane {
+    display: none;
+  }
+  .active {
+    display: block;
+  }
+  h2 {
+    display: block;
+    font-size: 16px;
+    margin: 0 0 6px 0;
+    color: #9e0000;
+    text-align: left; 
+  }
+  ul {
+    display: block;
+    margin:0;
+    li {
+      line-height: 18px;
+      position: relative;
+      list-style: none;
+      padding: 0;
+      font-size: 14px;
+      margin: 2px;
+    }
+  }
+}
+
+.group {
+  zoom :1;  
+}

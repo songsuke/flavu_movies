@@ -1,11 +1,3 @@
-<script type="text/javascript">
-$('.carousel').carousel({
-	interval: 2000
-
-})
-  
-
-</script>
 <div id="side">
     <div id="buddy-side">
       <h1> Buddies </h1>
@@ -13,43 +5,72 @@ $('.carousel').carousel({
         <p> Query buddies here, if not member says you have no buddies please register</p>
       </div>
     </div>
-  </div>
+</div>
   
 <div id="home-content">
 	<div id="showmovie-content">
 		<%@st['theatres'].each do |nearby|%>
 			<%if nearby['id'] == @id_showtheatre%> 
-				<h4 class="title">
-					<%=nearby['name']%>
-				
-				<%= nearby['location_description'] %> 
-		 		<%= nearby['market'] %> </td>
-				<%= nearby['adult_price'] %> 
-		 		<%= nearby['child_price'] %>  </h4>
-		 		<%=form_tag '/showmovie' do %>
+				<ul>
+					<li><h1 class="title">
+						<%=nearby['name']%>
+					</h1></li>
+					
+					<li> Address : <%=nearby['location']['address']%></li>
+					<li> City : <%=nearby['location']['city']%></li>
+					<li> Country : <%=nearby['location']['country']%></li>
+					<li> Latitude : <%=nearby['location']['latitude']%></li>
+					<li> Longitude :<%=nearby['location']['longitude']%></li>
+					<li> Postal Code : <%=nearby['location']['postal_code']%></li>
+					<li> Province : <%=nearby['location']['province']%></li>
+					<li> Distance : <%=nearby['distance']%></li>
+					<li> Phone Number : <%=nearby['phone_number']%></li>
 
-				<%nearby['movies'].each do |a2|%>
-				<div id="movie-pic">
-					<div class="movie-items">
-					<button class="btn btn-link" name="showid" id="showid" value="<%=a2['id']%>">
-					<% if(a2['photos'].length >0) %>
-		                <%photo = a2['photos'].first%>
-		                <img class="img-rounded" width="140" height="210" src="<%= photo['url']%>">
-		            <%else%> 
-		                <img class="img-rounded" width="140" height="210" src="/assets/no_image.gif">
-
-		            <%end%>	
-		            		                <h1> <%=a2['title'] %> </h1>
-		                </button>
-		                </div>
-
-				</div>
-				<%end%>
+<script type="text/javascript"src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDb5IpzvRHH678YrbdxmQyR4J5opeTKlQk&sensor=false">
+</script>	
+<script type="text/javascript">
+  function initialize() {
+    var myLatlng = new google.maps.LatLng(<%=nearby['location']['latitude']%>,<%=nearby['location']['longitude']%>);
+    var myOptions = {
+      zoom: 16,
+      center: myLatlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    var map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
+    
+    var marker = new google.maps.Marker({
+        position: myLatlng, 
+        map: map,
+        title:"<%=nearby['name']%>"
+    });   
+  }
+</script>
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		 initialize();
+	});
+</script>
+					<div id="map-canvas" style="height:400px; width:600px;"></div>
+				</ul>
+			<%end%>
+				<%nearby['movies'].each do |movie|%>
+					<% if movie['photos'].length >0 && movie['available']==true %>
+                    	<%photo = movie['photos'].first%>
+                    	<div class="movie-items2">
+	                      	<%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid => movie['id'] do%>
+	                          	<div class="movie-items1">
+	                            <img src="<%=photo['url']%>">             
+	                            <%=movie['title']%>
+	                         	</div>
+	                      	<%end%>
+						</div>
+                  	<%elsif movie['photos'].length==0 && movie['available']==true %>
+                    	<div class="movie-items2">
+                      		<%= link_to image_tag("/assets/no_image.gif" ,:class =>'img-rounded') +"#{movie['title']}" , {:controller => "static_pages" ,:action => "showmovie" ,:showid => movie['id']} , :class=>'movie-items1' %>
+                      	</div>
+					<%end%>
 				<%end%>
 			<%end%>
-		<%end%>
-
-		
 	</div>
 </div>
 
