@@ -16,28 +16,36 @@
   <meta http-equiv="refresh" content="0; url=/cover"> 
 
 <%else%>
+<script>
+$(function(){
+	$('a').each(function() {
+		if ($(this).prop('href') == window.location.href) {
+			$(this).addClass('current');
+		}
+	});
+});
+</script>
 </head>
 <body>
 
 <div id="wrapper">
 	<header id="head">
-		<h1 id="logo"> <%= link_to "Flavu MoviesX", home_path %> </h1>
+		<h1 id="logo" class="current"> <%= link_to "Flavu MoviesX", home_path %> </h1>
 		<nav id="mainnav">
 			<div class="main-menu">
 				<ul id= "main-menu" class="menu">
-					<li><%= link_to "Movies", movies_path %> </li>
-					<li><%= link_to "Theatres", theatres_path %> </li>
-					<li><%= link_to "Buddies", buddies_path %> </li>
-					<li><%= link_to "Preferences", preferences_path %> </li>
+					<li id="movie-link"><%= link_to "Movies", movies_path %> </li>
+					<li id="theatre-link"><%= link_to "Theatres", theatres_path %> </li>
+					<li id="buddy-link"><%= link_to "Buddies", buddies_path %> </li>
+					<li id="preference-link"><%= link_to "Preferences", preferences_path %> </li>
 
-						
 					<%if (!session['auth'])%>
-					<li><%= link_to "Register", register_path %></li>
+					<li id="register-link"><%= link_to "Register", register_path %></li>
 						
-					<li><%= link_to "Sign In", signin_path %>  </li>
+					<li id="signin-link"><%= link_to "Sign In", signin_path %>  </li>
 					<%else%>
-					<li><%= link_to "Setting", settings_path %> </li>
-					<li><%= link_to "Sign out", signout_path %>  </li>
+					<li id="setting-link"><%= link_to "Setting", settings_path %> </li>
+					<li id="signout-link"><%= link_to "Sign out", signout_path %>  </li>
 					<%end%>
 
 				</ul>
