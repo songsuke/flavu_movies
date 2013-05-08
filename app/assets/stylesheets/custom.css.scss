@@ -432,7 +432,7 @@ div.hidden{
   padding: 8px 25px 10px 18px;
   float: left;
 }
-
+/*showmovie*/
 #showmovie-content{
   border-radius: 3px;
   padding: 23px;
@@ -452,18 +452,18 @@ div.hidden{
 #trailer {
   margin: 0 0 20px;
   overflow: hidden;
-  height: 360px;
-  width: 640px;
+  height: auto;
+  width: auto;
 }
 
 #movie-pic {
-  padding-top: 20px;
+  padding-top: 10px;
   float: left;
   
 }
 #movie-details {
   margin-left: 20px;
-  padding-top: 28px;
+  padding-top: 10px;
   padding-right: 0;
   float: right;
   #content {
@@ -474,7 +474,7 @@ div.hidden{
   }
   h1{
     margin-bottom: 10px;
-    padding-left: 5px;
+    padding: 10px 0px 0px 10px;
     line-height: .8em;
     text-shadow: 0 1px 0 #fff;
     font-size: 21px;
@@ -493,6 +493,7 @@ div.hidden{
     margin-top: -6px;
     margin-bottom:2px;
     padding-left: 11px;
+    display: inline-table;
   }
 }
 
@@ -506,8 +507,8 @@ div.hidden{
   margin: 15px 0px 0px 10px;
   border-radius: 3px;
   box-shadow: 0 1px 3px rgba(25, 25, 25, 0.5);
-  width: 450px;
-  height: 420px;
+  width: 100%;
+  height: 100%;
   #content {
     
   }
@@ -516,14 +517,69 @@ div.hidden{
     border-radius: 3px;
     color: #febf34;
     padding: 4px 15px;
-    background: url(images/title.png) repeat-x #2a2a2a;
+    background: url('/assets/title.png') repeat-x #2a2a2a;
+    text-align: left;
   }
 }
+
+#result-today {
+  display: block;
+}
+
 #result-item {
   border: 1px solid #bbb;
   margin: 0 0 10px;
-  background: url(images/theater-bg.png) repeat-x #7c7d7c;
+  background: url('/assets/theater-bg.png') repeat-x #7c7d7c;
   border-radius: 3px 4px 4px 3px;
+  .movie-name {
+    float: left;
+    width: 90px;
+    text-align: right;
+    padding: 10px 0 0;
+    text-shadow: 0 1px 0 rgba(255,255,255,.51);
+    font-size: 20px;
+  }
+  #result-info {
+    margin-left: 100px;
+    border-radius: 0 3px 3px 0;
+    background-color: #d3d3d3;
+    #item {
+      list-style: none;
+      width: 100%;
+      #picture {
+        float: left;
+        padding: 10px;
+      }
+      p.showtime {
+        overflow: hidden;
+        text-shadow: 0 1px 0 #f2e2c1;
+        color: black;
+        border: 1px solid #444;
+        box-shadow: 0 1px 0 #9d6f0e;
+        background-image: url('/assets/quick-select.png');
+        padding: 0px 7px 5px 7px;
+      }
+    }
+    .info {
+      padding: 5px;
+      height: 150px;
+      li {
+        list-style: none;
+        float: left;
+        padding-right: 10px;
+      }
+      p {
+      }
+      h3 {
+        margin: 0;
+        font-size: 16px;
+        line-height: 16px;
+        height: 10px;
+        text-align: left;
+        font-weight: normal;
+      }
+    }
+  }
 }
 
 #setting-detail {

@@ -674,8 +674,8 @@ UDPSocket.open do |s|
         end
 
   end
-
   def showmovie
+
     if (!session[:auth] && !session[:guest_auth])
       redirect_to cover_path
     else
@@ -744,7 +744,24 @@ UDPSocket.open do |s|
           @id_showmovie=session[:showid2].to_i
           @url = "http://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
           @movies =HTTParty.get(@url, body: {user: {auth_token: session[:auth]}, browser: "1"}).parsed_response
+          #puts @movies
           @sm=@movies['remaining_movies']
+          @sm['movies'].each do |a1|
+            if a1['id'] == @id_showmovie 
+              @title = a1['title']
+              #puts @title
+            end
+          end
+          @title1=@title.split(" ").join("-")
+          #puts @title1
+          @trailer_url="http://api.traileraddict.com/?film=#{@title1}&width=640"
+          doc=Hpricot::XML(open(@trailer_url))
+          (doc/:trailers/:trailer).each do |status|
+            ['embed'].each do |e1|
+              #puts "status#{status.at(e1).inner_text}"
+              @trailer= status.at(e1).inner_text
+            end
+          end
 
           elsif params[:showid3]
           session[:showid3] = params[:showid3]
@@ -764,7 +781,7 @@ UDPSocket.open do |s|
           
           @url2 = "http://flavumovies.herokuapp.com/theatres_for_movie/#{@id_showmovie}.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
           @theatres_for_movie=HTTParty.get(@url2, body: {user: {auth_token: session[:auth]}, browser: "1"}).parsed_response
-
+          #puts @theatres_for_movie
           #showtime
           @url_theatre = "http://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
           @theatres =HTTParty.get(@url_theatre, body: {user: {auth_token: session[:auth]}, browser: "1"}).parsed_response

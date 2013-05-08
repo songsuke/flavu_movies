@@ -30,6 +30,7 @@ gem "jquery-ui-rails", "~> 4.0.2"
 gem "wifi_location", "~> 0.0.6"
 gem "hpricot", "~> 0.8.6"
 gem "oj", "~> 2.0.12"
+gem "ruby-traileraddict", "~> 0.0.1"
 platforms :jruby do
   gem 'trinidad'
   gem 'jruby-openssl'

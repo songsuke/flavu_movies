@@ -13,26 +13,31 @@ $('.carousel').carousel({
         <p> Query buddies here, if not member says you have no buddies please register</p>
       </div>
     </div>
-  </div>
+ </div>
   
 <div id="home-content">
+	<%@sm['movies'].each do |a1|%>
+		<%if a1['id'] == @id_showmovie%> 
+			<h1 class="title">
+				<%@a2=a1['title']%>
+				<%=a1['title']%>
+			</h1>
+		<%end%>
+	<%end%>
 	<div id="showmovie-content">
 		<%@sm['movies'].each do |a1|%>
 			<%if a1['id'] == @id_showmovie%> 
-				<h1 class="title">
-					<%=a1['title']%>
-				</h1>
-				<div id="trailer">
-					<iframe width="640" height="360" src="http://www.youtube.com/embed/5EjG-1U3wqA?autoplay=1&vq=hd1080 " frameborder="0" allowfullscreen></iframe>
-				</div>
+			<div id="trailer">
+				<%=(@trailer).html_safe%>
+			</div>
 				<div id="movie-pic">
 					<% if(a1['photos'].length >0) %>
-		                <%photo = a1['photos'].first%>
+		                <%@photo = a1['photos'].first%>
 		                <div class="movie-items">
-		                <img class="img-rounded" width="140" height="210" src="<%= photo['url']%>">
+		                <img class="img-rounded" width="140" height="210" src="<%=@photo['url']%>">
 		                </div>
 		            <%elsif(a1['photos'].length ==0) %>
-		            	<%photo = a1['photos'].first%>
+		            	<%@photo = a1['photos'].first%>
 		            	<div class="movie-items">
 		                <img class="img-rounded" width="140" height="210" src="/assets/no_img">
 		                </div>
@@ -56,26 +61,45 @@ $('.carousel').carousel({
 						<p><%=a2['name']%></p>
 					<%end%>
 					<h3> Rate </h3>
+					<%@rate=a1['rating']%>
 					<p><%=a1['rating']%></p>
 					</div>
-				</div>
+				</div>	
 			<%end%>
 		<%end%>
 
 		<div id="theatre-detail">
-			<div id="content">
-				<%@theatres_for_movie['theatres'].each do |tfm|%>
-					<h2 class="cinema-name"> <%=tfm['name']%> </h>
-						<div id="result-item">
-							<%tfm['showtimes'].each do |showtime|%>
-								<p>Date : <%=showtime['date']%></p>
-								<p>Time : <%=showtime['start_time']%></p>
-							<%end%>
-							<a href= "http://maps.googleapis.com/maps/api/staticmap?center=<%=tfm['location']['address']%>,<%=tfm['location']['city']%>&zoom=15&size=500x500&markers=color:red%7Clabel:S%7C<%=tfm['location']['address']%>,<%=tfm['location']['city']%>&sensor=false&key=AIzaSyDb5IpzvRHH678YrbdxmQyR4J5opeTKlQk" > 
-			<img width="200" height="200"src="http://maps.googleapis.com/maps/api/staticmap?center=<%=tfm['location']['address']%>,<%=tfm['location']['city']%>&zoom=11&size=200x200&markers=color:red%7Clabel:S%7C<%=tfm['location']['address']%>,<%=tfm['location']['city']%>&sensor=false"> Click </a>
+			<%@theatres_for_movie['theatres'].each do |tfm|%>
+				<div id="result-today">
+					<h2 class="cinema-name"> <%=tfm['name']%> </h2>
+					<div id="result-item">
+						<h3 class="movie-name">
+							<%=@a2%>
+						</h3>
+						<div id="result-info">
+							<div id="item">
+								<div id="picture">
+									<img width="80" height="auto" src="<%= @photo['url']%>">
+								</div>
+								<div class="info group">
+									<h3> Rate </h3>
+									<p class="btn btn-inverse"><%=@rate%></p>
+									<div class="showtime group">
+										<%tfm['showtimes'].each do |showtime|%>
+											<%if showtime['date'].to_date == Time.now.to_date%>
+												<ul>										<li>
+													<p class="showtime"><%=showtime['start_time']%></p>
+												</li>
+												</ul>
+											<%end%>
+										<%end%>
+									</div>
+								</div>
+							</div>
 						</div>
-				<%end%>
-			</div>
+					</div>
+				</div><!--content-->
+			<%end%>
 		</div>
 	</div>
 </div>

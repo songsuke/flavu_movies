@@ -67,7 +67,7 @@ $('.carousel').carousel('cycle')
 						<div class="movie-items1">
 							<% if(movie['photos'].length >0) %>
 	                    	<%photo = movie['photos'].first%> 
-	                    		<%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid1 => movie['id'] do%>
+	                    		<%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid2 => movie['id'] do%>
 	                          		<div class="movie-items1">
 	                            		<img src="<%=photo['url']%>">             
 	                            		<%=movie['title']%>
