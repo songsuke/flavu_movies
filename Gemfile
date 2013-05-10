@@ -23,10 +23,10 @@ end
 gem 'activerecord-postgresql-adapter'
 gem 'address'
 gem "rspec", "~> 2.13.0"
-gem 'bootstrap-sass', '~> 2.3.1.0'
+gem 'bootstrap-sass', '~> 2.3.1.1'
 gem 'jquery-rails', '~> 2.1'
 gem "geocoder", "~> 1.1.6"
-gem "jquery-ui-rails", "~> 4.0.2"
+gem "jquery-ui-rails", "~> 4.0.2"	
 gem "wifi_location", "~> 0.0.6"
 gem "hpricot", "~> 0.8.6"
 gem "oj", "~> 2.0.12"
