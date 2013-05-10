@@ -393,6 +393,108 @@ require 'open-uri'
   end
 
   def preferences
+    if (!session[:auth] && !session[:guest_auth])
+      redirect_to cover_path
+    else
+      if session[:check_guest] == 'true'
+        @url1 = "http://flavumovies.herokuapp.com/genre_preferences.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+        @url2 = "http://flavumovies.herokuapp.com/director_preferences.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+        @url3 = "http://flavumovies.herokuapp.com/actor_preferences.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+        @genre_preferences =HTTParty.get(@url1, body: {user: {auth_token: session[:guest_auth]}}).parsed_response
+        @director_preferences =HTTParty.get(@url2, body: {user: {auth_token: session[:guest_auth]}}).parsed_response
+        @actor_preferences =HTTParty.get(@url3, body: {user: {auth_token: session[:guest_auth]}}).parsed_response
+        
+
+        @url4 = "http://flavumovies.herokuapp.com/genres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+        @all_genres =HTTParty.get(@url4, body: {user: {auth_token: session[:guest_auth]}}).parsed_response
+
+        @genre_update =HTTParty.put("http://flavumovies.herokuapp.com/genre_preferences/1.json", body: {user: {auth_token: session[:guest_auth]}, genre_preference: {genre: params[:genre] ,score: params[:score]}}).parsed_response
+        puts @x1
+        puts params[:score]
+        puts params[:genre]
+
+        @genre_create =HTTParty.post("http://flavumovies.herokuapp.com/genre_preferences.json", body: {user: {auth_token: session[:guest_auth]}, genre_preference: {genre: params[:genre_create] ,score: params[:score]}}).parsed_response
+     
+        @genre_delete =HTTParty.delete("http://flavumovies.herokuapp.com/genre_preferences/1.json", body: {user: {auth_token: session[:guest_auth]}, genre_preference: {genre: params[:genre_delete] ,score: params[:score]}}).parsed_response
+        puts params[:genre_delete]
+        
+        
+        #@genre_update =HTTParty.post("http://flavumovies.herokuapp.com/genre_preferences.json", 
+        #  body: {user: {auth_token: @a1}, genre_preference: {genre: params[:genre],score: params[:score]}}).parsed_response
+
+
+       #@genre_preferences=JSON.parse(open("http://flavumovies.herokuapp.com/genre_preferences.json?auth_token=kczrVERyuJu6RgevHZCx").read) 
+      # @director_preferences=JSON.parse(open("http://flavumovies.herokuapp.com/director_preferences.json?auth_token=kczrVERyuJu6RgevHZCx").read) 
+       #@actor_preferences=JSON.parse(open("http://flavumovies.herokuapp.com/actor_preferences.json?auth_token=kczrVERyuJu6RgevHZCx").read) 
+        @gp=@genre_preferences['genre_preferences']
+        @dp=@director_preferences['director_preferences']
+        @ap=@actor_preferences['actor_preferences']
+#showtime
+          @url_theatre = "http://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+          @theatres =HTTParty.get(@url_theatre, body: {user: {auth_token: session[:guest_auth]}}).parsed_response
+          @nt=@theatres['nearby_theatres']
+          @url_movie = "http://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+          @movies =HTTParty.get(@url_movie, body: {user: {auth_token: session[:guest_auth]}}).parsed_response
+          @rm=@movies['remaining_movies']
+
+      else
+        ##puts params[:score]
+        #@a1=session[:auth]
+        #puts session[:auth]
+        puts "update = #{params[:update]}"
+        puts "update1 =#{params[:genre_update]}"
+        puts "delete= #{params[:delete]}"
+
+
+        if params[:create1] == "Create"
+          @genre_create =HTTParty.post("http://flavumovies.herokuapp.com/genre_preferences.json", body: {user: {auth_token: session[:auth]}, genre_preference: {genre: params[:genre_create] ,score: params[:score]}}).parsed_response
+        
+        elsif params[:update] =="Update"
+          @genre_update =HTTParty.put("http://flavumovies.herokuapp.com/genre_preferences/1.json", body: {user: {auth_token: session[:auth]}, genre_preference: {genre: params[:genre_update] ,score: params[:score]}}).parsed_response
+        
+        elsif params[:delete] == "Delete"
+          @genre_delete =HTTParty.delete("http://flavumovies.herokuapp.com/genre_preferences/1.json", body: {user: {auth_token: session[:auth]}, genre_preference: {genre: params[:genre_update] ,score: params[:score]}}).parsed_response
+        end
+        @url1 = "http://flavumovies.herokuapp.com/genre_preferences.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+        @url2 = "http://flavumovies.herokuapp.com/director_preferences.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+        @url3 = "http://flavumovies.herokuapp.com/actor_preferences.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+        @genre_preferences =HTTParty.get(@url1, body: {user: {auth_token: session[:auth]}}).parsed_response
+        @director_preferences =HTTParty.get(@url2, body: {user: {auth_token: session[:auth]}}).parsed_response
+        @actor_preferences =HTTParty.get(@url3, body: {user: {auth_token: session[:auth]}}).parsed_response
+        
+
+        @url4 = "http://flavumovies.herokuapp.com/genres.json"
+        @all_genres =HTTParty.get(@url4, body: {user: {auth_token: session[:auth]}}).parsed_response
+        
+       # puts @x1
+       # puts params[:score]
+       # puts params[:genre]
+   
+       # puts params[:genre_delete]
+      
+      
+      #@genre_update =HTTParty.post("http://flavumovies.herokuapp.com/genre_preferences.json", 
+      #  body: {user: {auth_token: @session[:auth]}, genre_preference: {genre: params[:genre],score: params[:score]}}).parsed_response
+
+
+        #puts session[:auth]
+     #@genre_preferences=JSON.parse(open("http://flavumovies.herokuapp.com/genre_preferences.json?auth_token=kczrVERyuJu6RgevHZCx").read) 
+    # @director_preferences=JSON.parse(open("http://flavumovies.herokuapp.com/director_preferences.json?auth_token=kczrVERyuJu6RgevHZCx").read) 
+     #@actor_preferences=JSON.parse(open("http://flavumovies.herokuapp.com/actor_preferences.json?auth_token=kczrVERyuJu6RgevHZCx").read) 
+        @gp=@genre_preferences['genre_preferences']
+        #@dp=@director_preferences['director_preferences']
+        #@ap=@actor_preferences['actor_preferences']
+
+        #showtime
+          @url_theatre = "http://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+          @theatres =HTTParty.get(@url_theatre, body: {user: {auth_token: session[:auth]}}).parsed_response
+          @nt=@theatres['nearby_theatres']
+          @url_movie = "http://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+          @movies =HTTParty.get(@url_movie, body: {user: {auth_token: session[:auth]}}).parsed_response
+          @rm=@movies['remaining_movies']
+
+      end
+    end
   
   end
   def edit
@@ -776,6 +878,22 @@ UDPSocket.open do |s|
           @url = "http://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
           @movies =HTTParty.get(@url, body: {user: {auth_token: session[:auth]}, browser: "1"}).parsed_response
           @sm=@movies['remaining_movies']
+          @sm['movies'].each do |a1|
+            if a1['id'] == @id_showmovie 
+              @title = a1['title']
+              #puts @title
+            end
+          end
+          @title1=@title.split(" ").join("-")
+          #puts @title1
+          @trailer_url="http://api.traileraddict.com/?film=#{@title1}&width=640"
+          doc=Hpricot::XML(open(@trailer_url))
+          (doc/:trailers/:trailer).each do |status|
+            ['embed'].each do |e1|
+              #puts "status#{status.at(e1).inner_text}"
+              @trailer= status.at(e1).inner_text
+            end
+          end
           end
 
           
@@ -797,6 +915,5 @@ UDPSocket.open do |s|
     end
 
   end
-
 
 end

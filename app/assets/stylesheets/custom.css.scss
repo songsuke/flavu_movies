@@ -244,7 +244,7 @@ body {
   overflow: auto;
 }
 
-#home-content ,#setting-content ,#theatre-content{
+#home-content ,#setting-content ,#theatre-content ,#preference-content{
   float: right;
   margin: 40px 26px 0 0;
   width: 686px;
@@ -472,7 +472,7 @@ div.hidden{
     border-radius: 3px;
     box-shadow: 0 1px 3px rgba(25, 25, 25, 0.5) ;
     width:450px;
-    height: 420px;
+    height: auto;
   }
   h1{
     margin-bottom: 10px;
@@ -674,7 +674,7 @@ div.hidden{
   }
 }
 
-#theatre-show {
+#theatre-show ,#preference-entire{
   border-radius: 3px;
   padding: 23px;
   width: 640px;
@@ -682,6 +682,7 @@ div.hidden{
   box-shadow: 0 1px 3px rgba(25,25,25,.5);
   margin-bottom: 48px;
   min-height: 400px;
+  overflow: hidden;
   element.style {
     left: 595px;
   }
@@ -720,3 +721,111 @@ div.hidden{
 .group {
   zoom :1;  
 }
+
+#showtheatre-info {
+  padding-bottom: 25px;
+  h3 {
+    margin-bottom: 0;
+    padding-left: 0;
+    text-shadow: 0 1px 0 #fff;
+    font-size: 21px;
+    color: #9e0000;
+    padding-bottom: 0;
+    line-height: 100%;
+    width: 100%;
+  }
+  li {
+    padding-bottom: 5px;
+  }
+}
+
+#preference-menu {
+  position:relative;
+  top: 0;
+  left: 0;
+  width: 200px;
+  border: 1px solid #ccc;
+  border-width: 1px 0 1px 1px;
+  z-index: 2;
+  border-radius: 5px 0 0 5px;
+  float: left;
+  text-shadow: 0 1px 0 #fff;
+  #myTab {
+    list-style: none;
+    text-decoration: none;
+    margin:0;
+    a {
+      padding: 5px 10px 5px 35px;
+    }
+    a:hover {
+      text-decoration: none;
+    }
+    li {
+      a {
+        color: black;
+      }
+      border-width: 0 1px 1px 0;
+      border-style: solid;
+      border-color: #ccc #fff;
+      display: block;
+      background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#fff));
+      height: 45px;
+    }
+    li.active {
+      border-width: 0 1px 1px 0;
+      border-style: solid;
+      border-color: #ccc #fff;
+      background: #fff;
+      color: #000;
+      height: 45px;
+    }
+  }
+  h2 {
+    text-align: left;
+    padding: 0 10px;
+    margin: 0;
+    height: 40px;
+    line-height: 40px;
+    color: #666;
+    background-color: white;
+    border-radius: 3px 3px 0 0;
+    border-bottom: 1px solid #fff;
+  }
+}
+
+#preference-container {
+  overflow: hidden;
+}
+
+#preference-info {
+  position: relative;
+  min-height: 230px;
+  border: 1px solid #ccc;
+  border-width: 1px 1px 1px 1px;
+  border-radius: 0 5px 5px;
+  margin:0;
+  overflow: hidden;
+}
+
+#genre1 {
+  overflow: hidden;
+}
+
+#genre-create {
+  float: left;
+  margin: 10px 0px 5px 15px;
+}
+
+#star {
+  float: right;
+  width: 155px;
+  height: 30px;
+  margin: 50px -1px 0px 0px;
+}
+
+#pcreate-button {
+  float:right;
+  height: 100px;
+  margin-right: 10px;
+}
+

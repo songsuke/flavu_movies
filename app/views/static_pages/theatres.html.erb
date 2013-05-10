@@ -7,8 +7,6 @@ $(function () {
 
 </script>
 
-<script type="text/javascript"src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDb5IpzvRHH678YrbdxmQyR4J5opeTKlQk&sensor=false">
-</script>	
 </head>
 <body>
 	<!--<div id="main" class="group" role="main">-->
@@ -58,28 +56,6 @@ $(function () {
 							        <button name="unliked" id="unliked" value="<%=liked['id']%>" class='btn btn-mini'> <i class="icon-thumbs-down"></i></button></li>
 								<%end%>
 				 
-<script type="text/javascript">
-  function initialize() {
-    var myLatlng = new google.maps.LatLng(<%=liked['location']['latitude']%>,<%=liked['location']['longitude']%>);
-    var myOptions = {
-      zoom: 16,
-      center: myLatlng,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    }
-    var map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
-    
-    var marker = new google.maps.Marker({
-        position: myLatlng, 
-        map: map,
-        title:"<%=liked['name']%>"
-    });   
-  }
-</script>
-<script type="text/javascript">
-	jQuery(document).ready(function() {
-		 initialize();
-	});
-</script>
 								<div id="map-canvas" style="height:400px; width:300px;"></div>
   							</ul>
   						</div>
