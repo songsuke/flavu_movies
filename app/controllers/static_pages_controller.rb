@@ -444,8 +444,8 @@ require 'open-uri'
         puts "update = #{params[:update]}"
         puts "update1 =#{params[:genre_update]}"
         puts "delete= #{params[:delete]}"
-
-
+        puts "create2=#{params[:create2]}"
+        puts params[:director_create]
         if params[:create1] == "Create"
           @genre_create =HTTParty.post("http://flavumovies.herokuapp.com/genre_preferences.json", body: {user: {auth_token: session[:auth]}, genre_preference: {genre: params[:genre_create] ,score: params[:score]}}).parsed_response
         
@@ -454,6 +454,25 @@ require 'open-uri'
         
         elsif params[:delete] == "Delete"
           @genre_delete =HTTParty.delete("http://flavumovies.herokuapp.com/genre_preferences/1.json", body: {user: {auth_token: session[:auth]}, genre_preference: {genre: params[:genre_update] ,score: params[:score]}}).parsed_response
+        
+        elsif params[:create2] == "Create"
+          @director_create =HTTParty.post("http://flavumovies.herokuapp.com/director_preferences.json", body: {user: {auth_token: session[:auth]}, director_preference: {director: params[:director_create] ,score: params[:score]}}).parsed_response
+        
+        elsif params[:update2] =="Update"
+          @director_update =HTTParty.put("http://flavumovies.herokuapp.com/director_preferences/1.json", body: {user: {auth_token: session[:auth]}, director_preference: {director: params[:director_update] ,score: params[:score]}}).parsed_response
+        
+        elsif params[:delete2] == "Delete"
+          @director_delete =HTTParty.delete("http://flavumovies.herokuapp.com/director_preferences/1.json", body: {user: {auth_token: session[:auth]}, director_preference: {director: params[:director_update] ,score: params[:score]}}).parsed_response
+        
+        elsif params[:create3] == "Create"
+          @actor_create =HTTParty.post("http://flavumovies.herokuapp.com/actor_preferences.json", body: {user: {auth_token: session[:auth]}, actor_preference: {actor: params[:actor_create] ,score: params[:score]}}).parsed_response
+        
+        elsif params[:update3] =="Update"
+          @actor_update =HTTParty.put("http://flavumovies.herokuapp.com/actor_preferences/1.json", body: {user: {auth_token: session[:auth]}, actor_preference: {actor: params[:actor_update] ,score: params[:score]}}).parsed_response
+        
+        elsif params[:delete3] == "Delete"
+          @actor_delete =HTTParty.delete("http://flavumovies.herokuapp.com/actor_preferences/1.json", body: {user: {auth_token: session[:auth]}, actor_preference: {actor: params[:actor_update] ,score: params[:score]}}).parsed_response
+
         end
         @url1 = "http://flavumovies.herokuapp.com/genre_preferences.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
         @url2 = "http://flavumovies.herokuapp.com/director_preferences.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
@@ -465,7 +484,12 @@ require 'open-uri'
 
         @url4 = "http://flavumovies.herokuapp.com/genres.json"
         @all_genres =HTTParty.get(@url4, body: {user: {auth_token: session[:auth]}}).parsed_response
-        
+        @url5 = "http://flavumovies.herokuapp.com/movie_directors.json"
+        @all_directors =HTTParty.get(@url5, body: {user: {auth_token: session[:auth]}}).parsed_response
+        @url6 = "http://flavumovies.herokuapp.com/actors.json"
+        @all_actors =HTTParty.get(@url6, body: {user: {auth_token: session[:auth]}}).parsed_response
+       
+        #@directors=@all_directors['movie_directors']
        # puts @x1
        # puts params[:score]
        # puts params[:genre]
@@ -482,8 +506,8 @@ require 'open-uri'
     # @director_preferences=JSON.parse(open("http://flavumovies.herokuapp.com/director_preferences.json?auth_token=kczrVERyuJu6RgevHZCx").read) 
      #@actor_preferences=JSON.parse(open("http://flavumovies.herokuapp.com/actor_preferences.json?auth_token=kczrVERyuJu6RgevHZCx").read) 
         @gp=@genre_preferences['genre_preferences']
-        #@dp=@director_preferences['director_preferences']
-        #@ap=@actor_preferences['actor_preferences']
+        @dp=@director_preferences['director_preferences']
+        @ap=@actor_preferences['actor_preferences']
 
         #showtime
           @url_theatre = "http://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
