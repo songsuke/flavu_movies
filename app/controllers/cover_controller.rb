@@ -12,7 +12,7 @@ class CoverController < ApplicationController
 
 		#@guest_displayname=SecureRandom.uuid
 
-	  	@guests =HTTParty.post("http://flavumovies.herokuapp.com/users.json", body: {user: {password: @guest_password, password_confirmation: @guest_password, email: @guest_email, username: @guest_gen, display_name: @guest_gen, guest: params[:guest], browser: "1"}}).parsed_response
+	  	@guests =HTTParty.post("http://flavumovies.herokuapp.com/users.json", body: {user: {password: @guest_password, password_confirmation: @guest_password, email: @guest_email, username: @guest_gen, display_name: @guest_gen, guest: params[:guest]}}).parsed_response
 	    puts @guests['id']
 	    puts @guests
 	    session[:guest]=@guests

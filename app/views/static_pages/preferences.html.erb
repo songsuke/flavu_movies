@@ -109,8 +109,8 @@ $(function () {
 							<div id="genre-create">
 								<p> Create your genres preferences</p>
 								<select id = "director_create" name = "director_create" style="width:175px;">
-						        	<%@all_directors['movie_directors'].each do |all_director| %>
-						        		<%@x2= all_director['director']%>
+						        	<%@all_directors['directors'].each do |all_director| %>
+						        		<%@x2= all_director['name']%>
 						        		<option name = "<%=@x2%>" id=genre value="<%=@x2%>"> <%=@x2%></option>
 						        	<%end%>
 						        </select>
@@ -128,7 +128,7 @@ $(function () {
 <script type="text/javascript">
 	$(function () {
 		$.fn.raty.defaults.path = '/assets/';
-	   	$('#<%= dp1['director_id'] %>').raty({
+	   	$('#<%= dp1['id'] %>').raty({
 	   	number: 10,
 	  	score: function() {
 	    return $(this).attr('data-score');
@@ -137,11 +137,11 @@ $(function () {
 	})
 </script>
 									
-								   	<%= dp1['director'] %>
-									<% @dp2=dp1['director'] %>
+								   	<%= dp1['name'] %>
+									<% @dp2=dp1['name'] %>
 
 									<div id="<%= dp1['director_id'] %>" data-score="<%= dp1['score'] %>"></div>
-									<input type="hidden" name="director_update" value="<%= dp1['director'] %>">
+									<input type="hidden" name="director_update" value="<%= dp1['name'] %>">
 									<button id="update2" class="btn btn-success" name="update2" value="Update">Update</button>  
 
 									<button id="delete2" class="btn btn-danger" name="delete2" value="Delete">Delete</button>  
