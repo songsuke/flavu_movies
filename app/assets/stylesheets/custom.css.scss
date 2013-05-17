@@ -443,7 +443,7 @@ div.hidden{
   box-shadow: 0 1px 3px rgba(25,25,25,.5);
   margin-bottom: 25px;
   min-height: 400px;
-  overflow: auto;
+  overflow: hidden;
   li {
     list-style: none;
     margin: 1px;
@@ -463,7 +463,7 @@ div.hidden{
   
 }
 #movie-details {
-  margin-left: 20px;
+  margin-left: 0px;
   padding-top: 10px;
   padding-right: 0;
   float: right;
@@ -532,6 +532,7 @@ div.hidden{
   margin: 0 0 10px;
   background: url('/assets/theater-bg.png') repeat-x #7c7d7c;
   border-radius: 3px 4px 4px 3px;
+  overflow: hidden;
   .movie-name {
     float: left;
     width: 90px;

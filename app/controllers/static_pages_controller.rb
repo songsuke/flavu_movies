@@ -880,14 +880,16 @@ UDPSocket.open do |s|
               #puts @title
             end
           end
-          @title1=@title.split("3D").join.split(" ")
+          @title1=@title.split("3D").join.split(".").join.split(" ")
+          puts @title1
           (0..@title1.length).each do |a2|
             if @title1[a2]=="&"
               @title1[a2]="and"
             end
           end
+
           @title1=@title1.join("-")
-          puts @title1
+          
           #@title1=@title.split(" ").join("-")
 
           puts @title1
