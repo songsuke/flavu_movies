@@ -715,16 +715,17 @@ UDPSocket.open do |s|
       #@ip_address = UDPSocket.open {|s| s.connect("64.233.187.99", 1); s.addr.last}
       #@ip_address=Address.get
       #real version
-      #@ip_address=@ip 
+      @ip_address=@ip 
       #test version
       #@ip_address="184.70.5.250"
-      #@latlong=Geocoder.coordinates(@ip_address)
+      
+      @latlong=Geocoder.coordinates(@ip_address)
 
-      #session[:latitude]=@latlong[0]
-      #session[:longitude]=@latlong[1]
+      session[:latitude]=@latlong[0]
+      session[:longitude]=@latlong[1]
       #30.267447, -97.739513
-      session[:latitude]="49.25"
-      session[:longitude]="-123.1333"
+      #session[:latitude]="49.25"
+      #session[:longitude]="-123.1333"
       #@lat_lng2
       puts session[:latitude]
       puts session[:longitude]

@@ -44,7 +44,9 @@
     height: 100%;
     }
 }
-
+[class^="icon-"] {
+background-image: url("/assets/glyphicons-halflings.png");
+}
 
 h1.title {
   margin-bottom: 10px;
