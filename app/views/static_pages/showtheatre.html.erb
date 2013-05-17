@@ -8,14 +8,14 @@
 </div>
   
 <div id="home-content">
-	<div id="showmovie-content">
-		<%@st['theatres'].each do |nearby|%>
+	<%@st['theatres'].each do |nearby|%>
 			<%if nearby['id'] == @id_showtheatre%> 
+			<h1 class="title">
+				<%=nearby['name']%>
+			</h1>
+	<div id="showmovie-content">
 			<div id="showtheatre-info">
 				<ul>
-					<li><h1 class="title">
-						<%=nearby['name']%>
-					</h1></li>
 					<li> Address : <%=nearby['location']['address']%></li>
 					<li> City : <%=nearby['location']['city']%></li>
 					<li> Country : <%=nearby['location']['country']%></li>

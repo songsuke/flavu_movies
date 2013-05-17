@@ -34,10 +34,10 @@ $(function () {
 					<div id="setting-head">
 						<h1>General Account Setting</h1>
 					</div>
-					<%if flash[:error]%>
-				    	<div class="alert alert-error"><%= flash[:error]%></div>
-				    <%elsif flash[:notice]%>
-				    	<div class="alert alert-success"><%= flash[:notice]%></div>
+					<%if flash[:error1]%>
+				    	<div class="alert alert-error"><%= flash[:error1]%></div>
+				    <%elsif flash[:notice1]%>
+				    	<div class="alert alert-success"><%= flash[:notice1]%></div>
 				    <%end%>
 <%=form_tag '/settings' do %>
 <div class="accordion" id="accordion2">
@@ -57,9 +57,7 @@ $(function () {
 	    	<div class="alert alert-info">
 	    		<p>Email should be in form like this youremail@example.com</p>
 	    	</div>
-			<div class='controls'>
-		    	<input name="commit1" id="commit1" type="submit" class="btn btn-primary" value="Update" style="float:right; margin-right:20px; margin-bottom:10px;">
-			</div>
+
 	 	</div>
 	  </div>
     </div>
@@ -78,9 +76,7 @@ $(function () {
 		<div id="arrange">
 			<%= label_tag 'Username : ' ,nil, :class => 'inline_label'%>
 	    	<%= text_field_tag "username" , "#{@account['username']}", :class=>'setting-text'%>
-			<div class='controls'>
-		    	<input name="commit2" id="commit2" type="submit" class="btn btn-primary" value="Update" style="float:right; margin-right:20px; margin-bottom:10px;">
-			</div>
+
 	 	</div>
 	  </div>
     </div>
@@ -99,9 +95,7 @@ $(function () {
         <div id="arrange">
 			<%= label_tag 'Display Name : ' ,nil, :class => 'inline_label'%>
 	    	<%= text_field_tag "display_name" , "#{@account['display_name']}", :class=>'setting-text'%>      
-			<div class='controls'>
-		    	<input name="commit3" id="commit3" type="submit" class="btn btn-primary" value="Update" style="float:right; margin-right:20px; margin-bottom:10px;">
-			</div>	    	
+ 	
 	 	</div>
       </div>
     </div>
@@ -120,9 +114,7 @@ $(function () {
         <div id="arrange">
 			<%= label_tag 'Phone Number : ' ,nil, :class => 'inline_label'%>
 	    	<%= text_field_tag "phone_number" , "#{@account['phone_number']}", :class=>'setting-text'%>    
-			<div class='controls'>
-		    	<input name="commit4" id="commit4" type="submit" class="btn btn-primary" value="Update" style="float:right; margin-right:20px; margin-bottom:10px;">
-			</div>	    	 
+ 
 	 	</div>
       </div>
     </div>
@@ -153,10 +145,6 @@ $(function () {
 	 		<p>Password has to be more than 6 characters</p>
 	 	</div>
 
-	    <div class='controls'>
-		    <input name="commit5" id="commit5" type="submit" class="btn btn-primary" value="Update" style="float:right; margin-right:20px; margin-bottom:10px;">
-		</div>
-
       </div>
     </div>
   </div>
@@ -164,7 +152,9 @@ $(function () {
 
 
 </div><!--accordion2-->
-
+      <div class='controls'>
+        <input name="commit1" id="commit1" type="submit" class="btn btn-primary" value="Update" style="float:right; margin-right:20px; margin-bottom:10px;">
+    </div>
 <%end%>
 				</div><!--account_settings-->
 

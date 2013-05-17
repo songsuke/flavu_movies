@@ -8,11 +8,12 @@ class CoverController < ApplicationController
 	elsif params[:guest] == 'true'
 		@guest_password=SecureRandom.uuid
 		@guest_gen=SecureRandom.uuid
+		puts @guest_password
 		@guest_email= @guest_gen + "@flavuguest.com"
 
 		#@guest_displayname=SecureRandom.uuid
 
-	  	@guests =HTTParty.post("http://flavumovies.herokuapp.com/users.json", body: {user: {password: @guest_password, password_confirmation: @guest_password, email: @guest_email, username: @guest_gen, display_name: @guest_gen, guest: params[:guest]}}).parsed_response
+	  	@guests =HTTParty.post("http://flavumovies.herokuapp.com/users.json", body: {user: {email: @guest_email, username: @guest_gen, password: @guest_password, password_confirmation: @guest_password, display_name: @guest_gen, guest: params[:guest]}}).parsed_response
 	    puts @guests['id']
 	    puts @guests
 	    session[:guest]=@guests
@@ -22,7 +23,7 @@ class CoverController < ApplicationController
 	    puts @guests['username']
 	    puts session[:guest_auth]
 	    puts @guests['auth_token']
-	    redirect_to home_path
+	    redirect_to root_path
 	elsif session[:auth] || session[:guest_auth]
 		redirect_to home_path
 

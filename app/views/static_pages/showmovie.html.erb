@@ -28,7 +28,11 @@ $('.carousel').carousel({
 		<%@sm['movies'].each do |a1|%>
 			<%if a1['id'] == @id_showmovie%> 
 			<div id="trailer">
-				<%=(@trailer).html_safe%>
+				<%if @trailer%>
+					<%=(@trailer).html_safe%>
+				<%else%>
+					We don't have the trailer for this movie, Please follow this <%=link_to "link" , "#{a1['trailer']}"%>
+				<%end%>
 			</div>
 				<div id="movie-pic">
 					<% if(a1['photos'].length >0) %>
@@ -48,6 +52,9 @@ $('.carousel').carousel({
 					<div id="content">
 					<h1> Information </h1>
 					<h3> Release Date </h3>
+						<p><%=a1['release']%></p>
+					<h3> Sypnosis </h3>
+						<p><%=a1['synopsis']%></p>	
 					<h3> Genres </h3>
 					<%a1['genres'].each do |a2|%>
 						<p><%=a2['name']%></p>
@@ -70,6 +77,7 @@ $('.carousel').carousel({
 
 		<div id="theatre-detail">
 			<%@theatres_for_movie['theatres'].each do |tfm|%>
+				
 				<div id="result-today">
 					<h2 class="cinema-name"> <%=tfm['name']%> </h2>
 					<div id="result-item">
