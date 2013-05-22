@@ -1,0 +1,164 @@
+<html>
+<head>
+<script type="text/javascript">
+$(function () {
+    $('#myTab a').tab();
+  })
+
+</script>
+
+<script type="text/javascript">
+$(function () {
+    $('#myTab2 a').tab();
+  })
+
+</script>
+
+</head>
+<body>
+	<!--<div id="main" class="group" role="main">-->
+
+
+
+<div id="theatre-content">
+	<div id="content">
+		<h1 class="title"> Showtimes </h1>
+		<div id="theatre-show">
+			<div class="theatres-list group">
+				<div class="theatres-filters">
+					<div class="by-near">
+						<ul id="myTab">
+							<h2> Liked </h2>
+							<% @lt['theatres'].each do |liked| %>
+  								<li><a href="#<%=liked['id']%>"  data-toggle="tab"><%=liked['name']%></a></li>	
+							<%end%>
+
+							<h2> Nearby </h2>
+							<% @nt['theatres'].each do |nearby| %>
+  								<li><a href="#<%=nearby['id']%>"  data-toggle="tab"><%=nearby['name']%></a></li>	
+							<%end%>
+
+							<h2> Unliked </h2>
+							<% @nit['theatres'].each do |unliked| %>
+  								<li><a href="#<%=unliked['id']%>"  data-toggle="tab"><%=unliked['name']%></a></li>	
+							<%end%>
+						</ul>
+					</div><!--by-near-->
+				</div><!--theatres-filters-->
+			</div><!--theatres-list group-->
+				<div class="theatres-info">
+					<!--liked theatres-->
+					
+					<% @lt['theatres'].each do |liked| %>
+  						<div class="tab-pane" id="<%=liked['id']%>">
+  							<ul id="myTab2">
+  							<% liked['movies'].each do |movie|%>
+	  							<li>
+		  							<div class="movie-items1">
+										<% if(movie['photos'].length >0) %>
+				                    		<%photo = movie['photos'].first%> 
+				                    		<a href="#<%=movie['id']%>" data-toggle="tab">
+				                          		<div class="movie-items1">
+				                            		<img src="<%=photo['url']%>">          
+				                            		<%=movie['title']%>
+				                            		<%@mid=movie['id']%>
+				                          		</div>
+				                          	</a>
+				                  		<%elsif movie['photos'].length==0%>
+				                  			<a href="#<%=movie['id']%>" data-toggle="tab">
+				                     			<img src="/assets/no_image.gif">           
+				                            	<%=movie['title']%>
+				                     		</a>
+				                  		<%end%>    
+			                  		</div>  
+			                  	</li>
+	                  		<%end%>  	
+	                  		</ul>		
+	                  		
+  								<% liked['movies'].each do |movie|%>
+		  							<div class="tab-pane" id="<%=movie['id']%>">
+		  								<p><%=movie['showtimes']%></p>
+
+									</div>
+								<%end%>
+
+  						</div>
+  					<%end%>
+  					
+  					<!--nearby-theatres-->
+  					
+					<% @nt['theatres'].each do |nearby| %>
+  						<div class="tab-pane" id="<%=nearby['id']%>">
+  							<ul id="myTab2">
+  							<% nearby['movies'].each do |movie|%>
+  								<li>
+	  								<div class="movie-items1">
+										<% if(movie['photos'].length >0) %>
+			                    			<%photo = movie['photos'].first%> 
+				                    		<a href="#<%=movie['id']%>" data-toggle="tab">
+					                          	<div class="movie-items1">
+					                            	<img src="<%=photo['url']%>">          
+					                            	<%=movie['title']%>
+					                          	</div>
+					                        </a>
+				                  		<%elsif movie['photos'].length==0%>
+					                  		<a href="#<%=movie['id']%>" data-toggle="tab">
+					                     		<img src="/assets/no_image.gif">           
+				                            	<%=movie['title']%>
+					                     	</a>
+				                  		<%end%>    
+		                  			</div>  
+		                  		</li>
+	                  		<%end%> 
+	                  		</ul>
+	                  		<% nearby['movies'].each do |movie|%>
+		  						<div class="tab-pane" id="<%=movie['id']%>">
+		  							<p><%=movie['id']%></p>
+								</div>
+							<%end%>
+  						</div>
+  					<%end%>
+  					
+  					<!--not-interested-theatres-->
+  					
+					<% @nit['theatres'].each do |unliked| %>
+  						<div class="tab-pane" id="<%=unliked['id']%>">
+  							<ul id="myTab2">
+  							<% unliked['movies'].each do |movie|%>
+	  							<li>
+		  							<div class="movie-items1">
+										<% if(movie['photos'].length >0) %>
+				                    		<%photo = movie['photos'].first%> 
+				                    		<a href="#<%=movie['id']%>" data-toggle="tab">
+				                          		<div class="movie-items1">
+				                            		<img src="<%=photo['url']%>">           
+				                            		<%=movie['title']%>
+				                          		</div>
+				                          	</a>
+				                  		<%elsif movie['photos'].length==0%>
+				                  			<a href="#<%=movie['id']%>" data-toggle="tab">
+				                  				<img src="/assets/no_image.gif">           
+				                            	<%=movie['title']%>
+				                     		</a>
+				                  		<%end%>    
+			                  		</div> 
+			                  	</li>
+	                  		<%end%>
+	                  		</ul> 
+	                  		<% nit['movies'].each do |movie|%>
+		  						<div class="tab-pane" id="<%=movie['id']%>">
+		  							<p><%=movie['id']%></p>
+								</div>
+						<%end%>
+  						</div>
+  					<%end%>
+  					 
+  						
+
+					
+				</div><!--theatres-info-->
+			</div><!--theatres-show-->
+	</div>
+</div><!--theatre-content-->
+</body>
+</html>

@@ -1,5 +1,21 @@
 <div id="quick-showtime">
-		<h1><img src="/assets/showtime.png"></h1>
+	<div class="navbar-inner">
+		<ul class="nav left">
+			<li><a class="brand" href="#"><img src="/assets/Flavu-Logo-shadow.png" width="25" height="25">Flavu</a></li>
+			<li><%= link_to "News" , "#"%></li>
+			<li><%= link_to "Reviews" , "#"%></li>
+			<li><%= link_to "Showtimes" , showtimes_path%></li>
+			<li><%= link_to "Box Office" , "#"%></li>
+			<li><%= link_to "Contact" , "#"%></li>
+			<li><%= link_to "About Us" , "#"%></li>
+		</ul>
+		<ul class="nav right">
+			<li class="stat"> Available On </li>
+			<li><a href="#"><img src="/assets/apple-logo.png" width="35" height="35"></a></li>
+			<li><a href="#"><img src="/assets/android-logo.png" width="35" height="35"></a></li>
+		</ul>
+
+		<!--<h1><img src="/assets/showtime.png"></h1>
 		<div id="quick-showtime-form">
 			<%=form_tag '/showtime' do %>
 		    	<div id="quick-movies">
@@ -10,7 +26,7 @@
 			        <%#@id_movie= movie['id']%>
 			        <option name = "<%=@id_movie%>" id=movie value="<%=@id_movie%>"> <%=@xmovies%></option>
 			        <%#end%>-->
-			        </select>
+			        <!--</select>
 		     	</div>
 
 		     	<div id="quick-theatres">
@@ -21,12 +37,13 @@
 			          <%#@id_theatre= theatre['id']%>
 			          <option name = "<%=@id_theatre%>" id=movie value="<%=@id_theatre%>"> <%=@xtheatres%></option>
 			          <%#end%>-->
-			        </select>
+			        <!--</select>
 		     	</div>
 
 		    <input class="btn btn-danger" name="commit" type="submit" value=" SHOWTIME ">
 		    <%end%>
 
 
-		</div>
-	</div>
+	</div>-->
+	</div><!--navbar-inner-->
+</div>

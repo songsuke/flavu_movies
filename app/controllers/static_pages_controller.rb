@@ -801,7 +801,7 @@ UDPSocket.open do |s|
     end
   end
 
-  def showtime
+  def showtimes
     if (!session[:auth] && !session[:guest_auth])
       redirect_to cover_path
     else

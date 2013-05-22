@@ -3,7 +3,7 @@ EasilyxMovie::Application.routes.draw do
 
   #resources :preferences
   match '/validate', to: 'static_pages#validate'
-  match '/showtime', to: 'static_pages#showtime'
+  match '/showtimes', to: 'static_pages#showtimes'
   match '/checklogin', to: 'checklogin#checklogin'
   match '/free', to: 'free#free'
   match '/showmovie', to: 'static_pages#showmovie'
