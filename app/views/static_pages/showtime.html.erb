@@ -1,1 +1,127 @@
-Showtime
+<html>
+<head>
+<script type="text/javascript">
+$(function () {
+    $('#myTab a').tab();
+  })
+
+</script>
+
+</head>
+<body>
+	<!--<div id="main" class="group" role="main">-->
+
+
+
+<div id="theatre-content">
+	<div id="content">
+		<h1 class="title"> Theatres </h1>
+		<div id="theatre-show">
+			<div class="theatres-list group">
+				<div class="theatres-filters">
+					<div class="by-near">
+						<ul id="myTab">
+							<h2> Liked </h2>
+							<% @lt['theatres'].each do |liked| %>
+  								<li><a href="#<%=liked['id']%>"  data-toggle="tab"><%=liked['name']%></a></li>	
+							<%end%>
+
+							<h2> Nearby </h2>
+							<% @nt['theatres'].each do |nearby| %>
+  								<li><a href="#<%=nearby['id']%>"  data-toggle="tab"><%=nearby['name']%></a></li>	
+							<%end%>
+
+							<h2> Unliked </h2>
+							<% @nit['theatres'].each do |unliked| %>
+  								<li><a href="#<%=unliked['id']%>"  data-toggle="tab"><%=unliked['name']%></a></li>	
+							<%end%>
+						</ul>
+					</div><!--by-near-->
+				</div><!--theatres-filters-->
+			</div><!--theatres-list group-->
+				<div class="theatres-info">
+					<!--liked theatres-->
+					<% @lt['theatres'].each do |liked| %>
+  						<div class="tab-pane" id="<%=liked['id']%>">
+  							<% liked['movies'].each do |movie|%>
+  							<div class="movie-items1">
+								<% if(movie['photos'].length >0) %>
+		                    	<%photo = movie['photos'].first%> 
+		                    		<a href="#<%=movie['id']%>">
+		                          		<div class="movie-items1">
+		                            		<img src="<%=photo['url']%>">          
+		                            		<%=movie['title']%>
+		                            		<%@mid=movie['id']%>
+		                          		</div>
+		                          	</a>
+		                  		<%elsif movie['photos'].length==0%>
+		                     		<%= link_to image_tag("/assets/no_image.gif" ,:class =>'img-rounded') +"#{movie['title']}" , {:controller => "static_pages" ,:action => "showmovie" ,:showid1 => movie['id']}  %>
+		                  		<%end%>    
+	                  		</div>  
+	                  		<%end%>  				
+  						</div>
+  					<%end%>
+  					<!--nearby-theatres-->
+					<% @nt['theatres'].each do |nearby| %>
+  						<div class="tab-pane" id="<%=nearby['id']%>">
+  							<% nearby['movies'].each do |movie|%>
+  							<div class="movie-items1">
+								<% if(movie['photos'].length >0) %>
+		                    	<%photo = movie['photos'].first%> 
+		                    		<%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid2 => movie['id'] do%>
+		                          		<div class="movie-items1">
+		                            		<img src="<%=photo['url']%>">          
+		                            		<%=movie['title']%>
+		                          		</div>
+		                        	<%end%>
+		                  		<%elsif movie['photos'].length==0%>
+		                     		<%= link_to image_tag("/assets/no_image.gif" ,:class =>'img-rounded') +"#{movie['title']}" , {:controller => "static_pages" ,:action => "showmovie" ,:showid1 => movie['id']}  %>
+		                  		<%end%>    
+	                  		</div>  
+	                  		<%end%> 
+  						</div>
+  					<%end%>
+  					<!--not-interested-theatres-->
+					<% @nit['theatres'].each do |unliked| %>
+  						<div class="tab-pane" id="<%=unliked['id']%>">
+  							<% unliked['movies'].each do |movie|%>
+  							<div class="movie-items1">
+								<% if(movie['photos'].length >0) %>
+		                    	<%photo = movie['photos'].first%> 
+		                    		<%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid2 => movie['id'] do%>
+		                          		<div class="movie-items1">
+		                            		<img src="<%=photo['url']%>">           
+		                            		<%=movie['title']%>
+		                          		</div>
+		                        	<%end%>
+		                  		<%elsif movie['photos'].length==0%>
+		                     		<%= link_to image_tag("/assets/no_image.gif" ,:class =>'img-rounded') +"#{movie['title']}" , {:controller => "static_pages" ,:action => "showmovie" ,:showid1 => movie['id']}  %>
+		                  		<%end%>    
+	                  		</div>  
+	                  		<%end%> 
+  						</div>
+  					<%end%>
+
+				</div><!--theatres-info-->
+<script type="text/javascript">
+$(function () {
+    $('#myTab2 a').tab();
+  })
+
+</script>
+
+				<ul id="myTab2">
+					<% @lt['theatres'].each do |liked| %>
+  						<% liked['movies'].each do |movie|%>
+	  						<div class="tab-pane" id="<%=movie['id']%>">
+	  							<p><%=movie['id']%></p>
+							</div>
+						<%end%>
+						
+					<%end%>
+				</ul>
+			</div><!--theatres-show-->
+	</div>
+</div><!--theatre-content-->
+</body>
+</html>

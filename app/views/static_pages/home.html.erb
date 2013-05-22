@@ -74,7 +74,7 @@ $('.carousel').carousel('cycle')
 	                          		</div>
 	                        	<%end%>
 	                  		<%elsif movie['photos'].length==0%>
-	                     		<%= link_to image_tag("/assets/no_image.gif" ,:class =>'img-rounded') +"#{movie['title']}" , {:controller => "static_pages" ,:action => "showmovie" ,:showid1 => movie['id']}  %>
+	                     		<%= link_to image_tag(@poster ,:class =>'img-rounded') +"#{movie['title']}" , {:controller => "static_pages" ,:action => "showmovie" ,:showid2 => movie['id']}  %>
 	                  		<%end%>    
 	                  	</div>    				
         			<%end%><!--rmloop-->

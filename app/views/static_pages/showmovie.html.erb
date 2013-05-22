@@ -16,6 +16,7 @@ $('.carousel').carousel({
  </div>
   
 <div id="home-content">
+	<div id="content">
 	<%@sm['movies'].each do |a1|%>
 		<%if a1['id'] == @id_showmovie%> 
 			<h1 class="title">
@@ -28,10 +29,10 @@ $('.carousel').carousel({
 		<%@sm['movies'].each do |a1|%>
 			<%if a1['id'] == @id_showmovie%> 
 			<div id="trailer">
-				<%if @trailer%>
-					<%=(@trailer).html_safe%>
+				<%if @trailers%>
+					<%=(@trailers).html_safe%>
 				<%else%>
-					We don't have the trailer for this movie, Please follow this <%=link_to "link" , "#{a1['trailer']}"%>
+					We don't have the trailer for this movie, Please follow this <%=link_to "Link" , "#{a1['trailer']}"%>
 				<%end%>
 			</div>
 				<div id="movie-pic">
@@ -39,11 +40,13 @@ $('.carousel').carousel({
 		                <%@photo = a1['photos'].first%>
 		                <div class="movie-items">
 		                <img class="img-rounded" width="140" height="210" src="<%=@photo['url']%>">
+		                <%@poster=@photo['url']%>
 		                </div>
 		            <%elsif(a1['photos'].length ==0) %>
 		            	<%@photo = a1['photos'].first%>
 		            	<div class="movie-items">
 		                <img class="img-rounded" width="140" height="210" src="/assets/no_img">
+		                <%@poster="/assets/no_img"%>
 		                </div>
 		            <%end%>
 						
@@ -87,7 +90,7 @@ $('.carousel').carousel({
 						<div id="result-info">
 							<div id="item">
 								<div id="picture">
-									<img width="80" height="auto" src="<%= @photo['url']%>">
+									<img width="80" height="auto" src="<%= @poster%>">
 								</div>
 								<div class="info group">
 									<h3> Rate </h3>
@@ -110,6 +113,7 @@ $('.carousel').carousel({
 			<%end%>
 		</div>
 	</div>
+</div>
 </div>
 
 

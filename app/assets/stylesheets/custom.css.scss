@@ -444,6 +444,7 @@ div.hidden{
   background-color: #fff;
   box-shadow: 0 1px 3px rgba(25,25,25,.5);
   margin-bottom: 25px;
+  margin-top: 0px;
   min-height: 400px;
   overflow: hidden;
   li {
@@ -466,7 +467,6 @@ div.hidden{
 }
 #movie-details {
   margin-left: 0px;
-  padding-top: 10px;
   padding-right: 0;
   float: right;
   #content {
