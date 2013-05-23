@@ -1,0 +1,16 @@
+<div id="theatre-content">
+	<div id="content">
+		<h1 class="title"> Critics </h1>
+		<div id="theatre-show"
+			<ul style="list-style:none;">
+				<%@reviews['reviews'].each do |review|%>
+					<li><%=review['critic']%></li>
+					<li><%=review['original_score']%></li>
+					<li><%=review['quote']%></li>
+					<li><%=link_to "Read More" , review['links']['review']%></li>	
+				<%end%>
+			</ul>
+		</div>
+	</div>
+</div>
+

@@ -9,6 +9,10 @@ EasilyxMovie::Application.routes.draw do
   match '/showmovie', to: 'static_pages#showmovie'
   match '/showtheatre', to: 'static_pages#showtheatre'
   match '/preferences', to: 'static_pages#preferences'
+  match '/boxoffice', to: 'static_pages#boxoffice'
+  match '/news', to: 'static_pages#news'
+  match '/reviews', to: 'static_pages#reviews'
+  match '/showreview', to: 'static_pages#showreview'
 
   #get "static_pages/signin"
   match '/signin', to: 'static_pages#signin'

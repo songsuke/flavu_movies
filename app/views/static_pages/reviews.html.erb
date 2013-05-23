@@ -1,0 +1,57 @@
+<html>
+<head>
+<script type="text/javascript">
+$(function () {
+    $('#myTab a').tab();
+  })
+
+</script>
+
+</head>
+<body>
+	<!--<div id="main" class="group" role="main">-->
+<div id="theatre-content">
+	<div id="content">
+		<h1 class="title"> Box Office </h1>
+		<div id="theatre-show">
+			<div class="theatres-list group">
+				<div class="theatres-filters">
+					<div class="by-near">
+						<ul id="myTab">
+							<h2> Current Movies </h2>
+							<% @boxoffice['movies'].each do |movie| %>
+								<%@movie_id=movie['id']%>
+  								<li><a href="#<%=movie['id']%>"  data-toggle="tab"><%=movie['title']%></a></li>	
+							<%end%>
+						</ul>
+					</div><!--by-near-->
+				</div><!--theatres-filters-->
+			</div><!--theatres-list group-->
+				<div class="theatres-info">
+					<!--liked theatres-->
+					<% @boxoffice['movies'].each do |movie| %>
+  						<div class="tab-pane" id="<%=movie['id']%>">
+  							<h2><%=movie['title']%></h2>
+  							<h2><img src="<%=movie['posters']['original']%>" width="100" height="100"></h2>
+  							<ul>
+  								<li> Year : <%=movie['year']%></li>
+  								<li> Rate : <%=movie['mpaa_rating']%></li>
+  								<li> Actors : </li>
+  								<% movie['abridged_cast'].each do |actor| %>
+  									<li><%=actor['name']%></li>
+  								<%end%>
+  								<li style="font-weight:bold;"> Synopsis </li>
+  								<li> <%=movie['synopsis']%></li>
+
+  								<%=link_to "Reviews" ,:action=>"showreview" ,:controller=>"static_pages", :id=>@movie_id%>
+
+  							</ul>
+  						</div>
+  					<%end%>
+				</div><!--theatres-info-->
+			</div><!--theatres-show-->
+		
+	</div>
+</div><!--theatre-content-->
+</body>
+</html>

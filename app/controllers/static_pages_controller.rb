@@ -979,24 +979,22 @@ UDPSocket.open do |s|
           @movies =HTTParty.get(@url, body: {user: {auth_token: session[:auth]}, browser: "1"}).parsed_response
           #puts @movies
           @sm=@movies['remaining_movies']
-          @sm['movies'].each do |a1|
-            if a1['id'] == @id_showmovie 
-              @title = a1['title']
+          #@sm['movies'].each do |a1|
+          #  if a1['id'] == @id_showmovie 
+          #    @title = a1['title']
               #puts @title
-            end
-          end
-          @title1=@title.split("3D").join.split(".").join.split(" ")
-          puts @title1
-          (0..@title1.length).each do |a2|
-            if @title1[a2]=="&"
-              @title1[a2]="and"
-            end
-          end
+          #  end
+          #end
+          #@title1=@title.split("3D").join.split(".").join.split(" ")
+          #puts @title1
+          #(0..@title1.length).each do |a2|
+          #  if @title1[a2]=="&"
+          #    @title1[a2]="and"
+          #  end
+          #end
 
-          @title1=@title1.join("-")
+          #@title1=@title1.join("-")
           
-          #@title1=@title.split(" ").join("-")
-
           puts @title1
           @trailer_url="http://api.traileraddict.com/?film=#{@title1}&width=640"
           doc=Hpricot::XML(open(@trailer_url))
@@ -1020,22 +1018,22 @@ UDPSocket.open do |s|
           @url = "http://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
           @movies =HTTParty.get(@url, body: {user: {auth_token: session[:auth]}, browser: "1"}).parsed_response
           @sm=@movies['remaining_movies']
-          @sm['movies'].each do |a1|
-            if a1['id'] == @id_showmovie 
-              @title = a1['title']
+          #@sm['movies'].each do |a1|
+          #  if a1['id'] == @id_showmovie 
+          #    @title = a1['title']
               #puts @title
-            end
-          end
-          @title1=@title.split(" ").join("-")
+          #  end
+          #end
+          #@title1=@title.split(" ").join("-")
           #puts @title1
-          @trailer_url="http://api.traileraddict.com/?film=#{@title1}&width=640"
-          doc=Hpricot::XML(open(@trailer_url))
-          (doc/:trailers/:trailer).each do |status|
-            ['embed'].each do |e1|
+          #@trailer_url="http://api.traileraddict.com/?film=#{@title1}&width=640"
+          #doc=Hpricot::XML(open(@trailer_url))
+          #(doc/:trailers/:trailer).each do |status|
+          #  ['embed'].each do |e1|
               #puts "status#{status.at(e1).inner_text}"
-              @trailer= status.at(e1).inner_text
-            end
-          end
+          #    @trailer= status.at(e1).inner_text
+          #  end
+          #end
           end
           @url2 = "http://flavumovies.herokuapp.com/theatres_for_movie/#{@id_showmovie}.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
           @theatres_for_movie=HTTParty.get(@url2, body: {user: {auth_token: session[:auth]}, browser: "1"}).parsed_response
@@ -1055,6 +1053,30 @@ UDPSocket.open do |s|
       #puts @liked_movies
     end
 
+  end
+
+  def boxoffice
+    @url = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?review_type=all&apikey=ufqydfp3jtp9ytyr69j37835"
+    @boxoffice =HTTParty.get(@url).parsed_response
+    
+  end
+
+  def news
+    @news =HTTParty.get("https://ajax.googleapis.com/ajax/services/search/news?v=1.0&q=movie&rsz=8&topic=e").parsed_response
+  end
+
+  def reviews
+    @url1 = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?review_type=all&limit=20&apikey=ufqydfp3jtp9ytyr69j37835"
+    @boxoffice =HTTParty.get(@url1).parsed_response
+
+    #@url2 = "http://api.rottentomatoes.com/api/public/v1.0/movies/#{@movie_id}/reviews.json?review_type=top_cirtic&apikey=ufqydfp3jtp9ytyr69j37835"
+    #@review =HTTParty.get(@url2).parsed_response
+  end
+
+  def showreview
+    puts params[:id]
+    @url2 = "http://api.rottentomatoes.com/api/public/v1.0/movies/#{params[:id]}/reviews.json?apikey=ufqydfp3jtp9ytyr69j37835"
+    @reviews=HTTParty.get(@url2).parsed_response
   end
 
 end
