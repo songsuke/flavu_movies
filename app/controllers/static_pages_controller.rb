@@ -1062,21 +1062,60 @@ UDPSocket.open do |s|
   end
 
   def news
-    @news =HTTParty.get("https://ajax.googleapis.com/ajax/services/search/news?v=1.0&q=movie&rsz=8&topic=e").parsed_response
+    @news =HTTParty.get("https://ajax.googleapis.com/ajax/services/search/news?v=1.0&q=movie&publisher=mtv&rsz=8&topic=e").parsed_response
+    #@news['responseData']['results'].each do |news1|
+      #@link1=news1['unescapedUrl']
+    #end
+    #@newsfeed="http://www.rollingstone.com/siteServices/rss/movieNewsAndFeature"
+    #doc=Hpricot::XML(open(@newsfeed))
+    #(doc/:channel/:item).each do |status|
+    #  ['title'].each do |e1|
+    #    @title= status.at(e1).inner_text
+        
+    #  end
+    #end
   end
 
   def reviews
-    @url1 = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?review_type=all&limit=20&apikey=ufqydfp3jtp9ytyr69j37835"
-    @boxoffice =HTTParty.get(@url1).parsed_response
+    #@url1 = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?review_type=all&limit=20&apikey=ufqydfp3jtp9ytyr69j37835"
+    #@boxoffice =HTTParty.get(@url1).parsed_response
+    @url = "http://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+    @movies =HTTParty.get(@url, body: {user: {auth_token: session[:auth]  }, browser: "1"}).parsed_response
+    @rm=@movies['remaining_movies']
+    @im=@movies['interested_movies']
+    @nim=@movies['not_interested_movies']
 
     #@url2 = "http://api.rottentomatoes.com/api/public/v1.0/movies/#{@movie_id}/reviews.json?review_type=top_cirtic&apikey=ufqydfp3jtp9ytyr69j37835"
     #@review =HTTParty.get(@url2).parsed_response
   end
 
   def showreview
-    puts params[:id]
-    @url2 = "http://api.rottentomatoes.com/api/public/v1.0/movies/#{params[:id]}/reviews.json?apikey=ufqydfp3jtp9ytyr69j37835"
-    @reviews=HTTParty.get(@url2).parsed_response
+    puts params[:review]
+    @title=params[:review]
+    @sr=params[:review].split(".").join(" ").split(":").join.split(" ")
+    (0..@sr.length).each do |a2|
+      if @sr[a2]=="&"
+        @sr[a2]="and"
+      end
+    end
+    @sr=@sr.join("+")
+    #puts @sr
+    @url2="http://api.nytimes.com/svc/movies/v2/reviews/search.json?query=#{@sr}&api-key=a51160564ac0105b65bfd15f3ba6a454:7:67593218"
+    @showreview=HTTParty.get(@url2).parsed_response
+    #puts @showreview
+    @link=@showreview['results'][0]['link']['url']
+    #puts @link
+
+    @doc = Nokogiri::HTML(open(@link))
+    @i=@doc.css('.articleBody p').length
+    @i=@i-1
+    (0..@i).each do |j|
+      puts @doc.css('.articleBody p')[j].content
+    end
+
+    #@url2 = "http://api.rottentomatoes.com/api/public/v1.0/movies/#{params[:id]}/reviews.json?page_limit=1&apikey=ufqydfp3jtp9ytyr69j37835"
+    #@reviews=HTTParty.get(@url2).parsed_response
+    #puts @reviews
   end
 
 end

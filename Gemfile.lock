@@ -35,7 +35,7 @@ GEM
     arel (3.0.2)
     args_parser (0.1.4)
     bcrypt-ruby (3.0.1)
-    bootstrap-sass (2.3.1.0)
+    bootstrap-sass (2.3.1.2)
       sass (~> 3.2)
     builder (3.0.4)
     coffee-rails (3.2.2)
@@ -76,6 +76,7 @@ GEM
     mime-types (1.23)
     multi_json (1.7.3)
     multi_xml (0.5.3)
+    nokogiri (1.5.9)
     oj (2.0.13)
     orm_adapter (0.4.0)
     pg (0.15.1)
@@ -166,6 +167,7 @@ DEPENDENCIES
   jquery-rails (~> 2.1)
   jquery-ui-rails (~> 4.0.2)
   jruby-openssl
+  nokogiri (~> 1.5.9)
   oj (~> 2.0.12)
   pg
   rails (= 3.2.13)

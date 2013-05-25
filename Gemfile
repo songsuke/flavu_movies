@@ -31,6 +31,7 @@ gem "wifi_location", "~> 0.0.6"
 gem "hpricot", "~> 0.8.6"
 gem "oj", "~> 2.0.12"
 gem "ruby-traileraddict", "~> 0.0.1"
+gem "nokogiri", "~> 1.5.9"
 platforms :jruby do
   gem 'trinidad'
   gem 'jruby-openssl'

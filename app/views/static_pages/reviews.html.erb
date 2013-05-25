@@ -1,57 +1,98 @@
 <html>
 <head>
-<script type="text/javascript">
-$(function () {
-    $('#myTab a').tab();
-  })
 
+<%if (!session[:auth] && !session[:guest_auth])%>
+<meta http-equiv="refresh" content="0; url=/cover"> 
+
+<%else%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+	<title></title>
+  <%= javascript_include_tag "bootstrap-carousel" %>
+  <%= javascript_include_tag "bootstrap-transition" %>
+
+
+
+<% unless @lat_lng %>
+<script>
+  getGeoLocation();
 </script>
-
+<% end %>
 </head>
 <body>
-	<!--<div id="main" class="group" role="main">-->
-<div id="theatre-content">
-	<div id="content">
-		<h1 class="title"> Box Office </h1>
-		<div id="theatre-show">
-			<div class="theatres-list group">
-				<div class="theatres-filters">
-					<div class="by-near">
-						<ul id="myTab">
-							<h2> Current Movies </h2>
-							<% @boxoffice['movies'].each do |movie| %>
-								<%@movie_id=movie['id']%>
-  								<li><a href="#<%=movie['id']%>"  data-toggle="tab"><%=movie['title']%></a></li>	
-							<%end%>
-						</ul>
-					</div><!--by-near-->
-				</div><!--theatres-filters-->
-			</div><!--theatres-list group-->
-				<div class="theatres-info">
-					<!--liked theatres-->
-					<% @boxoffice['movies'].each do |movie| %>
-  						<div class="tab-pane" id="<%=movie['id']%>">
-  							<h2><%=movie['title']%></h2>
-  							<h2><img src="<%=movie['posters']['original']%>" width="100" height="100"></h2>
-  							<ul>
-  								<li> Year : <%=movie['year']%></li>
-  								<li> Rate : <%=movie['mpaa_rating']%></li>
-  								<li> Actors : </li>
-  								<% movie['abridged_cast'].each do |actor| %>
-  									<li><%=actor['name']%></li>
-  								<%end%>
-  								<li style="font-weight:bold;"> Synopsis </li>
-  								<li> <%=movie['synopsis']%></li>
+<script type="text/javascript">
+$('.carousel').carousel('cycle')
+</script>
 
-  								<%=link_to "Reviews" ,:action=>"showreview" ,:controller=>"static_pages", :id=>@movie_id%>
 
-  							</ul>
-  						</div>
-  					<%end%>
-				</div><!--theatres-info-->
-			</div><!--theatres-show-->
-		
+
+<!--<div id="main" class="group" role="main">-->
+	<div id="slider">
+		<div id="content">
+			<div id="myCarousel" class="carousel slide">
+			  <ol class="carousel-indicators">
+			    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+			    <li data-target="#myCarousel" data-slide-to="1"></li>
+			    <li data-target="#myCarousel" data-slide-to="2"></li>
+			  </ol>
+			  <!-- Carousel items -->
+			  <div class="carousel-inner">
+			    <div class="active item" id = "slider">
+			    	<img src="/assets/iron-man-3.jpg" alt>
+			    </div>
+			    <div class="item" id="slider">    	
+			    	<img src="/assets/hulk.jpg" alt>
+				</div>
+			    <div class="item" id="slider">
+			    	<img src="/assets/captain-america.jpg" alt>
+			    </div>
+			  </div>
+			  <!-- Carousel nav -->
+			  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+			  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+			</div>
+		</div>
 	</div>
-</div><!--theatre-content-->
+
+	<div id="side">
+	    <div id="buddy-side">
+	      	<h1> Box Office </h1>
+	      	<div id="side-buddy-box">
+				<script type="text/javascript" language="javascript" src="http://www.boxofficemojo.com/data/js/wknd5.php?h=boxoffice1&r=boxoffice2"></script>
+			</div>
+		</div>
+	</div>
+
+	<div id="home-content">
+		<div id="movies">
+			<h1> Movies </h1>
+			<div id="nowshowing">
+				<div class="group">
+					<% @rm['movies'].each do |movie| %> 
+						<div class="movie-items1">
+							<% if(movie['photos'].length >0) %>
+	                    	<%photo = movie['photos'].first%> 
+	                    		<%=link_to :action=>"showreview" , :controller=>"static_pages" , :review => movie['title'] do%>
+	                          		<div class="movie-items1">
+	                            		<img src="<%=photo['url']%>">             
+	                            		<%=movie['title']%>
+	                          		</div>
+	                        	<%end%>
+	                  		<%elsif movie['photos'].length==0%>
+	                     		<%= link_to image_tag(@poster ,:class =>'img-rounded') +"#{movie['title']}" , {:controller => "static_pages" ,:action => "showreview" ,:review => movie['title']}  %>
+	                  		<%end%>    
+	                  	</div>    				
+        			<%end%><!--rmloop-->
+        		</div>
+			</div>
+		</div><!--movies-->
+	</div><!--home-content-->
+
+<!--</div>main-->
+
+<%end%>
+
+
 </body>
 </html>
