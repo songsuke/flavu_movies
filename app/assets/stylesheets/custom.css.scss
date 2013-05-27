@@ -17,10 +17,6 @@
     width: 70%;
   }
 
-  img {
-    width: 100%;
-  }
-
 }
 
 /* Landscape phone to portrait tablet */
@@ -29,9 +25,7 @@
     width: 70%;
   }
 
-  img {
-    width: 100%;
-  }
+
 }
  
 /* Landscape phones and down */
@@ -39,12 +33,18 @@
   .container {
     width: 40%;
   }
+  #head {
+    height: 20%;
+  }
 
 }
 
 @media (max-width: 320px) {
   .container {
     width: 30%;
+  }
+  #head {
+    height: 20%;
   }
 
 }
