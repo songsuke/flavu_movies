@@ -1,12 +1,15 @@
 <div id="theatre-content">
 	<div id="content">
-		<h1 class="title"> <%=@title%> Review </h1>
+		<h1 class="title"> <%=@title%> Reviews </h1>
 		<div id="theatre-show"
 			<ul style="list-style:none;">
+				<%=link_to "#{@showreview['results'][0]['headline']}" ,@showreview['results'][0]['link']['url']%>
 
-					<%(0..@i).each do |j|%>
-	      				<%=@doc.css('.articleBody p')[j].content%>
-    				<%end%>
+				<li><img src="<%=@showreview['results'][0]['multimedia']['resource']['src']%>"></li>
+				<li><%=@showreview['results'][0]['summary_short'].html_safe%></li>
+				<li> Showtimes </li>
+				<li> <%=link_to "More Information", :action=>"showmovie", :controller=>"static_pages", :showid2=>@movie_id %> </li>
+
 			</ul>
 		</div>
 	</div>

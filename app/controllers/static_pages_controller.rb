@@ -1062,7 +1062,7 @@ UDPSocket.open do |s|
   end
 
   def news
-    @news =HTTParty.get("https://ajax.googleapis.com/ajax/services/search/news?v=1.0&q=movie&publisher=mtv&rsz=8&topic=e").parsed_response
+    @news =HTTParty.get("https://ajax.googleapis.com/ajax/services/search/news?v=1.0&q=movie&rsz=8").parsed_response
     #@news['responseData']['results'].each do |news1|
       #@link1=news1['unescapedUrl']
     #end
@@ -1085,12 +1085,15 @@ UDPSocket.open do |s|
     @im=@movies['interested_movies']
     @nim=@movies['not_interested_movies']
 
+
     #@url2 = "http://api.rottentomatoes.com/api/public/v1.0/movies/#{@movie_id}/reviews.json?review_type=top_cirtic&apikey=ufqydfp3jtp9ytyr69j37835"
     #@review =HTTParty.get(@url2).parsed_response
   end
 
   def showreview
     puts params[:review]
+    puts params[:reviewid]
+    @movie_id=params[:reviewid]
     @title=params[:review]
     @sr=params[:review].split(".").join(" ").split(":").join.split(" ")
     (0..@sr.length).each do |a2|
@@ -1102,16 +1105,16 @@ UDPSocket.open do |s|
     #puts @sr
     @url2="http://api.nytimes.com/svc/movies/v2/reviews/search.json?query=#{@sr}&api-key=a51160564ac0105b65bfd15f3ba6a454:7:67593218"
     @showreview=HTTParty.get(@url2).parsed_response
-    #puts @showreview
-    @link=@showreview['results'][0]['link']['url']
+    puts @showreview
+    #@link=@showreview['results'][0]['link']['url']
     #puts @link
 
-    @doc = Nokogiri::HTML(open(@link))
-    @i=@doc.css('.articleBody p').length
-    @i=@i-1
-    (0..@i).each do |j|
-      puts @doc.css('.articleBody p')[j].content
-    end
+    #@doc = Nokogiri::HTML(open(@link))
+    #@i=@doc.css('.articleBody p').length
+    #@i=@i-1
+    #(0..@i).each do |j|
+    #  puts @doc.css('.articleBody p')[j].content
+    #end
 
     #@url2 = "http://api.rottentomatoes.com/api/public/v1.0/movies/#{params[:id]}/reviews.json?page_limit=1&apikey=ufqydfp3jtp9ytyr69j37835"
     #@reviews=HTTParty.get(@url2).parsed_response
