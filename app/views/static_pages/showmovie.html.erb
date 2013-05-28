@@ -1,11 +1,4 @@
-<script type="text/javascript">
-$('.carousel').carousel({
-	interval: 2000
 
-})
-  
-
-</script>
 <div id="side">
     <div id="buddy-side">
       <h1> Buddies </h1>
@@ -14,6 +7,19 @@ $('.carousel').carousel({
       </div>
     </div>
  </div>
+
+ <a href="#myModal" class="btn" data-toggle="modal">Launch Modal</a>
+
+<div class="modal hide" id="myModal" ><!-- note the use of "hide" class -->
+  <div class="modal-header">
+    <button class="close" data-dismiss="modal">×</button>
+    <h3>Modal header</h3>
+  </div>
+  <div class="modal-body">
+    <p>One fine body…</p>
+  </div>
+</div>​
+
   
 <div id="home-content">
 	<div id="content">
@@ -29,14 +35,20 @@ $('.carousel').carousel({
 		<%@sm['movies'].each do |a1|%>
 			<%if a1['id'] == @id_showmovie%> 
 			<div id="trailer">
+
 				<%@trailer="http://www.youtube.com/embed/" +a1['youtube_trailer'] +"?feature=player_detailpage"%>
-				<iframe width="640" height="360" src="<%=@trailer%>" frameborder="0" allowfullscreen></iframe>
+
+
+
+
 				<!--<%if @trailers%>
 					<%=(@trailers).html_safe%>
 				<%else%>
 					We don't have the trailer for this movie, Please follow this <%=link_to "Link" , "#{a1['trailer']}"%>
 				<%end%>-->
 			</div>
+			
+
 				<div id="movie-pic">
 					<% if(a1['photos'].length >0) %>
 		                <%@photo = a1['photos'].first%>
@@ -47,8 +59,8 @@ $('.carousel').carousel({
 		            <%elsif(a1['photos'].length ==0) %>
 		            	<%@photo = a1['photos'].first%>
 		            	<div class="movie-items">
-		                <img class="img-rounded" width="140" height="210" src="/assets/no_img">
-		                <%@poster="/assets/no_img"%>
+		                <img class="img-rounded" width="140" height="210" src="/assets/no_image.gif">
+		                <%@poster="/assets/no_image.gif"%>
 		                </div>
 		            <%end%>
 						
@@ -117,5 +129,3 @@ $('.carousel').carousel({
 	</div>
 </div>
 </div>
-
-

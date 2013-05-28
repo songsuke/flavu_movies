@@ -33,8 +33,13 @@
   .container {
     width: 40%;
   }
+
   #head {
     height: 20%;
+  }
+
+  img {
+    max-width: 10%;
   }
 
 }
@@ -43,9 +48,15 @@
   .container {
     width: 30%;
   }
+
   #head {
     height: 20%;
   }
+
+  img {
+    max-width: 10%;
+  }
+
 
 }
 
@@ -151,6 +162,7 @@ body {
   background-image: url('/assets/bar-bg.png');
   box-shadow: 0 0 2px rgba(0,0,0,.2);
   height: 46px;
+  overflow: hidden;
   h1 {
     margin: 0;
     /*text-indent: 300%;*/
@@ -536,6 +548,7 @@ div.hidden{
   overflow: hidden;
   height: auto;
   width: auto;
+
 }
 
 #movie-pic {
