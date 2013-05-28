@@ -21,35 +21,75 @@
 			<%@sm['movies'].each do |a1|%>
 				<%if a1['id'] == @id_showmovie%> 
 				<!--<div id="trailer">-->
-
-					<%@trailer="http://www.youtube.com/embed/" +a1['youtube_trailer'] +"?feature=player_detailpage&autoplay=1"%>
-
-					
-
-
+					<%@trailer="http://www.youtube.com/embed/" +a1['youtube_trailer'] +"?feature=player_detailpage"%>
 				<!--</div>-->
-				
-
 					<div id="movie-pic">
 						<% if(a1['photos'].length >0) %>
 			                <%@photo = a1['photos'].first%>
 			                <div class="movie-items">
 				                <a href="#myModal" data-toggle="modal" data-backdrop="false">
+				                	<span class="play"></span>
 				                	<img class="img-rounded" width="140" height="210" src="<%=@photo['url']%>">
 				                </a>
-				               
+				               	<div id="myModal" class="modal fade hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				                	<div class="modal-header">
+    									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    									<h1 class="title">
+    										<%=a1['title']%>
+    									</h1>
+    								</div>
+    								<div class="modal-body">
+				                		<iframe width="640" height="360" src="<%=@trailer%>" frameborder="0" allowfullscreen></iframe>
+				               		</div>
+				                </div>
 
 			                <%@poster=@photo['url']%>
 			                </div>
 			            <%elsif(a1['photos'].length ==0) %>
 			            	<%@photo = a1['photos'].first%>
 			            	<div class="movie-items">
-			                <img class="img-rounded" width="140" height="210" src="/assets/no_image.gif">
+			            		<a href="#myModal" data-toggle="modal" data-backdrop="false">
+				                	<span class="play"></span>
+				                	<img class="img-rounded" width="140" height="210" src="/assets/no_image.gif">
+				                </a>
+				               	<div id="myModal" class="modal fade hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				                	<div class="modal-header">
+    									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    									<h1 class="title">
+    										<%=@a2%>
+    									</h1>
+    								</div>
+    								<div class="modal-body">
+				                		<iframe width="640" height="360" src="<%=@trailer%>" frameborder="0" allowfullscreen></iframe>
+				               		</div>
+				                </div>
 			                <%@poster="/assets/no_image.gif"%>
 			                </div>
-			            <%end%>
-							
+			            <%end%>	
 					</div>
+					<div id="movie-slide">
+						<div class="movie-slide-items">
+							<div id="myCarousel" class="carousel slide">
+				  				<div class="carousel-inner">
+									<%@sm['movies'].each do |a1|%>
+										<%if a1['id'] == @id_showmovie%>
+												<div align="center" class="item active" id = "movie-slide">
+													<img class="img-rounded" src="<%=@photo['url']%>">
+												</div>
+											<%a1['photos'].each do |a2|%>
+												<div align="center" class="item" id = "movie-slide">
+													<img class="img-rounded" src="<%=a2['url']%>">
+												</div>
+											<%end%>
+										<%end%>
+			  						<%end%>
+		  						</div>
+		  						<a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+		  						<a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+  							</div>
+  						</div>
+  					</div>
+
 					<div id="movie-details">
 						<div id="content">
 						<h1> Information </h1>
@@ -114,13 +154,3 @@
 		</div>
 	</div>
 </div>
-		 
-		 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				                	<div class="modal-header">
-    									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    								</div>
-    								<div class="modal-body">
-				                		<iframe width="1280" height="720" src="<%=@trailer%>" frameborder="0" allowfullscreen></iframe>
-				               		</div>
-
-				                </div>

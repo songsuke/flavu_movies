@@ -298,16 +298,14 @@ body {
 #slider {
   width: 1024px;
   height: 320px;
-}
-
-.carousel-indicators {
+  .carousel-indicators {
   top: 105%;
   left: 50%;
   li {
     background-color: black;
-
   }
  }
+}
 
 #side {
   width: 260px;
@@ -407,6 +405,19 @@ body {
   }
   img {
     width: 150px;
+  }
+  #myModal {
+    width: auto;
+    height: auto;
+    left: 45%;
+  }
+  .play {
+    display: block;
+    background-image: url('/assets/play.png');
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 10%;
   }
 }
 
@@ -552,18 +563,49 @@ div.hidden{
 }
 
 #movie-pic {
-  padding-top: 10px;
   float: left;
-  
+  padding: 0;
+    img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: 240px;
+  }
 }
+
+#movie-slide {
+  float: right;
+  max-width: 100%;
+  width: auto;
+  margin-right: -10px;
+  .movie-slide-items {
+    padding: 0px;
+    margin: 0px;
+    border: 1px solid #fff;
+    border-radius: 3px;
+    display: block;
+    width: 470px;
+    height: 280px;
+    text-shadow: 0 1px 0 #fff;
+  }
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: 240px;
+  }
+  .item {
+    float: center;
+  }
+}
+
 #movie-details {
   margin-left: 0px;
   padding-right: 0;
-  float: right;
   #content {
     border-radius: 3px;
     box-shadow: 0 1px 3px rgba(25, 25, 25, 0.5) ;
-    width:450px;
+    width:100%;
     height: auto;
   }
   h1{
