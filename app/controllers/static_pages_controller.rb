@@ -1123,12 +1123,45 @@ UDPSocket.open do |s|
 
   def confirm_account
     puts params[:confirmation_token]
-     @url = "http://flavumovies.herokuapp.com/users/confirmation.json"
-      @confirm_account =HTTParty.get(@url, body: {confirmation_token: params[:confirmation_token]}).parsed_response
-       
-       session[:auth]=@confirm_account['auth_token']
-               redirect_to home_path
+    @url = "http://flavumovies.herokuapp.com/users/confirmation.json"
+    @confirm_account =HTTParty.get(@url, body: {confirmation_token: params[:confirmation_token]}).parsed_response
+    session[:auth]=@confirm_account['auth_token']   
+    redirect_to home_path
+  end
 
+  def forgot_password
+    if params[:confirm] ="confirm"
+      puts params[:email]
+      #puts params[:confirmation_token]
+      @url = "http://flavumovies.herokuapp.com/users/password.json"
+      @forgot_password =HTTParty.post(@url, body: {user: {email: params[:email]}})
+      puts @forgot_password
+    else
+    
+    end
+  end
+
+  def request_password_recovery
+    puts params[:email]
+    puts params[:confirmation_token]
+    @url = "http://flavumovies.herokuapp.com/users/confirmation.json"
+    @confirm_account =HTTParty.get(@url, body: {confirmation_token: params[:confirmation_token]}).parsed_response
+    session[:auth]=@confirm_account['auth_token']   
+    redirect_to home_path
+  end
+
+  def reset_password
+    #params[:reset_password_token]
+    #puts params[:reset_password_token]
+    puts params[:confirm]
+    if params[:confirm]="confirm"
+      @url = "http://flavumovies.herokuapp.com/users/password.json"
+      @reset_password =HTTParty.put(@url, body: { user:{reset_password_token: params[:reset_password_token], password: params[:password], password_confirmation: params[:password_confirmation] }}).parsed_response
+      session[:auth]=@reset_password['auth_token']   
+      redirect_to home_path
+    else
+
+    end
 
   end
 

@@ -14,6 +14,12 @@ EasilyxMovie::Application.routes.draw do
   match '/reviews', to: 'static_pages#reviews'
   match '/showreview', to: 'static_pages#showreview'
   match '/confirm_account', to: 'static_pages#confirm_account'
+  match '/forgot_password', to: 'static_pages#forgot_password'
+  match '/reset_password', to: 'static_pages#reset_password'
+
+  
+
+  match '/request_password_recovery', to: 'static_pages#request_password_recovery'
 
   #get "static_pages/signin"
   match '/signin', to: 'static_pages#signin'
