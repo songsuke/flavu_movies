@@ -1,9 +1,4 @@
-<script type="text/javascript">
-$(function () {
-    $('#myTab a').tab();
-  })
 
-</script>
   <%= javascript_include_tag "jquery.raty.min" %>
   <%= javascript_include_tag "jquery.raty" %>
 
@@ -11,7 +6,13 @@ $(function () {
 $(function () {
 	$.fn.raty.defaults.path = '/assets/';
     $('#star').raty({
-   	number: 10,
+   	space: false,
+   	starOff: 'rate_off.png',
+  	starOn : 'rate_on.png',
+  	width: 200,
+    size: 1,
+   	numberMax: 100,
+   	number: 100,
   	targetType: 'number',
   	targetKeep: true
 	});
@@ -22,7 +23,13 @@ $(function () {
 $(function () {
 	$.fn.raty.defaults.path = '/assets/';
     $('#star_director').raty({
-   	number: 10,
+   	space: false,
+   	starOff: 'rate_off.png',
+  	starOn : 'rate_on.png',
+  	width: 200,
+    size: 1,
+   	numberMax: 100,
+   	number: 100,
   	targetType: 'number',
   	targetKeep: true
 	});
@@ -33,7 +40,13 @@ $(function () {
 $(function () {
 	$.fn.raty.defaults.path = '/assets/';
     $('#star_actor').raty({
-   	number: 10,
+   	space: false,
+   	starOff: 'rate_off.png',
+  	starOn : 'rate_on.png',
+  	width: 200,
+    size: 1,
+   	numberMax: 100,
+   	number: 100,
   	targetType: 'number',
   	targetKeep: true
 	});
@@ -81,7 +94,13 @@ $(function () {
 	$(function () {
 		$.fn.raty.defaults.path = '/assets/';
 	   	$('#<%= gp1['genre'] %>').raty({
-	   	number: 10,
+	   	space: false,
+	   	starOff: 'rate_off.png',
+	  	starOn : 'rate_on.png',
+	  	width: 200,
+	    size: 1,
+	   	numberMax: 100,
+	   	number: 100,
 	  	score: function() {
 	    return $(this).attr('data-score');
 	  	}
@@ -129,7 +148,13 @@ $(function () {
 	$(function () {
 		$.fn.raty.defaults.path = '/assets/';
 	   	$('#<%= dp1['id'] %>').raty({
-	   	number: 10,
+	   	space: false,
+	   	starOff: 'rate_off.png',
+	  	starOn : 'rate_on.png',
+	  	width: 200,
+	    size: 1,
+	   	numberMax: 100,
+	   	number: 100,
 	  	score: function() {
 	    return $(this).attr('data-score');
 	  	}
@@ -177,7 +202,13 @@ $(function () {
 	$(function () {
 		$.fn.raty.defaults.path = '/assets/';
 	   	$('#<%= ap1['id'] %>').raty({
-	   	number: 10,
+	   	space: false,
+	   	starOff: 'rate_off.png',
+	  	starOn : 'rate_on.png',
+	  	width: 200,
+	    size: 1,
+	   	numberMax: 100,
+	   	number: 100,
 	  	score: function() {
 	    return $(this).attr('data-score');
 	  	}

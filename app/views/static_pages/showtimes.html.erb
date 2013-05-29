@@ -1,25 +1,8 @@
 <html>
-<head>
-<script type="text/javascript">
-$(function () {
-    $('#myTab a').tab();
-  })
-
-</script>
-
-<script type="text/javascript">
-$(function () {
-    $('#myTab2 a').tab();
-  })
-
-</script>
-
-</head>
 <body>
+
+
 	<!--<div id="main" class="group" role="main">-->
-
-
-
 <div id="theatre-content">
 	<div id="content">
 		<h1 class="title"> Showtimes </h1>
@@ -46,9 +29,10 @@ $(function () {
 					</div><!--by-near-->
 				</div><!--theatres-filters-->
 			</div><!--theatres-list group-->
+
 				<div class="theatres-info">
 					<!--liked theatres-->
-					
+
 					<% @lt['theatres'].each do |liked| %>
   						<div class="tab-pane" id="<%=liked['id']%>">
   							<ul id="myTab2">
@@ -75,10 +59,15 @@ $(function () {
 	                  		<%end%>  	
 	                  		</ul>		
 	                  		
-  								<% liked['movies'].each do |movie|%>
+  								<% liked['movies'].each do |movie|%>								
 		  							<div class="tab-pane" id="<%=movie['id']%>">
-		  								<p><%=movie['showtimes']%></p>
-
+		  								<th>
+		  								<h1 class="title"><%=movie['title']%></h1>
+		  								<%movie['showtimes'].each do |showtime|%>
+		  									<p><%=showtime['date']%></p>
+		  									<p><%=showtime['start_time']%></p>
+		  									<%end%>
+		  								</th>
 									</div>
 								<%end%>
 

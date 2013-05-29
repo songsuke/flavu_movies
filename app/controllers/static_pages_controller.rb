@@ -1121,4 +1121,13 @@ UDPSocket.open do |s|
     #puts @reviews
   end
 
+  def confirm_account
+     @url = "http://flavumovies.herokuapp.com/users/confirmation.json"
+      @theatres =HTTParty.get(@url, body: {user: 
+        {confirmation_token: 1} }).parsed_response
+       
+
+  end
+
+
 end

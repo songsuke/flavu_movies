@@ -13,6 +13,7 @@ EasilyxMovie::Application.routes.draw do
   match '/news', to: 'static_pages#news'
   match '/reviews', to: 'static_pages#reviews'
   match '/showreview', to: 'static_pages#showreview'
+  match '/confirmation', to: 'static_pages#confirmation'
 
   #get "static_pages/signin"
   match '/signin', to: 'static_pages#signin'

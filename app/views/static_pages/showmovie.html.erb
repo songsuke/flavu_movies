@@ -137,9 +137,10 @@
 										<div class="showtime group">
 											<%tfm['showtimes'].each do |showtime|%>
 												<%if showtime['date'].to_date == Time.now.to_date%>
-													<ul>										<li>
-														<p class="showtime"><%=showtime['start_time']%></p>
-													</li>
+													<ul>							
+														<li>
+															<p class="showtime"><%=showtime['start_time']%></p>
+														</li>
 													</ul>
 												<%end%>
 											<%end%>
