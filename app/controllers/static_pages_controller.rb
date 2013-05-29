@@ -1124,8 +1124,11 @@ UDPSocket.open do |s|
   def confirm_account
     puts params[:confirmation_token]
      @url = "http://flavumovies.herokuapp.com/users/confirmation.json"
-      @theatres =HTTParty.get(@url, body: {confirmation_token: params[:confirmation_token]}).parsed_response
+      @confirm_account =HTTParty.get(@url, body: {confirmation_token: params[:confirmation_token]}).parsed_response
        
+       session[:auth]=@confirm_account['auth_token']
+               redirect_to home_path
+
 
   end
 
