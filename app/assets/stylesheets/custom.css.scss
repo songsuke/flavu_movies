@@ -397,6 +397,12 @@ body {
   overflow: hidden;
   position: relative;
   text-shadow: 0 1px 0 #fff;
+  .modal.fade {
+    top:-1000%;
+  } 
+  .modal.fade.in {
+    top: 10%;
+  }
   h3 {
     color: #333;
     margin: 0;
@@ -409,7 +415,6 @@ body {
   #myModal {
     width: auto;
     height: auto;
-    left: 45%;
   }
   .play {
     display: block;
