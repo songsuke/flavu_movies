@@ -1159,7 +1159,7 @@ UDPSocket.open do |s|
       puts params[:password]
       puts params[:password_confirmation]       
       @url = "http://flavumovies.herokuapp.com/users/password.json"
-      @reset_password =HTTParty.put(@url, body: { user: {reset_password_token: params[:reset_password_token], password: params[:password], password_confirmation: params[:password_confirmation] }}).parsed_response
+      @reset_password =HTTParty.put(@url, body: { user: {reset_password_token: session[:reset_password_token], password: params[:password], password_confirmation: params[:password_confirmation] }}).parsed_response
       session[:auth]=@reset_password['auth_token']   
       puts @reset_password
       redirect_to home_path
