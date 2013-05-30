@@ -1151,7 +1151,7 @@ UDPSocket.open do |s|
   end
 
   def reset_password
-    #params[:reset_password_token]
+    puts params[:reset_password_token]
     #puts params[:reset_password_token]
     puts params[:confirm]
     if params[:confirm]=="confirm"
