@@ -153,9 +153,14 @@ require 'open-uri'
         else
           #puts params[:liked]
           if params[:liked]
-            @liked_movies =HTTParty.post("http://flavumovies.herokuapp.com/interested_movies.json", body: {user: {auth_token: session[:auth]}, interested_movie: { movie_id:params[:liked] ,interested: "true", not_interested: "false"}}).parsed_response
+            @liked_movies =HTTParty.post("http://flavumovies.herokuapp.com/interested_movies.json", body: {user: {auth_token: session[:auth]}, interested_movie: { movie_id:params[:liked]}}).parsed_response
           elsif params[:unliked]
-            @unliked_movies =HTTParty.post("http://flavumovies.herokuapp.com/not_interested_movies.json", body: {user: {auth_token: session[:auth]}, not_interested_movie: { movie_id:params[:unliked] ,not_interested: "true", interested: "false"}}).parsed_response
+            @unliked_movies =HTTParty.post("http://flavumovies.herokuapp.com/not_interested_movies.json", body: {user: {auth_token: session[:auth]}, not_interested_movie: { movie_id:params[:unliked]}}).parsed_response
+          elsif params[:soso1]
+            @soso_movies =HTTParty.delete("http://flavumovies.herokuapp.com/interested_movies.json", body: {user: {auth_token: session[:auth]}, interested_movie: { movie_id:params[:soso1]}}).parsed_response
+          elsif params[:soso2]
+            @soso_movies =HTTParty.delete("http://flavumovies.herokuapp.com/not_interested_movies.json", body: {user: {auth_token: session[:auth]}, not_interested_movie: { movie_id:params[:soso2]}}).parsed_response
+
           else
           end
           #puts params[:watched]

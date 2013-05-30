@@ -603,6 +603,10 @@ div.hidden{
 
 }
 
+#movie-pic-slide {
+  overflow: hidden;
+}
+
 #movie-pic {
   float: left;
   padding: 0;
@@ -681,7 +685,7 @@ div.hidden{
 
 #theatre-detail {
   float: left;
-  margin: 15px 0px 0px 10px;
+  margin: 15px 0px 0px 0px;
   border-radius: 3px;
   box-shadow: 0 1px 3px rgba(25, 25, 25, 0.5);
   width: 100%;
@@ -721,6 +725,7 @@ div.hidden{
     margin-left: 100px;
     border-radius: 0 3px 3px 0;
     background-color: #d3d3d3;
+    overflow: hidden;
     #item {
       list-style: none;
       width: 100%;
@@ -992,7 +997,7 @@ div.hidden{
   margin: 10px 0px 5px 15px;
 }
 
-#star {
+#star, #star_director, #star_actor {
   float: right;
   width: 155px;
   height: 30px;

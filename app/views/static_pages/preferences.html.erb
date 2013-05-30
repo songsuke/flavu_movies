@@ -126,7 +126,7 @@ $(function () {
 							<%=form_tag '/preferences' do%>
 						<div id="genre1">
 							<div id="genre-create">
-								<p> Create your genres preferences</p>
+								<p> Create your director preferences</p>
 								<select id = "director_create" name = "director_create" style="width:175px;">
 						        	<%@all_directors['directors'].each do |all_director| %>
 						        		<%@x2= all_director['name']%>
@@ -180,7 +180,7 @@ $(function () {
 							<%=form_tag '/preferences' do%>
 						<div id="genre1">
 							<div id="genre-create">
-								<p> Create your genres preferences</p>
+								<p> Create your actor preferences</p>
 								<select id = "actor_create" name = "actor_create" style="width:175px;">
 						        	<%@all_actors['actors'].each do |all_actor| %>
 						        		<%@x3= all_actor['name']%>

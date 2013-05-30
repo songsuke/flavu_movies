@@ -23,6 +23,7 @@
 				<!--<div id="trailer">-->
 					<%@trailer="http://www.youtube.com/embed/" +a1['youtube_trailer'] +"?feature=player_detailpage"%>
 				<!--</div>-->
+				<div id="movie-pic-slide">
 					<div id="movie-pic">
 						<% if(a1['photos'].length >0) %>
 			                <%@photo = a1['photos'].first%>
@@ -73,14 +74,17 @@
 				  				<div class="carousel-inner">
 									<%@sm['movies'].each do |a1|%>
 										<%if a1['id'] == @id_showmovie%>
-												<div align="center" class="item active" id = "movie-slide">
-													<img class="img-rounded" src="<%=@photo['url']%>">
-												</div>
 											<%a1['photos'].each do |a2|%>
+												<%if a2['poster']==false%>
 												<div align="center" class="item" id = "movie-slide">
 													<img class="img-rounded" src="<%=a2['url']%>">
+													<%@a3=a2['url']%>
 												</div>
+												<%end%>
 											<%end%>
+											<div align="center" class="item active" id ="movie-slide">
+												<img class="img-rounded" src="<%=@a3%>">
+											</div>
 										<%end%>
 			  						<%end%>
 		  						</div>
@@ -89,7 +93,7 @@
   							</div>
   						</div>
   					</div>
-
+  				</div>
 					<div id="movie-details">
 						<div id="content">
 						<h1> Information </h1>
@@ -132,14 +136,17 @@
 										<img width="80" height="auto" src="<%= @poster%>">
 									</div>
 									<div class="info group">
-										<h3> Rate </h3>
-										<p class="btn btn-inverse"><%=@rate%></p>
 										<div class="showtime group">
 											<%tfm['showtimes'].each do |showtime|%>
 												<%if showtime['date'].to_date == Time.now.to_date%>
 													<ul>							
 														<li>
-															<p class="showtime"><%=showtime['start_time']%></p>
+															<p> Date </p>
+															<p class="btn btn-inverse"><%=showtime['date']%>
+															</p>
+															<p> Time </p>		
+															<p class="showtime"><%=showtime['start_time']%>
+															</p>
 														</li>
 													</ul>
 												<%end%>
