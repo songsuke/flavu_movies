@@ -727,11 +727,11 @@ UDPSocket.open do |s|
       
       @latlong=Geocoder.coordinates(@ip_address)
 
-      #session[:latitude]=@latlong[0]
-      #session[:longitude]=@latlong[1]
+      session[:latitude]=@latlong[0]
+      session[:longitude]=@latlong[1]
       #30.267447, -97.739513
-      session[:latitude]="49.25"
-      session[:longitude]="-123.1333"
+      #session[:latitude]="49.25"
+      #session[:longitude]="-123.1333"
       #@lat_lng2
       puts session[:latitude]
       puts session[:longitude]
