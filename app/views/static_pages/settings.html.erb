@@ -179,18 +179,41 @@ $(function () {
 
 		  <%=form_tag '/settings' do %>
         <p style="display:block; margin-bottom:0px; margin-top:5px">Radius</p>
-        <%= radio_button_tag(:radius, "5") %>
-        <%= label_tag '5' ,nil, :class => 'inline_label' %>
-        <%= radio_button_tag(:radius, "10") %>
-        <%= label_tag '10' ,nil, :class => 'inline_label' %>
-        <%= radio_button_tag(:radius, "30") %>
-        <%= label_tag '30' ,nil, :class => 'inline_label' %>
+        <% if session[:SO_radius] == "5" %>
+          <%= radio_button_tag(:radius, "5", :checked => 1) %>
+          <%= label_tag '5' ,nil, :class => 'inline_label' %>
+          <%= radio_button_tag(:radius, "10") %>
+          <%= label_tag '10' ,nil, :class => 'inline_label' %>
+          <%= radio_button_tag(:radius, "30") %>
+          <%= label_tag '30' ,nil, :class => 'inline_label' %>
+        <% elsif session[:SO_radius] == "10" %>
+          <%= radio_button_tag(:radius, "5") %>
+          <%= label_tag '5' ,nil, :class => 'inline_label' %>
+          <%= radio_button_tag(:radius, "10", :checked => 1) %>
+          <%= label_tag '10' ,nil, :class => 'inline_label' %>
+          <%= radio_button_tag(:radius, "30") %>
+          <%= label_tag '30' ,nil, :class => 'inline_label' %>
+        <% else %>
+          <%= radio_button_tag(:radius, "5") %>
+          <%= label_tag '5' ,nil, :class => 'inline_label' %>
+          <%= radio_button_tag(:radius, "10") %>
+          <%= label_tag '10' ,nil, :class => 'inline_label' %>
+          <%= radio_button_tag(:radius, "30", :checked => 1) %>
+          <%= label_tag '30' ,nil, :class => 'inline_label' %>
+        <% end %>
 
         <p style="display:block; margin-bottom:0px; margin-top:5px">Unit</p>
-        <%= radio_button_tag(:unit, "km") %>
-        <%= label_tag 'Kilometres' ,nil, :class => 'inline_label' %>
-        <%= radio_button_tag(:unit, "ml") %>
-        <%= label_tag 'Miles' ,nil, :class => 'inline_label' %>
+        <% if session[:SO_unit] == "km" %>
+          <%= radio_button_tag(:unit, "km", :checked => 1) %>
+          <%= label_tag 'Kilometres' ,nil, :class => 'inline_label' %>
+          <%= radio_button_tag(:unit, "mi") %>
+          <%= label_tag 'Miles' ,nil, :class => 'inline_label' %>
+        <% else %>
+          <%= radio_button_tag(:unit, "km") %>
+          <%= label_tag 'Kilometres' ,nil, :class => 'inline_label' %>
+          <%= radio_button_tag(:unit, "mi", :checked => 1) %>
+          <%= label_tag 'Miles' ,nil, :class => 'inline_label' %>
+        <% end %>
 
         <div class='controls'>
 		      <input name="commitSO" id="commitSO" type="submit" class="btn btn-primary" value="Update" style="float:right; margin-right:20px; margin-bottom:10px;">
@@ -209,53 +232,57 @@ $(function () {
     <div id="collapseMLO" class="accordion-body collapse">
       <div class="accordion-inner">
         <%=form_tag '/settings' do %>
-          <p style="display:block; margin-bottom:0px; margin-top:5px">Genres option is 
-            <% if session[:MLO_genres]=="off"%>
-              <span class="badge">off</span>
-            <% else %>
-              <span class="badge">on</span>
-            <%end%>
-          </p>
-          <%= radio_button_tag(:genres, "on") %>
-          <%= label_tag 'on' ,nil, :class => 'inline_label' %>
-          <%= radio_button_tag(:genres, "off") %>
-          <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <p style="display:block; margin-bottom:0px; margin-top:5px">Genres Option</p>
+          <% if session[:MLO_genres] == "true" %>
+            <%= radio_button_tag(:genres, "true", :checked => 1) %>
+            <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+            <%= radio_button_tag(:genres, "false") %>
+            <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <% else %>
+            <%= radio_button_tag(:genres, "true") %>
+            <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+            <%= radio_button_tag(:genres, "false", :checked => 1) %>
+            <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <% end %>
 
-          <p style="display:block; margin-bottom:0px; margin-top:5px">Actors options is
-            <% if session[:MLO_actors]=="off"%>
-              <span class="badge">off</span>
-            <% else %>
-              <span class="badge">on</span>
-            <%end%>
-          </p>
-          <%= radio_button_tag(:actors, "on") %>
-          <%= label_tag 'on' ,nil, :class => 'inline_label' %>
-          <%= radio_button_tag(:actors, "off") %>
-          <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <p style="display:block; margin-bottom:0px; margin-top:5px">Actors Options</p>
+          <% if session[:MLO_actors] == "true" %>
+            <%= radio_button_tag(:actors, "true", :checked => 1) %>
+            <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+            <%= radio_button_tag(:actors, "false") %>
+            <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <% else %>
+            <%= radio_button_tag(:actors, "true") %>
+            <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+            <%= radio_button_tag(:actors, "false", :checked => 1) %>
+            <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <% end %>
 
-          <p style="display:block; margin-bottom:0px; margin-top:5px">Directors option is
-          <% if session[:MLO_directors]=="off"%>
-              <span class="badge">off</span>
-            <% else %>
-              <span class="badge">on</span>
-            <%end%>
-          </p>
-          <%= radio_button_tag(:directors, "on") %>
-          <%= label_tag 'on' ,nil, :class => 'inline_label' %>
-          <%= radio_button_tag(:directors, "off") %>
-          <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <p style="display:block; margin-bottom:0px; margin-top:5px">Directors Option</p>
+          <% if session[:MLO_directors] == "true" %>
+            <%= radio_button_tag(:directors, "true", :checked => 1) %>
+            <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+            <%= radio_button_tag(:directors, "false") %>
+            <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <% else %>
+            <%= radio_button_tag(:directors, "true") %>
+            <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+            <%= radio_button_tag(:directors, "false", :checked => 1) %>
+            <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <% end %>
 
-          <p style="display:block; margin-bottom:0px; margin-top:5px">Rating and Runtime option is
-            <% if session[:MLO_raterun]=="off"%>
-              <span class="badge">off</span>
-            <% else %>
-              <span class="badge">on</span>
-            <%end%>
-          </p>
-          <%= radio_button_tag(:raterun, "on") %>
-          <%= label_tag 'on' ,nil, :class => 'inline_label' %>
-          <%= radio_button_tag(:raterun, "off") %>
-          <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <p style="display:block; margin-bottom:0px; margin-top:5px">Rating and Runtime Option</p>
+          <% if session[:MLO_raterun] == "true" %>
+            <%= radio_button_tag(:raterun, "true", :checked => 1) %>
+            <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+            <%= radio_button_tag(:raterun, "false") %>
+            <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <% else %>
+            <%= radio_button_tag(:raterun, "true") %>
+            <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+            <%= radio_button_tag(:raterun, "false", :checked => 1) %>
+            <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <% end %>
 
           <div class='controls'>
             <input name="commitMLO" id="commitMLO" type="submit" class="btn btn-primary" value="Update" style="float:right; margin-right:20px; margin-bottom:10px;">
@@ -273,41 +300,44 @@ $(function () {
     <div id="collapseTLO" class="accordion-body collapse">
       <div class="accordion-inner">
         <%=form_tag '/settings' do %>
-          <p style="display:block; margin-bottom:0px; margin-top:5px">Address option is
-            <% if session[:TLO_address]=="off"%>
-              <span class="badge">off</span>
-            <% else %>
-              <span class="badge">on</span>
-            <%end%>
-          </p>
-          <%= radio_button_tag(:address, "on") %>
-          <%= label_tag 'on' ,nil, :class => 'inline_label' %>
-          <%= radio_button_tag(:address, "off") %>
-          <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <p style="display:block; margin-bottom:0px; margin-top:5px">Address Option</p>
+          <% if session[:TLO_address] == "true" %>
+            <%= radio_button_tag(:address, "true", :checked => 1) %>
+            <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+            <%= radio_button_tag(:address, "false") %>
+            <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <% else %>
+            <%= radio_button_tag(:address, "true") %>
+            <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+            <%= radio_button_tag(:address, "false", :checked => 1) %>
+            <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <% end %>
 
-          <p style="display:block; margin-bottom:0px; margin-top:5px">Phone Number option is
-            <% if session[:TLO_phone_number]=="off"%>
-              <span class="badge">off</span>
-            <% else %>
-              <span class="badge">on</span>
-            <%end%>
-          </p>
-          <%= radio_button_tag(:phone_number, "on") %>
-          <%= label_tag 'on' ,nil, :class => 'inline_label' %>
-          <%= radio_button_tag(:phone_number, "off") %>
-          <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <p style="display:block; margin-bottom:0px; margin-top:5px">Phone Number Option</p>
+          <% if session[:TLO_phone_number] == "true" %>
+            <%= radio_button_tag(:phone_number, "true", :checked => 1) %>
+            <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+            <%= radio_button_tag(:phone_number, "false") %>
+            <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <% else %>
+            <%= radio_button_tag(:phone_number, "true") %>
+            <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+            <%= radio_button_tag(:phone_number, "false", :checked => 1) %>
+            <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <% end %>
 
-          <p style="display:block; margin-bottom:0px; margin-top:5px">Distance option is
-            <% if session[:TLO_distance]=="off"%>
-              <span class="badge">off</span>
-            <% else %>
-              <span class="badge">on</span>
-            <%end%>
-          </p>
-          <%= radio_button_tag(:distance, "on") %>
-          <%= label_tag 'on' ,nil, :class => 'inline_label' %>
-          <%= radio_button_tag(:distance, "off") %>
-          <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <p style="display:block; margin-bottom:0px; margin-top:5px">Distance Option</p>
+          <% if session[:TLO_distance] == "true" %>
+            <%= radio_button_tag(:distance, "true", :checked => 1) %>
+            <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+            <%= radio_button_tag(:distance, "false") %>
+            <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <% else %>
+            <%= radio_button_tag(:distance, "true") %>
+            <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+            <%= radio_button_tag(:distance, "false", :checked => 1) %>
+            <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <% end %>
 
           <div class='controls'>
             <input name="commitTLO" id="commitTLO" type="submit" class="btn btn-primary" value="Update" style="float:right; margin-right:20px; margin-bottom:10px;">
@@ -325,41 +355,45 @@ $(function () {
     <div id="collapseMO" class="accordion-body collapse">
       <div class="accordion-inner">
         <%=form_tag '/settings' do %>
-          <p style="display:block; margin-bottom:0px; margin-top:5px">Liked Theatres option is
-          <% if session[:MO_likedt]=="off"%>
-              <span class="badge">off</span>
-            <% else %>
-              <span class="badge">on</span>
-            <%end%>
-          </p>
-          <%= radio_button_tag(:likedt, "on") %>
-          <%= label_tag 'on' ,nil, :class => 'inline_label' %>
-          <%= radio_button_tag(:likedt, "off") %>
-          <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <p style="display:block; margin-bottom:0px; margin-top:5px">Liked Theatres Option</p>
+          <% if session[:MO_liked_theatres] == "true" %>
+            <%= radio_button_tag(:liked_theatres, "true", :checked => 1) %>
+            <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+            <%= radio_button_tag(:liked_theatres, "false") %>
+            <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <% else %>
+            <%= radio_button_tag(:liked_theatres, "true") %>
+            <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+            <%= radio_button_tag(:liked_theatres, "false", :checked => 1) %>
+            <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <% end %>
 
-          <p style="display:block; margin-bottom:0px; margin-top:5px">Nearby Theatres option is
-            <% if session[:MO_near]=="off"%>
-              <span class="badge">off</span>
-            <% else %>
-              <span class="badge">on</span>
-            <%end%>
-          </p>
-          <%= radio_button_tag(:near, "on") %>
-          <%= label_tag 'on' ,nil, :class => 'inline_label' %>
-          <%= radio_button_tag(:near, "off") %>
-          <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <p style="display:block; margin-bottom:0px; margin-top:5px">Nearby Theatres Option</p>
+          <% if session[:MO_nearby_theatres] == "true" %>
+            <%= radio_button_tag(:nearby_theatres, "true", :checked => 1) %>
+            <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+            <%= radio_button_tag(:nearby_theatres, "false") %>
+            <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <% else %>
+            <%= radio_button_tag(:nearby_theatres, "true") %>
+            <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+            <%= radio_button_tag(:nearby_theatres, "false", :checked => 1) %>
+            <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <% end %>
 
-          <p style="display:block; margin-bottom:0px; margin-top:5px">Disliked Theatres option is
-            <% if session[:MO_dist]=="off"%>
-              <span class="badge">off</span>
-            <% else %>
-              <span class="badge">on</span>
-            <%end%>
-          </p>
-          <%= radio_button_tag(:dist, "on") %>
-          <%= label_tag 'on' ,nil, :class => 'inline_label' %>
-          <%= radio_button_tag(:dist, "off") %>
-          <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <p style="display:block; margin-bottom:0px; margin-top:5px">Disliked Theatres Option</p>
+          <% if session[:MO_disliked_theatres] == "true" %>
+            <%= radio_button_tag(:disliked_theatres, "true", :checked => 1) %>
+            <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+            <%= radio_button_tag(:disliked_theatres, "false") %>
+            <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <% else %>
+            <%= radio_button_tag(:disliked_theatres, "true") %>
+            <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+            <%= radio_button_tag(:disliked_theatres, "false", :checked => 2) %>
+            <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <% end %>
+          
           <div class='controls'>
             <input name="commitMO" id="commitMO" type="submit" class="btn btn-primary" value="Update" style="float:right; margin-right:20px; margin-bottom:10px;">
           </div>
