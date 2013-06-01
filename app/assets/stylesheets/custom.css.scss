@@ -163,6 +163,24 @@ body {
   box-shadow: 0 0 2px rgba(0,0,0,.2);
   height: 46px;
   overflow: hidden;
+  form {
+    position: relative;
+  }
+  input[type="text"] {
+    margin: 7px 0 0 10px;
+    width: 250px;
+  }
+  #bt_find_friends {
+    background-color: #fff;
+    border: 0;
+    cursor: pointer;
+    display: block;
+    margin: 15px 6px 0 0;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
   h1 {
     margin: 0;
     /*text-indent: 300%;*/
@@ -333,7 +351,7 @@ body {
   overflow: auto;
 }
 
-#home-content ,#setting-content ,#theatre-content ,#preference-content{
+#home-content ,#setting-content ,#theatre-content ,#preference-content ,#buddy-content{
   float: right;
   margin: 40px 26px 0 0;
   width: 686px;
@@ -558,13 +576,6 @@ div.hidden{
 	display:none;
 }
 
-
-
-#f1 {
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
 #login-bar {
   padding: 5px 10px 0px 14px;
 }
@@ -579,7 +590,7 @@ div.hidden{
   float: left;
 }
 /*showmovie*/
-#showmovie-content{
+#showmovie-content {
   border-radius: 3px;
   padding: 23px;
   width: 640px;
@@ -844,6 +855,7 @@ div.hidden{
     }
     a {
         color: #333;
+        display: block;
     }
     li {
       padding-left: 18px;
@@ -944,6 +956,9 @@ div.hidden{
     li {
       a {
         color: black;
+        display: block;
+        height: 70%;
+        padding-top: 12px;
       }
       border-width: 0 1px 1px 0;
       border-style: solid;
@@ -1021,5 +1036,101 @@ div.hidden{
 .obxoffice2 {
   background-color: white;
 
+}
+
+/*buddy*/
+#buddy-detail{
+  border-radius: 3px;
+  padding: 0;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(25,25,25,.5);
+  margin-bottom: 25px;
+  margin-top: 0px;
+  min-height: 400px;
+  overflow: hidden;
+  p {
+    line-height: 1.3em;
+  }
+  h4 {
+    font-size: 17.5px;
+    font-weight: initial;
+  }
+  .buddy-content-header {
+    padding: 10px 10px 10px 23px;
+    border-radius: 6px 6px 0 0;
+    background-clip: padding-box;
+    width: auto;
+    border: 1px solid rgba(0,0,0,.1);
+    border-left-width: 0;
+    border-top-width: 0;
+    border-right: 0;
+  }
+  .stream-item {
+    overflow: hidden;
+    background: #fff;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    background-clip: padding-box;
+    padding: 10px 10px 10px 23px;
+    input[type="text"] {
+      margin: 7px 0 0 0px;
+      width: 250px;
+    }
+    #user-action {
+      float: right;
+      margin-top: 10px;
+    }
+    #user-info {
+      float: left;
+      #buddy-image {
+        float: left;
+      }
+      #buddy-info {
+        float: right;
+        margin-left: 10px;
+        line-height:0;
+      }
+    }
+  }
+
+  li {
+    line-height: inherit;
+    list-style: none;
+    margin: 1px;
+  }
+}
+
+#side-buddy {
+  width: 260px;
+  float: left;
+  margin: 40px 26px 0;
+  #buddy-box{
+    clear: both;
+    border-radius: 3px;
+    margin: 0 0 25px;
+    box-shadow: 0 1px 3px rgba(25,25,25,.4);
+    background-color: #fff;
+    overflow: auto;
+    li {
+      a {
+        line-height: 1.7em;
+        text-decoration: none;
+        display: block;
+      }
+    }
+    li.active {
+      a {
+        color: black;
+      }
+    }
+    ul {
+      list-style: none;
+      margin: 10px 0 10px 15px;
+    }
+    .icon-chevron-right {
+      position: absolute;
+      left: 260px;  
+    }
+  }
 }
 

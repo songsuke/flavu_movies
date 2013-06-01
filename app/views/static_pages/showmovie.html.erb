@@ -74,17 +74,21 @@
 				  				<div class="carousel-inner">
 									<%@sm['movies'].each do |a1|%>
 										<%if a1['id'] == @id_showmovie%>
-											<%a1['photos'].each do |a2|%>
-												<%if a2['poster']==false%>
+											<% photos = a1['photos'].select{|photo| photo['poster'] == false} %>
+											<% if photos.length > 0 %> 
+											  <div align="center" class="item active" id ="movie-slide">
+												<img class="img-rounded" src="<%=photos.first['url']%>">
+											  </div>
+											<% end %>
+											<% photos.each do |photo| %>
+											  <% if photo == photos.first %>
+											    <% next %>
+											  <% end %>
 												<div align="center" class="item" id = "movie-slide">
-													<img class="img-rounded" src="<%=a2['url']%>">
-													<%@a3=a2['url']%>
+													<img class="img-rounded" src="<%=photo['url']%>">
 												</div>
-												<%end%>
-											<%end%>
-											<div align="center" class="item active" id ="movie-slide">
-												<img class="img-rounded" src="<%=@a3%>">
-											</div>
+											<% end %>
+											
 										<%end%>
 			  						<%end%>
 		  						</div>
