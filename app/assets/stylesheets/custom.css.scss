@@ -2,13 +2,13 @@
 @import "bootstrap-responsive";
 
 /* Large desktop */
+
+
 @media (min-width: 1200px) {
 
   .container {
     width: 100%;
   }
-
-
 }
 
 /* Portrait tablet to landscape and desktop */
@@ -24,8 +24,6 @@
   .container {
     width: 70%;
   }
-
-
 }
  
 /* Landscape phones and down */
@@ -37,9 +35,6 @@
   #head {
     height: 20%;
   }
-
-
-
 }
 
 @media (max-width: 320px) {
@@ -50,9 +45,6 @@
   #head {
     height: 20%;
   }
-
-
-
 }
 
 [class^="icon-"] {
