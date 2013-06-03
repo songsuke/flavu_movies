@@ -38,9 +38,7 @@
     height: 20%;
   }
 
-  img {
-    max-width: 10%;
-  }
+
 
 }
 
@@ -53,9 +51,6 @@
     height: 20%;
   }
 
-  img {
-    max-width: 10%;
-  }
 
 
 }
@@ -162,7 +157,7 @@ body {
   background-image: url('/assets/bar-bg.png');
   box-shadow: 0 0 2px rgba(0,0,0,.2);
   height: 46px;
-  overflow: hidden;
+  overflow: visible;
   form {
     position: relative;
   }
@@ -202,6 +197,9 @@ body {
   padding-right: 25px;
   background-color: #f9f9f9;
   border: none;
+  #dropdown1 {
+    float: none;
+  }
   -webkit-border-radius: 3px;
    a:hover, a:focus {
     text-decoration: none;
@@ -310,7 +308,8 @@ body {
   z-index: 1;
   position: relative;
   min-height: 700px;
-  overflow: auto;
+  overflow: hidden;
+  clear: both;
 }
 
 #slider {
@@ -527,6 +526,43 @@ body {
   }
 }
 
+.watched-lists1 {
+  float: left;
+  padding: 0px;
+  margin: 0px;
+  border: 1px solid #fff;
+  border-radius: 3px;
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  position: relative;
+  text-shadow: 0 1px 0 #fff;
+
+}
+
+.watched-lists2 {
+  float: left;
+  padding: 10px;
+  margin: 0px;
+  border: 1px solid #fff;
+  border-radius: 3px;
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  position: relative;
+  text-shadow: 0 1px 0 #fff;
+  img {
+    width: 40px;
+    height: 60px;
+  }
+}
+
+#button3 {
+  margin-top: 7px;
+  padding-left: 10px;
+}
 
 #button2 {
   margin-top: 7px;
@@ -691,7 +727,7 @@ div.hidden{
 
 #movie-cat {
   position: relative;
-  overflow: auto;
+  overflow: hidden;
 }
 
 #theatre-detail {

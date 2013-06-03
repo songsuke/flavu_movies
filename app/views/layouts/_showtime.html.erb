@@ -4,23 +4,22 @@
 <div id="quick-showtime">
 	<div class="navbar-inner">
 		<ul class="nav left">
-			<div role="navigation">
-			<li class="dropdown">
-				<a id="drop1" class="brand dropdown-toggle" href="#" role="button" data-toggle="dropdown"><img src="/assets/Flavu-Logo-shadow.png" width="25" height="25">Flavu</a><b class="caret"></b>
-			
-				<ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-					<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Blog</a></li>
-					<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Contact</a></li>
-					<li role="presentation"><a role="menuitem" tabindex="-1" href="#">AboutUs</a></li>
-				</ul>
+			<li role="navigation">
+				<li class="dropdown">
+					<a id="drop1" class="brand dropdown-toggle" href="#" role="button" data-toggle="dropdown"><img src="/assets/Flavu-Logo-shadow.png" width="25" height="25">Flavu</a>
+					<ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+						<li id="dropdown1" role="presentation"><a role="menuitem" tabindex="-1" href="http://blog.flavu.com/">Blog</a></li>
+						<li id="dropdown1" role="presentation"><a role="menuitem" tabindex="-1" href="#">Contact</a></li>
+						<li id="dropdown1" role="presentation"><a role="menuitem" tabindex="-1" href="#">About Us</a></li>
+					</ul>
+				</li>
 			</li>
-		</div>
 			<li><%= link_to "News" , news_path%></li>
 			<li><%= link_to "Reviews" , reviews_path%></li>
 			<li><%= link_to "Showtimes" , showtimes_path%></li>
 			<li><%= link_to "Box Office" , boxoffice_path%></li>
 			<li>
-				<%=form_tag '/buddies' do%>
+				<%=form_tag '/buddies' ,:style=>"margin:0;" do%>
 					<input id="request" name="request" type="text" placeholder="send your request">
 					<button id="bt_find_friends" name="commit" class="icon-search" type="submit" title="send your request"></button>
 				<%end%>
