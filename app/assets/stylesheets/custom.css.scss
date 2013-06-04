@@ -473,8 +473,8 @@ body {
   border: 1px solid #fff;
   border-radius: 3px;
   display: block;
-  width: 158px;
-  height: 315px;
+  width: 147px;
+  height: 275px;
   overflow: hidden;
   position: relative;
   text-shadow: 0 1px 0 #fff;
@@ -1394,14 +1394,17 @@ div.hidden{
   }
   #nowshowing {
     clear: both;
-    background-color: black;
     box-shadow: 0 1px 3px rgba(25, 25, 25, 0.5);
+    background-color: white;
+    margin: 5px 0 10px 0;
+    padding: 5px 0 5px 0;
+
   }
   .movie-items1{
-    border-color: whitesmoke;
+    border-color: black;
     border-style:solid;
     border-width: 1px;
-    margin: 10px 0 0 2px;
+    margin: 0px 5px 5px 5px;
     border-radius: 3px;
     float: none;
     display: block;
@@ -1419,18 +1422,18 @@ div.hidden{
       padding-left: 2px;
     }
     a {
-      color: whitesmoke;
+      color: black;
       font-size: 10px;
     }
     img {
       width: 60px;
-      height: 120px;
+      height: 90px;
     }
     p {
       margin: 0;
     }
     .movie-items2 {
-      margin: 5px 0 5px 5px;
+      margin: 0px 0px 0px 5px;
     }
   }
 
