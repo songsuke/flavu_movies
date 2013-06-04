@@ -2,48 +2,8 @@
 @import "bootstrap-responsive";
 
 /* Large desktop */
+
 @media (min-width: 1200px) {
-
-  .container {
-    width: 100%;
-  }
-}
-
-/* Portrait tablet to landscape and desktop */
-@media (min-width: 768px) and (max-width: 979px) {
-  .container {
-    width: 70%;
-  }
-
-}
-
-/* Landscape phone to portrait tablet */
-@media (max-width: 767px) { 
-  .container {
-    width: 70%;
-  }
-}
- 
-/* Landscape phones and down */
-@media (max-width: 480px) {
-  .container {
-    width: 40%;
-  }
-
-  #head {
-    height: 20%;
-  }
-}
-
-@media (max-width: 320px) {
-  .container {
-    width: 30%;
-  }
-
-  #head {
-    height: 20%;
-  }
-}
 
 [class^="icon-"] {
 background-image: url("/assets/glyphicons-halflings.png");
@@ -76,7 +36,7 @@ html {
 
 body {
   background-color: #000;
-  background-image: url('/assets/iron-man3-bg.jpg');
+  background-image: url('/assets/hangover-bg.jpg');
   background-repeat: no-repeat;
   background-position: top center;
   background-attachment: fixed;
@@ -1268,4 +1228,22 @@ div.hidden{
 
 #abc {
   overflow: hidden;
+}
+
+}
+
+
+
+@media only screen and (max-width: 767px) and (min-width: 479px) { 
+  body {
+    background-color: #000;
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-attachment: fixed;
+    font-family: "Helvetica Neue",Arial,Helvetica,Geneva,sans-serif;  
+  }
+  #logo { 
+    float: none; 
+    text-align: center !important; 
+  }
 }
