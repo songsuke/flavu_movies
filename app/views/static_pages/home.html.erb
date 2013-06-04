@@ -123,38 +123,47 @@
 	                    		<%if photo['poster']==true%>
 			                        <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid2 => movie['id'] do%>
 										<div class="movie-items2">
-				                            <img src="<%=photo['url']%>" class="img-rounded">             
-				                            <%=movie['title']%>
-			                              	<div id="hiding">
-												<p><%=movie['release']%></p>
-												<%movie['genres'].each do |a2|%>
-													<p><%=a2['name']%></p>
-												<%end%>
-												<%movie['directors'].each do |a2|%>
-													<p><%=a2['name']%></p>
-												<%end%>
-												<%movie['actors'].each do |a2|%>
-													<p><%=a2['name']%></p>
-												<%end%>
-			                            	</div>
+											<div id="movie-items-pics">
+				                            	<img src="<%=photo['url']%>" class="img-rounded">
+				                            </div>
+				                            <div id="movie-items-info-tiny">
+					                            <%=movie['title']%>
+				                              	<div id="hiding">
+				                              		<p>
+													<%movie['genres'].each do |a2|%>
+														<%=a2['name']%>
+													<%end%>
+													</p>
+													<p>
+													<%movie['directors'].each do |a2|%>
+														<%=a2['name']%>
+													<%end%>
+													</p>
+
+				                            	</div>
+				                            </div>
 			                            </div>
 			                        <%end%>
 			                    <%else%>
 			                        <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid2 => movie['id'] do%>
 			                            <div class="movie-items2">
-			                              	<img src="/assets/no_image.gif" class="img-rounded">             
-			                              	<%=movie['title']%>
-			                              	<div id="hiding">
-												<p><%=movie['release']%></p>
-												<%movie['genres'].each do |a2|%>
-													<p><%=a2['name']%></p>
-												<%end%>
-												<%movie['directors'].each do |a2|%>
-													<p><%=a2['name']%></p>
-												<%end%>
-												<%movie['actors'].each do |a2|%>
-													<p><%=a2['name']%></p>
-												<%end%>
+			                        		<div id="movie-items-pics">
+			                              		<img src="/assets/no_image.gif" class="img-rounded">       
+											</div>
+				                            <div id="movie-items-info-tiny">
+			                              		<%=movie['title']%>
+			                              		<div id="hiding">
+			                              			<p>
+													<%movie['genres'].each do |a2|%>
+														<%=a2['name']%>
+													<%end%>
+													</p>
+													<p>
+													<%movie['directors'].each do |a2|%>
+														<%=a2['name']%>
+													<%end%>
+													</p>
+			                            		</div>
 			                            	</div>
 			                            </div>    
 			                        <%end%>
@@ -162,20 +171,24 @@
 	                  		<%elsif movie['photos'].length==0%>
 	                     		<%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid1 => movie['id'] do%>
 			                        <div class="movie-items2">
-			                            <img src="/assets/no_image.gif" class="img-rounded">             
-			                            <%=movie['title']%>
-			                            <div id="hiding">
-											<p><%=movie['release']%></p>
-											<%movie['genres'].each do |a2|%>
-												<p><%=a2['name']%></p>
-											<%end%>
-											<%movie['directors'].each do |a2|%>
-												<p><%=a2['name']%></p>
-											<%end%>
-											<%movie['actors'].each do |a2|%>
-												<p><%=a2['name']%></p>
-											<%end%>
-			                            </div>
+			                        	<div id="movie-items-pics">
+			                            	<img src="/assets/no_image.gif" class="img-rounded">             
+			                       		</div>
+				                        <div id="movie-items-info-tiny">
+				                            <%=movie['title']%>
+				                            <div id="hiding">
+				                            	<p>
+												<%movie['genres'].each do |a2|%>
+													<%=a2['name']%>
+												<%end%>
+												</p>
+												<p>
+												<%movie['directors'].each do |a2|%>
+													<%=a2['name']%>
+												<%end%>
+												</p>
+				                            </div>
+				                        </div>
 			                        </div>                           
 			                    <%end%>    
 			                <%end%> 
