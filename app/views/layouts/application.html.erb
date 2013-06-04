@@ -38,15 +38,17 @@ $(function(){
 					<li id="buddy-link"><%= link_to "Buddies", buddies_path %> </li>
 					<li id="preference-link"><%= link_to "Preferences", preferences_path %> </li>
 
-					<%if (!session['auth'])%>
-					<li id="register-link"><%= link_to "Register", register_path %></li>
+					<!--<li id="register-link"><%= link_to "Register", register_path %></li>
 						
-					<li id="signin-link"><%= link_to "Sign In", signin_path %>  </li>
-					<%else%>
+					<li id="signin-link"><%= link_to "Sign In", signin_path %>  </li>-->
 					<li id="setting-link"><%= link_to "Setting", settings_path %> </li>
-					<li id="signout-link"><%= link_to "Sign out", signout_path %>  </li>
-					<%end%>
 
+					<!--<li id="signout-link"><%= link_to "Sign out", signout_path %>  </li>-->
+					<li id="app_store">
+						<%=link_to "#" do%>
+							<img src="/assets/apple_store.png">
+						<%end%>
+					</li>
 				</ul>
 			</div>
 		</nav>
@@ -60,7 +62,6 @@ $(function(){
 <div id="main" class="group" role="main">
 
 <%=yield%>
-<%=render 'layouts/side' %>
 
 </div>
 <%=render 'layouts/footer' %>

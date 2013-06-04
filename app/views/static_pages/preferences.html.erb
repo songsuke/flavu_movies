@@ -111,7 +111,7 @@ $(function () {
 								   	<%= gp1['genre'] %>
 									<% @gp2=gp1['genre'] %>
 
-									<div id="<%= gp1['genre'] %>" data-score="<%= gp1['score'] %>"></div>
+									<div id="<%= gp1['genre'] %>" data-score="<%= gp1['score'] %>" style="height:30px;"></div>
 									<input type="hidden" name="genre_update" value="<%= gp1['genre'] %>">
 									<button id="update" class="btn btn-success" name="update" value="Update">Update</button>  
 
@@ -165,7 +165,7 @@ $(function () {
 								   	<%= dp1['name'] %>
 									<% @dp2=dp1['name'] %>
 
-									<div id="<%= dp1['director_id'] %>" data-score="<%= dp1['score'] %>"></div>
+									<div id="<%= dp1['director_id'] %>" data-score="<%= dp1['score'] %>" style="height:30px;"></div>
 									<input type="hidden" name="director_update" value="<%= dp1['name'] %>">
 									<button id="update2" class="btn btn-success" name="update2" value="Update">Update</button>  
 
@@ -219,7 +219,7 @@ $(function () {
 								   	<%= ap1['actor'] %>
 									<% @ap2=ap1['actor'] %>
 
-									<div id="<%= ap1['id'] %>" data-score="<%= ap1['score'] %>"></div>
+									<div id="<%= ap1['id'] %>" data-score="<%= ap1['score'] %>" style="height:30px;"></div>
 									<input type="hidden" name="actor_update" value="<%= ap1['actor'] %>">
 									<button id="update3" class="btn btn-success" name="update3" value="Update">Update</button>  
 

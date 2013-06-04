@@ -1,12 +1,3 @@
-<div id="side">
-    <div id="buddy-side">
-      <h1> Buddies </h1>
-      <div id="side-buddy-box">
-        <p> Query buddies here, if not member says you have no buddies please register</p>
-      </div>
-    </div>
- </div>
-
 <div id="home-content">
 	<div id="content">
 		<%@sm['movies'].each do |a1|%>
@@ -28,19 +19,19 @@
 						<% if(a1['photos'].length >0) %>
 			                <%@photo = a1['photos'].first%>
 			                <div class="movie-items">
-				                <a href="#myModal" data-toggle="modal" data-backdrop="false">
+				                <a href="#myModal1" data-toggle="modal" data-backdrop="false">
 				                	<span class="play"></span>
 				                	<img class="img-rounded" width="140" height="210" src="<%=@photo['url']%>">
 				                </a>
-				               	<div id="myModal" class="modal fade hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				                	<div class="modal-header">
+				               	<div id="myModal1" class="modal fade hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				                	<div id="modal-header" class="modal-header">
     									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     									<h1 class="title">
     										<%=a1['title']%>
     									</h1>
     								</div>
-    								<div class="modal-body">
-				                		<iframe width="640" height="360" src="<%=@trailer%>" frameborder="0" allowfullscreen></iframe>
+    								<div id="modal-body" class="modal-body">
+				                		<iframe width="960" height="480" src="<%=@trailer%>" frameborder="0" allowfullscreen></iframe>
 				               		</div>
 				                </div>
 
@@ -49,19 +40,19 @@
 			            <%elsif(a1['photos'].length ==0) %>
 			            	<%@photo = a1['photos'].first%>
 			            	<div class="movie-items">
-			            		<a href="#myModal" data-toggle="modal" data-backdrop="false">
+			            		<a href="#myModal1" data-toggle="modal" data-backdrop="false">
 				                	<span class="play"></span>
 				                	<img class="img-rounded" width="140" height="210" src="/assets/no_image.gif">
 				                </a>
 				               	<div id="myModal" class="modal fade hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				                	<div class="modal-header">
+				                	<div id="modal-header" class="modal-header">
     									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     									<h1 class="title">
     										<%=@a2%>
     									</h1>
     								</div>
-    								<div class="modal-body">
-				                		<iframe width="640" height="360" src="<%=@trailer%>" frameborder="0" allowfullscreen></iframe>
+    								<div id="modal-body" class="modal-body">
+				                		<iframe width="960" height="480" src="<%=@trailer%>" frameborder="0" allowfullscreen></iframe>
 				               		</div>
 				                </div>
 			                <%@poster="/assets/no_image.gif"%>

@@ -1,19 +1,10 @@
-<div id="side">
-    <div id="buddy-side">
-      <h1> Buddies </h1>
-      <div id="side-buddy-box">
-        <p> Query buddies here, if not member says you have no buddies please register</p>
-      </div>
-    </div>
-</div>
-  
 <div id="home-content">
 	<%@st['theatres'].each do |nearby|%>
 			<%if nearby['id'] == @id_showtheatre%> 
 			<h1 class="title">
 				<%=nearby['name']%>
 			</h1>
-	<div id="showmovie-content">
+	<div id="showtheatre-content">
 			<div id="showtheatre-info">
 				<ul>
 					<li> Address : <%=nearby['location']['address']%></li>
@@ -59,7 +50,7 @@
 			<%nearby['movies'].each do |movie|%>
 				<% if movie['photos'].length >0 && movie['available']==true %>
                    	<%photo = movie['photos'].first%>
-                   	<div class="movie-items2">
+                   	<div class="movie-items1">
 	                    <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid => movie['id'] do%>
 	                        <div class="movie-items1">
 	                        	<img src="<%=photo['url']%>">             
@@ -68,7 +59,7 @@
 	                    <%end%>
 					</div>
                 <%elsif movie['photos'].length==0 && movie['available']==true %>
-                    <div class="movie-items2">
+                    <div class="movie-items1">
                       	<%= link_to image_tag("/assets/no_image.gif" ,:class =>'img-rounded') +"#{movie['title']}" , {:controller => "static_pages" ,:action => "showmovie" ,:showid => movie['id']} , :class=>'movie-items1' %>
                     </div>
 				<%end%>
