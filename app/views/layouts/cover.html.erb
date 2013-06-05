@@ -1,5 +1,8 @@
 <html>
 <head>
+	  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "jquery-1.7.2.min" %>
+  <%= javascript_include_tag "jquery_ujs" %>
 <%= stylesheet_link_tag    "cover", :media => "all" %>
 <%= csrf_meta_tags %>
 </head>
@@ -9,7 +12,7 @@
 	<div class="wrapper">
 		<div id="header">
 			<div id="logo">
-				<h1> LOGO </h1>
+				<img src="/assets/logof.png">
 			</div>
 			<div id="login-menu">
 				<%if flash[:error]%>
@@ -18,29 +21,76 @@
 				 	</div>
 				<%else%>
 				<%end%>
-				  	<%= form_tag '/checklogin' do %>
-					    <div id="login1">
-					      <!--<label for="user_login">Login</label>-->
-					    	<!--<%= label_tag("login") %>-->
-					    	<label for="login">Email</label>
-					   		<%=text_field_tag "login"%>
-
-					      <!--<input id="user_login" name="user[login]" size="30" type="text">-->					
-					  	</div>	
-						<div id="password1">
-							<%= label_tag("password") %>
-							<%= password_field_tag("password") %>
-					    </div>
-						<div class='controls' style="float:right; padding-right:10px;">
-							<button name="confirm" id="confirm" value="confirm"> Login </button>
-						</div>				   	
-   <%end%>
 			</div>
 		</div>
 		<div class="content">
 			<div id="cover-content">
-			<!--<iframe width="640" height="360" src="http://www.youtube.com/embed/5EjG-1U3wqA?autoplay=1&vq=hd1080 " frameborder="0" allowfullscreen></iframe>-->
-			<iframe width="640" height="360" src="http://trailers.apple.com/movies/dreamworks/thecroods/thecroods-tlr1_h640w.mov" frameborder="0" allowfullscreen></iframe>
+				<%=form_tag '/cover' do %>
+					<button class="btn btn-large" name="guest" id="guest" value="true"> Enter the website </button>
+				<%end%>
+				<div id="btn">
+					<button data-target="#myModal" class="btn btn-large" name="guest" id="guest" value="true" data-toggle="modal" data-backdrop="true"> Log In </button>
+					<div id="myModal" class="modal fade hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-header">
+				    		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				    		<h3 class="title">Log In</h3>
+				    	</div>
+				    	<div class="modal-body">
+							<%= form_tag '/checklogin' do %>
+								<div class="control-group">
+									<div class="controls">
+										<div id="login-bar">
+											<%= label_tag("Login") %>
+											<%= text_field_tag "login"%>
+											<%= label_tag("Password") %>
+											<%= password_field_tag("password") %>
+										</div>
+										<div id="login-button">
+										  	<button name="confirm" id="confirm" value="confirm"> Login </button>
+										</div>
+										<div id="remember-but">
+											<label><input type="checkbox"> Remember me</label>
+										</div>
+									</div>
+								</div>
+							<%end%>
+				  		</div>
+					</div>
+				</div>
+				<div id="btn">
+					<button data-target="#myModal-r" class="btn btn-large" name="guest" id="guest" value="true" data-toggle="modal" data-backdrop="true"> Register </button>
+					<div id="myModal-r" class="modal fade hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-header">
+				    		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				    		<h3 class="title"> Register </h3>
+				    	</div>
+				    	<div class="modal-body">
+							<%= form_tag '/register' do %>
+								<div class='control-group'>
+								    <div class='controls'>
+								    	<%= label_tag("Email") %>
+								      	<%= text_field_tag "email"%>
+								    </div>
+								</div>
+								<div class='control-group'>
+								    <div class='controls'>
+								      	<%= label_tag("Email Confirmation") %>
+								      	<%= text_field_tag "email_confirmation"%>
+								    </div>
+								</div>
+								<div class='control-group'>
+								    <div class='controls'>
+								      	<%= label_tag("Password") %>
+								      	<%= password_field_tag("password") %>
+								    </div>
+								</div>								 
+								<div class='controls'>
+									<button name="confirm" id="confirm" value="confirm"> Confirm </button>
+								</div>
+							<%end%>
+				  		</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	<%=yield%>

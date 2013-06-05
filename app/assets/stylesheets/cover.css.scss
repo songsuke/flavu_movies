@@ -3,108 +3,119 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import "bootstrap";
 @import "bootstrap-responsive";
-@media (min-width: 1200px) {
+@media (min-width: 980px) {
 
-  .container {
-    width: 100%;
-  }
+	body {
+		background-color: black;
+		background-image: url('/assets/bg-black.jpg');
+		background-repeat: no-repeat;
+		background-position: top center;
+		background-attachment: fixed;
+	}
 
+	.wrapper {
+		margin: 0 auto;
+		width: 1024px;
+		position: relative;
+	}
 
-}
+	#header {
+	margin-top: 50px;
+	margin-bottom: 2em;
+	}
 
-/* Portrait tablet to landscape and desktop */
-@media (min-width: 768px) and (max-width: 979px) {
-  .container {
-    width: 70%;
-  }
+	#logo {
+		float: left;
+		margin-bottom: 30px;
+	}
+	#login-menu {
+		float: right;
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}
 
-}
-
-/* Landscape phone to portrait tablet */
-@media (max-width: 767px) { 
-  .container {
-    width: 70%;
-  }
-
-
-}
- 
-/* Landscape phones and down */
-@media (max-width: 480px) {
-  .container {
-    width: 40%;
-  }
-  
-  #head {
-    height: 20%;
-  }
-
-}
-
-@media (max-width: 320px) {
-  .container {
-    width: 30%;
-  }
-
-  #head {
-    height: 20%;
-  }
-
-}
-
-body {
-	background-color: gray;
-}
-
-.wrapper {
-	margin: 0 auto;
-	width: 1024px;
-	position: relative;
-}
-
-#header {
-margin-top: 50px;
-margin-bottom: 2em;
-}
-
-#logo {
-	float: left;
-	margin-bottom: 30px;
-}
-#login-menu {
-	float: right;
-	margin-top: 20px;
-	margin-bottom: 20px;
-}
-
-#password1, #login1 {
-	display: inline;
-	padding-right: 10px;
-	width: 140px;
-	label {
+	#password1, #login1 {
 		display: inline;
+		padding-right: 10px;
 		width: 140px;
+		label {
+			display: inline;
+			width: 140px;
+		}
+	}
+
+
+	.content {
+		clear: both;
+		margin: 0 auto;
+	}
+
+	#cover-content {
+		width: 960px;
+		height: 500px;
+		margin-bottom: 1em;
+		text-align: center;
+		/*background-image: ;*/
+
+	}
+
+	#btn {
+		margin-bottom: 20px;
+	}
+
+	button.btn.btn-large {
+		width: 220px;
+		height: 70px;
 	}
 }
 
-
-.content {
-	clear: both;
-	margin: 0 auto;
-}
-
-#cover-content {
-	background-color: black;
-	width: 1024px;
-	height: 500px;
-	margin-bottom: 1em;
-	text-align: center;
-	/*background-image: ;*/
-	iframe {
-		margin-top: 60px;
+@media (max-width: 480px) { 
+		body {
+		background-color: black;
+		background-image: url('/assets/bg-black.jpg');
+		background-repeat: no-repeat;
+		background-position: top center;
+		background-attachment: fixed;
 	}
-}
-#bottom-content {
-	float: right;
-	
+
+
+	#header {
+	margin-top: 50px;
+	margin-bottom: 2em;
+	}
+
+	#logo { 
+	  	float: none; 
+	  	text-align: center !important; 
+	}
+
+	#password1, #login1 {
+		display: inline;
+		padding-right: 10px;
+		width: 140px;
+		label {
+			display: inline;
+			width: 140px;
+		}
+	}
+
+	.content {
+		clear: both;
+		margin: 0 auto;
+	}
+
+
+	#btn {
+		margin-bottom: 20px;
+	}
+
+	button.btn.btn-large {
+		width: 220px;
+		height: 70px;
+	}
+
+	#cover-content {
+		text-align: center;
+	}
+
 }
