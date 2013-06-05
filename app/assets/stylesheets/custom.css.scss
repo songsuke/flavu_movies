@@ -466,22 +466,6 @@ body {
   border: 1px solid #ccc;
 }
 
-.movie-items2s {
-  float: left;
-  padding: 0px;
-  margin: 0px;
-  border: 1px solid #fff;
-  border-radius: 3px;
-  display: block;
-  width: 147px;
-  height: 275px;
-  overflow: hidden;
-  position: relative;
-  text-shadow: 0 1px 0 #fff;
-  text-align: center;
-}
-
-
 .movie-items2 {
   float: left;
   padding: 0px;
@@ -489,7 +473,7 @@ body {
   border: 1px solid #fff;
   border-radius: 3px;
   display: block;
-  width: 158px;
+  width: 147px;
   height: 316px;
   overflow: hidden;
   position: relative;
@@ -1317,16 +1301,15 @@ div.hidden{
 
   #mainnav {
     float: none;
-    text-align: center;
     font: 20px DBHelvethaicaX55Regular,san-serif;
     ul {
       padding: 0;
       margin: 0;
     }
     li {
-      display: block;
-      color: white;
-      margin: 15px;
+        display: inline-table;
+        color: white;
+        margin: 15px 0px 5px 15px;
       a.current {
         color: #eacb88;
       }
@@ -1474,7 +1457,14 @@ div.hidden{
     }
 
   }
-
+  #foot {
+    background-color: rgba(0,0,0,.85);
+    box-shadow: 0 0 8px rgba(0,0,0,.2);
+    border-radius: 0 0 3px 3px;
+    li {
+      display: inline;
+    }
+  }
 
   
 }

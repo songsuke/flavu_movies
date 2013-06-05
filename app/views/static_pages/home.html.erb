@@ -55,12 +55,12 @@
 	                    	<%photo = movie['photos'].first%> 
 	                    		<%if photo['poster']==true%>
 			                        <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid1 => movie['id'] do%>
-			                            <div class="movie-items2s">
+			                            <div class="movie-items2">
 											<div id="movie-items-pics">
 				                            	<img src="<%=photo['url']%>" class="img-rounded">
 				                            </div>
 				                            <div id="movie-items-info-tiny">
-					                            <h2 class="title"><%=movie['title']%></h2>
+					                            <p><%=movie['title']%></p>
 				                              	<div id="hiding">
 				                              		<p>
 													<%movie['genres'].each do |a2|%>
@@ -79,12 +79,12 @@
 			                        <%end%>
 			                    <%else%>
 			                        <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid1 => movie['id'] do%>
-			                            <div class="movie-items2s">
+			                            <div class="movie-items2">
 			                        		<div id="movie-items-pics">
 			                              		<img src="/assets/no_image.gif" class="img-rounded">       
 											</div>
 				                            <div id="movie-items-info-tiny">
-			                    				<h2 class="title"><%=movie['title']%></h2>
+					                            <p><%=movie['title']%></p>
 			                              		<div id="hiding">
 			                              			<p>
 													<%movie['genres'].each do |a2|%>
@@ -103,12 +103,12 @@
 			                      <%end%>
 	                  		<%elsif movie['photos'].length==0%>
 			                    <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid1 => movie['id'] do%>
-			                        <div class="movie-items2s">
+			                        <div class="movie-items2">
 			                        	<div id="movie-items-pics">
 			                            	<img src="/assets/no_image.gif" class="img-rounded">             
 			                       		</div>
 				                        <div id="movie-items-info-tiny">
-					                        <h2 class="title"><%=movie['title']%></h2>
+					                            <p><%=movie['title']%></p>
 				                            <div id="hiding">
 				                            	<p>
 												<%movie['genres'].each do |a2|%>
@@ -135,12 +135,12 @@
 	                    	<%photo = movie['photos'].first%> 
 	                    		<%if photo['poster']==true%>
 			                        <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid2 => movie['id'] do%>
-										<div class="movie-items2s">
+										<div class="movie-items2">
 											<div id="movie-items-pics">
 				                            	<img src="<%=photo['url']%>" class="img-rounded">
 				                            </div>
 				                            <div id="movie-items-info-tiny">
-					                            <h2 class="title"><%=movie['title']%></h2>
+					                            <p><%=movie['title']%></p>
 				                              	<div id="hiding">
 				                              		<p>
 													<%movie['genres'].each do |a2|%>
@@ -159,12 +159,12 @@
 			                        <%end%>
 			                    <%else%>
 			                        <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid2 => movie['id'] do%>
-			                            <div class="movie-items2s">
+			                            <div class="movie-items2">
 			                        		<div id="movie-items-pics">
 			                              		<img src="/assets/no_image.gif" class="img-rounded">       
 											</div>
 				                            <div id="movie-items-info-tiny">
-			                    				<h2 class="title"><%=movie['title']%></h2>
+					                            <p><%=movie['title']%></p>
 			                              		<div id="hiding">
 			                              			<p>
 													<%movie['genres'].each do |a2|%>
@@ -183,12 +183,12 @@
 			                      <%end%>
 	                  		<%elsif movie['photos'].length==0%>
 	                     		<%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid1 => movie['id'] do%>
-			                        <div class="movie-items2s">
+			                        <div class="movie-items2">
 			                        	<div id="movie-items-pics">
 			                            	<img src="/assets/no_image.gif" class="img-rounded">             
 			                       		</div>
 				                        <div id="movie-items-info-tiny">
-					                        <h2 class="title"><%=movie['title']%></h2>
+					                            <p><%=movie['title']%></p>
 				                            <div id="hiding">
 				                            	<p>
 												<%movie['genres'].each do |a2|%>
@@ -214,12 +214,12 @@
 	                    	<%photo = movie['photos'].first%> 
 	                    		<%if photo['poster']==true%>
 			                        <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid3 => movie['id'] do%>
-			                            <div class="movie-items2s">
+			                            <div class="movie-items2">
 											<div id="movie-items-pics">
 				                            	<img src="<%=photo['url']%>" class="img-rounded">
 				                            </div>
 				                            <div id="movie-items-info-tiny">
-					                            <h2 class="title"><%=movie['title']%></h2>
+					                            <p><%=movie['title']%></p>
 				                              	<div id="hiding">
 				                              		<p>
 													<%movie['genres'].each do |a2|%>
@@ -238,12 +238,12 @@
 			                        <%end%>
 			                    <%else%>
 			                        <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid3 => movie['id'] do%>
-			                            <div class="movie-items2s">
+			                            <div class="movie-items2">
 			                        		<div id="movie-items-pics">
 			                              		<img src="/assets/no_image.gif" class="img-rounded">       
 											</div>
 				                            <div id="movie-items-info-tiny">
-			                    				<h2 class="title"><%=movie['title']%></h2>
+					                            <p><%=movie['title']%></p>
 			                              		<div id="hiding">
 			                              			<p>
 													<%movie['genres'].each do |a2|%>
@@ -262,12 +262,12 @@
 			                      <%end%>
 	                  		<%elsif movie['photos'].length==0%>
 	                     		<%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid1 => movie['id'] do%>
-			                        <div class="movie-items2s">
+			                        <div class="movie-items2">
 			                        	<div id="movie-items-pics">
 			                            	<img src="/assets/no_image.gif" class="img-rounded">             
 			                       		</div>
 				                        <div id="movie-items-info-tiny">
-					                        <h2 class="title"><%=movie['title']%></h2>
+					                            <p><%=movie['title']%></p>
 				                            <div id="hiding">
 				                            	<p>
 												<%movie['genres'].each do |a2|%>
