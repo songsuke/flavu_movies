@@ -1612,7 +1612,7 @@ body {
       height: auto;
     }
   }
-  #nowshowing{
+  #nowshowing, #showmovie-content {
     clear: both;
     box-shadow: 0 1px 3px rgba(25, 25, 25, 0.5);
     background-color: white;
@@ -1700,5 +1700,66 @@ body {
     margin: 15px;
     float: left;
   }
-
+  #movie-pic-slide {
+    overflow: hidden;
+    .movie-items{
+      overflow: hidden;
+      margin: 0px 5px 5px 5px;
+      border-radius: 3px;
+      float: left;
+      display: block;
+      width: auto;
+      height: auto;
+      position: relative;
+      text-shadow: 0 1px 0 #fff;
+      img {
+        width: auto;
+        height: 160px;
+      }
+    }
+    #movie-slide {
+      width: auto;
+      height: auto;
+      float: right;
+      margin-right: 5px;
+      img {
+        height: 160px;
+      }
+    }
+  }
+  #movie-details {
+    margin: 0 5px 0 5px;
+    #content {
+      border-radius: 3px;
+      box-shadow: 0 1px 3px rgba(25, 25, 25, 0.5);
+    }
+    h1 {
+      font-size: 21px;
+      color: #9e0000;
+      margin: 5px;
+    }
+    h3 {
+      font-size: 14px;
+      color: #333;
+      margin: 5px;
+    }
+    p {
+      font-size: 14px;
+      display: inline-table;
+      margin: 5px;
+    }
+  }
+  #theatre-detail {
+    margin: 5px;
+    width: 100%;
+    height: 100%;
+    .cinema-name {
+      margin: 0 0 0 5px;
+      border-radius: 3px;
+      color: #febf34;
+      padding: 5px;
+      background: url("/assets/title.png") repeat-x #2a2a2a;
+      text-align: left;
+    }
+  }
 }
