@@ -466,7 +466,7 @@ body {
   border: 1px solid #ccc;
 }
 
-.movie-items2{
+.movie-items2s {
   float: left;
   padding: 0px;
   margin: 0px;
@@ -475,6 +475,22 @@ body {
   display: block;
   width: 147px;
   height: 275px;
+  overflow: hidden;
+  position: relative;
+  text-shadow: 0 1px 0 #fff;
+  text-align: center;
+}
+
+
+.movie-items2 {
+  float: left;
+  padding: 0px;
+  margin: 0px;
+  border: 1px solid #fff;
+  border-radius: 3px;
+  display: block;
+  width: 158px;
+  height: 316px;
   overflow: hidden;
   position: relative;
   text-shadow: 0 1px 0 #fff;
