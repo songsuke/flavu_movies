@@ -441,7 +441,7 @@ body {
   border-radius: 3px;
   display: block;
   width: 147px;
-  height: 275px;
+  height: 316px;
   overflow: hidden;
   position: relative;
   text-shadow: 0 1px 0 #fff;
@@ -461,7 +461,7 @@ body {
   }
 }
 
-.movie-items1:hover {
+.movie-items2:hover {
   background-color: #ddd;
   border: 1px solid #ccc;
 }
@@ -474,11 +474,15 @@ body {
   border-radius: 3px;
   display: block;
   width: 147px;
-  height: 316px;
+  height: 275px;
   overflow: hidden;
   position: relative;
   text-shadow: 0 1px 0 #fff;
   text-align: center;
+    img {
+    width: 135px;
+    height: 210px;
+  }
 }
 
 .movie-items3{
@@ -521,7 +525,13 @@ body {
   overflow: hidden;
   position: relative;
   text-shadow: 0 1px 0 #fff;
-
+  #movie-items-pics {
+    float: left;
+    margin-right: 5px;
+  }
+  #movie-items-info-tiny {
+    margin: 15px 0 0 0;
+  }
 }
 
 .watched-lists2 {
@@ -1476,6 +1486,9 @@ body {
   [class^="icon-"] {
     background-image: url("/assets/glyphicons-halflings.png");
   }
+  #movie-title-pc {
+    display: none
+  }
   #logo { 
     float: none; 
     text-align: center !important; 
@@ -1599,15 +1612,29 @@ body {
       height: auto;
     }
   }
-  #nowshowing {
+  #nowshowing{
     clear: both;
     box-shadow: 0 1px 3px rgba(25, 25, 25, 0.5);
     background-color: white;
     margin: 5px 0 10px 0;
     padding: 5px 0 5px 0;
-
   }
-  .movie-items1{
+  #nowshowing1 {
+    #myTabContent {
+      background-color: white;
+    }
+    .nav-tabs > li {
+      float: none;
+    }
+  }
+  #side-buddy-box {
+    clear: both;
+    box-shadow: 0 1px 3px rgba(25, 25, 25, 0.5);
+    background-color: white;
+    margin: 5px 0 10px 0;
+    padding: 5px 0 5px 0;
+  }
+  .movie-items1,.watched-lists1{
     overflow: hidden;
     border-color: black;
     border-style:solid;
@@ -1637,7 +1664,7 @@ body {
     p {
       margin: 0;
     }
-    .movie-items2 {
+    .movie-items2,.watched-lists2 {
       margin: 0px 0px 0px 5px;
     }
     #movie-items-pics {
