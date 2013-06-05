@@ -1277,6 +1277,9 @@ div.hidden{
     background-attachment: fixed;
     font-family: "Helvetica Neue",Arial,Helvetica,Geneva,sans-serif;  
   }
+  [class^="icon-"] {
+    background-image: url("/assets/glyphicons-halflings.png");
+  }
   #logo { 
     float: none; 
     text-align: center !important; 
@@ -1334,7 +1337,7 @@ div.hidden{
     }
     input[type="text"] ,input[type="password"]{
       margin: 0;
-      width: auto;
+      width: 85%;
     }
     #bt_find_friends {
       background-color: #fff;
@@ -1466,5 +1469,14 @@ div.hidden{
     }
   }
 
-  
+  #login-button {
+    margin: 15px;
+    float: right;
+  }
+
+  #remember-but {
+    margin: 15px;
+    float: left;
+  }
+
 }
