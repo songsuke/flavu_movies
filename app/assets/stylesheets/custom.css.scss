@@ -1619,6 +1619,7 @@ body {
     }
   }
   #nowshowing, #showmovie-content {
+    border-radius: 3px;
     clear: both;
     box-shadow: 0 1px 3px rgba(25, 25, 25, 0.5);
     background-color: white;
@@ -1913,7 +1914,7 @@ body {
       }
     }
   }
-  #buddy-detail,#preference-info {
+  #buddy-detail,#preference-info,#setting-content {
     clear: both;
     border-radius: 3px;
     box-shadow: 0 1px 3px rgba(25, 25, 25, 0.5);
@@ -1936,7 +1937,7 @@ body {
   #genre1 {
     margin-bottom: 10px;
   }
-  #preference-menu {
+  #preference-menu, #side-setting-box {
     clear: both;
     border-radius: 3px;
     box-shadow: 0 1px 3px rgba(25, 25, 25, 0.5);
@@ -1957,6 +1958,42 @@ body {
           color: black;
         }
       }
+    }
+  }
+  #setting-head {
+    h1.title {
+      text-shadow: 0 1px 0 #fff;
+      font-size: 24px;
+      color: black;
+      font-weight: normal;
+      font-family: 'DBHelvethaicaX55Regular',sans-serif;
+    }
+  }
+  #setting_to_right {
+    float: right;
+    margin: 10px 0 10px 0;
+  }
+  #setting_to_center {
+    margin-left: 135px;
+    margin: 10px 0 10px 0;
+  }
+  #setting_to_left {
+    float: left;
+    margin: 10px 0 10px 0;
+  }
+  #news-content {
+    margin: 10px;
+    list-style: none;
+    li {
+      margin: 10px 0 10px 0px;
+    }
+  }
+  .theatres-info1 {
+    .tab-pane {
+      display: none;
+    }
+    .active {
+      display: block;
     }
   }
 }

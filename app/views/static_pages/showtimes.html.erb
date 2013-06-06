@@ -42,7 +42,7 @@
 										<% if(movie['photos'].length >0) %>
 				                    		<%photo = movie['photos'].first%> 
 				                    		<a href="#<%=movie['id']%><%=liked['id']%>" data-toggle="modal" data-backdrop="false">
-				                          		<div class="movie-items1">
+				                          		<div class="movie-items2">
 				                            		<img src="<%=photo['url']%>">
 				                            		<%=movie['title']%>
 				                            		<%@mid=movie['id']%>
@@ -50,8 +50,10 @@
 				                          	</a>
 				                  		<%elsif movie['photos'].length==0%>
 				                    		<a href="#<%=movie['id']%><%=liked['id']%>" data-toggle="modal" data-backdrop="false">
+				                     		<div class="movie-items2">
 				                     			<img src="/assets/no_image.gif">  
 				                            	<%=movie['title']%>
+				                            </div>
 				                     		</a>
 				                  		<%end%>    
 			                  		</div>  
@@ -88,8 +90,8 @@
 		  							<div class="movie-items1">
 										<% if(movie['photos'].length >0) %>
 				                    		<%photo = movie['photos'].first%> 
-											<a href="#<%=movie['id']%><%=liked['id']%>" data-toggle="modal" data-backdrop="false">		
-												<div class="movie-items1">
+											<a href="#<%=movie['id']%><%=liked['id']%>" data-toggle="modal" data-backdrop="false">
+												<div class="movie-items2">
 				                            		<img src="<%=photo['url']%>">      
 				                            		<%=movie['title']%>
 				                            		<%@mid=movie['id']%>
@@ -97,8 +99,10 @@
 				                          	</a>
 				                  		<%elsif movie['photos'].length==0%>
 				                    		<a href="#<%=movie['id']%><%=liked['id']%>" data-toggle="modal" data-backdrop="false">
-				                     			<img src="/assets/no_image.gif">     
-				                            	<%=movie['title']%>
+					                        	<div class="movie-items2">           
+					                        		<img src="/assets/no_image.gif"> 
+					                        		<%=movie['title']%>
+					                        	</div>
 				                     		</a>
 				                  		<%end%>    
 			                  		</div>  
@@ -136,7 +140,7 @@
 										<% if(movie['photos'].length >0) %>
 				                    		<%photo = movie['photos'].first%> 
 				                    		<a href="#<%=movie['id']%><%=liked['id']%>" data-toggle="modal" data-backdrop="false">
-				                          		<div class="movie-items1">
+				                          		<div class="movie-items2">
 				                            		<img src="<%=photo['url']%>">      
 				                            		<%=movie['title']%>
 				                            		<%@mid=movie['id']%>
@@ -144,8 +148,10 @@
 				                          	</a>
 				                  		<%elsif movie['photos'].length==0%>
 				                    		<a href="#<%=movie['id']%><%=liked['id']%>" data-toggle="modal" data-backdrop="false">
-				                     			<img src="/assets/no_image.gif">       
-				                            	<%=movie['title']%>
+					                        	<div class="movie-items2">	
+				                     				<img src="/assets/no_image.gif">   
+				                            		<%=movie['title']%>
+				                            	</div>
 				                     		</a>
 				                  		<%end%>    
 			                  		</div>  
