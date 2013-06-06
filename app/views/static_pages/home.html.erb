@@ -134,7 +134,7 @@
 							<% if(movie['photos'].length >0) %>
 	                    	<%photo = movie['photos'].first%> 
 	                    		<%if photo['poster']==true%>
-			                        <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid2 => movie['id'] do%>
+			                        <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid => movie['id'] do%>
 										<div class="movie-items2">
 											<div id="movie-items-pics">
 				                            	<img src="<%=photo['url']%>" class="img-rounded">
@@ -157,7 +157,7 @@
 			                            </div>
 			                        <%end%>
 			                    <%else%>
-			                        <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid2 => movie['id'] do%>
+			                        <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid => movie['id'] do%>
 			                            <div class="movie-items2">
 			                        		<div id="movie-items-pics">
 			                              		<img src="/assets/no_image.gif" class="img-rounded">       
@@ -181,7 +181,7 @@
 			                        <%end%>
 			                    <%end%>
 	                  		<%elsif movie['photos'].length==0%>
-	                     		<%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid2 => movie['id'] do%>
+	                     		<%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid => movie['id'] do%>
 			                        <div class="movie-items2">
 			                        	<div id="movie-items-pics">
 			                            	<img src="/assets/no_image.gif" class="img-rounded">             
@@ -212,7 +212,7 @@
 							<% if(movie['photos'].length >0) %>
 	                    	<%photo = movie['photos'].first%> 
 	                    		<%if photo['poster']==true%>
-			                        <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid3 => movie['id'] do%>
+			                        <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid => movie['id'] do%>
 			                            <div class="movie-items2">
 											<div id="movie-items-pics">
 				                            	<img src="<%=photo['url']%>" class="img-rounded">
@@ -236,7 +236,7 @@
 			                            </div>
 			                        <%end%>
 			                    <%else%>
-			                        <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid3 => movie['id'] do%>
+			                        <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid => movie['id'] do%>
 			                            <div class="movie-items2">
 			                        		<div id="movie-items-pics">
 			                              		<img src="/assets/no_image.gif" class="img-rounded">       
@@ -260,7 +260,7 @@
 			                        <%end%>
 			                      <%end%>
 	                  		<%elsif movie['photos'].length==0%>
-	                     		<%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid3 => movie['id'] do%>
+	                     		<%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid => movie['id'] do%>
 			                        <div class="movie-items2">
 			                        	<div id="movie-items-pics">
 			                            	<img src="/assets/no_image.gif" class="img-rounded">             

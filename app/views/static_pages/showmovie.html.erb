@@ -1,23 +1,15 @@
 <div id="home-content">
 	<div id="content">
-		<%@sm['movies'].each do |a1|%>
-			<%if a1['id'] == @id_showmovie%> 
-				<h1 class="title">
-					<%@a2=a1['title']%>
-					<%=a1['title']%>
-				</h1>
-			<%end%>
-		<%end%>
+		<h1 class="title">
+			<%@a2=@sm['title']%>
+			<%=@sm['title']%>
+		</h1>
 		<div id="showmovie-content">
-			<%@sm['movies'].each do |a1|%>
-				<%if a1['id'] == @id_showmovie%> 
-				<!--<div id="trailer">-->
-					<%@trailer="http://www.youtube.com/embed/" +a1['youtube_trailer'] +"?feature=player_detailpage"%>
-				<!--</div>-->
+					<%@trailer="http://www.youtube.com/embed/" +@sm['youtube_trailer'] +"?feature=player_detailpage"%>
 				<div id="movie-pic-slide">
 					<div id="movie-pic">
-						<% if(a1['photos'].length >0) %>
-			                <%@photo = a1['photos'].first%>
+						<% if(@sm['photos'].length >0) %>
+			                <%@photo = @sm['photos'].first%>
 			                <div class="movie-items">
 				                <a href="#myModal1" data-toggle="modal" data-backdrop="false">
 				                	<span class="play"></span>
@@ -27,7 +19,7 @@
 				                	<div id="modal-header" class="modal-header">
     									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     									<h1 class="title">
-    										<%=a1['title']%>
+    										<%=@sm['title']%>
     									</h1>
     								</div>
     								<div id="modal-body" class="modal-body">
@@ -37,8 +29,8 @@
 
 			                <%@poster=@photo['url']%>
 			                </div>
-			            <%elsif(a1['photos'].length ==0) %>
-			            	<%@photo = a1['photos'].first%>
+			            <%elsif(@sm['photos'].length ==0) %>
+			            	<%@photo = @sm['photos'].first%>
 			            	<div class="movie-items">
 			            		<a href="#myModal1" data-toggle="modal" data-backdrop="false">
 				                	<span class="play"></span>
@@ -63,9 +55,7 @@
 						<div class="movie-slide-items">
 							<div id="myCarousel" class="carousel slide">
 				  				<div class="carousel-inner">
-									<%@sm['movies'].each do |a1|%>
-										<%if a1['id'] == @id_showmovie%>
-											<% photos = a1['photos'].select{|photo| photo['poster'] == false} %>
+											<% photos = @sm['photos'].select{|photo| photo['poster'] == false} %>
 											<% if photos.length > 0 %> 
 											  <div align="center" class="item active" id ="movie-slide">
 												<img class="img-rounded" src="<%=photos.first['url']%>">
@@ -80,8 +70,6 @@
 												</div>
 											<% end %>
 											
-										<%end%>
-			  						<%end%>
 		  						</div>
 		  						<a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
 		  						<a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
@@ -93,32 +81,30 @@
 						<div id="content">
 						<h1> Information </h1>
 						<h3> Release Date </h3>
-							<p><%=a1['release']%></p>
+							<p><%=@sm['release']%></p>
 						<h3> Sypnosis </h3>
-							<p><%=a1['synopsis']%></p>	
+							<p><%=@sm['synopsis']%></p>	
 						<h3> Genres </h3>
-						<%a1['genres'].each do |a2|%>
+						<%@sm['genres'].each do |a2|%>
 							<p><%=a2['name']%></p>
 						<%end%>
 						<h3> Director </h3>
-						<%a1['directors'].each do |a2|%>
+						<%@sm['directors'].each do |a2|%>
 							<p><%=a2['name']%></p>
 						<%end%>
 						<h3> Actors </h3>
-						<%a1['actors'].each do |a2|%>
+						<%@sm['actors'].each do |a2|%>
 							<p><%=a2['name']%></p>
 						<%end%>
 						<h3> Rate </h3>
-						<%@rate=a1['rating']%>
-						<p><%=a1['rating']%></p>
+						<%@rate=@sm['rating']%>
+						<p><%=@sm['rating']%></p>
 						</div>
 					</div>	
-				<%end%>
-			<%end%>
+
 
 			<div id="theatre-detail">
-				<%@theatres_for_movie['theatres'].each do |tfm|%>
-					
+				<%@theatres_for_movie['theatres'].each do |tfm|%>					
 					<div id="result-today">
 						<h2 class="cinema-name"> <%=tfm['name']%> </h2>
 						<div id="result-item">

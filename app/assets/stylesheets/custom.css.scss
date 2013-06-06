@@ -1989,6 +1989,11 @@ body {
     }
   }
   .theatres-info1 {
+    margin: 10px 0px 10px 0;
+
+    ul {
+      margin: 0;
+    }
     .tab-pane {
       display: none;
     }

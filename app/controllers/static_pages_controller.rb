@@ -1362,161 +1362,28 @@ UDPSocket.open do |s|
         puts params[:showid3]
 
         if session[:check_guest] == "true"
-          if params[:showid1]
-          session[:showid1] = params[:showid1]
-          @id_showmovie=session[:showid1].to_i
-          @url = "http://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-          @movies =HTTParty.get(@url, body: {user: {auth_token: session[:guest_auth]}, browser: "1"}).parsed_response
-          @sm=@movies['interested_movies']
-
-          elsif params[:showid2]
-          session[:showid2] = params[:showid2]
-          @id_showmovie=session[:showid2].to_i
-          @url = "http://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-          @movies =HTTParty.get(@url, body: {user: {auth_token: session[:guest_auth]}, browser: "1"}).parsed_response
-          #puts @movies
-          @sm=@movies['remaining_movies']
-          @sm['movies'].each do |a1|
-            if a1['id'] == @id_showmovie 
-              @title = a1['title']
-              #puts @title
-            end
+          if params[:showid]#should be movies in theatres page
+            @id_showmovie = params[:showid]
+            @url = "http://flavumovies.herokuapp.com/movies/#{params[:showid]}.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+            @movies =HTTParty.get(@url, body: {user: {auth_token: session[:guest_auth]}, browser: "1"}).parsed_response
+            @sm=@movies['movie']
           end
-
-          #@embed_code = TrailerAddict.get_trailer_embed_code("#{@title}")
-          #@trailers = @embed_code.split
-          #@trailers[1]="width=\"640\""
-          #@trailers[2]="height=\"360\"><param"
-          #@trailers[16]="width=\"640\""
-          #@trailers[17]="height=\"360\"></embed></object>"
-          #@trailers=@trailers.join(" ")
-          #puts @embed_code
-          #puts @trailers
-          @title1=@title.split("3D").join.split(".").join.split(":").join.split(" ")
-          puts @title1
-          (0..@title1.length).each do |a2|
-            if @title1[a2]=="&"
-              @title1[a2]="and"
-            end
-          end
-          @title1=@title1.join("-")
-          puts @title1
-          @trailer_url="http://api.traileraddict.com/?film=#{@title1}&width=640"
-          doc=Hpricot::XML(open(@trailer_url))
-          (doc/:trailers/:trailer).each do |status|
-            ['embed'].each do |e1|
-              #puts "status#{status.at(e1).inner_text}"
-              @trailers= status.at(e1).inner_text
-            end
-          end
-
-          elsif params[:showid3]
-          session[:showid3] = params[:showid3]
-          @id_showmovie=session[:showid3].to_i
-          @url = "http://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-          @movies =HTTParty.get(@url, body: {user: {auth_token: session[:guest_auth]}, browser: "1"}).parsed_response
-          @sm=@movies['not_interested_movies']
-
-          elsif params[:showid]#should be movies in theatres page
-          session[:showid] = params[:showid]
-          @id_showmovie=session[:showid].to_i
-          @url = "http://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-          @movies =HTTParty.get(@url, body: {user: {auth_token: session[:guest_auth]}, browser: "1"}).parsed_response
-          @sm=@movies['remaining_movies']
-          end
-
           @url2 = "http://flavumovies.herokuapp.com/theatres_for_movie/#{@id_showmovie}.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
           @theatres_for_movie=HTTParty.get(@url2, body: {user: {auth_token: session[:guest_auth]}, browser: "1"}).parsed_response
-         
-          #showtime
-          #@url_theatre = "http://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-          #@theatres =HTTParty.get(@url_theatre, body: {user: {auth_token: session[:guest_auth]}, browser: "1"}).parsed_response
-          #@nt=@theatres['nearby_theatres']
-          #@url_movie = "http://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-          #@movies =HTTParty.get(@url_movie, body: {user: {auth_token: session[:guest_auth]}, browser: "1"}).parsed_response
-          #@rm=@movies['remaining_movies']
-        
+      
 
 
         else
-          if params[:showid1]
-          session[:showid1] = params[:showid1]
-          @id_showmovie=session[:showid1].to_i
-          @url = "http://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-          @movies =HTTParty.get(@url, body: {user: {auth_token: session[:auth]}, browser: "1"}).parsed_response
-          @sm=@movies['interested_movies']
-
-          elsif params[:showid2]
-          session[:showid2] = params[:showid2]
-          @id_showmovie=session[:showid2].to_i
-          @url = "http://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-          @movies =HTTParty.get(@url, body: {user: {auth_token: session[:auth]}, browser: "1"}).parsed_response
-          #puts @movies
-          @sm=@movies['remaining_movies']
-          #@sm['movies'].each do |a1|
-          #  if a1['id'] == @id_showmovie 
-          #    @title = a1['title']
-              #puts @title
-          #  end
-          #end
-          #@title1=@title.split("3D").join.split(".").join.split(" ")
-          #puts @title1
-          #(0..@title1.length).each do |a2|
-          #  if @title1[a2]=="&"
-          #    @title1[a2]="and"
-          #  end
-          #end
-
-          #@title1=@title1.join("-")
-          
-          puts @title1
-          @trailer_url="http://api.traileraddict.com/?film=#{@title1}&width=640"
-          doc=Hpricot::XML(open(@trailer_url))
-          (doc/:trailers/:trailer).each do |status|
-            ['embed'].each do |e1|
-              #puts "status#{status.at(e1).inner_text}"
-              @trailer= status.at(e1).inner_text
-            end
-          end
-
-          elsif params[:showid3]
-          session[:showid3] = params[:showid3]
-          @id_showmovie=session[:showid3].to_i
-          @url = "http://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-          @movies =HTTParty.get(@url, body: {user: {auth_token: session[:auth]}, browser: "1"}).parsed_response
-          @sm=@movies['not_interested_movies']
-
-          elsif params[:showid] && params[:show]#should be movies in theatres page
-          @id_showmovie = params[:showid]
-          @url = "http://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-          @movies =HTTParty.get(@url, body: {user: {auth_token: session[:auth]}, browser: "1"}).parsed_response
-          @st=@theatres['nearby_theatres']['theatres'].select{|x| x['id'] = params[:show]}.first
-          @sm=@st['movies']
-          puts @sm
-          #@sm['movies'].each do |a1|
-          #  if a1['id'] == @id_showmovie 
-          #    @title = a1['title']
-              #puts @title
-          #  end
-          #end
-          #@title1=@title.split(" ").join("-")
-          #puts @title1
-          #@trailer_url="http://api.traileraddict.com/?film=#{@title1}&width=640"
-          #doc=Hpricot::XML(open(@trailer_url))
-          #(doc/:trailers/:trailer).each do |status|
-          #  ['embed'].each do |e1|
-              #puts "status#{status.at(e1).inner_text}"
-          #    @trailer= status.at(e1).inner_text
-          #  end
-          #end
+          if params[:showid]#should be movies in theatres page
+            @id_showmovie = params[:showid]
+            @url = "http://flavumovies.herokuapp.com/movies/#{params[:showid]}.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+            @movies =HTTParty.get(@url, body: {user: {auth_token: session[:auth]}, browser: "1"}).parsed_response
+            @sm=@movies['movie']
           end
           @url2 = "http://flavumovies.herokuapp.com/theatres_for_movie/#{@id_showmovie}.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
           @theatres_for_movie=HTTParty.get(@url2, body: {user: {auth_token: session[:auth]}, browser: "1"}).parsed_response
       
         end
-
-      #puts params[:liked]
-      #puts @liked_movies
     end
 
   end
