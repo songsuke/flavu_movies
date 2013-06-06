@@ -1478,9 +1478,8 @@ UDPSocket.open do |s|
     #puts params[:reset_password_token]
     #session[:reset_password_token] = params[:reset_password_token]
     #puts params[:reset_password_token]
-    if params[:reset_password_token]
       @password_reset_token=params[:reset_password_token]
-    end
+
     if params[:confirm]=="confirm"
       puts "yes"
       puts params[:password]
@@ -1496,5 +1495,9 @@ UDPSocket.open do |s|
 
   end
 
-
+  def idevice
+    if params[:password_reset_token]
+      @password_reset_token = params[:password_reset_token]
+    end
+  end
 end
