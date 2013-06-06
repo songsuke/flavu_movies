@@ -68,6 +68,59 @@
 	}
 }
 
+@media (max-width: 767px) { 
+	body {
+		background-color: black;
+		background-repeat: no-repeat;
+		background-position: top center;
+		background-attachment: fixed;
+	}
+
+
+	#header {
+	margin-top: 50px;
+	margin-bottom: 2em;
+	}
+
+	#logo { 
+	  	float: none; 
+	  	text-align: center !important; 
+	}
+
+	#password1, #login1 {
+		display: inline;
+		padding-right: 10px;
+		width: 140px;
+		label {
+			display: inline;
+			width: 140px;
+		}
+	}
+
+	.content {
+		clear: both;
+		margin: 0 auto;
+	}
+
+
+	#btn {
+		margin-bottom: 20px;
+	}
+
+	button.btn.btn-large {
+		width: 190px;
+		height: 60px;
+	}
+
+	#cover-content {
+		text-align: center;
+		margin: 20% 0 0 0;
+	}
+
+}
+
+
+
 @media (max-width: 480px) { 
 	body {
 		background-color: black;
