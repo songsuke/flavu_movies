@@ -279,77 +279,38 @@ require 'open-uri'
       redirect_to cover_path
     else
       if session[:check_guest] == 'true'
+        @url = "http://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+        @theatres =HTTParty.get(@url, body: {user: {auth_token: session[:guest_auth]}, browser: "1"}).parsed_response
         if params[:showid1]
-        session[:id_showtheatre] = params[:showid1]
-        @id_showtheatre = session[:id_showtheatre].to_i
-        @url = "http://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-        @theatres =HTTParty.get(@url, body: {user: {auth_token: session[:guest_auth]}, browser: "1"}).parsed_response
-        @st=@theatres['liked_theatres']
-      elsif params[:showid2]
-        session[:id_showtheatre] = params[:showid2]
-        @id_showtheatre = session[:id_showtheatre].to_i
-        @url = "http://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-        @theatres =HTTParty.get(@url, body: {user: {auth_token: session[:guest_auth]}, browser: "1"}).parsed_response
-        @st=@theatres['nearby_theatres']
-      elsif params[:showid3]
-        session[:id_showtheatre] = params[:showid3]
-        @id_showtheatre = session[:id_showtheatre].to_i
-        @url = "http://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-        @theatres =HTTParty.get(@url, body: {user: {auth_token: session[:guest_auth]}, browser: "1"}).parsed_response
-        @st=@theatres['not_interested_theatres']
-      end
-
-      
-      #showtime
-        #@url_theatre = "http://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-        #@theatres =HTTParty.get(@url_theatre, body: {user: {auth_token: session[:guest_auth]}}).parsed_response
-        #@nt=@theatres['nearby_theatres']
-        #@url_movie = "http://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-        #@movies =HTTParty.get(@url_movie, body: {user: {auth_token: session[:guest_auth]}}).parsed_response
-        #@rm=@movies['remaining_movies']
-
+          @id_showtheatre = params[:showid1]
+          @st=@theatres['liked_theatres']['theatres'].select{|x| x['id'] = @id_showtheatre}.first
+        elsif params[:showid2]
+          @id_showtheatre = params[:showid2].to_i
+          puts @id_showtheatre
+          @st=@theatres['nearby_theatres']['theatres'].select{|x| x['id'] = @id_showtheatre}.first
+        elsif params[:showid3]
+          @id_showtheatre = params[:showid3]
+          @st=@theatres['not_interested_theatres']['theatres'].select{|x| x['id'] = @id_showtheatre}.first
+        end
 
       else
-      #puts params[:showid]
-      if params[:showid1]
-        session[:id_showtheatre] = params[:showid1]
-        @id_showtheatre = session[:id_showtheatre].to_i
         @url = "http://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
         @theatres =HTTParty.get(@url, body: {user: {auth_token: session[:auth]}, browser: "1"}).parsed_response
-        @st=@theatres['liked_theatres']
-      elsif params[:showid2]
-        session[:id_showtheatre] = params[:showid2]
-        @id_showtheatre = session[:id_showtheatre].to_i
-        @url = "http://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-        @theatres =HTTParty.get(@url, body: {user: {auth_token: session[:auth]}, browser: "1"}).parsed_response
-        @st=@theatres['nearby_theatres']
-      elsif params[:showid3]
-        session[:id_showtheatre] = params[:showid3]
-        @url = "http://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-        @id_showtheatre = session[:id_showtheatre].to_i
-        @theatres =HTTParty.get(@url, body: {user: {auth_token: session[:auth]}, browser: "1"}).parsed_response
-        @st=@theatres['not_interested_theatres']
-      end
-
-      #@url = "http://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-      #@theatres =HTTParty.get(@url, body: {user: {auth_token: session[:auth]}}).parsed_response
-
-      #@theatres=JSON.parse(open("http://flavumovies.herokuapp.com/theatres.json?auth_token=ZhhSqcdR2T6KoVv29UZp").read) 
-      #@lt=@theatres['liked_theatres']
-      #@nt=@theatres['nearby_theatres']
-      #@nit=@theatres['not_interested_theatres']
-      #showtime
-        #@url_theatre = "http://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-        #@theatres =HTTParty.get(@url_theatre, body: {user: {auth_token: session[:auth]}}).parsed_response
-        #@nt=@theatres['nearby_theatres']
-        #@url_movie = "http://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-        #@movies =HTTParty.get(@url_movie, body: {user: {auth_token: session[:auth]}}).parsed_response
-        #@rm=@movies['remaining_movies']
-
+        if params[:showid1]
+          @id_showtheatre = params[:showid1]
+          @st=@theatres['liked_theatres']['theatres'].select{|x| x['id'] = @id_showtheatre}.first
+        elsif params[:showid2]
+          @id_showtheatre = params[:showid2]
+          puts @id_showtheatre
+          @st=@theatres['nearby_theatres']['theatres'].select{|x| x['id'] = @id_showtheatre}.first
+        elsif params[:showid3]
+          @id_showtheatre = params[:showid3]
+          @st=@theatres['not_interested_theatres']['theatres'].select{|x| x['id'] = @id_showtheatre}.first
+        end
       end
     end
-
   end
+
   def buddies
     if (session[:auth])
     @a1=session[:auth]
@@ -1393,15 +1354,13 @@ UDPSocket.open do |s|
     if (!session[:auth] && !session[:guest_auth])
       redirect_to cover_path
     else
-        #@a1=session[:auth]
         puts session[:check_guest]
         puts session[:auth]
         puts session[:guest_auth]
         puts params[:showid1]
         puts params[:showid2]
         puts params[:showid3]
-        #session[:showid] = params[:showid]
-        #@id_showmovie=session[:showid].to_i
+
         if session[:check_guest] == "true"
           if params[:showid1]
           session[:showid1] = params[:showid1]
@@ -1527,12 +1486,13 @@ UDPSocket.open do |s|
           @movies =HTTParty.get(@url, body: {user: {auth_token: session[:auth]}, browser: "1"}).parsed_response
           @sm=@movies['not_interested_movies']
 
-          elsif params[:showid]#should be movies in theatres page
-          session[:showid] = params[:showid]
-          @id_showmovie=session[:showid].to_i
-          @url = "http://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+          elsif params[:showid] && params[:show]#should be movies in theatres page
+          @id_showmovie = params[:showid]
+          @url = "http://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
           @movies =HTTParty.get(@url, body: {user: {auth_token: session[:auth]}, browser: "1"}).parsed_response
-          @sm=@movies['remaining_movies']
+          @st=@theatres['nearby_theatres']['theatres'].select{|x| x['id'] = params[:show]}.first
+          @sm=@st['movies']
+          puts @sm
           #@sm['movies'].each do |a1|
           #  if a1['id'] == @id_showmovie 
           #    @title = a1['title']
@@ -1552,15 +1512,6 @@ UDPSocket.open do |s|
           end
           @url2 = "http://flavumovies.herokuapp.com/theatres_for_movie/#{@id_showmovie}.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
           @theatres_for_movie=HTTParty.get(@url2, body: {user: {auth_token: session[:auth]}, browser: "1"}).parsed_response
-          #puts @theatres_for_movie
-          
-          #showtime
-          #@url_theatre = "http://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-          #@theatres =HTTParty.get(@url_theatre, body: {user: {auth_token: session[:auth]}, browser: "1"}).parsed_response
-          #@nt=@theatres['nearby_theatres']
-          #@url_movie = "http://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-          #@movies =HTTParty.get(@url_movie, body: {user: {auth_token: session[:auth]}, browser: "1"}).parsed_response
-          #@rm=@movies['remaining_movies']
       
         end
 
@@ -1656,29 +1607,21 @@ UDPSocket.open do |s|
     end
   end
 
-  def request_password_recovery
-    puts params[:email]
-    puts params[:confirmation_token]
-    @url = "http://flavumovies.herokuapp.com/users/confirmation.json"
-    @confirm_account =HTTParty.get(@url, body: {confirmation_token: params[:confirmation_token]}).parsed_response
-    session[:auth]=@confirm_account['auth_token']   
-    redirect_to home_path
-  end
-
   def reset_password
     #puts params[:reset_password_token]
     #session[:reset_password_token] = params[:reset_password_token]
     #puts params[:reset_password_token]
-    @reset_password=params[:reset_password_token]
-    puts params[:confirm]
+    if params[:reset_password_token]
+      @password_reset_token=params[:reset_password_token]
+    end
     if params[:confirm]=="confirm"
       puts "yes"
       puts params[:password]
       puts params[:password_confirmation]       
       @url = "http://flavumovies.herokuapp.com/users/password.json"
-      @reset_password =HTTParty.put(@url, body: { user: {reset_password_token: params[:reset_password], password: params[:password], password_confirmation: params[:password_confirmation] }}).parsed_response
-      session[:auth]=@reset_password['auth_token']   
-      puts @reset_password
+      @password_reset_token =HTTParty.put(@url, body: { user: {reset_password_token: params[:reset_password], password: params[:password], password_confirmation: params[:password_confirmation] }}).parsed_response
+      session[:auth]=@password_reset_token['auth_token']   
+      puts @password_reset_token
       redirect_to home_path
     else
 
