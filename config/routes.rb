@@ -16,6 +16,7 @@ EasilyxMovie::Application.routes.draw do
   match '/confirm_account', to: 'static_pages#confirm_account'
   match '/forgot_password', to: 'static_pages#forgot_password'
   match '/reset_password', to: 'static_pages#reset_password'
+  match '/idevice', to: 'static_pages#idevice'
 
   
 
