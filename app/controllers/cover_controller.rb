@@ -18,8 +18,8 @@ class CoverController < ApplicationController
 	    puts @guests
 	    session[:guest]=@guests
 	    session[:check_guest]="true"
-	    #session[:guest_auth]=@guests['auth_token']
-        session[:guest_auth] ={secure: true, httponly: true, domain: 'flavu.com', value: "#{@guests['auth_token']}"}
+	    session[:guest_auth]=@guests['auth_token']
+        #session[:guest_auth] ={secure: true, httponly: true, domain: 'flavu.com', value: "#{@guests['auth_token']}"}
 
 	    puts @guests['guest']
 	    puts @guests['username']
