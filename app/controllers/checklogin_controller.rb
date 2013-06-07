@@ -9,8 +9,8 @@ def checklogin
       puts @users.first[0]
       if (@users.first[0]=="error")
         flash[:error] = "Username or Password is wrong. Please try again"
-        #session[:check_guest] ={secure: true, httponly: true, domain: 'flavu.com', value: "true"}
-        session[:check_guest] ="true"
+        session[:check_guest] ={secure: true, httponly: true, domain: 'flavu.com', value: "true"}
+        #session[:check_guest] ="true"
         puts session[:check_guest]
         redirect_to home_path
       else
