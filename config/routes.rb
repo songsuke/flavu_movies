@@ -5,7 +5,6 @@ EasilyxMovie::Application.routes.draw do
   match '/validate', to: 'static_pages#validate'
   match '/showtimes', to: 'static_pages#showtimes'
   match '/checklogin', to: 'checklogin#checklogin'
-  match '/free', to: 'free#free'
   match '/showmovie', to: 'static_pages#showmovie'
   match '/showtheatre', to: 'static_pages#showtheatre'
   match '/preferences', to: 'static_pages#preferences'
@@ -20,7 +19,6 @@ EasilyxMovie::Application.routes.draw do
 
   
 
-  match '/request_password_recovery', to: 'static_pages#request_password_recovery'
 
   #get "static_pages/signin"
   match '/signin', to: 'static_pages#signin'
@@ -51,7 +49,6 @@ EasilyxMovie::Application.routes.draw do
 
   root to: 'static_pages#home'
  # root :to => 'posts#index'
-  match '/getip',    to: 'ip_get#getip'
   #match '/index', to: 'preferences#index'
   #match '/edit', to: 'preferences#edit'
   #match '/show', to: 'preferences#show'
