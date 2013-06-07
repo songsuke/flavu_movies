@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
-require 'httpsarty'
+require 'httparty'
 require 'open-uri'
 
   def signin
