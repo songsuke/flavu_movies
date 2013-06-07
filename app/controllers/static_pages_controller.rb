@@ -1144,6 +1144,7 @@ require 'open-uri'
         end
         @account =HTTParty.put("http://flavumovies.herokuapp.com/users.json", 
         body: {user: {auth_token: session[:auth]}}).parsed_response
+        puts @account
             puts params[:commit1]
             puts params[:commit2]
       
@@ -1180,11 +1181,11 @@ UDPSocket.open do |s|
       
       @latlong=Geocoder.coordinates(@ip_address)
 
-      session[:latitude]=@latlong[0]
-      session[:longitude]=@latlong[1]
+      #session[:latitude]=@latlong[0]
+      #session[:longitude]=@latlong[1]
       #30.267447, -97.739513
-      #session[:latitude]="49.25"
-      #session[:longitude]="-123.1333"
+      session[:latitude]="49.25"
+      session[:longitude]="-123.1333"
       #@lat_lng2
       puts session[:latitude]
       puts session[:longitude]

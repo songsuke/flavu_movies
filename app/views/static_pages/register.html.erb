@@ -1,5 +1,9 @@
-<h1> Register </h1>
-  <!--<form action = "/signin" method ="post">-->
+<div id="register-content">
+  <h1 class="title"> Register </h1>
+
+  <div id="content">
+    <div id="register-detail">
+
   <%if flash[:error]%>
   <div class = "alert">
     <p> <%=flash[:error]%></p>
@@ -11,10 +15,9 @@
 
   <div class='control-group'>
     <div class='controls'>
-      <!--<label for="user_login">Login</label>-->
       <%= label_tag("Email") %>
-      <!--<input id="user_login" name="user[login]" size="30" type="text">-->
-      <%= text_field_tag "email"%>
+      <%= text_field_tag "email" , nil, :placeholder => "youremail@example.com"%>
+
     </div>
   </div>
 
@@ -23,7 +26,7 @@
       <!--<label for="user_login">Login</label>-->
       <%= label_tag("Email Confirmation") %>
       <!--<input id="user_login" name="user[login]" size="30" type="text">-->
-      <%= text_field_tag "email_confirmation"%>
+      <%= text_field_tag "email_confirmation" , nil, :placeholder=>"Please match your email"%>
     </div>
   </div>
 
@@ -33,7 +36,7 @@
       <!--<label for="user_password">Password</label>-->
       <%= label_tag("Password") %>
       <!--<input id="user_password" name="user[password]" size="30" type="password">-->
-      <%= password_field_tag("password") %>
+      <%= password_field_tag "password" , nil, :placeholder => "At least 6 characters"%>
     </div>
   </div>
 
@@ -45,9 +48,46 @@
   <button name="confirm" id="confirm" value="confirm"> Confirm </button>
    </div>
 
+<div class="accordion" id="accordion2">
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+        Privacy Policy
+      </a>
+    </div>
+    <div id="collapseOne" class="accordion-body collapse">
+      <div class="accordion-inner">
+PRIVACY POLICY
+Effective <Date>
 
+<p>At Easily Experience Inc. we value the privacy of our users, this document should explain about how FlavuMovies ("Application") collects and uses your information.</p>
+
+<p>INFORMATION COLLECTION AND USAGE
+Registration is optional when using our Application. However, some features are only accessible to registered users. Registered users are asked to provide their email address and a password for authentication purposes. Your email address may also be used to reset your password and notify you of any updates to our Application.</p>
+
+<p>Registered users may optionally choose to provide additional information including a username, display name, phone number and access to their contacts list. This information may be used for interactions with or representing oneself to other users ("Friend" or "Buddy".</p>
+
+<p>Registered users may choose to change the information they have provided by navigating to "Settings" => "My Account" => "View Account" and pressing the "Edit" option in the top right hand corner.</p>
+
+<p>For all users, use of the Application may require use of GPS technology (or similar technology) to determine your approximate location so that suitable theatres and movies can be displayed to enhance your experience.</p>
+
+<p>We may also collect other technical information including device model, operating system version, Application version, vendor identifier and log data (certain interactions with the Application that are automatically created).</p>
+
+<p>LINKS TO OTHER WEBSITES
+Our Application may contain links to other websites. When you use these links and leave our Application we have no control of the activities on these websites. Under such circumstances, we cannot assume responsibility or ensure that the practices outlined in this policy are adhered to. Please exercise your own judgement when using these websites.</p>
+
+<p>POLICY CHANGES
+This policy may be updated from time to time. When changes are made they will be reflected on this page by a revised effective date, and in some cases notice will be given through email.</p>
+
+<p>CONTACT US
+If you have any questions or concerns regarding our policy, please contact us at email@flavu.com</p>
+      </div>
+    </div>
+  </div>
+</div>
   
 
-<!--</form>-->
-
 <%end%>
+    </div>
+  </div>
+</div>

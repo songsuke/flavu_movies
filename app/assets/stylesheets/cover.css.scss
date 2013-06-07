@@ -55,7 +55,10 @@
 		height: 500px;
 		margin-bottom: 1em;
 		text-align: center;
-		
+
+		#remember-but {
+			margin-top: 15px;
+		}				
 	}
 
 	#btn {
@@ -78,6 +81,7 @@
 
   input[type="text"],input[type="password"] {
     height: 35px;
+    width: 100%;
   }
 
 	#header {
@@ -118,6 +122,15 @@
 	#cover-content {
 		text-align: center;
 		margin: 5% 0 0 0;
+		.modal-body {
+			text-align: left;
+		}
+
+		#remember-but {
+			margin-top: 15px;
+			margin-bottom: 15px;
+		}		
+
 	}
 
 }
@@ -132,7 +145,10 @@
 		background-attachment: fixed;
 	}
 
-
+  input[type="text"],input[type="password"] {
+    height: 35px;
+    width: 100%;
+  }
 	#header {
 	margin-top: 50px;
 	margin-bottom: 2em;
@@ -171,6 +187,13 @@
 	#cover-content {
 		text-align: center;
 		margin: 25% 0 0 0;
+		.modal-body {
+			text-align: left;
+		}
+		#remember-but {
+			margin-top: 15px;
+			margin-bottom: 15px;			
+		}		
 	}
 
 }
