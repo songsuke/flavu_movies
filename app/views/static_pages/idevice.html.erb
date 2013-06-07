@@ -1,6 +1,8 @@
-<script>
-  var userAgent = window.navigator.userAgent;
-  if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i)) {
-    window.location = <%= "flavumovies://?password_reset_token=#{@password_reset_token}" %>
-  }
-</script>
+	<script> 
+		var userAgent = window.navigator.userAgent;
+		if (userAgent.match(/iPhone/i) || userAgent.match(/iPad/i)) {	
+			var baseUrl = "flavumovies://?reset_password_token=";
+			var token = "<%= @reset_password_token %>";
+			window.location = baseUrl + token;
+		}
+	</script>

@@ -278,36 +278,18 @@ require 'open-uri'
     if (!session[:auth] && !session[:guest_auth])
       redirect_to cover_path
     else
+      @url = "http://flavumovies.herokuapp.com/theatres/#{params[:showid]}.json"
       if session[:check_guest] == 'true'
-        @url = "http://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-        @theatres =HTTParty.get(@url, body: {user: {auth_token: session[:guest_auth]}, browser: "1"}).parsed_response
-        if params[:showid1]
-          @id_showtheatre = params[:showid1]
-          @st=@theatres['liked_theatres']['theatres'].select{|x| x['id'] = @id_showtheatre}.first
-        elsif params[:showid2]
-          @id_showtheatre = params[:showid2].to_i
-          puts @id_showtheatre
-          @st=@theatres['nearby_theatres']['theatres'].select{|x| x['id'] = @id_showtheatre}.first
-        elsif params[:showid3]
-          @id_showtheatre = params[:showid3]
-          @st=@theatres['not_interested_theatres']['theatres'].select{|x| x['id'] = @id_showtheatre}.first
+        if params[:showid]
+          @theatres =HTTParty.get(@url, body: {user: {auth_token: session[:guest_auth]}, browser: "1"}).parsed_response
         end
 
       else
-        @url = "http://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-        @theatres =HTTParty.get(@url, body: {user: {auth_token: session[:auth]}, browser: "1"}).parsed_response
-        if params[:showid1]
-          @id_showtheatre = params[:showid1]
-          @st=@theatres['liked_theatres']['theatres'].select{|x| x['id'] = @id_showtheatre}.first
-        elsif params[:showid2]
-          @id_showtheatre = params[:showid2]
-          puts @id_showtheatre
-          @st=@theatres['nearby_theatres']['theatres'].select{|x| x['id'] = @id_showtheatre}.first
-        elsif params[:showid3]
-          @id_showtheatre = params[:showid3]
-          @st=@theatres['not_interested_theatres']['theatres'].select{|x| x['id'] = @id_showtheatre}.first
+        if params[:showid]
+          @theatres =HTTParty.get(@url, body: {user: {auth_token: session[:auth]}, browser: "1"}).parsed_response
         end
       end
+      @st=@theatres['theatre']
     end
   end
 
@@ -1496,8 +1478,6 @@ UDPSocket.open do |s|
   end
 
   def idevice
-    if params[:password_reset_token]
-      @password_reset_token = params[:password_reset_token]
-    end
+    @reset_password_token = params[:reset_password_token]
   end
 end

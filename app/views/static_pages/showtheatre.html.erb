@@ -42,10 +42,9 @@
 					<div id="map-canvas"></div>
 				</ul>
 			</div>
-
 			<%@st['movies'].each do |movie|%>
 				<div class="movie-items1">
-					<% if(movie['photos'].length >0 && movie['available']=true) %>
+					<% if movie['photos'].length >0 %>
 	                   	<%photo = movie['photos'].first%> 
 	                    		<%if photo['poster']==true%>
 			                        <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid => movie['id'] do%>
@@ -54,7 +53,7 @@
 				                            	<img src="<%=photo['url']%>" class="img-rounded">
 				                            </div>
 				                            <div id="movie-items-info-tiny">
-					                            <p style="font-weight:bold;"><%=movie['title']%></p>
+					                            <p style="font-weight:bold;"><%=movie['title']%></p>		              
 				                              	<div id="hiding">
 				                              		<p>
 													<%movie['genres'].each do |a2|%>
@@ -75,10 +74,10 @@
 			                        <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid => movie['id'] do%>
 			                            <div class="movie-items2">
 			                        		<div id="movie-items-pics">
-			                              		<img src="/assets/no_image.gif" class="img-rounded">       
+			                              		<img src="/assets/no_image.gif" class="img-rounded"> 
 											</div>
 				                            <div id="movie-items-info-tiny">
-					                            <p style="font-weight:bold;"><%=movie['title']%></p>
+					                            <p style="font-weight:bold;"><%=movie['title']%></p>					 
 			                              		<div id="hiding">
 			                              			<p>
 													<%movie['genres'].each do |a2|%>
@@ -95,11 +94,11 @@
 			                            </div>                           
 			                        <%end%>
 			                      <%end%>
-	                  		<%elsif movie['photos'].length==0 && movie['available']=true %>
+	                  		<%elsif movie['photos'].length==0 %>
 			                    <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid => movie['id'] do%>
 			                        <div class="movie-items2">
 			                        	<div id="movie-items-pics">
-			                            	<img src="/assets/no_image.gif" class="img-rounded">             
+			                            	<img src="/assets/no_image.gif" class="img-rounded">
 			                       		</div>
 				                        <div id="movie-items-info-tiny">
 					                            <p style="font-weight:bold;"><%=movie['title']%></p>

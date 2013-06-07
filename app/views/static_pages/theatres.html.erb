@@ -41,7 +41,7 @@
   								<li><%=liked['location']['address']%> <%=liked['location']['city']%>
   								</li>
   								<li>Phone number : <%=liked['phone_number']%></li>
-  								<li><%=link_to "More Information", :action=>"showtheatre" , :controller=>"static_pages" , :showid1 => liked['id']%>
+  								<li><%=link_to "More Information", :action=>"showtheatre" , :controller=>"static_pages" , :showid => liked['id']%>
   								</li>
 								<%=form_tag '/theatres' do %>
 									<li><button name="soso1" id="soso1" value="<%=liked['id']%>" class='btn btn-mini'> <i class="icon-remove"></i></button>
@@ -59,7 +59,7 @@
   								<li><%=nearby['location']['address']%> <%=nearby['location']['city']%>
   								</li>
   								<li>Phone number : <%=nearby['phone_number']%></li>
-  								<li><%=link_to "More Information", :action=>"showtheatre" , :controller=>"static_pages" , :showid2 => nearby['id']%>
+  								<li><%=link_to "More Information", :action=>"showtheatre" , :controller=>"static_pages" , :showid => nearby['id']%>
   								</li>
 								<%=form_tag '/theatres' do %>
 									<li><button name="liked" id="liked" value="<%=nearby['id']%>" class='btn btn-mini'> <i class="icon-thumbs-up"></i></button>
@@ -77,7 +77,7 @@
   								<li><%=unliked['location']['address']%> <%=unliked['location']['city']%>
   								</li>
   								<li>Phone number : <%=unliked['phone_number']%></li>
-  								<li><%=link_to "More Information", :action=>"showtheatre" , :controller=>"static_pages" , :showid3 => unliked['id']%>
+  								<li><%=link_to "More Information", :action=>"showtheatre" , :controller=>"static_pages" , :showid => unliked['id']%>
   								</li>
 								<%=form_tag '/theatres' do %>
 									<li><button name="liked" id="liked" value="<%=unliked['id']%>" class='btn btn-mini'> <i class="icon-thumbs-up"></i></button>
