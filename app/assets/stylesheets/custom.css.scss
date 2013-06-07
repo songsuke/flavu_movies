@@ -653,7 +653,7 @@ div.hidden{
   float: left;
   padding: 0;
     img {
-    max-width: 100%;
+    max-width: 200px;
     max-height: 100%;
     width: auto;
     height: 300px;
@@ -1516,7 +1516,7 @@ body {
     font-weight: bold;
     font-family: 'DBHelvethaicaX55Regular',sans-serif;
   }
-  
+
   input[type="text"],input[type="password"] {
     height: 35px;
   }
@@ -1724,8 +1724,21 @@ body {
       position: relative;
       text-shadow: 0 1px 0 #fff;
       img {
+        max-width: 90px;
         width: auto;
         height: 135px;
+      }
+      .modal-body {
+        position: relative;
+        overflow-y: auto;
+        width: auto;
+        height: auto;
+        max-height: 400px;
+        padding: 0;
+        iframe {
+          width: 100%;
+          height: auto;
+        }
       }
     }
     #movie-slide {
