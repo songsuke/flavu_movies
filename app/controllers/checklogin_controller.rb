@@ -17,8 +17,11 @@ def checklogin
         puts @users
         @auth_token=@users['auth_token']
         session[:username] = @users['username']
+        #session[:username] ={secure: true, httponly: true, domain: 'flavu.com', value: "true"}        
         session[:user] = @users
-        session[:auth] = @auth_token
+        #session[:auth] = @auth_token
+        session[:auth] ={secure: true, httponly: true, domain: 'flavu.com', value: "#{@auth_token}"}
+
         #session[:latitude] = '49.28385281'
        # session[:longitude] = '-123.1120815'
         @username=session[:username]
