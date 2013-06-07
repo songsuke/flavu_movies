@@ -1204,25 +1204,6 @@ UDPSocket.open do |s|
         #session[:rm]=@movies['remaining_movies']
       else 
 
-        #for showtimes
-        #@showtimes=[]
-        #@url_theatre = "http://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-        #@theatres =HTTParty.get(@url_theatre, body: {user: {auth_token: session[:auth]}, browser: "1"}).parsed_response
-        #@nt=@theatres['nearby_theatres']
-        #@nearby_theatres = @theatres['nearby_theatres']['theatres']
-        #@nearby_theatres.each do |nearby_theatre|
-        #  nearby_theatre['movies'].each do |movie|
-        #    movie['showtimes'].each do |showtime|
-        #      showtime['theatre_id'] = nearby_theatre['id']
-        #      showtime['movie_id'] = movie['id']
-        #      @showtimes << showtime
-        #    end
-        #  end
-        #end
-        #s=@showtimes.select{|st| st['movie_id']=99}
-        #puts @showtimes
-        #session[:showtimes] = @showtimes
-
         @url_movie = "http://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
         @movies =HTTParty.get(@url_movie, body: {user: {auth_token: session[:auth]}, browser: "1"}).parsed_response
         @rm=@movies['remaining_movies']
