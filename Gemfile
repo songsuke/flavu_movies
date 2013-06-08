@@ -3,6 +3,8 @@ gem 'sinatra', '1.1.0'
 gem 'rails', '3.2.13'
 gem 'devise'
 gem 'therubyracer', :platforms => :ruby
+gem 'rack-ssl', :require => 'rack/ssl'
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
