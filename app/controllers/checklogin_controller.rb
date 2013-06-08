@@ -5,7 +5,7 @@ def checklogin
     else
       
       puts "my param #{params[:login]}"
-      @users =httparty.post("https://flavumovies.herokuapp.com/users/sign_in.json", body: {user: {login: params[:login], password: params[:password]}}).parsed_response 
+      @users =HTTParty.post("https://flavumovies.herokuapp.com/users/sign_in.json", body: {user: {login: params[:login], password: params[:password]}}).parsed_response 
       puts @users.first[0]
       if (@users.first[0]=="error")
         flash[:error] = "Username or Password is wrong. Please try again"

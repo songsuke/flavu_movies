@@ -13,7 +13,7 @@ class CoverController < ApplicationController
 
 		#@guest_displayname=SecureRandom.uuid
 
-	  	@guests =httparty.post("https://flavumovies.herokuapp.com/users.json", body: {user: {email: @guest_email, username: @guest_gen, password: @guest_password, password_confirmation: @guest_password, display_name: @guest_gen, guest: params[:guest]}}).parsed_response
+	  	@guests =HTTParty.post("https://flavumovies.herokuapp.com/users.json", body: {user: {email: @guest_email, username: @guest_gen, password: @guest_password, password_confirmation: @guest_password, display_name: @guest_gen, guest: params[:guest]}}).parsed_response
 	    puts @guests['id']
 	    puts @guests
 	    session[:guest]=@guests
