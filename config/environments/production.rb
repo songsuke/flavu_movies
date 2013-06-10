@@ -4,7 +4,8 @@ EasilyxMovie::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
   config.middleware.use Rack::SSL
   config.middleware.insert_before ActionDispatch::Cookies, Rack::SSL
-
+config.middleware.insert_before ActionDispatch::Static, "Rack::SSL"
+config.middleware.insert_before ActionDispatch::Static, Rack::SSL, :exclude => proc { |env| env['HTTPS'] != 'on' }
   # Code is not reloaded between requests
   config.cache_classes = true
 
