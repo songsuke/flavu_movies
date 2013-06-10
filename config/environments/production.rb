@@ -2,7 +2,7 @@ EasilyxMovie::Application.configure do
   #require 'rack/ssl'
 
   # Settings specified here will take precedence over those in config/application.rb
-  #config.middleware.use Rack::SSL
+  config.middleware.use Rack::SSL
   # Code is not reloaded between requests
   config.cache_classes = true
 
