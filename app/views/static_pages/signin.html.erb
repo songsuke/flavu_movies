@@ -12,7 +12,7 @@
 <%end%>
 
   <%= form_tag '/signin' do %>
-  <%if (!session[:auth])%>
+  <%if (!cookies.signed[:auth])%>
   <div class='control-group'>
     <div class='controls'>
       <!--<label for="user_login">Login</label>-->

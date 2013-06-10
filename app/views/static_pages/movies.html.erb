@@ -1,4 +1,4 @@
-  <%if(session[:auth] || session[:guest_auth])%>
+  <%if(cookies.signed[:auth]) || (cookies.signed[:guest_auth])%>
 
   <div id="movie-content">
     <div id="movies">
