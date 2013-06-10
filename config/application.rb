@@ -11,6 +11,7 @@ end
 
 module EasilyxMovie
   class Application < Rails::Application
+    config.middleware.use Rack::SSL
     #config.middleware.use Rack::SslEnforcer
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -36,7 +37,7 @@ module EasilyxMovie
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
-    config.force_ssl = false
+    config.force_ssl = true
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
 
