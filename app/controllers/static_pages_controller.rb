@@ -1,5 +1,4 @@
 class StaticPagesController < ApplicationController
-require 'httparty'
 require 'open-uri'
 
   def signin
@@ -1359,7 +1358,7 @@ UDPSocket.open do |s|
   end
 
   def news
-    @news =HTTParty.get("http://ajax.googleapis.com/ajax/services/search/news?v=1.0&q=movie&rsz=8").parsed_response
+    @news =HTTParty.get("//ajax.googleapis.com/ajax/services/search/news?v=1.0&q=movie&rsz=8").parsed_response
     #@news['responseData']['results'].each do |news1|
       #@link1=news1['unescapedUrl']
     #end
@@ -1400,7 +1399,7 @@ UDPSocket.open do |s|
     end
     @sr=@sr.join("+")
     #puts @sr
-    @url2="http://api.nytimes.com/svc/movies/v2/reviews/search.json?query=#{@sr}&api-key=a51160564ac0105b65bfd15f3ba6a454:7:67593218"
+    @url2="//api.nytimes.com/svc/movies/v2/reviews/search.json?query=#{@sr}&api-key=a51160564ac0105b65bfd15f3ba6a454:7:67593218"
     @showreview=HTTParty.get(@url2).parsed_response
     puts @showreview
     #@link=@showreview['results'][0]['link']['url']

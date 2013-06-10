@@ -11,6 +11,7 @@ end
 
 module EasilyxMovie
   class Application < Rails::Application
+      config.middleware.use Rack::SslEnforcer , :hsts => true
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -35,7 +36,7 @@ module EasilyxMovie
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
-    #config.force_ssl = true
+    #config.force_ssl = false
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
 
