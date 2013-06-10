@@ -3,11 +3,11 @@ require 'httparty'
 require 'open-uri'
 
   def signin
-    #if (session[:auth] && session[:guest_auth])
+    #if (cookies.signed[:auth] && cookies.signed[:guest_auth])
      # redirect_to home_path
     if params[:confirm] !="confirm"
     else
-      session[:check_guest] = "false"
+      cookies.signed[:check_guest] = "false"
       puts "my param #{params[:login]}"
       @users =HTTParty.post("https://flavumovies.herokuapp.com/users/sign_in.json", body: {user: {login: params[:login], password: params[:password]}}).parsed_response 
       puts @users.first[0]
@@ -16,13 +16,13 @@ require 'open-uri'
       else
         puts @users
         @auth_token=@users['auth_token']
-        session[:username] = @users['username']
-        session[:user] = @users
-        session[:auth] = @auth_token
-        #session[:latitude] = '49.28385281'
-       # session[:longitude] = '-123.1120815'
-        @username=session[:username]
-        @auth=session[:auth]
+        cookies.signed[:username] = @users['username']
+        cookies.signed[:user] = @users
+        cookies.signed[:auth] = @auth_token
+        #cookies.signed[:latitude] = '49.28385281'
+       # cookies.signed[:longitude] = '-123.1120815'
+        @username=cookies.signed[:username]
+        @auth=cookies.signed[:auth]
         redirect_to home_path
       end
     end
@@ -30,13 +30,13 @@ require 'open-uri'
   end
 
   def register
-    if session[:check_guest] == 'true'
+    if cookies.signed[:check_guest] == 'true'
         #showtime
-          #@url_theatre = "https://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-          #@theatres =HTTParty.get(@url_theatre, body: {user: {auth_token: session[:guest_auth]}}).parsed_response
+          #@url_theatre = "https://flavumovies.herokuapp.com/theatres.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"
+          #@theatres =HTTParty.get(@url_theatre, body: {user: {auth_token: cookies.signed[:guest_auth]}}).parsed_response
           #@nt=@theatres['nearby_theatres']
-          #@url_movie = "https://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-          #@movies =HTTParty.get(@url_movie, body: {user: {auth_token: session[:guest_auth]}}).parsed_response
+          #@url_movie = "https://flavumovies.herokuapp.com/movies.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"
+          #@movies =HTTParty.get(@url_movie, body: {user: {auth_token: cookies.signed[:guest_auth]}}).parsed_response
           #@rm=@movies['remaining_movies']
 
       puts params[:confirm]
@@ -47,7 +47,7 @@ require 'open-uri'
         elsif params[:email] != params[:email_confirmation]
           flash[:error] = "Your email does not match. Please try again" 
         else
-          @users_registations =HTTParty.put("https://flavumovies.herokuapp.com/users.json", body: {user: {auth_token: session[:guest_auth], password: params[:password], password_confirmation: params[:password], email: params[:email], username: params[:email], display_name: params[:email], guest: "false"}}).parsed_response
+          @users_registations =HTTParty.put("https://flavumovies.herokuapp.com/users.json", body: {user: {auth_token: cookies.signed[:guest_auth], password: params[:password], password_confirmation: params[:password], email: params[:email], username: params[:email], display_name: params[:email], guest: "false"}}).parsed_response
           if (@users_registations['errors'])
             @check_register='false'
             flash[:error] = "#{params[:email]} has already been taken. Please try again"
@@ -71,11 +71,11 @@ require 'open-uri'
     else
 
       #showtime
-          #@url_theatre = "https://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-          #@theatres =HTTParty.get(@url_theatre, body: {user: {auth_token: session[:auth]}}).parsed_response
+          #@url_theatre = "https://flavumovies.herokuapp.com/theatres.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"
+          #@theatres =HTTParty.get(@url_theatre, body: {user: {auth_token: cookies.signed[:auth]}}).parsed_response
           #@nt=@theatres['nearby_theatres']
-          #@url_movie = "https://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-          #@movies =HTTParty.get(@url_movie, body: {user: {auth_token: session[:auth]}}).parsed_response
+          #@url_movie = "https://flavumovies.herokuapp.com/movies.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"
+          #@movies =HTTParty.get(@url_movie, body: {user: {auth_token: cookies.signed[:auth]}}).parsed_response
           #@rm=@movies['remaining_movies']
 
       puts params[:confirm]
@@ -108,90 +108,90 @@ require 'open-uri'
 
   def movies
 
-    if (!session[:auth] && !session[:guest_auth])
+    if (!cookies.signed[:auth] && !cookies.signed[:guest_auth])
       redirect_to cover_path
     else
-        #@a1=session[:auth]
-        #puts session[:check_guest]
-        #puts session[:auth]
-        #puts session[:guest_auth]
+        #@a1=cookies.signed[:auth]
+        #puts cookies.signed[:check_guest]
+        #puts cookies.signed[:auth]
+        #puts cookies.signed[:guest_auth]
 
 
-        if session[:check_guest] == "true"
+        if cookies.signed[:check_guest] == "true"
           #puts params[:liked]
           if params[:liked]
-            @liked_movies =HTTParty.post("https://flavumovies.herokuapp.com/interested_movies.json", body: {user: {auth_token: session[:guest_auth]}, interested_movie: { movie_id:params[:liked]}}).parsed_response
+            @liked_movies =HTTParty.post("https://flavumovies.herokuapp.com/interested_movies.json", body: {user: {auth_token: cookies.signed[:guest_auth]}, interested_movie: { movie_id:params[:liked]}}).parsed_response
           elsif params[:unliked]
-            @unliked_movies =HTTParty.post("https://flavumovies.herokuapp.com/not_interested_movies.json", body: {user: {auth_token: session[:guest_auth]}, not_interested_movie: { movie_id:params[:unliked]}}).parsed_response
+            @unliked_movies =HTTParty.post("https://flavumovies.herokuapp.com/not_interested_movies.json", body: {user: {auth_token: cookies.signed[:guest_auth]}, not_interested_movie: { movie_id:params[:unliked]}}).parsed_response
           elsif params[:soso1]
-            @soso_movies =HTTParty.delete("https://flavumovies.herokuapp.com/interested_movies.json", body: {user: {auth_token: session[:guest_auth]}, interested_movie: { movie_id:params[:soso1]}}).parsed_response
+            @soso_movies =HTTParty.delete("https://flavumovies.herokuapp.com/interested_movies.json", body: {user: {auth_token: cookies.signed[:guest_auth]}, interested_movie: { movie_id:params[:soso1]}}).parsed_response
           elsif params[:soso2]
-            @soso_movies =HTTParty.delete("https://flavumovies.herokuapp.com/not_interested_movies.json", body: {user: {auth_token: session[:guest_auth]}, not_interested_movie: { movie_id:params[:soso2]}}).parsed_response
+            @soso_movies =HTTParty.delete("https://flavumovies.herokuapp.com/not_interested_movies.json", body: {user: {auth_token: cookies.signed[:guest_auth]}, not_interested_movie: { movie_id:params[:soso2]}}).parsed_response
 
           else
           end
           #puts params[:watched]
           if params[:watched]
-            @watched_movies =HTTParty.post("https://flavumovies.herokuapp.com/watched_movies.json", body: {user: {auth_token: session[:guest_auth]}, watched_movie: {movie_id:params[:watched] }}).parsed_response
+            @watched_movies =HTTParty.post("https://flavumovies.herokuapp.com/watched_movies.json", body: {user: {auth_token: cookies.signed[:guest_auth]}, watched_movie: {movie_id:params[:watched] }}).parsed_response
           elsif params[:unwatched]
-            @unwatched_movies =HTTParty.delete("https://flavumovies.herokuapp.com/watched_movies.json", body: {user: {auth_token: session[:guest_auth]}, watched_movie: {movie_id:params[:unwatched]}}).parsed_response
+            @unwatched_movies =HTTParty.delete("https://flavumovies.herokuapp.com/watched_movies.json", body: {user: {auth_token: cookies.signed[:guest_auth]}, watched_movie: {movie_id:params[:unwatched]}}).parsed_response
           end
 
            if params[:showid]
-            session[:showid] = params[:showid]
+            cookies.signed[:showid] = params[:showid]
             redirect_to showmovie_path
           else
           end
-          @url = "https://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-          @movies =HTTParty.get(@url, body: {user: {auth_token: session[:guest_auth]  }, browser: "1"}).parsed_response
+          @url = "https://flavumovies.herokuapp.com/movies.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"
+          @movies =HTTParty.get(@url, body: {user: {auth_token: cookies.signed[:guest_auth]  }, browser: "1"}).parsed_response
           @rm=@movies['remaining_movies']
           @im=@movies['interested_movies']
           @nim=@movies['not_interested_movies']
 
           #showtime
-          #@url_theatre = "https://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-          #@theatres =HTTParty.get(@url_theatre, body: {user: {auth_token: session[:guest_auth]}, browser: "1"}).parsed_response
+          #@url_theatre = "https://flavumovies.herokuapp.com/theatres.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"
+          #@theatres =HTTParty.get(@url_theatre, body: {user: {auth_token: cookies.signed[:guest_auth]}, browser: "1"}).parsed_response
           #@nt=@theatres['nearby_theatres']
-          #@url_movie = "https://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
+          #@url_movie = "https://flavumovies.herokuapp.com/movies.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"
           
 
 
         else
           #puts params[:liked]
           if params[:liked]
-            @liked_movies =HTTParty.post("https://flavumovies.herokuapp.com/interested_movies.json", body: {user: {auth_token: session[:auth]}, interested_movie: { movie_id:params[:liked]}}).parsed_response
+            @liked_movies =HTTParty.post("https://flavumovies.herokuapp.com/interested_movies.json", body: {user: {auth_token: cookies.signed[:auth]}, interested_movie: { movie_id:params[:liked]}}).parsed_response
           elsif params[:unliked]
-            @unliked_movies =HTTParty.post("https://flavumovies.herokuapp.com/not_interested_movies.json", body: {user: {auth_token: session[:auth]}, not_interested_movie: { movie_id:params[:unliked]}}).parsed_response
+            @unliked_movies =HTTParty.post("https://flavumovies.herokuapp.com/not_interested_movies.json", body: {user: {auth_token: cookies.signed[:auth]}, not_interested_movie: { movie_id:params[:unliked]}}).parsed_response
           elsif params[:soso1]
-            @soso_movies =HTTParty.delete("https://flavumovies.herokuapp.com/interested_movies.json", body: {user: {auth_token: session[:auth]}, interested_movie: { movie_id:params[:soso1]}}).parsed_response
+            @soso_movies =HTTParty.delete("https://flavumovies.herokuapp.com/interested_movies.json", body: {user: {auth_token: cookies.signed[:auth]}, interested_movie: { movie_id:params[:soso1]}}).parsed_response
           elsif params[:soso2]
-            @soso_movies =HTTParty.delete("https://flavumovies.herokuapp.com/not_interested_movies.json", body: {user: {auth_token: session[:auth]}, not_interested_movie: { movie_id:params[:soso2]}}).parsed_response
+            @soso_movies =HTTParty.delete("https://flavumovies.herokuapp.com/not_interested_movies.json", body: {user: {auth_token: cookies.signed[:auth]}, not_interested_movie: { movie_id:params[:soso2]}}).parsed_response
 
           else
           end
           #puts params[:watched]
           if params[:watched]
-            @watched_movies =HTTParty.post("https://flavumovies.herokuapp.com/watched_movies.json", body: {user: {auth_token: session[:auth]}, watched_movie: {movie_id:params[:watched] }}).parsed_response
+            @watched_movies =HTTParty.post("https://flavumovies.herokuapp.com/watched_movies.json", body: {user: {auth_token: cookies.signed[:auth]}, watched_movie: {movie_id:params[:watched] }}).parsed_response
           elsif params[:unwatched]
-            @unwatched_movies =HTTParty.delete("https://flavumovies.herokuapp.com/watched_movies.json", body: {user: {auth_token: session[:auth]}, watched_movie: {movie_id:params[:unwatched]}}).parsed_response
+            @unwatched_movies =HTTParty.delete("https://flavumovies.herokuapp.com/watched_movies.json", body: {user: {auth_token: cookies.signed[:auth]}, watched_movie: {movie_id:params[:unwatched]}}).parsed_response
           end
 
            if params[:showid]
-            session[:showid] = params[:showid]
+            cookies.signed[:showid] = params[:showid]
             redirect_to showmovie_path
           else
           end
-          @url = "https://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-          @movies =HTTParty.get(@url, body: {user: {auth_token: session[:auth]  }, browser: "1"}).parsed_response
+          @url = "https://flavumovies.herokuapp.com/movies.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"
+          @movies =HTTParty.get(@url, body: {user: {auth_token: cookies.signed[:auth]  }, browser: "1"}).parsed_response
           @rm=@movies['remaining_movies']
           @im=@movies['interested_movies']
           @nim=@movies['not_interested_movies']
           #showtime
-          #@url_theatre = "https://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-          #@theatres =HTTParty.get(@url_theatre, body: {user: {auth_token: session[:auth]}, browser: "1"}).parsed_response
+          #@url_theatre = "https://flavumovies.herokuapp.com/theatres.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"
+          #@theatres =HTTParty.get(@url_theatre, body: {user: {auth_token: cookies.signed[:auth]}, browser: "1"}).parsed_response
           #@nt=@theatres['nearby_theatres']
-          #@url_movie = "https://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-          #@movies =HTTParty.get(@url_movie, body: {user: {auth_token: session[:auth]}}).parsed_response
+          #@url_movie = "https://flavumovies.herokuapp.com/movies.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"
+          #@movies =HTTParty.get(@url_movie, body: {user: {auth_token: cookies.signed[:auth]}}).parsed_response
           #@rm=@movies['remaining_movies']
          
         end
@@ -203,38 +203,38 @@ require 'open-uri'
   end
 
   def theatres
-    if (!session[:auth] && !session[:guest_auth])
+    if (!cookies.signed[:auth] && !cookies.signed[:guest_auth])
       redirect_to cover_path
     else
-      if session[:check_guest] == 'true'
+      if cookies.signed[:check_guest] == 'true'
         if params[:liked]
           @url = "https://flavumovies.herokuapp.com/liked_theatres.json"
-          @theatres =HTTParty.post(@url, body: {user: {auth_token: session[:guest_auth]}, liked_theatre: {theatre_id: params[:liked]} }).parsed_response
+          @theatres =HTTParty.post(@url, body: {user: {auth_token: cookies.signed[:guest_auth]}, liked_theatre: {theatre_id: params[:liked]} }).parsed_response
         elsif params[:unliked]
           @url = "https://flavumovies.herokuapp.com/not_interested_theatres.json"
-          @theatres =HTTParty.post(@url, body: {user: {auth_token: session[:guest_auth]}, not_interested_theatre: {theatre_id: params[:unliked]} }).parsed_response
+          @theatres =HTTParty.post(@url, body: {user: {auth_token: cookies.signed[:guest_auth]}, not_interested_theatre: {theatre_id: params[:unliked]} }).parsed_response
         elsif params[:soso1]
           @url = "https://flavumovies.herokuapp.com/liked_theatres.json"
-          @theatres =HTTParty.delete(@url, body: {user: {auth_token: session[:guest_auth]}, liked_theatre: {theatre_id: params[:soso1]} }).parsed_response
+          @theatres =HTTParty.delete(@url, body: {user: {auth_token: cookies.signed[:guest_auth]}, liked_theatre: {theatre_id: params[:soso1]} }).parsed_response
         elsif params[:soso2]
           @url = "https://flavumovies.herokuapp.com/not_interested_theatres.json"
-          @theatres =HTTParty.delete(@url, body: {user: {auth_token: session[:guest_auth]}, not_interested_theatre: {theatre_id: params[:soso2]} }).parsed_response
+          @theatres =HTTParty.delete(@url, body: {user: {auth_token: cookies.signed[:guest_auth]}, not_interested_theatre: {theatre_id: params[:soso2]} }).parsed_response
 
         end
 
-      @url = "https://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-      @theatres =HTTParty.get(@url, body: {user: {auth_token: session[:guest_auth]}, browser: "1"}).parsed_response
+      @url = "https://flavumovies.herokuapp.com/theatres.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"
+      @theatres =HTTParty.get(@url, body: {user: {auth_token: cookies.signed[:guest_auth]}, browser: "1"}).parsed_response
 
       #@theatres=JSON.parse(open("https://flavumovies.herokuapp.com/theatres.json?auth_token=ZhhSqcdR2T6KoVv29UZp").read) 
       @lt=@theatres['liked_theatres']
       @nt=@theatres['nearby_theatres']
       @nit=@theatres['not_interested_theatres']
       #showtime
-        #@url_theatre = "https://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-        #@theatres =HTTParty.get(@url_theatre, body: {user: {auth_token: session[:guest_auth]}}).parsed_response
+        #@url_theatre = "https://flavumovies.herokuapp.com/theatres.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"
+        #@theatres =HTTParty.get(@url_theatre, body: {user: {auth_token: cookies.signed[:guest_auth]}}).parsed_response
         #@nt=@theatres['nearby_theatres']
-        #@url_movie = "https://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-        #@movies =HTTParty.get(@url_movie, body: {user: {auth_token: session[:guest_auth]}}).parsed_response
+        #@url_movie = "https://flavumovies.herokuapp.com/movies.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"
+        #@movies =HTTParty.get(@url_movie, body: {user: {auth_token: cookies.signed[:guest_auth]}}).parsed_response
         #@rm=@movies['remaining_movies']
 
 
@@ -243,31 +243,31 @@ require 'open-uri'
        # puts params[:unliked]
         if params[:liked]
           @url = "https://flavumovies.herokuapp.com/liked_theatres.json"
-          @theatres =HTTParty.post(@url, body: {user: {auth_token: session[:auth]}, liked_theatre: {theatre_id: params[:liked]} }).parsed_response
+          @theatres =HTTParty.post(@url, body: {user: {auth_token: cookies.signed[:auth]}, liked_theatre: {theatre_id: params[:liked]} }).parsed_response
         elsif params[:unliked]
           @url = "https://flavumovies.herokuapp.com/not_interested_theatres.json"
-          @theatres =HTTParty.post(@url, body: {user: {auth_token: session[:auth]}, not_interested_theatre: {theatre_id: params[:unliked]} }).parsed_response
+          @theatres =HTTParty.post(@url, body: {user: {auth_token: cookies.signed[:auth]}, not_interested_theatre: {theatre_id: params[:unliked]} }).parsed_response
         elsif params[:soso1]
           @url = "https://flavumovies.herokuapp.com/liked_theatres.json"
-          @theatres =HTTParty.delete(@url, body: {user: {auth_token: session[:auth]}, liked_theatre: {theatre_id: params[:soso1]} }).parsed_response
+          @theatres =HTTParty.delete(@url, body: {user: {auth_token: cookies.signed[:auth]}, liked_theatre: {theatre_id: params[:soso1]} }).parsed_response
         elsif params[:soso2]
           @url = "https://flavumovies.herokuapp.com/not_interested_theatres.json"
-          @theatres =HTTParty.delete(@url, body: {user: {auth_token: session[:auth]}, not_interested_theatre: {theatre_id: params[:soso2]} }).parsed_response
+          @theatres =HTTParty.delete(@url, body: {user: {auth_token: cookies.signed[:auth]}, not_interested_theatre: {theatre_id: params[:soso2]} }).parsed_response
 
         end
-      @url = "https://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-      @theatres =HTTParty.get(@url, body: {user: {auth_token: session[:auth]}, browser: "1"}).parsed_response
+      @url = "https://flavumovies.herokuapp.com/theatres.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"
+      @theatres =HTTParty.get(@url, body: {user: {auth_token: cookies.signed[:auth]}, browser: "1"}).parsed_response
       #puts @theatres
       #@theatres=JSON.parse(open("https://flavumovies.herokuapp.com/theatres.json?auth_token=ZhhSqcdR2T6KoVv29UZp").read) 
       @lt=@theatres['liked_theatres']
       @nt=@theatres['nearby_theatres']
       @nit=@theatres['not_interested_theatres']
       #showtime
-        #@url_theatre = "https://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-        #@theatres =HTTParty.get(@url_theatre, body: {user: {auth_token: session[:auth]}}).parsed_response
+        #@url_theatre = "https://flavumovies.herokuapp.com/theatres.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"
+        #@theatres =HTTParty.get(@url_theatre, body: {user: {auth_token: cookies.signed[:auth]}}).parsed_response
         #@nt=@theatres['nearby_theatres']
-        #@url_movie = "https://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-        #@movies =HTTParty.get(@url_movie, body: {user: {auth_token: session[:auth]}}).parsed_response
+        #@url_movie = "https://flavumovies.herokuapp.com/movies.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"
+        #@movies =HTTParty.get(@url_movie, body: {user: {auth_token: cookies.signed[:auth]}}).parsed_response
         #@rm=@movies['remaining_movies']
 
       end
@@ -275,18 +275,18 @@ require 'open-uri'
   end
 
   def showtheatre
-    if (!session[:auth] && !session[:guest_auth])
+    if (!cookies.signed[:auth] && !cookies.signed[:guest_auth])
       redirect_to cover_path
     else
       @url = "https://flavumovies.herokuapp.com/theatres/#{params[:showid]}.json"
-      if session[:check_guest] == 'true'
+      if cookies.signed[:check_guest] == 'true'
         if params[:showid]
-          @theatres =HTTParty.get(@url, body: {user: {auth_token: session[:guest_auth]}, browser: "1"}).parsed_response
+          @theatres =HTTParty.get(@url, body: {user: {auth_token: cookies.signed[:guest_auth]}, browser: "1"}).parsed_response
         end
 
       else
         if params[:showid]
-          @theatres =HTTParty.get(@url, body: {user: {auth_token: session[:auth]}, browser: "1"}).parsed_response
+          @theatres =HTTParty.get(@url, body: {user: {auth_token: cookies.signed[:auth]}, browser: "1"}).parsed_response
         end
       end
       @st=@theatres['theatre']
@@ -294,8 +294,8 @@ require 'open-uri'
   end
 
   def buddies
-    if (session[:auth])
-    @a1=session[:auth]
+    if (cookies.signed[:auth])
+    @a1=cookies.signed[:auth]
     puts params[:request]
       if params[:request]
         @requesting =HTTParty.post("https://flavumovies.herokuapp.com/send_request.json", body: {user: {auth_token: @a1}, friend_contact_info: params[:request]}).parsed_response
@@ -341,56 +341,56 @@ require 'open-uri'
 
   def preferences
 
-    if (!session[:auth] && !session[:guest_auth])
+    if (!cookies.signed[:auth] && !cookies.signed[:guest_auth])
       redirect_to cover_path
     else
-      if session[:check_guest] == 'true'
+      if cookies.signed[:check_guest] == 'true'
         puts "update = #{params[:update]}"
         puts "update1 =#{params[:genre_update]}"
         puts "delete= #{params[:delete]}"
         puts "create2=#{params[:create2]}"
         puts params[:director_create]
         if params[:create1] == "Create"
-          @genre_create =HTTParty.post("https://flavumovies.herokuapp.com/genre_preferences.json", body: {user: {auth_token: session[:guest_auth]}, genre_preference: {genre: params[:genre_create] ,score: params[:score]}}).parsed_response
+          @genre_create =HTTParty.post("https://flavumovies.herokuapp.com/genre_preferences.json", body: {user: {auth_token: cookies.signed[:guest_auth]}, genre_preference: {genre: params[:genre_create] ,score: params[:score]}}).parsed_response
         
         elsif params[:update] =="Update"
-          @genre_update =HTTParty.put("https://flavumovies.herokuapp.com/genre_preferences/1.json", body: {user: {auth_token: session[:guest_auth]}, genre_preference: {genre: params[:genre_update] ,score: params[:score]}}).parsed_response
+          @genre_update =HTTParty.put("https://flavumovies.herokuapp.com/genre_preferences/1.json", body: {user: {auth_token: cookies.signed[:guest_auth]}, genre_preference: {genre: params[:genre_update] ,score: params[:score]}}).parsed_response
         
         elsif params[:delete] == "Delete"
-          @genre_delete =HTTParty.delete("https://flavumovies.herokuapp.com/genre_preferences/1.json", body: {user: {auth_token: session[:guest_auth]}, genre_preference: {genre: params[:genre_update] ,score: params[:score]}}).parsed_response
+          @genre_delete =HTTParty.delete("https://flavumovies.herokuapp.com/genre_preferences/1.json", body: {user: {auth_token: cookies.signed[:guest_auth]}, genre_preference: {genre: params[:genre_update] ,score: params[:score]}}).parsed_response
         
         elsif params[:create2] == "Create"
-          @director_create =HTTParty.post("https://flavumovies.herokuapp.com/director_preferences.json", body: {user: {auth_token: session[:guest_auth]}, director_preference: {director: params[:director_create] ,score: params[:score]}}).parsed_response
+          @director_create =HTTParty.post("https://flavumovies.herokuapp.com/director_preferences.json", body: {user: {auth_token: cookies.signed[:guest_auth]}, director_preference: {director: params[:director_create] ,score: params[:score]}}).parsed_response
         
         elsif params[:update2] =="Update"
-          @director_update =HTTParty.put("https://flavumovies.herokuapp.com/director_preferences/1.json", body: {user: {auth_token: session[:guest_auth]}, director_preference: {director: params[:director_update] ,score: params[:score]}}).parsed_response
+          @director_update =HTTParty.put("https://flavumovies.herokuapp.com/director_preferences/1.json", body: {user: {auth_token: cookies.signed[:guest_auth]}, director_preference: {director: params[:director_update] ,score: params[:score]}}).parsed_response
         
         elsif params[:delete2] == "Delete"
-          @director_delete =HTTParty.delete("https://flavumovies.herokuapp.com/director_preferences/1.json", body: {user: {auth_token: session[:guest_auth]}, director_preference: {director: params[:director_update] ,score: params[:score]}}).parsed_response
+          @director_delete =HTTParty.delete("https://flavumovies.herokuapp.com/director_preferences/1.json", body: {user: {auth_token: cookies.signed[:guest_auth]}, director_preference: {director: params[:director_update] ,score: params[:score]}}).parsed_response
         
         elsif params[:create3] == "Create"
-          @actor_create =HTTParty.post("https://flavumovies.herokuapp.com/actor_preferences.json", body: {user: {auth_token: session[:guest_auth]}, actor_preference: {actor: params[:actor_create] ,score: params[:score]}}).parsed_response
+          @actor_create =HTTParty.post("https://flavumovies.herokuapp.com/actor_preferences.json", body: {user: {auth_token: cookies.signed[:guest_auth]}, actor_preference: {actor: params[:actor_create] ,score: params[:score]}}).parsed_response
         
         elsif params[:update3] =="Update"
-          @actor_update =HTTParty.put("https://flavumovies.herokuapp.com/actor_preferences/1.json", body: {user: {auth_token: session[:guest_auth]}, actor_preference: {actor: params[:actor_update] ,score: params[:score]}}).parsed_response
+          @actor_update =HTTParty.put("https://flavumovies.herokuapp.com/actor_preferences/1.json", body: {user: {auth_token: cookies.signed[:guest_auth]}, actor_preference: {actor: params[:actor_update] ,score: params[:score]}}).parsed_response
         
         elsif params[:delete3] == "Delete"
-          @actor_delete =HTTParty.delete("https://flavumovies.herokuapp.com/actor_preferences/1.json", body: {user: {auth_token: session[:guest_auth]}, actor_preference: {actor: params[:actor_update] ,score: params[:score]}}).parsed_response
+          @actor_delete =HTTParty.delete("https://flavumovies.herokuapp.com/actor_preferences/1.json", body: {user: {auth_token: cookies.signed[:guest_auth]}, actor_preference: {actor: params[:actor_update] ,score: params[:score]}}).parsed_response
         end
 
         @url1 = "https://flavumovies.herokuapp.com/genre_preferences.json"
         @url2 = "https://flavumovies.herokuapp.com/director_preferences.json"
         @url3 = "https://flavumovies.herokuapp.com/actor_preferences.json"
-        @genre_preferences =HTTParty.get(@url1, body: {user: {auth_token: session[:guest_auth]}}).parsed_response
-        @director_preferences =HTTParty.get(@url2, body: {user: {auth_token: session[:guest_auth]}}).parsed_response
-        @actor_preferences =HTTParty.get(@url3, body: {user: {auth_token: session[:guest_auth]}}).parsed_response
+        @genre_preferences =HTTParty.get(@url1, body: {user: {auth_token: cookies.signed[:guest_auth]}}).parsed_response
+        @director_preferences =HTTParty.get(@url2, body: {user: {auth_token: cookies.signed[:guest_auth]}}).parsed_response
+        @actor_preferences =HTTParty.get(@url3, body: {user: {auth_token: cookies.signed[:guest_auth]}}).parsed_response
           
         @url4 = "https://flavumovies.herokuapp.com/genres.json"
-        @all_genres =HTTParty.get(@url4, body: {user: {auth_token: session[:guest_auth]}}).parsed_response
+        @all_genres =HTTParty.get(@url4, body: {user: {auth_token: cookies.signed[:guest_auth]}}).parsed_response
         @url5 = "https://flavumovies.herokuapp.com/directors.json"
-        @all_directors =HTTParty.get(@url5, body: {user: {auth_token: session[:guest_auth]}}).parsed_response
+        @all_directors =HTTParty.get(@url5, body: {user: {auth_token: cookies.signed[:guest_auth]}}).parsed_response
         @url6 = "https://flavumovies.herokuapp.com/actors.json"
-        @all_actors =HTTParty.get(@url6, body: {user: {auth_token: session[:guest_auth]}}).parsed_response
+        @all_actors =HTTParty.get(@url6, body: {user: {auth_token: cookies.signed[:guest_auth]}}).parsed_response
         
         @gp=@genre_preferences['genre_preferences']
         @dp=@director_preferences['director_preferences']
@@ -399,8 +399,8 @@ require 'open-uri'
 
       else
         ##puts params[:score]
-        #@a1=session[:auth]
-        #puts session[:auth]
+        #@a1=cookies.signed[:auth]
+        #puts cookies.signed[:auth]
         puts "update = #{params[:update2]}"
         puts "update1 =#{params[:director_update]}"
         puts "delete= #{params[:delete]}"
@@ -408,46 +408,46 @@ require 'open-uri'
         puts "create2=#{params[:create2]}"
         puts params[:director_create]
         if params[:create1] == "Create"
-          @genre_create =HTTParty.post("https://flavumovies.herokuapp.com/genre_preferences.json", body: {user: {auth_token: session[:auth]}, genre_preference: {genre: params[:genre_create] ,score: params[:score]}}).parsed_response
+          @genre_create =HTTParty.post("https://flavumovies.herokuapp.com/genre_preferences.json", body: {user: {auth_token: cookies.signed[:auth]}, genre_preference: {genre: params[:genre_create] ,score: params[:score]}}).parsed_response
         
         elsif params[:update] =="Update"
-          @genre_update =HTTParty.put("https://flavumovies.herokuapp.com/genre_preferences/1.json", body: {user: {auth_token: session[:auth]}, genre_preference: {genre: params[:genre_update] ,score: params[:score]}}).parsed_response
+          @genre_update =HTTParty.put("https://flavumovies.herokuapp.com/genre_preferences/1.json", body: {user: {auth_token: cookies.signed[:auth]}, genre_preference: {genre: params[:genre_update] ,score: params[:score]}}).parsed_response
         
         elsif params[:delete] == "Delete"
-          @genre_delete =HTTParty.delete("https://flavumovies.herokuapp.com/genre_preferences/1.json", body: {user: {auth_token: session[:auth]}, genre_preference: {genre: params[:genre_update] ,score: params[:score]}}).parsed_response
+          @genre_delete =HTTParty.delete("https://flavumovies.herokuapp.com/genre_preferences/1.json", body: {user: {auth_token: cookies.signed[:auth]}, genre_preference: {genre: params[:genre_update] ,score: params[:score]}}).parsed_response
 
         elsif params[:create2] == "Create"
-          @director_create =HTTParty.post("https://flavumovies.herokuapp.com/director_preferences.json", body: {user: {auth_token: session[:auth]}, director_preference: {director: params[:director_create] ,score: params[:score]}}).parsed_response
+          @director_create =HTTParty.post("https://flavumovies.herokuapp.com/director_preferences.json", body: {user: {auth_token: cookies.signed[:auth]}, director_preference: {director: params[:director_create] ,score: params[:score]}}).parsed_response
         
         elsif params[:update2] =="Update"
-          @director_update =HTTParty.put("https://flavumovies.herokuapp.com/director_preferences/1.json", body: {user: {auth_token: session[:auth]}, director_preference: {director: params[:director_update] ,score: params[:score]}}).parsed_response
+          @director_update =HTTParty.put("https://flavumovies.herokuapp.com/director_preferences/1.json", body: {user: {auth_token: cookies.signed[:auth]}, director_preference: {director: params[:director_update] ,score: params[:score]}}).parsed_response
         
         elsif params[:delete2] == "Delete"
-          @director_delete =HTTParty.delete("https://flavumovies.herokuapp.com/director_preferences/1.json", body: {user: {auth_token: session[:auth]}, director_preference: {director: params[:director_update] ,score: params[:score]}}).parsed_response
+          @director_delete =HTTParty.delete("https://flavumovies.herokuapp.com/director_preferences/1.json", body: {user: {auth_token: cookies.signed[:auth]}, director_preference: {director: params[:director_update] ,score: params[:score]}}).parsed_response
           puts @director_delete
         elsif params[:create3] == "Create"
-          @actor_create =HTTParty.post("https://flavumovies.herokuapp.com/actor_preferences.json", body: {user: {auth_token: session[:auth]}, actor_preference: {actor: params[:actor_create] ,score: params[:score]}}).parsed_response
+          @actor_create =HTTParty.post("https://flavumovies.herokuapp.com/actor_preferences.json", body: {user: {auth_token: cookies.signed[:auth]}, actor_preference: {actor: params[:actor_create] ,score: params[:score]}}).parsed_response
         
         elsif params[:update3] =="Update"
-          @actor_update =HTTParty.put("https://flavumovies.herokuapp.com/actor_preferences/1.json", body: {user: {auth_token: session[:auth]}, actor_preference: {actor: params[:actor_update] ,score: params[:score]}}).parsed_response
+          @actor_update =HTTParty.put("https://flavumovies.herokuapp.com/actor_preferences/1.json", body: {user: {auth_token: cookies.signed[:auth]}, actor_preference: {actor: params[:actor_update] ,score: params[:score]}}).parsed_response
         
         elsif params[:delete3] == "Delete"
-          @actor_delete =HTTParty.delete("https://flavumovies.herokuapp.com/actor_preferences/1.json", body: {user: {auth_token: session[:auth]}, actor_preference: {actor: params[:actor_update] ,score: params[:score]}}).parsed_response
+          @actor_delete =HTTParty.delete("https://flavumovies.herokuapp.com/actor_preferences/1.json", body: {user: {auth_token: cookies.signed[:auth]}, actor_preference: {actor: params[:actor_update] ,score: params[:score]}}).parsed_response
         end
 
         @url1 = "https://flavumovies.herokuapp.com/genre_preferences.json"
         @url2 = "https://flavumovies.herokuapp.com/director_preferences.json"
         @url3 = "https://flavumovies.herokuapp.com/actor_preferences.json"
-        @genre_preferences =HTTParty.get(@url1, body: {user: {auth_token: session[:auth]}}).parsed_response
-        @director_preferences =HTTParty.get(@url2, body: {user: {auth_token: session[:auth]}}).parsed_response
-        @actor_preferences =HTTParty.get(@url3, body: {user: {auth_token: session[:auth]}}).parsed_response
+        @genre_preferences =HTTParty.get(@url1, body: {user: {auth_token: cookies.signed[:auth]}}).parsed_response
+        @director_preferences =HTTParty.get(@url2, body: {user: {auth_token: cookies.signed[:auth]}}).parsed_response
+        @actor_preferences =HTTParty.get(@url3, body: {user: {auth_token: cookies.signed[:auth]}}).parsed_response
           
         @url4 = "https://flavumovies.herokuapp.com/genres.json"
-        @all_genres =HTTParty.get(@url4, body: {user: {auth_token: session[:auth]}}).parsed_response
+        @all_genres =HTTParty.get(@url4, body: {user: {auth_token: cookies.signed[:auth]}}).parsed_response
         @url5 = "https://flavumovies.herokuapp.com/directors.json"
-        @all_directors =HTTParty.get(@url5, body: {user: {auth_token: session[:auth]}}).parsed_response
+        @all_directors =HTTParty.get(@url5, body: {user: {auth_token: cookies.signed[:auth]}}).parsed_response
         @url6 = "https://flavumovies.herokuapp.com/actors.json"
-        @all_actors =HTTParty.get(@url6, body: {user: {auth_token: session[:auth]}}).parsed_response
+        @all_actors =HTTParty.get(@url6, body: {user: {auth_token: cookies.signed[:auth]}}).parsed_response
         
         @gp=@genre_preferences['genre_preferences']
         @dp=@director_preferences['director_preferences']
@@ -456,19 +456,19 @@ require 'open-uri'
     end
   end
   def edit
-    reset_session
+    cookies.delete(:auth, :auth_token=>'cookies[:auth]')
     redirect_to cover_path
   end
 
   def settings 
-    puts session[:check_guest]
-    if (!session[:auth] && !session[:guest_auth])
+    puts cookies.signed[:check_guest]
+    if (!cookies.signed[:auth] && !cookies.signed[:guest_auth])
       redirect_to cover_path
     else
-      if session[:check_guest] == 'true'
-        @user=session[:user]
+      if cookies.signed[:check_guest] == 'true'
+        @user=cookies.signed[:user]
         @user_preference_url = "https://flavumovies.herokuapp.com/user_preferences"
-        @user_preference =HTTParty.get("https://flavumovies.herokuapp.com/user_preferences.json", body: {user: {auth_token: session[:guest_auth]}}).parsed_response
+        @user_preference =HTTParty.get("https://flavumovies.herokuapp.com/user_preferences.json", body: {user: {auth_token: cookies.signed[:guest_auth]}}).parsed_response
           
         @radius = @user_preference["user_preferences"].find{|x| x["preference"] == "search radius"}
         @unit = @user_preference["user_preferences"].find{|x| x["preference"] == "unit of measure"}
@@ -483,22 +483,22 @@ require 'open-uri'
         @show_nearby_theatres = @user_preference["user_preferences"].find{|x| x["preference"] == "show nearby theatres on map"}
         @show_disliked_theatres = @user_preference["user_preferences"].find{|x| x["preference"] == "show disliked theatres on map"}
       
-        session[:SO_radius] ||= @radius["value"]
-        session[:SO_unit] ||= @unit["value"]
-        session[:MLO_genres] ||= @show_genres["value"]
-        session[:MLO_actors] ||= @show_actors["value"]
-        session[:MLO_directors] ||= @show_directors["value"]
-        session[:MLO_raterun] ||= @show_rating_runtime["value"]
-        session[:TLO_address] ||= @show_address["value"]
-        session[:TLO_distance] ||= @show_distance["value"]
-        session[:TLO_phone_number] ||= @show_phone["value"]
-        session[:MO_liked_theatres] ||= @show_liked_theatres["value"]
-        session[:MO_nearby_theatres] ||= @show_nearby_theatres["value"]
-        session[:MO_disliked_theatres] ||= @show_disliked_theatres["value"]
+        cookies.signed[:SO_radius] ||= @radius["value"]
+        cookies.signed[:SO_unit] ||= @unit["value"]
+        cookies.signed[:MLO_genres] ||= @show_genres["value"]
+        cookies.signed[:MLO_actors] ||= @show_actors["value"]
+        cookies.signed[:MLO_directors] ||= @show_directors["value"]
+        cookies.signed[:MLO_raterun] ||= @show_rating_runtime["value"]
+        cookies.signed[:TLO_address] ||= @show_address["value"]
+        cookies.signed[:TLO_distance] ||= @show_distance["value"]
+        cookies.signed[:TLO_phone_number] ||= @show_phone["value"]
+        cookies.signed[:MO_liked_theatres] ||= @show_liked_theatres["value"]
+        cookies.signed[:MO_nearby_theatres] ||= @show_nearby_theatres["value"]
+        cookies.signed[:MO_disliked_theatres] ||= @show_disliked_theatres["value"]
           
         if params[:commit1] == "Update"
           @setting_account =HTTParty.put("https://flavumovies.herokuapp.com/users.json",
-          body: {user: {auth_token: session[:guest_auth], email: params[:email], 
+          body: {user: {auth_token: cookies.signed[:guest_auth], email: params[:email], 
             username: params[:username],
             display_name: params[:display_name],
             phone_number: params[:phone_number],
@@ -517,7 +517,7 @@ require 'open-uri'
 
         #elsif params[:commit2] == "Update"
           #@setting_account =HTTParty.put("https://flavumovies.herokuapp.com/users.json", 
-          #body: {user: {auth_token: session[:auth], username: params[:username]}}).parsed_response
+          #body: {user: {auth_token: cookies.signed[:auth], username: params[:username]}}).parsed_response
           #if (@setting_account['errors'])
             #flash[:error] = "Update username is error. Please try again"
             #flash[:notice] = nil
@@ -528,13 +528,13 @@ require 'open-uri'
 
         #elsif params[:commit3] == "Update"
           #@setting_account =HTTParty.put("https://flavumovies.herokuapp.com/users.json", 
-          #body: {user: {auth_token: session[:auth], display_name: params[:display_name]}}).parsed_response
+          #body: {user: {auth_token: cookies.signed[:auth], display_name: params[:display_name]}}).parsed_response
           #flash[:notice] = "Update your display name is successful"
           #flash[:notice] = nil
 
         #elsif params[:commit4] == "Update"
           #@setting_account =HTTParty.put("https://flavumovies.herokuapp.com/users.json", 
-          #body: {user: {auth_token: session[:auth], phone_number: params[:phone_number]}}).parsed_response
+          #body: {user: {auth_token: cookies.signed[:auth], phone_number: params[:phone_number]}}).parsed_response
           #if (@setting_account['errors'])
             #flash[:error] = "Your phone number has something wrong. Please try again" 
             #flash[:notice] = nil
@@ -545,7 +545,7 @@ require 'open-uri'
 
         #elsif params[:commit5] == "Update"
           #@setting_account =HTTParty.put("https://flavumovies.herokuapp.com/users.json", 
-          #body: {user: {auth_token: session[:auth], password: params[:password],
+          #body: {user: {auth_token: cookies.signed[:auth], password: params[:password],
           #  password_confirmation: params[:password_confirmation]}}).parsed_response
           #if (params[:password].length <= 6)
             #flash[:error] = "Your password is too short. It has to be more than 6 characters"
@@ -559,11 +559,11 @@ require 'open-uri'
           #end
 
         elsif params[:commitSO] == "Update"
-          if session[:SO_radius] != params[:radius].to_s
+          if cookies.signed[:SO_radius] != params[:radius].to_s
             HTTParty.put("#{@user_preference_url}/#{@radius['id']}.json",
               body: {
                 user: {
-                  auth_token: session[:guest_auth]
+                  auth_token: cookies.signed[:guest_auth]
                 },
                 user_preference: {
                   preference: @radius["preference"],
@@ -571,14 +571,14 @@ require 'open-uri'
                 }
               }
             )
-            session[:SO_radius] = params[:radius]
+            cookies.signed[:SO_radius] = params[:radius]
           end
           
-          if session[:SO_unit] != params[:unit].to_s
+          if cookies.signed[:SO_unit] != params[:unit].to_s
             HTTParty.put("#{@user_preference_url}/#{@unit['id']}.json",
               body: {
                 user: {
-                  auth_token: session[:guest_auth]
+                  auth_token: cookies.signed[:guest_auth]
                 },
                 user_preference: {
                   preference: @unit["preference"],
@@ -586,7 +586,7 @@ require 'open-uri'
                 }
               }
             )
-            session[:SO_unit] = params[:unit]
+            cookies.signed[:SO_unit] = params[:unit]
           end
             
             #@user_preference =HTTParty.get("https://flavumovies.herokuapp.com/user_preferences.json", body: {user: {auth_token: @a1}}).parsed_response
@@ -596,12 +596,12 @@ require 'open-uri'
             #puts @unit_id
             #@radius2 =HTTParty.put("https://flavumovies.herokuapp.com/user_preferences/#{@radius_id}.json",
             #body: {
-            #user: {auth_token: session[:auth]} ,
+            #user: {auth_token: cookies.signed[:auth]} ,
             #user_preference: {preference: "search radius", value: params[:radius]}
             #}).parsed_response
             #@unit2 =HTTParty.put("https://flavumovies.herokuapp.com/user_preferences/#{@unit_id}.json",
             #body: {
-            #user: {auth_token: session[:auth]} ,
+            #user: {auth_token: cookies.signed[:auth]} ,
             #user_preference: {preference: "unit of measure", value: params[:unit]}
             #}).parsed_response
             
@@ -609,11 +609,11 @@ require 'open-uri'
 
             # TODO
             #if params[:genres]
-          if session[:MLO_genres] != params[:genres].to_s
+          if cookies.signed[:MLO_genres] != params[:genres].to_s
             HTTParty.put("#{@user_preference_url}/#{@show_genres['id']}.json",
               body: {
                 user: {
-                  auth_token: session[:guest_auth]
+                  auth_token: cookies.signed[:guest_auth]
                 },
                 user_preference: {
                   preference: @show_genres["preference"],
@@ -621,14 +621,14 @@ require 'open-uri'
                 }
               }
             )
-            session[:MLO_genres] = params[:genres]
+            cookies.signed[:MLO_genres] = params[:genres]
           end
             
-          if session[:MLO_actors] != params[:actors].to_s
+          if cookies.signed[:MLO_actors] != params[:actors].to_s
             HTTParty.put("#{@user_preference_url}/#{@show_actors['id']}.json",
               body: {
                 user: {
-                  auth_token: session[:guest_auth]
+                  auth_token: cookies.signed[:guest_auth]
                 },
                 user_preference: {
                   preference: @show_actors["preference"],
@@ -636,14 +636,14 @@ require 'open-uri'
                 }
               }
             )
-            session[:MLO_actors] = params[:actors]
+            cookies.signed[:MLO_actors] = params[:actors]
           end
             
-          if session[:MLO_directors] != params[:directors].to_s
+          if cookies.signed[:MLO_directors] != params[:directors].to_s
             HTTParty.put("#{@user_preference_url}/#{@show_directors['id']}.json",
               body: {
                 user: {
-                  auth_token: session[:guest_auth]
+                  auth_token: cookies.signed[:guest_auth]
                 },
                 user_preference: {
                   preference: @show_directors["preference"],
@@ -651,14 +651,14 @@ require 'open-uri'
                 }
               }
             )
-            session[:MLO_directors] = params[:directors]
+            cookies.signed[:MLO_directors] = params[:directors]
           end
             
-          if session[:MLO_raterun] != params[:raterun].to_s
+          if cookies.signed[:MLO_raterun] != params[:raterun].to_s
             HTTParty.put("#{@user_preference_url}/#{@show_rating_runtime['id']}.json",
               body: {
                 user: {
-                  auth_token: session[:guest_auth]
+                  auth_token: cookies.signed[:guest_auth]
                 },
                 user_preference: {
                   preference: @show_rating_runtime["preference"],
@@ -666,27 +666,27 @@ require 'open-uri'
                 }
               }
             )
-            session[:MLO_raterun] = params[:raterun]
+            cookies.signed[:MLO_raterun] = params[:raterun]
           end
             
             #if params[:actors]
-            #session[:MLO_actors] = params[:actors]
-            #puts "actors is #{session[:MLO_actors]}"
+            #cookies.signed[:MLO_actors] = params[:actors]
+            #puts "actors is #{cookies.signed[:MLO_actors]}"
             #end
             #if params[:directors]
-            #session[:MLO_directors] = params[:directors]
+            #cookies.signed[:MLO_directors] = params[:directors]
             #end
             #if params[:raterun]
-            #session[:MLO_raterun] = params[:raterun]
+            #cookies.signed[:MLO_raterun] = params[:raterun]
             #end
 
         elsif params[:commitTLO] == "Update"
 
-          if session[:TLO_address] != params[:address].to_s
+          if cookies.signed[:TLO_address] != params[:address].to_s
             HTTParty.put("#{@user_preference_url}/#{@show_address['id']}.json",
               body: {
                 user: {
-                  auth_token: session[:guest_auth]
+                  auth_token: cookies.signed[:guest_auth]
                 },
                 user_preference: {
                   preference: @show_address["preference"],
@@ -694,14 +694,14 @@ require 'open-uri'
                 }
               }
             )
-            session[:TLO_address] = params[:address]
+            cookies.signed[:TLO_address] = params[:address]
           end
             
-          if session[:TLO_distance] != params[:distance].to_s
+          if cookies.signed[:TLO_distance] != params[:distance].to_s
             HTTParty.put("#{@user_preference_url}/#{@show_distance['id']}.json",
               body: {
                 user: {
-                  auth_token: session[:guest_auth]
+                  auth_token: cookies.signed[:guest_auth]
                 },
                 user_preference: {
                   preference: @show_distance["preference"],
@@ -709,14 +709,14 @@ require 'open-uri'
                 }
               }
             )
-            session[:TLO_distance] = params[:distance]
+            cookies.signed[:TLO_distance] = params[:distance]
           end
             
-          if session[:TLO_phone_number] != params[:phone_number].to_s
+          if cookies.signed[:TLO_phone_number] != params[:phone_number].to_s
             HTTParty.put("#{@user_preference_url}/#{@show_phone['id']}.json",
               body: {
                 user: {
-                  auth_token: session[:guest_auth]
+                  auth_token: cookies.signed[:guest_auth]
                 },
                 user_preference: {
                   preference: @show_phone["preference"],
@@ -724,27 +724,27 @@ require 'open-uri'
                 }
               }
             )
-            session[:TLO_phone_number] = params[:phone_number]
+            cookies.signed[:TLO_phone_number] = params[:phone_number]
           end
             
             #if params[:address]
-            #session[:TLO_address] = params[:address]
-            #puts "address is #{session[:TLO_address]}"
+            #cookies.signed[:TLO_address] = params[:address]
+            #puts "address is #{cookies.signed[:TLO_address]}"
             #end
             #if params[:phone_number]
-            #session[:TLO_phone_number] = params[:phone_number]
-            #puts "phone number is #{session[:TLO_phone_number]}"
+            #cookies.signed[:TLO_phone_number] = params[:phone_number]
+            #puts "phone number is #{cookies.signed[:TLO_phone_number]}"
             #end
             #if params[:distance]
-            #session[:TLO_distance] = params[:distance]
+            #cookies.signed[:TLO_distance] = params[:distance]
             #end
 
         elsif params[:commitMO] == "Update"
-          if session[:MO_liked_theatres] != params[:liked_theatres].to_s
+          if cookies.signed[:MO_liked_theatres] != params[:liked_theatres].to_s
             HTTParty.put("#{@user_preference_url}/#{@show_liked_theatres['id']}.json",
               body: {
                 user: {
-                  auth_token: session[:guest_auth]
+                  auth_token: cookies.signed[:guest_auth]
                 },
                 user_preference: {
                   preference: @show_liked_theatres["preference"],
@@ -752,14 +752,14 @@ require 'open-uri'
                 }
               }
             )
-            session[:MO_liked_theatres] = params[:liked_theatres]
+            cookies.signed[:MO_liked_theatres] = params[:liked_theatres]
           end
           
-          if session[:MO_nearby_theatres] != params[:nearby_theatres].to_s
+          if cookies.signed[:MO_nearby_theatres] != params[:nearby_theatres].to_s
             HTTParty.put("#{@user_preference_url}/#{@show_nearby_theatres['id']}.json",
               body: {
                 user: {
-                  auth_token: session[:guest_auth]
+                  auth_token: cookies.signed[:guest_auth]
                 },
                 user_preference: {
                   preference: @show_nearby_theatres["preference"],
@@ -767,14 +767,14 @@ require 'open-uri'
                 }
               }
             )
-            session[:MO_nearby_theatres] = params[:nearby_theatres]
+            cookies.signed[:MO_nearby_theatres] = params[:nearby_theatres]
           end
             
-          if session[:MO_disliked_theatres] != params[:disliked_theatres].to_s
+          if cookies.signed[:MO_disliked_theatres] != params[:disliked_theatres].to_s
             HTTParty.put("#{@user_preference_url}/#{@show_disliked_theatres['id']}.json",
               body: {
                 user: {
-                  auth_token: session[:guest_auth]
+                  auth_token: cookies.signed[:guest_auth]
                 },
                 user_preference: {
                   preference: @show_disliked_theatres["preference"],
@@ -782,38 +782,38 @@ require 'open-uri'
                 }
               }
             )
-            session[:MO_disliked_theatres] = params[:disliked_theatres]
+            cookies.signed[:MO_disliked_theatres] = params[:disliked_theatres]
           end
             
             #if params[:likedt]
-            #session[:MO_likedt] = params[:likedt]
-            #puts "liked teatres is #{session[:MO_likedt]}"
+            #cookies.signed[:MO_likedt] = params[:likedt]
+            #puts "liked teatres is #{cookies.signed[:MO_likedt]}"
             #end
             #if params[:near]
-            #session[:MO_near] = params[:near]
-            #puts "nearby theatres is #{session[:MO_near]}"
+            #cookies.signed[:MO_near] = params[:near]
+            #puts "nearby theatres is #{cookies.signed[:MO_near]}"
             #end
             #if params[:dist]
-            #session[:MO_dist] = params[:dist]
+            #cookies.signed[:MO_dist] = params[:dist]
             #end
 
         end#commit
       
         @account =HTTParty.put("https://flavumovies.herokuapp.com/users.json", 
-        body: {user: {auth_token: session[:guest_auth]}}).parsed_response
+        body: {user: {auth_token: cookies.signed[:guest_auth]}}).parsed_response
           puts params[:commit1]
           puts params[:commit2]
       
 
 
       else
-     #@a1=session[:auth]
-        @user=session[:user]
-       # puts session[:auth]
+     #@a1=cookies.signed[:auth]
+        @user=cookies.signed[:user]
+       # puts cookies.signed[:auth]
        # puts @a1
        
         @user_preference_url = "https://flavumovies.herokuapp.com/user_preferences"
-        @user_preference =HTTParty.get("https://flavumovies.herokuapp.com/user_preferences.json", body: {user: {auth_token: session[:auth]}}).parsed_response
+        @user_preference =HTTParty.get("https://flavumovies.herokuapp.com/user_preferences.json", body: {user: {auth_token: cookies.signed[:auth]}}).parsed_response
           
         @radius = @user_preference["user_preferences"].find{|x| x["preference"] == "search radius"}
         @unit = @user_preference["user_preferences"].find{|x| x["preference"] == "unit of measure"}
@@ -828,22 +828,22 @@ require 'open-uri'
         @show_nearby_theatres = @user_preference["user_preferences"].find{|x| x["preference"] == "show nearby theatres on map"}
         @show_disliked_theatres = @user_preference["user_preferences"].find{|x| x["preference"] == "show disliked theatres on map"}
       
-        session[:SO_radius] ||= @radius["value"]
-        session[:SO_unit] ||= @unit["value"]
-        session[:MLO_genres] ||= @show_genres["value"]
-        session[:MLO_actors] ||= @show_actors["value"]
-        session[:MLO_directors] ||= @show_directors["value"]
-        session[:MLO_raterun] ||= @show_rating_runtime["value"]
-        session[:TLO_address] ||= @show_address["value"]
-        session[:TLO_distance] ||= @show_distance["value"]
-        session[:TLO_phone_number] ||= @show_phone["value"]
-        session[:MO_liked_theatres] ||= @show_liked_theatres["value"]
-        session[:MO_nearby_theatres] ||= @show_nearby_theatres["value"]
-        session[:MO_disliked_theatres] ||= @show_disliked_theatres["value"]
+        cookies.signed[:SO_radius] ||= @radius["value"]
+        cookies.signed[:SO_unit] ||= @unit["value"]
+        cookies.signed[:MLO_genres] ||= @show_genres["value"]
+        cookies.signed[:MLO_actors] ||= @show_actors["value"]
+        cookies.signed[:MLO_directors] ||= @show_directors["value"]
+        cookies.signed[:MLO_raterun] ||= @show_rating_runtime["value"]
+        cookies.signed[:TLO_address] ||= @show_address["value"]
+        cookies.signed[:TLO_distance] ||= @show_distance["value"]
+        cookies.signed[:TLO_phone_number] ||= @show_phone["value"]
+        cookies.signed[:MO_liked_theatres] ||= @show_liked_theatres["value"]
+        cookies.signed[:MO_nearby_theatres] ||= @show_nearby_theatres["value"]
+        cookies.signed[:MO_disliked_theatres] ||= @show_disliked_theatres["value"]
           
         if params[:commit1] == "Update"
           @setting_account =HTTParty.put("https://flavumovies.herokuapp.com/users.json",
-          body: {user: {auth_token: session[:auth], email: params[:email], 
+          body: {user: {auth_token: cookies.signed[:auth], email: params[:email], 
             username: params[:username],
             display_name: params[:display_name],
             phone_number: params[:phone_number],
@@ -862,7 +862,7 @@ require 'open-uri'
 
         #elsif params[:commit2] == "Update"
           #@setting_account =HTTParty.put("https://flavumovies.herokuapp.com/users.json", 
-          #body: {user: {auth_token: session[:auth], username: params[:username]}}).parsed_response
+          #body: {user: {auth_token: cookies.signed[:auth], username: params[:username]}}).parsed_response
           #if (@setting_account['errors'])
             #flash[:error] = "Update username is error. Please try again"
             #flash[:notice] = nil
@@ -873,13 +873,13 @@ require 'open-uri'
 
         #elsif params[:commit3] == "Update"
           #@setting_account =HTTParty.put("https://flavumovies.herokuapp.com/users.json", 
-          #body: {user: {auth_token: session[:auth], display_name: params[:display_name]}}).parsed_response
+          #body: {user: {auth_token: cookies.signed[:auth], display_name: params[:display_name]}}).parsed_response
           #flash[:notice] = "Update your display name is successful"
           #flash[:notice] = nil
 
         #elsif params[:commit4] == "Update"
           #@setting_account =HTTParty.put("https://flavumovies.herokuapp.com/users.json", 
-          #body: {user: {auth_token: session[:auth], phone_number: params[:phone_number]}}).parsed_response
+          #body: {user: {auth_token: cookies.signed[:auth], phone_number: params[:phone_number]}}).parsed_response
           #if (@setting_account['errors'])
             #flash[:error] = "Your phone number has something wrong. Please try again" 
             #flash[:notice] = nil
@@ -890,7 +890,7 @@ require 'open-uri'
 
         #elsif params[:commit5] == "Update"
           #@setting_account =HTTParty.put("https://flavumovies.herokuapp.com/users.json", 
-          #body: {user: {auth_token: session[:auth], password: params[:password],
+          #body: {user: {auth_token: cookies.signed[:auth], password: params[:password],
           #  password_confirmation: params[:password_confirmation]}}).parsed_response
           #if (params[:password].length <= 6)
             #flash[:error] = "Your password is too short. It has to be more than 6 characters"
@@ -904,11 +904,11 @@ require 'open-uri'
           #end
 
         elsif params[:commitSO] == "Update"
-          if session[:SO_radius] != params[:radius].to_s
+          if cookies.signed[:SO_radius] != params[:radius].to_s
             HTTParty.put("#{@user_preference_url}/#{@radius['id']}.json",
               body: {
                 user: {
-                  auth_token: session[:auth]
+                  auth_token: cookies.signed[:auth]
                 },
                 user_preference: {
                   preference: @radius["preference"],
@@ -916,14 +916,14 @@ require 'open-uri'
                 }
               }
             )
-            session[:SO_radius] = params[:radius]
+            cookies.signed[:SO_radius] = params[:radius]
           end
           
-          if session[:SO_unit] != params[:unit].to_s
+          if cookies.signed[:SO_unit] != params[:unit].to_s
             HTTParty.put("#{@user_preference_url}/#{@unit['id']}.json",
               body: {
                 user: {
-                  auth_token: session[:auth]
+                  auth_token: cookies.signed[:auth]
                 },
                 user_preference: {
                   preference: @unit["preference"],
@@ -931,7 +931,7 @@ require 'open-uri'
                 }
               }
             )
-            session[:SO_unit] = params[:unit]
+            cookies.signed[:SO_unit] = params[:unit]
           end
             
             #@user_preference =HTTParty.get("https://flavumovies.herokuapp.com/user_preferences.json", body: {user: {auth_token: @a1}}).parsed_response
@@ -941,12 +941,12 @@ require 'open-uri'
             #puts @unit_id
             #@radius2 =HTTParty.put("https://flavumovies.herokuapp.com/user_preferences/#{@radius_id}.json",
             #body: {
-            #user: {auth_token: session[:auth]} ,
+            #user: {auth_token: cookies.signed[:auth]} ,
             #user_preference: {preference: "search radius", value: params[:radius]}
             #}).parsed_response
             #@unit2 =HTTParty.put("https://flavumovies.herokuapp.com/user_preferences/#{@unit_id}.json",
             #body: {
-            #user: {auth_token: session[:auth]} ,
+            #user: {auth_token: cookies.signed[:auth]} ,
             #user_preference: {preference: "unit of measure", value: params[:unit]}
             #}).parsed_response
             
@@ -954,11 +954,11 @@ require 'open-uri'
 
             # TODO
             #if params[:genres]
-          if session[:MLO_genres] != params[:genres].to_s
+          if cookies.signed[:MLO_genres] != params[:genres].to_s
             HTTParty.put("#{@user_preference_url}/#{@show_genres['id']}.json",
               body: {
                 user: {
-                  auth_token: session[:auth]
+                  auth_token: cookies.signed[:auth]
                 },
                 user_preference: {
                   preference: @show_genres["preference"],
@@ -966,14 +966,14 @@ require 'open-uri'
                 }
               }
             )
-            session[:MLO_genres] = params[:genres]
+            cookies.signed[:MLO_genres] = params[:genres]
           end
             
-          if session[:MLO_actors] != params[:actors].to_s
+          if cookies.signed[:MLO_actors] != params[:actors].to_s
             HTTParty.put("#{@user_preference_url}/#{@show_actors['id']}.json",
               body: {
                 user: {
-                  auth_token: session[:auth]
+                  auth_token: cookies.signed[:auth]
                 },
                 user_preference: {
                   preference: @show_actors["preference"],
@@ -981,14 +981,14 @@ require 'open-uri'
                 }
               }
             )
-            session[:MLO_actors] = params[:actors]
+            cookies.signed[:MLO_actors] = params[:actors]
           end
             
-          if session[:MLO_directors] != params[:directors].to_s
+          if cookies.signed[:MLO_directors] != params[:directors].to_s
             HTTParty.put("#{@user_preference_url}/#{@show_directors['id']}.json",
               body: {
                 user: {
-                  auth_token: session[:auth]
+                  auth_token: cookies.signed[:auth]
                 },
                 user_preference: {
                   preference: @show_directors["preference"],
@@ -996,14 +996,14 @@ require 'open-uri'
                 }
               }
             )
-            session[:MLO_directors] = params[:directors]
+            cookies.signed[:MLO_directors] = params[:directors]
           end
             
-          if session[:MLO_raterun] != params[:raterun].to_s
+          if cookies.signed[:MLO_raterun] != params[:raterun].to_s
             HTTParty.put("#{@user_preference_url}/#{@show_rating_runtime['id']}.json",
               body: {
                 user: {
-                  auth_token: session[:auth]
+                  auth_token: cookies.signed[:auth]
                 },
                 user_preference: {
                   preference: @show_rating_runtime["preference"],
@@ -1011,27 +1011,27 @@ require 'open-uri'
                 }
               }
             )
-            session[:MLO_raterun] = params[:raterun]
+            cookies.signed[:MLO_raterun] = params[:raterun]
           end
             
             #if params[:actors]
-            #session[:MLO_actors] = params[:actors]
-            #puts "actors is #{session[:MLO_actors]}"
+            #cookies.signed[:MLO_actors] = params[:actors]
+            #puts "actors is #{cookies.signed[:MLO_actors]}"
             #end
             #if params[:directors]
-            #session[:MLO_directors] = params[:directors]
+            #cookies.signed[:MLO_directors] = params[:directors]
             #end
             #if params[:raterun]
-            #session[:MLO_raterun] = params[:raterun]
+            #cookies.signed[:MLO_raterun] = params[:raterun]
             #end
 
         elsif params[:commitTLO] == "Update"
 
-          if session[:TLO_address] != params[:address].to_s
+          if cookies.signed[:TLO_address] != params[:address].to_s
             HTTParty.put("#{@user_preference_url}/#{@show_address['id']}.json",
               body: {
                 user: {
-                  auth_token: session[:auth]
+                  auth_token: cookies.signed[:auth]
                 },
                 user_preference: {
                   preference: @show_address["preference"],
@@ -1039,14 +1039,14 @@ require 'open-uri'
                 }
               }
             )
-            session[:TLO_address] = params[:address]
+            cookies.signed[:TLO_address] = params[:address]
           end
             
-          if session[:TLO_distance] != params[:distance].to_s
+          if cookies.signed[:TLO_distance] != params[:distance].to_s
             HTTParty.put("#{@user_preference_url}/#{@show_distance['id']}.json",
               body: {
                 user: {
-                  auth_token: session[:auth]
+                  auth_token: cookies.signed[:auth]
                 },
                 user_preference: {
                   preference: @show_distance["preference"],
@@ -1054,14 +1054,14 @@ require 'open-uri'
                 }
               }
             )
-            session[:TLO_distance] = params[:distance]
+            cookies.signed[:TLO_distance] = params[:distance]
           end
             
-          if session[:TLO_phone_number] != params[:phone_number].to_s
+          if cookies.signed[:TLO_phone_number] != params[:phone_number].to_s
             HTTParty.put("#{@user_preference_url}/#{@show_phone['id']}.json",
               body: {
                 user: {
-                  auth_token: session[:auth]
+                  auth_token: cookies.signed[:auth]
                 },
                 user_preference: {
                   preference: @show_phone["preference"],
@@ -1069,27 +1069,27 @@ require 'open-uri'
                 }
               }
             )
-            session[:TLO_phone_number] = params[:phone_number]
+            cookies.signed[:TLO_phone_number] = params[:phone_number]
           end
             
             #if params[:address]
-            #session[:TLO_address] = params[:address]
-            #puts "address is #{session[:TLO_address]}"
+            #cookies.signed[:TLO_address] = params[:address]
+            #puts "address is #{cookies.signed[:TLO_address]}"
             #end
             #if params[:phone_number]
-            #session[:TLO_phone_number] = params[:phone_number]
-            #puts "phone number is #{session[:TLO_phone_number]}"
+            #cookies.signed[:TLO_phone_number] = params[:phone_number]
+            #puts "phone number is #{cookies.signed[:TLO_phone_number]}"
             #end
             #if params[:distance]
-            #session[:TLO_distance] = params[:distance]
+            #cookies.signed[:TLO_distance] = params[:distance]
             #end
 
         elsif params[:commitMO] == "Update"
-          if session[:MO_liked_theatres] != params[:liked_theatres].to_s
+          if cookies.signed[:MO_liked_theatres] != params[:liked_theatres].to_s
             HTTParty.put("#{@user_preference_url}/#{@show_liked_theatres['id']}.json",
               body: {
                 user: {
-                  auth_token: session[:auth]
+                  auth_token: cookies.signed[:auth]
                 },
                 user_preference: {
                   preference: @show_liked_theatres["preference"],
@@ -1097,14 +1097,14 @@ require 'open-uri'
                 }
               }
             )
-            session[:MO_liked_theatres] = params[:liked_theatres]
+            cookies.signed[:MO_liked_theatres] = params[:liked_theatres]
           end
           
-          if session[:MO_nearby_theatres] != params[:nearby_theatres].to_s
+          if cookies.signed[:MO_nearby_theatres] != params[:nearby_theatres].to_s
             HTTParty.put("#{@user_preference_url}/#{@show_nearby_theatres['id']}.json",
               body: {
                 user: {
-                  auth_token: session[:auth]
+                  auth_token: cookies.signed[:auth]
                 },
                 user_preference: {
                   preference: @show_nearby_theatres["preference"],
@@ -1112,14 +1112,14 @@ require 'open-uri'
                 }
               }
             )
-            session[:MO_nearby_theatres] = params[:nearby_theatres]
+            cookies.signed[:MO_nearby_theatres] = params[:nearby_theatres]
           end
             
-          if session[:MO_disliked_theatres] != params[:disliked_theatres].to_s
+          if cookies.signed[:MO_disliked_theatres] != params[:disliked_theatres].to_s
             HTTParty.put("#{@user_preference_url}/#{@show_disliked_theatres['id']}.json",
               body: {
                 user: {
-                  auth_token: session[:auth]
+                  auth_token: cookies.signed[:auth]
                 },
                 user_preference: {
                   preference: @show_disliked_theatres["preference"],
@@ -1127,23 +1127,23 @@ require 'open-uri'
                 }
               }
             )
-            session[:MO_disliked_theatres] = params[:disliked_theatres]
+            cookies.signed[:MO_disliked_theatres] = params[:disliked_theatres]
           end
             
             #if params[:likedt]
-            #session[:MO_likedt] = params[:likedt]
-            #puts "liked teatres is #{session[:MO_likedt]}"
+            #cookies.signed[:MO_likedt] = params[:likedt]
+            #puts "liked teatres is #{cookies.signed[:MO_likedt]}"
             #end
             #if params[:near]
-            #session[:MO_near] = params[:near]
-            #puts "nearby theatres is #{session[:MO_near]}"
+            #cookies.signed[:MO_near] = params[:near]
+            #puts "nearby theatres is #{cookies.signed[:MO_near]}"
             #end
             #if params[:dist]
-            #session[:MO_dist] = params[:dist]
+            #cookies.signed[:MO_dist] = params[:dist]
             #end      
         end
         @account =HTTParty.put("https://flavumovies.herokuapp.com/users.json", 
-        body: {user: {auth_token: session[:auth]}}).parsed_response
+        body: {user: {auth_token: cookies.signed[:auth]}}).parsed_response
         puts @account
             puts params[:commit1]
             puts params[:commit2]
@@ -1156,7 +1156,8 @@ require 'open-uri'
     #@lat_lng = cookies[:lat_lng]
     #@lat_lng2 = @lat_lng.split('|')
     #puts @lat_lng2[0]
-
+        puts cookies.signed[:auth]
+        puts cookies.signed[:guest_auth]
 @ip = request.remote_ip
 puts @ip
 request.remote_ip
@@ -1168,8 +1169,9 @@ UDPSocket.open do |s|
     end
 #puts @i2
     #puts @lat_lng
-    if (!session[:auth] && !session[:guest_auth])
-      redirect_to cover_path
+    if (!cookies.signed[:auth]) && (!cookies.signed[:guest_auth])
+      #redirect_to cover_path
+      puts "No"
     else
       #@ip_address=open( "https://jsonip.com/" ){ |s| JSON::parse( s.string())['ip'] }
       #@ip_address = UDPSocket.open {|s| s.connect("64.233.187.99", 1); s.addr.last}
@@ -1181,35 +1183,35 @@ UDPSocket.open do |s|
       
       @latlong=Geocoder.coordinates(@ip_address)
 
-      #session[:latitude]=@latlong[0]
-      #session[:longitude]=@latlong[1]
+      #cookies.signed[:latitude]=@latlong[0]
+      #cookies.signed[:longitude]=@latlong[1]
       #30.267447, -97.739513
-      session[:latitude]="49.25"
-      session[:longitude]="-123.1333"
+      cookies.permanent.signed[:latitude]="49.25"
+      cookies.permanent.signed[:longitude]="-123.1333"
       #@lat_lng2
-      puts session[:latitude]
-      puts session[:longitude]
+      puts cookies.signed[:latitude]
+      puts cookies.signed[:longitude]
       #puts @ip_address
-      if session[:check_guest] == 'true'
-        #@url_theatre = "https://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-        #@theatres =HTTParty.get(@url_theatre, body: {user: {auth_token: session[:guest_auth]}, browser: "1"}).parsed_response
+      if cookies.signed[:check_guest] == 'true'
+        #@url_theatre = "https://flavumovies.herokuapp.com/theatres.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"
+        #@theatres =HTTParty.get(@url_theatre, body: {user: {auth_token: cookies.signed[:guest_auth]}, browser: "1"}).parsed_response
         #@nt=@theatres['nearby_theatres']
-        puts session[:guest_auth]
-        @url_movie = "https://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-        @movies =HTTParty.get(@url_movie, body: {user: {auth_token: session[:guest_auth]}, browser: "1"}).parsed_response
+        puts cookies.signed[:guest_auth]
+        @url_movie = "https://flavumovies.herokuapp.com/movies.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"
+        @movies =HTTParty.get(@url_movie, body: {user: {auth_token: cookies.signed[:guest_auth]}, browser: "1"}).parsed_response
         #puts @movies
         @rm=@movies['remaining_movies']
         @im=@movies['interested_movies']
         @nim=@movies['not_interested_movies']
-        #session[:rm]=@movies['remaining_movies']
+        #cookies.signed[:rm]=@movies['remaining_movies']
       else 
 
-        @url_movie = "https://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-        @movies =HTTParty.get(@url_movie, body: {user: {auth_token: session[:auth]}, browser: "1"}).parsed_response
+        @url_movie = "https://flavumovies.herokuapp.com/movies.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"
+        @movies =HTTParty.get(@url_movie, body: {user: {auth_token: cookies.signed[:auth]}, browser: "1"}).parsed_response
         @rm=@movies['remaining_movies']
         @im=@movies['interested_movies']
         @nim=@movies['not_interested_movies']
-        #session[:rm]=@movies['remaining_movies']
+        #cookies.signed[:rm]=@movies['remaining_movies']
 
       end
 
@@ -1217,9 +1219,9 @@ UDPSocket.open do |s|
   end
 
   def signout
-    #reset_session 
-    session[:check_guest] = "true"
-    session[:auth] = nil
+    #reset_cookies.signed 
+    cookies.signed[:check_guest] = "true"
+    cookies.signed[:auth] = nil
 
     redirect_to home_path
   end
@@ -1242,38 +1244,38 @@ UDPSocket.open do |s|
   end
 
   def showtimes
-    if (!session[:auth] && !session[:guest_auth])
+    if (!cookies.signed[:auth] && !cookies.signed[:guest_auth])
       redirect_to cover_path
     else
-      if session[:check_guest] == 'true'
+      if cookies.signed[:check_guest] == 'true'
         if params[:liked]
           @url = "https://flavumovies.herokuapp.com/liked_theatres.json"
-          @theatres =HTTParty.post(@url, body: {user: {auth_token: session[:guest_auth]}, liked_theatre: {theatre_id: params[:liked]} }).parsed_response
+          @theatres =HTTParty.post(@url, body: {user: {auth_token: cookies.signed[:guest_auth]}, liked_theatre: {theatre_id: params[:liked]} }).parsed_response
         elsif params[:unliked]
           @url = "https://flavumovies.herokuapp.com/not_interested_theatres.json"
-          @theatres =HTTParty.post(@url, body: {user: {auth_token: session[:guest_auth]}, not_interested_theatre: {theatre_id: params[:unliked]} }).parsed_response
+          @theatres =HTTParty.post(@url, body: {user: {auth_token: cookies.signed[:guest_auth]}, not_interested_theatre: {theatre_id: params[:unliked]} }).parsed_response
         elsif params[:soso1]
           @url = "https://flavumovies.herokuapp.com/liked_theatres.json"
-          @theatres =HTTParty.delete(@url, body: {user: {auth_token: session[:guest_auth]}, liked_theatre: {theatre_id: params[:soso1]} }).parsed_response
+          @theatres =HTTParty.delete(@url, body: {user: {auth_token: cookies.signed[:guest_auth]}, liked_theatre: {theatre_id: params[:soso1]} }).parsed_response
         elsif params[:soso2]
           @url = "https://flavumovies.herokuapp.com/not_interested_theatres.json"
-          @theatres =HTTParty.delete(@url, body: {user: {auth_token: session[:guest_auth]}, not_interested_theatre: {theatre_id: params[:soso2]} }).parsed_response
+          @theatres =HTTParty.delete(@url, body: {user: {auth_token: cookies.signed[:guest_auth]}, not_interested_theatre: {theatre_id: params[:soso2]} }).parsed_response
 
         end
 
-      @url = "https://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-      @theatres =HTTParty.get(@url, body: {user: {auth_token: session[:guest_auth]}, browser: "1"}).parsed_response
+      @url = "https://flavumovies.herokuapp.com/theatres.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"
+      @theatres =HTTParty.get(@url, body: {user: {auth_token: cookies.signed[:guest_auth]}, browser: "1"}).parsed_response
 
       #@theatres=JSON.parse(open("https://flavumovies.herokuapp.com/theatres.json?auth_token=ZhhSqcdR2T6KoVv29UZp").read) 
       @lt=@theatres['liked_theatres']
       @nt=@theatres['nearby_theatres']
       @nit=@theatres['not_interested_theatres']
       #showtime
-        #@url_theatre = "https://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-        #@theatres =HTTParty.get(@url_theatre, body: {user: {auth_token: session[:guest_auth]}}).parsed_response
+        #@url_theatre = "https://flavumovies.herokuapp.com/theatres.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"
+        #@theatres =HTTParty.get(@url_theatre, body: {user: {auth_token: cookies.signed[:guest_auth]}}).parsed_response
         #@nt=@theatres['nearby_theatres']
-        #@url_movie = "https://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-        #@movies =HTTParty.get(@url_movie, body: {user: {auth_token: session[:guest_auth]}}).parsed_response
+        #@url_movie = "https://flavumovies.herokuapp.com/movies.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"
+        #@movies =HTTParty.get(@url_movie, body: {user: {auth_token: cookies.signed[:guest_auth]}}).parsed_response
         #@rm=@movies['remaining_movies']
 
 
@@ -1282,31 +1284,31 @@ UDPSocket.open do |s|
        # puts params[:unliked]
         if params[:liked]
           @url = "https://flavumovies.herokuapp.com/liked_theatres.json"
-          @theatres =HTTParty.post(@url, body: {user: {auth_token: session[:auth]}, liked_theatre: {theatre_id: params[:liked]} }).parsed_response
+          @theatres =HTTParty.post(@url, body: {user: {auth_token: cookies.signed[:auth]}, liked_theatre: {theatre_id: params[:liked]} }).parsed_response
         elsif params[:unliked]
           @url = "https://flavumovies.herokuapp.com/not_interested_theatres.json"
-          @theatres =HTTParty.post(@url, body: {user: {auth_token: session[:auth]}, not_interested_theatre: {theatre_id: params[:unliked]} }).parsed_response
+          @theatres =HTTParty.post(@url, body: {user: {auth_token: cookies.signed[:auth]}, not_interested_theatre: {theatre_id: params[:unliked]} }).parsed_response
         elsif params[:soso1]
           @url = "https://flavumovies.herokuapp.com/liked_theatres.json"
-          @theatres =HTTParty.delete(@url, body: {user: {auth_token: session[:auth]}, liked_theatre: {theatre_id: params[:soso1]} }).parsed_response
+          @theatres =HTTParty.delete(@url, body: {user: {auth_token: cookies.signed[:auth]}, liked_theatre: {theatre_id: params[:soso1]} }).parsed_response
         elsif params[:soso2]
           @url = "https://flavumovies.herokuapp.com/not_interested_theatres.json"
-          @theatres =HTTParty.delete(@url, body: {user: {auth_token: session[:auth]}, not_interested_theatre: {theatre_id: params[:soso2]} }).parsed_response
+          @theatres =HTTParty.delete(@url, body: {user: {auth_token: cookies.signed[:auth]}, not_interested_theatre: {theatre_id: params[:soso2]} }).parsed_response
 
         end
-      @url = "https://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-      @theatres =HTTParty.get(@url, body: {user: {auth_token: session[:auth]}, browser: "1"}).parsed_response
+      @url = "https://flavumovies.herokuapp.com/theatres.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"
+      @theatres =HTTParty.get(@url, body: {user: {auth_token: cookies.signed[:auth]}, browser: "1"}).parsed_response
       #puts @theatres
       #@theatres=JSON.parse(open("https://flavumovies.herokuapp.com/theatres.json?auth_token=ZhhSqcdR2T6KoVv29UZp").read) 
       @lt=@theatres['liked_theatres']
       @nt=@theatres['nearby_theatres']
       @nit=@theatres['not_interested_theatres']
       #showtime
-        #@url_theatre = "https://flavumovies.herokuapp.com/theatres.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-        #@theatres =HTTParty.get(@url_theatre, body: {user: {auth_token: session[:auth]}}).parsed_response
+        #@url_theatre = "https://flavumovies.herokuapp.com/theatres.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"
+        #@theatres =HTTParty.get(@url_theatre, body: {user: {auth_token: cookies.signed[:auth]}}).parsed_response
         #@nt=@theatres['nearby_theatres']
-        #@url_movie = "https://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-        #@movies =HTTParty.get(@url_movie, body: {user: {auth_token: session[:auth]}}).parsed_response
+        #@url_movie = "https://flavumovies.herokuapp.com/movies.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"
+        #@movies =HTTParty.get(@url_movie, body: {user: {auth_token: cookies.signed[:auth]}}).parsed_response
         #@rm=@movies['remaining_movies']
 
       end
@@ -1315,37 +1317,37 @@ UDPSocket.open do |s|
 
   def showmovie
 
-    if (!session[:auth] && !session[:guest_auth])
+    if (!cookies.signed[:auth] && !cookies.signed[:guest_auth])
       redirect_to cover_path
     else
-        puts session[:check_guest]
-        puts session[:auth]
-        puts session[:guest_auth]
+        puts cookies.signed[:check_guest]
+        puts cookies.signed[:auth]
+        puts cookies.signed[:guest_auth]
         puts params[:showid1]
         puts params[:showid2]
         puts params[:showid3]
 
-        if session[:check_guest] == "true"
+        if cookies.signed[:check_guest] == "true"
           if params[:showid]#should be movies in theatres page
             @id_showmovie = params[:showid]
-            @url = "https://flavumovies.herokuapp.com/movies/#{params[:showid]}.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-            @movies =HTTParty.get(@url, body: {user: {auth_token: session[:guest_auth]}, browser: "1"}).parsed_response
+            @url = "https://flavumovies.herokuapp.com/movies/#{params[:showid]}.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"
+            @movies =HTTParty.get(@url, body: {user: {auth_token: cookies.signed[:guest_auth]}, browser: "1"}).parsed_response
             @sm=@movies['movie']
           end
-          @url2 = "https://flavumovies.herokuapp.com/theatres_for_movie/#{@id_showmovie}.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-          @theatres_for_movie=HTTParty.get(@url2, body: {user: {auth_token: session[:guest_auth]}, browser: "1"}).parsed_response
+          @url2 = "https://flavumovies.herokuapp.com/theatres_for_movie/#{@id_showmovie}.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"
+          @theatres_for_movie=HTTParty.get(@url2, body: {user: {auth_token: cookies.signed[:guest_auth]}, browser: "1"}).parsed_response
       
 
 
         else
           if params[:showid]#should be movies in theatres page
             @id_showmovie = params[:showid]
-            @url = "https://flavumovies.herokuapp.com/movies/#{params[:showid]}.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-            @movies =HTTParty.get(@url, body: {user: {auth_token: session[:auth]}, browser: "1"}).parsed_response
+            @url = "https://flavumovies.herokuapp.com/movies/#{params[:showid]}.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"
+            @movies =HTTParty.get(@url, body: {user: {auth_token: cookies.signed[:auth]}, browser: "1"}).parsed_response
             @sm=@movies['movie']
           end
-          @url2 = "https://flavumovies.herokuapp.com/theatres_for_movie/#{@id_showmovie}.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-          @theatres_for_movie=HTTParty.get(@url2, body: {user: {auth_token: session[:auth]}, browser: "1"}).parsed_response
+          @url2 = "https://flavumovies.herokuapp.com/theatres_for_movie/#{@id_showmovie}.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"
+          @theatres_for_movie=HTTParty.get(@url2, body: {user: {auth_token: cookies.signed[:auth]}, browser: "1"}).parsed_response
       
         end
     end
@@ -1376,8 +1378,8 @@ UDPSocket.open do |s|
   def reviews
     #@url1 = "https://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?review_type=all&limit=20&apikey=ufqydfp3jtp9ytyr69j37835"
     #@boxoffice =HTTParty.get(@url1).parsed_response
-    @url = "https://flavumovies.herokuapp.com/movies.json?latitude=#{session[:latitude]}&longitude=#{session[:longitude]}"
-    @movies =HTTParty.get(@url, body: {user: {auth_token: session[:auth]  }, browser: "1"}).parsed_response
+    @url = "https://flavumovies.herokuapp.com/movies.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"
+    @movies =HTTParty.get(@url, body: {user: {auth_token: cookies.signed[:auth]  }, browser: "1"}).parsed_response
     @rm=@movies['remaining_movies']
     @im=@movies['interested_movies']
     @nim=@movies['not_interested_movies']
@@ -1422,7 +1424,7 @@ UDPSocket.open do |s|
     puts params[:confirmation_token]
     @url = "https://flavumovies.herokuapp.com/users/confirmation.json"
     @confirm_account =HTTParty.get(@url, body: {confirmation_token: params[:confirmation_token]}).parsed_response
-    session[:auth]=@confirm_account['auth_token']   
+    cookies.signed[:auth]=@confirm_account['auth_token']   
     redirect_to home_path
   end
 
@@ -1440,7 +1442,7 @@ UDPSocket.open do |s|
 
   def reset_password
     #puts params[:reset_password_token]
-    #session[:reset_password_token] = params[:reset_password_token]
+    #cookies.signed[:reset_password_token] = params[:reset_password_token]
     #puts params[:reset_password_token]
       @password_reset_token=params[:reset_password_token]
 
@@ -1450,7 +1452,7 @@ UDPSocket.open do |s|
       puts params[:password_confirmation]       
       @url = "https://flavumovies.herokuapp.com/users/password.json"
       @password_reset_token =HTTParty.put(@url, body: { user: {reset_password_token: params[:reset_password], password: params[:password], password_confirmation: params[:password_confirmation] }}).parsed_response
-      session[:auth]=@password_reset_token['auth_token']   
+      cookies.signed[:auth]=@password_reset_token['auth_token']   
       puts @password_reset_token
       redirect_to home_path
     else

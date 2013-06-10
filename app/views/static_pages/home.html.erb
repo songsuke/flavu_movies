@@ -1,7 +1,7 @@
 <html>
 <head>
 
-<%if (!session[:auth] && !session[:guest_auth])%>
+<%if (!cookies.signed[:auth]) && (!cookies.signed[:guest_auth])%>
 <meta http-equiv="refresh" content="0; url=/cover"> 
 
 <%else%>

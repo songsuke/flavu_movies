@@ -19,7 +19,7 @@
 		<div id="setting-detail">
 			<div id="myTabContent" class="tab-content">
 				<div class="tab-pane active" id="account_settings">
-          <%if(!session[:auth])%>
+          <%if(!cookies.signed[:auth])%>
              <h11> Sign up to have an account--><%= link_to "Here", register_path%> )</h11>
           <%else%>
 					<div id="setting-head">
@@ -172,14 +172,14 @@
 
 		  <%=form_tag '/settings' do %>
         <p style="display:block; margin-bottom:0px; margin-top:5px">Radius</p>
-        <% if session[:SO_radius] == "5" %>
+        <% if cookies.signed[:SO_radius] == "5" %>
           <%= radio_button_tag(:radius, "5", :checked => 1) %>
           <%= label_tag '5' ,nil, :class => 'inline_label' %>
           <%= radio_button_tag(:radius, "10") %>
           <%= label_tag '10' ,nil, :class => 'inline_label' %>
           <%= radio_button_tag(:radius, "30") %>
           <%= label_tag '30' ,nil, :class => 'inline_label' %>
-        <% elsif session[:SO_radius] == "10" %>
+        <% elsif cookies.signed[:SO_radius] == "10" %>
           <%= radio_button_tag(:radius, "5") %>
           <%= label_tag '5' ,nil, :class => 'inline_label' %>
           <%= radio_button_tag(:radius, "10", :checked => 1) %>
@@ -196,7 +196,7 @@
         <% end %>
 
         <p style="display:block; margin-bottom:0px; margin-top:5px">Unit</p>
-        <% if session[:SO_unit] == "km" %>
+        <% if cookies.signed[:SO_unit] == "km" %>
           <%= radio_button_tag(:unit, "km", :checked => 1) %>
           <%= label_tag 'Kilometres' ,nil, :class => 'inline_label' %>
           <%= radio_button_tag(:unit, "mi") %>
@@ -226,7 +226,7 @@
       <div class="accordion-inner">
         <%=form_tag '/settings' do %>
           <p style="display:block; margin-bottom:0px; margin-top:5px">Genres Option</p>
-          <% if session[:MLO_genres] == "true" %>
+          <% if cookies.signed[:MLO_genres] == "true" %>
             <%= radio_button_tag(:genres, "true", :checked => 1) %>
             <%= label_tag 'on' ,nil, :class => 'inline_label' %>
             <%= radio_button_tag(:genres, "false") %>
@@ -239,7 +239,7 @@
           <% end %>
 
           <p style="display:block; margin-bottom:0px; margin-top:5px">Actors Options</p>
-          <% if session[:MLO_actors] == "true" %>
+          <% if cookies.signed[:MLO_actors] == "true" %>
             <%= radio_button_tag(:actors, "true", :checked => 1) %>
             <%= label_tag 'on' ,nil, :class => 'inline_label' %>
             <%= radio_button_tag(:actors, "false") %>
@@ -252,7 +252,7 @@
           <% end %>
 
           <p style="display:block; margin-bottom:0px; margin-top:5px">Directors Option</p>
-          <% if session[:MLO_directors] == "true" %>
+          <% if cookies.signed[:MLO_directors] == "true" %>
             <%= radio_button_tag(:directors, "true", :checked => 1) %>
             <%= label_tag 'on' ,nil, :class => 'inline_label' %>
             <%= radio_button_tag(:directors, "false") %>
@@ -265,7 +265,7 @@
           <% end %>
 
           <p style="display:block; margin-bottom:0px; margin-top:5px">Rating and Runtime Option</p>
-          <% if session[:MLO_raterun] == "true" %>
+          <% if cookies.signed[:MLO_raterun] == "true" %>
             <%= radio_button_tag(:raterun, "true", :checked => 1) %>
             <%= label_tag 'on' ,nil, :class => 'inline_label' %>
             <%= radio_button_tag(:raterun, "false") %>
@@ -294,7 +294,7 @@
       <div class="accordion-inner">
         <%=form_tag '/settings' do %>
           <p style="display:block; margin-bottom:0px; margin-top:5px">Address Option</p>
-          <% if session[:TLO_address] == "true" %>
+          <% if cookies.signed[:TLO_address] == "true" %>
             <%= radio_button_tag(:address, "true", :checked => 1) %>
             <%= label_tag 'on' ,nil, :class => 'inline_label' %>
             <%= radio_button_tag(:address, "false") %>
@@ -307,7 +307,7 @@
           <% end %>
 
           <p style="display:block; margin-bottom:0px; margin-top:5px">Phone Number Option</p>
-          <% if session[:TLO_phone_number] == "true" %>
+          <% if cookies.signed[:TLO_phone_number] == "true" %>
             <%= radio_button_tag(:phone_number, "true", :checked => 1) %>
             <%= label_tag 'on' ,nil, :class => 'inline_label' %>
             <%= radio_button_tag(:phone_number, "false") %>
@@ -320,7 +320,7 @@
           <% end %>
 
           <p style="display:block; margin-bottom:0px; margin-top:5px">Distance Option</p>
-          <% if session[:TLO_distance] == "true" %>
+          <% if cookies.signed[:TLO_distance] == "true" %>
             <%= radio_button_tag(:distance, "true", :checked => 1) %>
             <%= label_tag 'on' ,nil, :class => 'inline_label' %>
             <%= radio_button_tag(:distance, "false") %>
@@ -349,7 +349,7 @@
       <div class="accordion-inner">
         <%=form_tag '/settings' do %>
           <p style="display:block; margin-bottom:0px; margin-top:5px">Liked Theatres Option</p>
-          <% if session[:MO_liked_theatres] == "true" %>
+          <% if cookies.signed[:MO_liked_theatres] == "true" %>
             <%= radio_button_tag(:liked_theatres, "true", :checked => 1) %>
             <%= label_tag 'on' ,nil, :class => 'inline_label' %>
             <%= radio_button_tag(:liked_theatres, "false") %>
@@ -362,7 +362,7 @@
           <% end %>
 
           <p style="display:block; margin-bottom:0px; margin-top:5px">Nearby Theatres Option</p>
-          <% if session[:MO_nearby_theatres] == "true" %>
+          <% if cookies.signed[:MO_nearby_theatres] == "true" %>
             <%= radio_button_tag(:nearby_theatres, "true", :checked => 1) %>
             <%= label_tag 'on' ,nil, :class => 'inline_label' %>
             <%= radio_button_tag(:nearby_theatres, "false") %>
@@ -375,7 +375,7 @@
           <% end %>
 
           <p style="display:block; margin-bottom:0px; margin-top:5px">Disliked Theatres Option</p>
-          <% if session[:MO_disliked_theatres] == "true" %>
+          <% if cookies.signed[:MO_disliked_theatres] == "true" %>
             <%= radio_button_tag(:disliked_theatres, "true", :checked => 1) %>
             <%= label_tag 'on' ,nil, :class => 'inline_label' %>
             <%= radio_button_tag(:disliked_theatres, "false") %>
