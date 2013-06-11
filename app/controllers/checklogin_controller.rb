@@ -17,10 +17,10 @@ def checklogin
         cookies.permanent.signed[:username] = {value: "#{@users['username']}"}
         #cookies.signed[:username] ={secure: true, httponly: true, domain: 'flavu.com', value: "true"}        
         cookies.permanent.signed[:user] = {value: "#{@users}"}
-        if checkbox[check]]=1
+        if checkbox[check]=1
           cookies.permanent.signed[:auth] = {secure: true,value: "#{@users['auth_token']}"}
           puts "yes#{params[:checkbox]}"
-        elsif checkbox[check]]=0
+        elsif checkbox[check]=0
           cookies.signed[:auth] = {secure: true,value: "#{@users['auth_token']}"}
           puts "no"
         end
