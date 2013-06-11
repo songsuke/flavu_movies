@@ -14,14 +14,16 @@ def checklogin
         #puts cookies.signed[:check_guest]
         redirect_to home_path
       else
-        cookies.permanent.signed[:username] = {value: "#{@users['username']}"}
-        #cookies.signed[:username] ={secure: true, httponly: true, domain: 'flavu.com', value: "true"}        
-        cookies.permanent.signed[:user] = {value: "#{@users}"}
-        if params[:checkbox]==1
-          cookies.permanent.signed[:auth] = {secure: true,value: "#{@users['auth_token']}"}
-          puts "yes#{params[:checkbox]}"
-        elsif params[:checkbox]==0
-          cookies.signed[:auth] = {secure: true,value: "#{@users['auth_token']}"}
+        
+        if params[:checkbox]['check']=="1"
+          cookies.permanent.signed[:auth] = {value: "#{@users['auth_token']}"}
+          cookies.permanent.signed[:username] = {value: "#{@users['username']}"}
+          cookies.permanent.signed[:user] = {value: "#{@users}"}
+          puts "yes#{params[:checkbox]['check']}"
+        elsif params[:checkbox]['check']=="0"
+          cookies.signed[:auth] = {value: "#{@users['auth_token']}"}
+          cookies.signed[:username] = {value: "#{@users['username']}"}
+          cookies.signed[:user] = {value: "#{@users}"}
           puts "no"
         end
         #cookies.signed[:auth] ={secure: true, httponly: true, domain: 'flavu.com', value: "#{@auth_token}"}

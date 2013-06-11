@@ -353,7 +353,7 @@ require 'open-uri'
       end
     end
   end
-  
+
   def edit
     cookies.delete(:auth, :auth_token=>'cookies[:auth]')
     redirect_to cover_path
@@ -1055,8 +1055,8 @@ require 'open-uri'
     #@lat_lng = cookies[:lat_lng]
     #@lat_lng2 = @lat_lng.split('|')
     #puts @lat_lng2[0]
-        puts cookies.signed[:auth]
-        puts cookies.signed[:guest_auth]
+        puts "auth#{cookies.signed[:auth]}"
+        puts "guest#{cookies.signed[:guest_auth]}"
 @ip = request.remote_ip
 puts @ip
 request.remote_ip
@@ -1089,10 +1089,15 @@ request.remote_ip
       puts cookies.signed[:longitude]
       #puts @ip_address
       @url_movie = "https://flavumovies.herokuapp.com/movies.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"
-      if cookies.signed[:check_guest] == 'true'
-        @movies =HTTParty.get(@url_movie, body: {user: {auth_token: cookies.signed[:guest_auth]}, browser: "1"}).parsed_response
+      puts cookies.signed[:check_guest]
+      puts cookies.signed[:check_guest].class
+      if ((!cookies.signed[:auth]) && (cookies.signed[:guest_auth]))
+          cookies.signed[:check_guest] = "true"
+      end
+      if (cookies.signed[:check_guest] == 'true')
+          @movies =HTTParty.get(@url_movie, body: {user: {auth_token: cookies.signed[:guest_auth]}, browser: "1"}).parsed_response
       else 
-        @movies =HTTParty.get(@url_movie, body: {user: {auth_token: cookies.signed[:auth]}, browser: "1"}).parsed_response
+          @movies =HTTParty.get(@url_movie, body: {user: {auth_token: cookies.signed[:auth]}, browser: "1"}).parsed_response
       end
       @rm=@movies['remaining_movies']
       @im=@movies['interested_movies']
@@ -1326,6 +1331,10 @@ request.remote_ip
   end
 
   def idevice
-    @reset_password_token = params[:reset_password_token]
+    if params[:reset_password_token]
+      @reset_password_token = params[:reset_password_token]
+    elsif params[:confirmation_token]
+      @confirmation_token = params[:confirmation_token]
+    end
   end
 end

@@ -1,8 +1,13 @@
-	<script> 
-		var userAgent = window.navigator.userAgent;
-		if (userAgent.match(/iPhone/i) || userAgent.match(/iPad/i)) {	
+<script> 
+	var userAgent = window.navigator.userAgent;
+	if (userAgent.match(/iPhone/i) || userAgent.match(/iPad/i)) {
+		<% if @reset_password_token %>	
 			var baseUrl = "flavumovies://?reset_password_token=";
 			var token = "<%= @reset_password_token %>";
-			window.location = baseUrl + token;
-		}
-	</script>
+	  	<% else %>
+	    		var baseUrl = "flavumovies://?confirmation_token=";
+			var token = "<%= @confirmation_token %>";
+	  	<% end %>
+		window.location = baseUrl + token;
+	}
+</script>
