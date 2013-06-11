@@ -1170,8 +1170,7 @@ UDPSocket.open do |s|
 #puts @i2
     #puts @lat_lng
     if (!cookies.signed[:auth]) && (!cookies.signed[:guest_auth])
-      #redirect_to cover_path
-      puts "No"
+      redirect_to cover_path
     else
       #@ip_address=open( "https://jsonip.com/" ){ |s| JSON::parse( s.string())['ip'] }
       #@ip_address = UDPSocket.open {|s| s.connect("64.233.187.99", 1); s.addr.last}
