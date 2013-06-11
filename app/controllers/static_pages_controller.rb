@@ -1041,7 +1041,7 @@ require 'open-uri'
             #cookies.signed[:MO_dist] = params[:dist]
             #end      
         end
-        @account =HTTParty.put("https://flavumovies.herokuapp.com/users.json", 
+        @account =HTTParty.get("https://flavumovies.herokuapp.com/users/#{cookies.signed[:user_id]}.json", 
         body: {user: {auth_token: cookies.signed[:auth]}}).parsed_response
         puts @account
             puts params[:commit1]

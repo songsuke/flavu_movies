@@ -18,11 +18,13 @@ def checklogin
         if params[:checkbox]['check']=="1"
           cookies.permanent.signed[:auth] = {value: "#{@users['auth_token']}"}
           cookies.permanent.signed[:username] = {value: "#{@users['username']}"}
+          cookies.permanent.signed[:user_id] = {value: "#{@users['id']}"}
           cookies.permanent.signed[:user] = {value: "#{@users}"}
           puts "yes#{params[:checkbox]['check']}"
         elsif params[:checkbox]['check']=="0"
           cookies.signed[:auth] = {value: "#{@users['auth_token']}"}
           cookies.signed[:username] = {value: "#{@users['username']}"}
+          cookies.signed[:user_id] = {value: "#{@users['id']}"}
           cookies.signed[:user] = {value: "#{@users}"}
           puts "no"
         end
