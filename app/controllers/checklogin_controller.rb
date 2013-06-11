@@ -19,8 +19,10 @@ def checklogin
         cookies.permanent.signed[:user] = {value: "#{@users}"}
         if params[:checkbox]=1
           cookies.permanent.signed[:auth] = {secure: true,value: "#{@users['auth_token']}"}
+          puts "yes#{params[:checkbox]}"
         else
           cookies.signed[:auth] = {secure: true,value: "#{@users['auth_token']}"}
+          puts "no"
         end
         #cookies.signed[:auth] ={secure: true, httponly: true, domain: 'flavu.com', value: "#{@auth_token}"}
         #cookies.signed[:latitude] = '49.28385281'
