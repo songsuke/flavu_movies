@@ -65,13 +65,15 @@
   								<div id="<%=movie['id']%><%=liked['id']%>" class="modal fade hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 									<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+										<%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid=>movie['id'] do%>
 				  						<h1 class="title"><%=movie['title']%></h1>
+				  						<%end%>
 				  					</div>
 				  					<div class="modal-body">
 				  						<%movie['showtimes'].each do |showtime|%>
 				  							<%if showtime['date'].to_date == Time.now.to_date%>
-					  							<p><%=showtime['date']%></p>
-					  							<p><%=showtime['start_time']%></p>
+					  								<p>Date : <%=showtime['date']%></p>
+					  								<p>Time : <%=showtime['start_time']%></p>
 					  						<%end%>
 				  						<%end%>
 				  					</div>
@@ -114,13 +116,15 @@
   								<div id="<%=movie['id']%><%=liked['id']%>" class="modal fade hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 									<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+										<%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid=>movie['id'] do%>
 				  						<h1 class="title"><%=movie['title']%></h1>
+				  						<%end%>				  					
 				  					</div>
 				  					<div class="modal-body">
 				  						<%movie['showtimes'].each do |showtime|%>
 				  							<%if showtime['date'].to_date == Time.now.to_date%>
-				  								<p><%=showtime['date']%></p>
-				  								<p><%=showtime['start_time']%></p>
+					  							<p>Date : <%=showtime['date']%></p>
+					  							<p>Time : <%=showtime['start_time']%></p>
 				  							<%end%>
 				  						<%end%>
 				  					</div>
@@ -163,13 +167,15 @@
   								<div id="<%=movie['id']%><%=liked['id']%>" class="modal fade hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 									<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+										<%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid=>movie['id'] do%>
 				  						<h1 class="title"><%=movie['title']%></h1>
+				  						<%end%>				  					
 				  					</div>
 				  					<div class="modal-body">
 				  						<%movie['showtimes'].each do |showtime|%>
 				  					  		<%if showtime['date'].to_date == Time.now.to_date%>
-				  								<p><%=showtime['date']%></p>
-				  								<p><%=showtime['start_time']%></p>
+												<p>Date : <%=showtime['date']%></p>
+					  							<p>Time : <%=showtime['start_time']%></p>
 				  							<%end%>
 				  						<%end%>
 				  					</div>
