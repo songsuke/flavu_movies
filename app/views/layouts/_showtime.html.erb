@@ -24,12 +24,12 @@
 				<%end%>
 			</li>
 			
-
 		</ul>
 		<ul class="nav right">
 			<%if (!cookies.signed[:auth])%>
 				<li>
-					<a href="#myModal" data-toggle="modal" data-backdrop="true" class="title">Log In</a>
+		
+					<a href="#myModal" data-toggle="modal" data-backdrop="true" class="title" >Log In</a>
 					<div id="myModal" class="modal fade hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						<div class="modal-header">
 		    				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -38,7 +38,8 @@
 		    			<div class="modal-body">
 							<%= form_tag '/checklogin' do %>
 								<div class="control-group">
-									<div class="controls">
+									<div class="controls">		
+										<%if flash[:error]%><div class="alert"><%= flash[:error]%></div><%end%>
 										<div id="login-bar">
 											<%= label_tag("Login") %>
 											<%= text_field_tag "login"%>
@@ -58,7 +59,7 @@
 							<%end%>
 		  				</div>
 					</div>
-				<li>
+				</li>
 				<li>
 					<a href="/register" class="title">Register</a>
 				</li>
@@ -72,41 +73,6 @@
 			</li>
 			<%end%>
 		</ul>
-<!--
-			<li class="stat"> Available On </li>
-			<li><a href="#"><img src="/assets/apple-logo.png" width="35" height="35"></a></li>
-			<li><a href="#"><img src="/assets/android-logo.png" width="35" height="35"></a></li>
-		</ul> -->
 
-		<!--<h1><img src="/assets/showtime.png"></h1>
-		<div id="quick-showtime-form">
-			<%=form_tag '/showtime' do %>
-		    	<div id="quick-movies">
-			        <select id = "movie" name = "movie">
-			        <option name = "all_movies" id=movie value="all_movies"> All Movies</option><h1>at</h1>
-			        <!--<%#@rm['movies'].each do |movie| %>
-			        <%#@xmovies= movie['title']%>
-			        <%#@id_movie= movie['id']%>
-			        <option name = "<%=@id_movie%>" id=movie value="<%=@id_movie%>"> <%=@xmovies%></option>
-			        <%#end%>-->
-			        <!--</select>
-		     	</div>
-
-		     	<div id="quick-theatres">
-			        <select id = "theatre" name = "theatre">
-			        <option name = "all_theatres" id="theatre" value="all_theatres"> All Theatres</option>
-			         <!--<%#@nt['theatres'].each do |theatre| %>
-			          <%#@xtheatres= theatre['name']%>
-			          <%#@id_theatre= theatre['id']%>
-			          <option name = "<%=@id_theatre%>" id=movie value="<%=@id_theatre%>"> <%=@xtheatres%></option>
-			          <%#end%>-->
-			        <!--</select>
-		     	</div>
-
-		    <input class="btn btn-danger" name="commit" type="submit" value=" SHOWTIME ">
-		    <%end%>
-
-
-	</div>-->
 	</div><!--navbar-inner-->
 </div>
