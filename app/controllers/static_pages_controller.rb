@@ -142,11 +142,11 @@ require 'open-uri'
   end
 
   def showtheatre
-    if (!cookies.signed[:auth] && !cookies.signed[:guest_auth])
+    if (!cookies.signed[:auth]) && (!cookies.signed[:guest_auth])
       redirect_to cover_path
     else
-      @url = "https://flavumovies.herokuapp.com/theatres/#{params[:showid]}.json"
-      if cookies.signed[:check_guest] == 'true'
+      @url = "https://flavumovies.herokuapp.com/theatres/#{params[:showid]}.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"     
+      if cookies.signed[:check_guest] == "true"
         if params[:showid]
           @theatres =HTTParty.get(@url, body: {user: {auth_token: cookies.signed[:guest_auth]}, browser: "1"}).parsed_response
         end
@@ -311,6 +311,7 @@ require 'open-uri'
 
   def edit
     cookies.delete(:auth, :auth_token=>'cookies[:auth]')
+    cookies.signed[:guest_auth] = nil
     redirect_to cover_path
   end
 
@@ -653,10 +654,10 @@ require 'open-uri'
 
         end#commit
       
-        @account =HTTParty.put("https://flavumovies.herokuapp.com/users.json", 
-        body: {user: {auth_token: cookies.signed[:guest_auth]}}).parsed_response
-          puts params[:commit1]
-          puts params[:commit2]
+        #@account =HTTParty.put("https://flavumovies.herokuapp.com/users.json", 
+        #body: {user: {auth_token: cookies.signed[:guest_auth]}}).parsed_response
+        #  puts params[:commit1]
+        #  puts params[:commit2]
       
 
 
@@ -702,7 +703,8 @@ require 'open-uri'
             display_name: params[:display_name],
             phone_number: params[:phone_number],
             password: params[:password],
-            password_confirmation: params[:password_confirmation]
+            password_confirmation: params[:password_confirmation],
+            current_password: params[:current_password]
             }}).parsed_response
           puts params[:email]
           #puts @setting_account['errors']['email'].first
@@ -996,9 +998,13 @@ require 'open-uri'
             #cookies.signed[:MO_dist] = params[:dist]
             #end      
         end
+       # puts params[:current_password]
+       # @account1 =HTTParty.put("https://flavumovies.herokuapp.com/users.json", 
+       # body: {user: {auth_token: cookies.signed[:auth],current_password: params[:current_password]}}).parsed_response
+       # puts @account1
+
         @account =HTTParty.get("https://flavumovies.herokuapp.com/users/#{cookies.signed[:user_id]}.json", 
         body: {user: {auth_token: cookies.signed[:auth]}}).parsed_response
-        puts @account
             puts params[:commit1]
             puts params[:commit2]
       
