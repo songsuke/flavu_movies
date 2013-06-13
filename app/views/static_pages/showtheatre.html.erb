@@ -5,16 +5,28 @@
 	<div id="showtheatre-content">
 			<div id="showtheatre-info">
 				<ul>
+					<%if cookies.signed[:TLO_address]=="false"%>
+  			  		<%else%>
 					<li> Address : <%=@st['location']['address']%></li>
 					<li> City : <%=@st['location']['city']%></li>
 					<li> Country : <%=@st['location']['country']%></li>
-					<li> Latitude : <%=@st['location']['latitude']%></li>
-					<li> Longitude :<%=@st['location']['longitude']%></li>
 					<li> Postal Code : <%=@st['location']['postal_code']%></li>
 					<li> Province : <%=@st['location']['province']%></li>
+					<%end%>
+					<li> Latitude : <%=@st['location']['latitude']%></li>
+					<li> Longitude :<%=@st['location']['longitude']%></li>
+					<%if cookies.signed[:TLO_distance]=="false"%>
+  			  		<%else%>
 					<li> Distance : <%=@st['distance']%></li>
+					<%end%>
+					<%if cookies.signed[:TLO_phone_number]=="false"%>
+  			  		<%else%>
 					<li> Phone Number : <%=@st['phone_number']%></li>
-
+					<%end%>
+					<%if (@st['liked']==true && cookies.signed[:MO_liked_theatres]=="false")%>
+					<%elsif (@st['liked']==false && @st['not_interested']==false && cookies.signed[:MO_nearby_theatres]=="false")%>
+					<%elsif (@st['not_interested']==true && cookies.signed[:MO_disliked_theatres]=="false")%>
+					<%else%>	
 <script type="text/javascript"src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDb5IpzvRHH678YrbdxmQyR4J5opeTKlQk&sensor=false">
 </script>	
 <script type="text/javascript">
@@ -40,6 +52,7 @@
 	});
 </script>
 					<div id="map-canvas"></div>
+					<%end%>
 				</ul>
 			</div>
 			<%@st['movies'].each do |movie|%>

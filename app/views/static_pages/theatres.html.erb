@@ -1,10 +1,3 @@
-<html>
-
-<body>
-	<!--<div id="main" class="group" role="main">-->
-
-
-
 <div id="theatre-content">
 	<div id="content">
 		<h1 class="title"> Theatres </h1>
@@ -37,10 +30,20 @@
   						<div class="tab-pane" id="<%=liked['id']%>">
   							<h2><%=liked['name']%></h2>
   							<ul>
-  								<li> Address : </li>
-  								<li><%=liked['location']['address']%> <%=liked['location']['city']%>
-  								</li>
-  								<li>Phone number : <%=liked['phone_number']%></li>
+  								<%if cookies.signed[:TLO_address]=="false"%>
+  			  					<%else%>
+	  								<li> Address : </li>
+	  								<li><%=liked['location']['address']%> <%=liked['location']['city']%>
+	  								</li>
+	  							<%end%>
+	  							<%if cookies.signed[:TLO_phone_number]=="false"%>
+  			  					<%else%>
+  									<li>Phone number : <%=liked['phone_number']%></li>
+  								<%end%>
+  								<%if cookies.signed[:TLO_distance]=="false"%>
+  			  					<%else%>
+  									<li>Distance : <%=liked['distance']%></li>
+								<%end%>
   								<li><%=link_to "More Information", :action=>"showtheatre" , :controller=>"static_pages" , :showid => liked['id']%>
   								</li>
 								<%=form_tag '/theatres' do %>
@@ -55,10 +58,20 @@
   						<div class="tab-pane" id="<%=nearby['id']%>">
   							<h2><%=nearby['name']%></h2>
   							<ul>
-  								<li> Address : </li>
-  								<li><%=nearby['location']['address']%> <%=nearby['location']['city']%>
-  								</li>
-  								<li>Phone number : <%=nearby['phone_number']%></li>
+  								<%if cookies.signed[:TLO_address]=="false"%>
+  			  					<%else%>
+	  								<li> Address : </li>
+	  								<li><%=nearby['location']['address']%> <%=nearby['location']['city']%>
+	  								</li>
+	  							<%end%>	  								
+  								<%if cookies.signed[:TLO_phone_number]=="false"%>
+  			  					<%else%>
+  									<li>Phone number : <%=nearby['phone_number']%></li>
+  								<%end%>
+  								<%if cookies.signed[:TLO_distance]=="false"%>
+  			  					<%else%>
+  									<li>Distance : <%=nearby['distance']%></li>
+								<%end%>
   								<li><%=link_to "More Information", :action=>"showtheatre" , :controller=>"static_pages" , :showid => nearby['id']%>
   								</li>
 								<%=form_tag '/theatres' do %>
@@ -73,10 +86,20 @@
   						<div class="tab-pane" id="<%=unliked['id']%>">
   							<h2><%=unliked['name']%></h2>
   							<ul>
-  								<li> Address : </li>
-  								<li><%=unliked['location']['address']%> <%=unliked['location']['city']%>
-  								</li>
-  								<li>Phone number : <%=unliked['phone_number']%></li>
+  								<%if cookies.signed[:TLO_address]=="false"%>
+  			  					<%else%>
+	  								<li> Address : </li>
+	  								<li><%=unliked['location']['address']%> <%=unliked['location']['city']%>
+	  								</li>
+  								<%end%>
+  								<%if cookies.signed[:TLO_phone_number]=="false"%>
+  			  					<%else%>
+  									<li>Phone number : <%=unliked['phone_number']%></li>
+  								<%end%>
+  								<%if cookies.signed[:TLO_distance]=="false"%>
+  			  					<%else%>
+  									<li>Distance : <%=unliked['distance']%></li>
+								<%end%>
   								<li><%=link_to "More Information", :action=>"showtheatre" , :controller=>"static_pages" , :showid => unliked['id']%>
   								</li>
 								<%=form_tag '/theatres' do %>
@@ -92,5 +115,3 @@
 		
 	</div>
 </div><!--theatre-content-->
-</body>
-</html>

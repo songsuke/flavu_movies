@@ -60,6 +60,10 @@
 											  <div align="center" class="item active" id ="movie-slide">
 												<img class="img-rounded" src="<%=photos.first['url']%>">
 											  </div>
+											<%elsif(@sm['photos'].length ==0) %>
+											  <div align="center" class="item active" id ="movie-slide">
+												<img class="img-rounded" src="/assets/no_image.gif">
+											  </div>
 											<% end %>
 											<% photos.each do |photo| %>
 											  <% if photo == photos.first %>
@@ -84,21 +88,34 @@
 							<p><%=@sm['release']%></p>
 						<h3> Sypnosis </h3>
 							<p><%=@sm['synopsis']%></p>	
-						<h3> Genres </h3>
-						<%@sm['genres'].each do |a2|%>
-							<p><%=a2['name']%></p>
+						<%if cookies.signed[:MLO_genres]=="false"%>
+						<%else%>
+							<h3> Genres </h3>
+							<%@sm['genres'].each do |a2|%>
+								<p><%=a2['name']%></p>
+							<%end%>
 						<%end%>
-						<h3> Director </h3>
-						<%@sm['directors'].each do |a2|%>
-							<p><%=a2['name']%></p>
+						<%if cookies.signed[:MLO_directors]=="false"%>
+						<%else%>
+							<h3> Director </h3>
+							<%@sm['directors'].each do |a2|%>
+								<p><%=a2['name']%></p>
+							<%end%>
 						<%end%>
-						<h3> Actors </h3>
-						<%@sm['actors'].each do |a2|%>
-							<p><%=a2['name']%></p>
+						<%if cookies.signed[:MLO_actors]=="false"%>
+						<%else%>
+							<h3> Actors </h3>
+							<%@sm['actors'].each do |a2|%>
+								<p><%=a2['name']%></p>
+							<%end%>
 						<%end%>
-						<h3> Rate </h3>
-						<%@rate=@sm['rating']%>
-						<p><%=@sm['rating']%></p>
+						<%if cookies.signed[:MLO_raterun]=="false"%>
+						<%else%>
+							<h3> Rate </h3>
+							<p><%=@sm['rating']%></p>
+							<h3> Runtime </h3>
+							<p><%=@sm['runtime']%></p>
+						<%end%>
 						</div>
 					</div>	
 

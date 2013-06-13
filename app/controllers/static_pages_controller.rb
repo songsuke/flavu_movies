@@ -150,14 +150,13 @@ require 'open-uri'
         if params[:showid]
           @theatres =HTTParty.get(@url, body: {user: {auth_token: cookies.signed[:guest_auth]}, browser: "1"}).parsed_response
         end
-
       else
         if params[:showid]
           @theatres =HTTParty.get(@url, body: {user: {auth_token: cookies.signed[:auth]}, browser: "1"}).parsed_response
         end
       end
       @st=@theatres['theatre']
-    end
+     end
   end
 
   def buddies
