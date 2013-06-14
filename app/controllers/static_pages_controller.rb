@@ -1051,7 +1051,7 @@ request.remote_ip
       puts cookies.signed[:latitude]
       puts cookies.signed[:longitude]
       #puts @ip_address
-      @url_movie = "https://flavumovies.herokuapp.com/movies.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"
+      @url_movie = "https://flavumovies.herokuapp.com/movies_browser.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"
       puts cookies.signed[:check_guest]
       puts cookies.signed[:check_guest].class
       if ((!cookies.signed[:auth]) && (cookies.signed[:guest_auth]))
