@@ -164,7 +164,7 @@ require 'open-uri'
   def buddies
     if (cookies.signed[:auth])
     @a1=cookies.signed[:auth]
-    puts params[:request]
+    
       if params[:request]
         @requesting =HTTParty.post("https://flavumovies.herokuapp.com/send_request.json", body: {user: {auth_token: @a1}, friend_contact_info: params[:request]}).parsed_response
       elsif params[:follow]
@@ -191,7 +191,7 @@ require 'open-uri'
       @requests =HTTParty.get(@url3, body: {user: {auth_token: @a1}}).parsed_response
       #@url4 = "https://flavumovies.herokuapp.com/blockees.json"
       #@blockees =HTTParty.get(@url4, body: {user: {auth_token: @a1}}).parsed_response
-      
+      #puts params[:reject]
       @fw1=@followers['followers']
       @fw2=@followees['followees']
       @rq=@requests['friends_requests']
