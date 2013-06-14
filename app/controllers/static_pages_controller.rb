@@ -163,42 +163,40 @@ require 'open-uri'
 
   def buddies
     if (cookies.signed[:auth])
-    @a1=cookies.signed[:auth]
-    
       if params[:request]
-        @requesting =HTTParty.post("https://flavumovies.herokuapp.com/send_request.json", body: {user: {auth_token: @a1}, friend_contact_info: params[:request]}).parsed_response
+        @requesting =HTTParty.post("https://flavumovies.herokuapp.com/send_request.json", body: {user: {auth_token: cookies.signed[:auth]}, friend_contact_info: params[:request]}).parsed_response
       elsif params[:follow]
-        @follow =HTTParty.post("https://flavumovies.herokuapp.com/friendships/follow.json?id=#{params[:follow]}", body: {user: {auth_token: @a1}}).parsed_response
+        @follow =HTTParty.post("https://flavumovies.herokuapp.com/friendships/follow.json?id=#{params[:follow]}", body: {user: {auth_token: cookies.signed[:auth]}}).parsed_response
       elsif params[:unfollow]
-        @unfollow =HTTParty.post("https://flavumovies.herokuapp.com/friendships/unfollow.json?id=#{params[:unfollow]}", body: {user: {auth_token: @a1}}).parsed_response    
+        @unfollow =HTTParty.post("https://flavumovies.herokuapp.com/friendships/unfollow.json?id=#{params[:unfollow]}", body: {user: {auth_token: cookies.signed[:auth]}}).parsed_response    
       elsif params[:accept_and_follow]
-        @accept_and_follow =HTTParty.post("https://flavumovies.herokuapp.com/friendships/accept_and_follow.json?id=#{params[:accept_and_follow]}", body: {user: {auth_token: @a1}}).parsed_response
+        @accept_and_follow =HTTParty.post("https://flavumovies.herokuapp.com/friendships/accept_and_follow.json?id=#{params[:accept_and_follow]}", body: {user: {auth_token: cookies.signed[:auth]}}).parsed_response
       elsif params[:accept]
-        @accept =HTTParty.post("https://flavumovies.herokuapp.com/friendships/accept.json?id=#{params[:accept]}", body: {user: {auth_token: @a1}}).parsed_response
+        @accept =HTTParty.post("https://flavumovies.herokuapp.com/friendships/accept.json?id=#{params[:accept]}", body: {user: {auth_token: cookies.signed[:auth]}}).parsed_response
       elsif params[:reject]
-        @reject =HTTParty.post("https://flavumovies.herokuapp.com/friendships/reject.json?id=#{params[:reject]}", body: {user: {auth_token: @a1}}).parsed_response
+        @reject =HTTParty.post("https://flavumovies.herokuapp.com/friendships/reject.json?id=#{params[:reject]}", body: {user: {auth_token: cookies.signed[:auth]}}).parsed_response
       #elsif params[:block]
-        #@block =HTTParty.post("https://flavumovies.herokuapp.com/friendships/block.json?id=#{params[:block]}", body: {user: {auth_token: @a1}}).parsed_response
+        #@block =HTTParty.post("https://flavumovies.herokuapp.com/friendships/block.json?id=#{params[:block]}", body: {user: {auth_token: cookies.signed[:auth]}}).parsed_response
       #elsif params[:unblock]
-        #@unblock =HTTParty.post("https://flavumovies.herokuapp.com/friendships/unblock.json?id=#{params[:unblock]}", body: {user: {auth_token: @a1}}).parsed_response
+        #@unblock =HTTParty.post("https://flavumovies.herokuapp.com/friendships/unblock.json?id=#{params[:unblock]}", body: {user: {auth_token: cookies.signed[:auth]}}).parsed_response
         #puts @unblock
       end
+      puts cookies.signed[:auth]
+      puts @accept_and_follow
       @url1 = "https://flavumovies.herokuapp.com/followers.json"
-      @followers =HTTParty.get(@url1, body: {user: {auth_token: @a1}}).parsed_response
+      @followers =HTTParty.get(@url1, body: {user: {auth_token: cookies.signed[:auth]}}).parsed_response
       @url2 = "https://flavumovies.herokuapp.com/followees.json"
-      @followees =HTTParty.get(@url2, body: {user: {auth_token: @a1}}).parsed_response
+      @followees =HTTParty.get(@url2, body: {user: {auth_token: cookies.signed[:auth]}}).parsed_response
       @url3 = "https://flavumovies.herokuapp.com/requests.json"
-      @requests =HTTParty.get(@url3, body: {user: {auth_token: @a1}}).parsed_response
+      @requests =HTTParty.get(@url3, body: {user: {auth_token: cookies.signed[:auth]}}).parsed_response
       #@url4 = "https://flavumovies.herokuapp.com/blockees.json"
-      #@blockees =HTTParty.get(@url4, body: {user: {auth_token: @a1}}).parsed_response
+      #@blockees =HTTParty.get(@url4, body: {user: {auth_token: cookies.signed[:auth]}}).parsed_response
       #puts params[:reject]
       @fw1=@followers['followers']
       @fw2=@followees['followees']
       @rq=@requests['friends_requests']
       #@bk1=@blockees['blockees']
       #@bk2=@blockers['blockers']
-      #HTTParty.post("https://flavumovies.herokuapp.com/send_request.json", body: {user: {auth_token: "pb3BiqsJkvxbv2P3jnTR", friend_contact_info:"user1"}}).parsed_response
-
     else
     end
   end

@@ -1,4 +1,4 @@
-<%if @a1%>
+<%if cookies.signed[:auth]%>
 
 <div id="side-buddy">
 	<div id="setting">
@@ -43,6 +43,8 @@
 							<input id="request" name="request" type="text" placeholder="send your request">
 							<button id="bt_find_friends" name="commit" class="btn" type="submit" title="send your request">Send your request</button>
 						</li>
+					<%end%>
+					<%=form_tag '/buddies' do %>
 						<% @rq.each do |request|%>
 							<li class="stream-item">	
 								<div id="user-info">
@@ -66,7 +68,7 @@
 
 				<div class="tab-pane" id="following">
 					<div class="buddy-content-header">
-						<h4>Following</h4>
+						<h4>Movies Buddies</h4>
 					</div>
 					<%=form_tag '/buddies' do %>
 						<% @fw2.each do |followee|%>
@@ -90,7 +92,7 @@
 
 				<div class="tab-pane" id="followers">
 					<div class="buddy-content-header">
-						<h4>Followers</h4>
+						<h4>Friends</h4>
 					</div>
 					<%=form_tag '/buddies' do %>					
 						<% @fw1.each do |follower|%>
