@@ -106,9 +106,12 @@
 										<p><%= follower['follower']['email'] %></p>
 									</div>
 								</div>
+								<%if follower['status']=="follower_and_followee"%>
+								<%else%>
 								<div id="user-action">
 									<button name="follow" id="follow" class="btn" value="<%=follower['follower']['id']%>">Follow</button>
 								</div>
+								<%end%>
 							</li>
 						<%end%>
 					<%end%>

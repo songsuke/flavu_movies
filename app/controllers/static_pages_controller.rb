@@ -101,7 +101,7 @@ require 'open-uri'
         edirect_to showmovie_path
       end
     
-      @url = "https://flavumovies.herokuapp.com/movies.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"
+      @url = "https://flavumovies.herokuapp.com/movies_browser.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"
       @movies = HTTParty.get(@url, body: {user: {auth_token: token}, browser: "1"}).parsed_response
       @rm = @movies['remaining_movies']
       @im = @movies['interested_movies']
@@ -133,7 +133,7 @@ require 'open-uri'
         @theatres =HTTParty.delete(@url, body: {user: {auth_token: token}, not_interested_theatre: {theatre_id: params[:soso2]} }).parsed_response
       end
         
-      @url = "https://flavumovies.herokuapp.com/theatres.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"
+      @url = "https://flavumovies.herokuapp.com/theatres_browser.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"
       @theatres = HTTParty.get(@url, body: {user: {auth_token: token}, browser: "1"}).parsed_response
       @lt = @theatres['liked_theatres']
       @nt = @theatres['nearby_theatres']
@@ -195,6 +195,8 @@ require 'open-uri'
       @fw1=@followers['followers']
       @fw2=@followees['followees']
       @rq=@requests['friends_requests']
+      #puts @fw2
+
       #@bk1=@blockees['blockees']
       #@bk2=@blockers['blockers']
     else
@@ -1151,7 +1153,7 @@ request.remote_ip
       redirect_to cover_path
     else
         #puts cookies.signed[:check_guest]
-        #puts cookies.signed[:auth]
+        puts cookies.signed[:auth]
         #puts cookies.signed[:guest_auth]
         #puts params[:showid1]
         #puts params[:showid2]
