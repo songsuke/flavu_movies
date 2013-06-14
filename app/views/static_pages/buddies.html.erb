@@ -11,12 +11,12 @@
 			  		</a>
 				</li>
 				<li>
-					<a href="#following" data-toggle="tab">Following (<%=@followees['total_entries']%>)
+					<a href="#following" data-toggle="tab">Movies Buddies (<%=@followees['total_entries']%>)
 						<i class="icon-chevron-right"></i>
 			  		</a>
 				</li>
 			  	<li>
-			  		<a href="#followers" data-toggle="tab">Followers (<%=@followers['total_entries']%>)
+			  		<a href="#followers" data-toggle="tab">Friends (<%=@followers['total_entries']%>)
 			  			<i class="icon-chevron-right"></i>
 			  		</a>
 				</li>
@@ -37,16 +37,13 @@
 					<div class="buddy-content-header">
 						<h4>Requests</h4>
 					</div>
-					<%if @requests['total_entries']=0%>
+					
 						<%=form_tag '/buddies' do %>
 						<li class="stream-item">	
 							<%= label_tag 'Send your request by enter the email, username, or phone number of the person you want to follow ' ,nil%>
 							<input id="request" name="request" type="text" placeholder="send your request">
 							<button id="bt_find_friends" name="commit" class="btn" type="submit" title="send your request">Send your request</button>
 						</li>
-						<%end%>
-					<%else%>
-						<%=form_tag '/buddies' do %>
 							<% @rq.each do |request|%>
 								<li class="stream-item">	
 									<div id="user-info">
@@ -66,7 +63,6 @@
 								</li>
 							<%end%>
 						<%end%>
-					<%end%>
 				</div>
 
 				<div class="tab-pane" id="following">

@@ -142,6 +142,8 @@ require 'open-uri'
   end
 
   def showtheatre
+    puts cookies.signed[:guest_auth]
+    puts cookies.signed[:auth]
     if (!cookies.signed[:auth]) && (!cookies.signed[:guest_auth])
       redirect_to cover_path
     else
@@ -1150,12 +1152,12 @@ request.remote_ip
     if (!cookies.signed[:auth] && !cookies.signed[:guest_auth])
       redirect_to cover_path
     else
-        puts cookies.signed[:check_guest]
-        puts cookies.signed[:auth]
-        puts cookies.signed[:guest_auth]
-        puts params[:showid1]
-        puts params[:showid2]
-        puts params[:showid3]
+        #puts cookies.signed[:check_guest]
+        #puts cookies.signed[:auth]
+        #puts cookies.signed[:guest_auth]
+        #puts params[:showid1]
+        #puts params[:showid2]
+        #puts params[:showid3]
 
         if cookies.signed[:check_guest] == "true"
           if params[:showid]#should be movies in theatres page
@@ -1175,6 +1177,7 @@ request.remote_ip
             @url = "https://flavumovies.herokuapp.com/movies/#{params[:showid]}.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"
             @movies =HTTParty.get(@url, body: {user: {auth_token: cookies.signed[:auth]}, browser: "1"}).parsed_response
             @sm=@movies['movie']
+            puts @sm
           end
           @url2 = "https://flavumovies.herokuapp.com/theatres_for_movie/#{@id_showmovie}.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"
           @theatres_for_movie=HTTParty.get(@url2, body: {user: {auth_token: cookies.signed[:auth]}, browser: "1"}).parsed_response

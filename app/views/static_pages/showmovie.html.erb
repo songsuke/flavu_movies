@@ -83,6 +83,16 @@
   				</div>
 					<div id="movie-details">
 						<div id="content">
+						<%if @sm['buddies']%>
+							<%@sm['buddies'].each do |buddy|%>
+								<%if @sm['buddies'].length==1%>
+									<p> Your movies buddies <a><%=buddy['display_name']%></a> likes this movies</p>
+								<%elsif @sm['buddies'].length>1%>
+									<p> Your movies buddies <a><%=buddy['display_name'].first%></a> <a>and others</a> like this movies</p>
+									<%end%>
+							<%end%>
+						<%else%>
+						<%end%>
 						<h1> Information </h1>
 						<h3> Release Date </h3>
 							<p><%=@sm['release']%></p>
