@@ -1551,7 +1551,8 @@ div.hidden{
       text-shadow: 0 1px 0 #fff;
       img {
         width: auto;
-        height: 275px;
+        max-height: 260px;
+        height: auto;
       }
       .modal-body {
         position: relative;
@@ -1572,7 +1573,8 @@ div.hidden{
       float: right;
       margin-right: 5px;
       img {
-        height: 275px;
+        max-height: 260px;
+        height: auto;
       }
     }
   }
@@ -2653,6 +2655,7 @@ div.hidden{
     float: left;
   }
   #movie-pic-slide {
+    float: left;
     overflow: hidden;
     .movie-items{
       overflow: hidden;
@@ -2665,9 +2668,8 @@ div.hidden{
       position: relative;
       text-shadow: 0 1px 0 #fff;
       img {
-        max-width: 90px;
-        width: auto;
-        height: 120px;
+        height: auto;
+        max-height: 120px;
       }
       .modal-body {
         position: relative;
@@ -2683,12 +2685,13 @@ div.hidden{
       }
     }
     #movie-slide {
+      overflow: hidden;
       width: auto;
       height: auto;
-      float: right;
       margin-right: 5px;
       img {
-        height: 120px;
+        height: auto;
+        max-height: 120px;
       }
     }
   }
