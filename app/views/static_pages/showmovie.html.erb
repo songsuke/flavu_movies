@@ -11,7 +11,7 @@
 						<% if(@sm['photos'].length >0) %>
 			                <%@photo = @sm['photos'].first%>
 			                <div class="movie-items">
-				                <a href="#myModal1" data-toggle="modal" data-backdrop="false">
+				                <a href="#myModal1" data-toggle="modal" data-backdrop="true">
 				                	<span class="play"></span>
 				                	<img class="img-rounded" width="140" height="210" src="<%=@photo['url']%>">
 				                </a>
@@ -32,7 +32,7 @@
 			            <%elsif(@sm['photos'].length ==0) %>
 			            	<%@photo = @sm['photos'].first%>
 			            	<div class="movie-items">
-			            		<a href="#myModal1" data-toggle="modal" data-backdrop="false">
+			            		<a href="#myModal1" data-toggle="modal" data-backdrop="true">
 				                	<span class="play"></span>
 				                	<img class="img-rounded" width="140" height="210" src="/assets/no_image.gif">
 				                </a>
@@ -91,9 +91,9 @@
 							<%elsif @sm['buddies'].length>1%>
 								<p> 
 									Your movies buddy <a><%=@sm['buddies'].first['display_name']%> </a> and 
-									<a href="#other_modal" data-toggle="modal" data-backdrop="false">other</a> like this movie 
+									<a href="#other_modal" data-toggle="modal" data-backdrop="true">other</a> like this movie 
 								</p>
-								<div id="other_modal" class="modal fade hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+								<div id="other_modal" class="modal fade hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 									<div class="modal-header" style="background-color:#2E2E2E;margin:0;padding:0 0 0 10px;">
 					    				<h3 style="color:white;">Your movies buddies who like this</h3>
 					    			</div>
