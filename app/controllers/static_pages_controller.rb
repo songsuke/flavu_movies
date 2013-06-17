@@ -1088,7 +1088,7 @@ request.remote_ip
 
   def validate
     if (!flash[:notice])
-      redirect_to cover_path
+     redirect_to cover_path
     else
     end
   end
