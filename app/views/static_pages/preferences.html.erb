@@ -147,7 +147,7 @@ $(function () {
 <script type="text/javascript">
 	$(function () {
 		$.fn.raty.defaults.path = '/assets/';
-	   	$('#<%= dp1['id'] %>').raty({
+	   	$('#<%= dp1['director_id'] %>').raty({
 	   	space: false,
 	   	starOff: 'rate_off.png',
 	  	starOn : 'rate_on.png',
@@ -162,11 +162,11 @@ $(function () {
 	})
 </script>
 									
-								   	<%= dp1['name'] %>
-									<% @dp2=dp1['name'] %>
+								   	<%= dp1['director'] %>
+									<% @dp2=dp1['director'] %>
 
 									<div id="<%= dp1['director_id'] %>" data-score="<%= dp1['score'] %>" style="height:30px;"></div>
-									<input type="hidden" name="director_update" value="<%= dp1['name'] %>">
+									<input type="hidden" name="director_update" value="<%= dp1['director'] %>">
 									<button id="update2" class="btn btn-success" name="update2" value="Update">Update</button>  
 
 									<button id="delete2" class="btn btn-danger" name="delete2" value="Delete">Delete</button>  
