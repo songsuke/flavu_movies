@@ -664,7 +664,15 @@ div.hidden{
   overflow: hidden;
   max-width: 100%;
   width: auto;
-  margin: 0px 0px 30px 17%;
+  margin: 0px 0px 30px 0px;
+  .carousel-inner>.next.left
+  {
+    left:100%;
+  }
+  .carousel-inner>.prev.right
+  {
+    left:-100%;
+  }
   .movie-slide-items {
     padding: 0px;
     margin: 0px;
@@ -680,6 +688,8 @@ div.hidden{
     max-height: 100%;
     width: auto;
     height: 300px;
+    margin-right: auto;
+    margin-left: auto;
   }
   .item {
   }
