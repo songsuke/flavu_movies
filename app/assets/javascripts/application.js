@@ -12,9 +12,10 @@
 //
 //
 //= require jquery
+//= require holder
+//= require bootstrap-transition
+//= require bootstrap-carousel
 //= require geolocation
 //= require bootstrap
 //= require jquery_ujs 
 //= require_tree .
-
-
