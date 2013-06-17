@@ -11,11 +11,10 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //
-//= require jquery-1.7.2.min
+//= require jquery
 //= require geolocation
 //= require bootstrap
 //= require jquery_ujs 
-//= require jquery
 //= require_tree .
 
 
