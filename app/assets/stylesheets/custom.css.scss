@@ -703,9 +703,14 @@ div.hidden{
   position: relative;
   overflow-y: visible;
   max-height: 100%;
-  padding: 10px 10px 10px 160px;
+  padding: 10px 10px 10px 10px;
   left: 0px;
   margin-left: 0;
+  #trailer {
+    margin-left: auto; 
+    margin-right: auto; 
+    display: block;
+  }
 }
 #movie-details {
   margin-left: 0px;
