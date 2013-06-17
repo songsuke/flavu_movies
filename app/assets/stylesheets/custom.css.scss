@@ -739,9 +739,8 @@ div.hidden{
 
 #theatre-detail {
   float: left;
-  margin: 15px 0px 0px 0px;
+  margin: 20px 0px 0px 0px;
   border-radius: 3px;
-  box-shadow: 0 1px 3px rgba(25, 25, 25, 0.5);
   width: 100%;
   height: 100%;
   #content {
@@ -749,7 +748,7 @@ div.hidden{
   }
   .cinema-name {
     margin: 0 0 10px;
-    border-radius: 3px;
+    border-radius: 3px 3px 0px 0px;
     color: #febf34;
     padding: 4px 15px;
     background: url('/assets/title.png') repeat-x #2a2a2a;
@@ -763,9 +762,9 @@ div.hidden{
 
 #result-item {
   border: 1px solid #bbb;
-  margin: 0 0 10px;
+  margin: 0 0 20px;
   background: url('/assets/theater-bg.png') repeat-x #7c7d7c;
-  border-radius: 3px 4px 4px 3px;
+  border-radius: 0px 0px 3px 3px;
   overflow: hidden;
   .movie-name {
     float: left;
