@@ -661,10 +661,10 @@ div.hidden{
 }
 
 #movie-slide {
-  float: right;
+  overflow: hidden;
   max-width: 100%;
   width: auto;
-  margin: 0px 0px 30px 0px;
+  margin: 0px 0px 30px 17%;
   .movie-slide-items {
     padding: 0px;
     margin: 0px;
@@ -682,7 +682,6 @@ div.hidden{
     height: 300px;
   }
   .item {
-    float: center;
   }
 }
 #modal-header {

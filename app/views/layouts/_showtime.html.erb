@@ -16,13 +16,15 @@
 			<!--<li><%= link_to "Reviews" , reviews_path%></li>
 			
 			<li><%= link_to "Box Office" , boxoffice_path%></li>-->
-
+			<%if cookies.signed['auth']%>
 			<li>
 				<%=form_tag '/buddies' ,:style=>"margin:0;" do%>
-					<input id="request" name="request" type="text" placeholder="send your request">
-					<button id="bt_find_friends" name="commit" class="icon-search" type="submit" title="send your request"></button>
+					<input id="request" name="request" type="text" placeholder="Send requests to your buddies">
+					<button id="bt_find_friends" name="commit" class="icon-search" type="submit" title="Send requests to your buddies"></button>
 				<%end%>
 			</li>
+			<%else%>
+			<%end%>
 			
 		</ul>
 		<ul class="nav right">
