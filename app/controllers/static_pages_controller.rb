@@ -1084,10 +1084,10 @@ request.remote_ip
       end
       if (cookies.signed[:check_guest] == 'true')
           @movies =HTTParty.get(@url_movie, body: {user: {auth_token: cookies.signed[:guest_auth]}, browser: "1"}).parsed_response
-          @token=cookies.signed[:guest_auth]        
+          #@token=cookies.signed[:guest_auth]        
       else 
           @movies =HTTParty.get(@url_movie, body: {user: {auth_token: cookies.signed[:auth]}, browser: "1"}).parsed_response
-          @token=cookies.signed[:auth] 
+          #@token=cookies.signed[:auth] 
       end
       
       @rm=@movies['remaining_movies']
