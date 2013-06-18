@@ -179,9 +179,6 @@ require 'open-uri'
       if cookies[:lat_lng]
         @lat_lng = cookies[:lat_lng].split("|")
       end
-      puts @lat_lng
-      puts @lat_lng.class
-      puts cookies[:lat_lng].class
       @url = "https://flavumovies.herokuapp.com/theatres/#{params[:showid]}.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"     
       if cookies.signed[:check_guest] == "true"
         @token=cookies.signed[:guest_auth]
@@ -189,7 +186,7 @@ require 'open-uri'
         @token=cookies.signed[:auth]
       end
 
-      @theatres =HTTParty.get(@url, body: {user: {auth_token: cookies.signed[:auth]}, browser: "1"}).parsed_response
+      @theatres =HTTParty.get(@url, body: {user: {auth_token: @token}, browser: "1"}).parsed_response
       @st=@theatres['theatre']
     end
   end
