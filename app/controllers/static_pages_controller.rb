@@ -145,10 +145,13 @@ require 'open-uri'
    
     puts cookies.signed[:guest_auth]
     puts cookies.signed[:auth]
+    puts @lat_lng
     if (!cookies.signed[:auth]) && (!cookies.signed[:guest_auth])
       redirect_to cover_path
     else
       @lat_lng = cookies[:lat_lng].split("|")
+      puts @lat_lng.class
+      puts cookies[:lat_lng].class
       @url = "https://flavumovies.herokuapp.com/theatres/#{params[:showid]}.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"     
       if cookies.signed[:check_guest] == "true"
         if params[:showid]
