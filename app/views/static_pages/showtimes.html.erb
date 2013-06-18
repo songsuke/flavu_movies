@@ -34,23 +34,43 @@
   							<% liked['movies'].each do |movie|%>
 	  							<li>
 		  							<div class="movie-items1">
-										<% if(movie['photos'].length >0) %>
-				                    		<%photo = movie['photos'].first%> 
-				                    		<a href="#<%=movie['id']%><%=liked['id']%>" data-toggle="modal" data-backdrop="true">
-				                          		<div class="movie-items2">
-				                            		<img src="<%=photo['url']%>">
-				                            		<%=movie['title']%>
-				                            		<%@mid=movie['id']%>
-				                          		</div>
-				                          	</a>
-				                  		<%elsif movie['photos'].length==0%>
-				                    		<a href="#<%=movie['id']%><%=liked['id']%>" data-toggle="modal" data-backdrop="true">
-				                     		<div class="movie-items2">
-				                     			<img src="/assets/no_image.gif">  
-				                            	<%=movie['title']%>
-				                            </div>
-				                     		</a>
-				                  		<%end%>    
+		  								<% if(movie['photos'].length >0) %>
+					                    	<%photo = movie['photos'].first%> 
+					                    	<%if photo['poster']==true%>
+							                    <a href="#<%=movie['id']%><%=liked['id']%>" data-toggle="modal">
+							                        <div class="movie-items2">
+														<div id="movie-items-pics">
+								                           	<img src="<%=photo['url']%>" class="img-rounded">
+								                        </div>
+								                        <div id="movie-items-info-tiny">
+									                        <p style="font-weight:bold;"><%=movie['title']%></p>
+									                    </div>
+							                        </div>
+							                    </a>
+							                <%else%>
+							                    <a href="#<%=movie['id']%><%=liked['id']%>" data-toggle="modal">
+							                	    <div class="movie-items2">
+							                       		<div id="movie-items-pics">
+							                           		<img src="/assets/no_image.gif" class="img-rounded"> 
+							                           	</div>
+								                        <div id="movie-items-info-tiny">
+									                        <p style="font-weight:bold;"><%=movie['title']%></p>
+							                            </div>
+							                        </div>                    	 
+							                    </a>
+							                <%end%>
+					                  	<%elsif movie['photos'].length==0%>
+							            	<a href="#<%=movie['id']%><%=liked['id']%>" data-toggle="modal">
+							                    <div class="movie-items2">
+							                    	<div id="movie-items-pics">
+							                           	<img src="/assets/no_image.gif" class="img-rounded">          
+							                       	</div>
+								                    <div id="movie-items-info-tiny">
+									                        <p style="font-weight:bold;"><%=movie['title']%></p>
+								                    </div>
+							                    </div>                         
+							                </a>                 		
+					                  	<%end%>   
 			                  		</div>  
 			                  	</li>
 	                  		<%end%>  	
@@ -85,23 +105,43 @@
   							<% liked['movies'].each do |movie|%>
 	  							<li>
 		  							<div class="movie-items1">
-										<% if(movie['photos'].length >0) %>
-				                    		<%photo = movie['photos'].first%> 
-											<a href="#<%=movie['id']%><%=liked['id']%>" data-toggle="modal" data-backdrop="true">
-												<div class="movie-items2">
-				                            		<img src="<%=photo['url']%>">      
-				                            		<%=movie['title']%>
-				                            		<%@mid=movie['id']%>
-				                          		</div>
-				                          	</a>
-				                  		<%elsif movie['photos'].length==0%>
-				                    		<a href="#<%=movie['id']%><%=liked['id']%>" data-toggle="modal" data-backdrop="true">
-					                        	<div class="movie-items2">           
-					                        		<img src="/assets/no_image.gif"> 
-					                        		<%=movie['title']%>
-					                        	</div>
-				                     		</a>
-				                  		<%end%>    
+		  								<% if(movie['photos'].length >0) %>
+					                    	<%photo = movie['photos'].first%> 
+					                    	<%if photo['poster']==true%>
+							                    <a href="#<%=movie['id']%><%=liked['id']%>" data-toggle="modal">
+							                        <div class="movie-items2">
+														<div id="movie-items-pics">
+								                           	<img src="<%=photo['url']%>" class="img-rounded">
+								                        </div>
+								                        <div id="movie-items-info-tiny">
+									                        <p style="font-weight:bold;"><%=movie['title']%></p>
+									                    </div>
+							                        </div>
+							                    </a>
+							                <%else%>
+							                    <a href="#<%=movie['id']%><%=liked['id']%>" data-toggle="modal">
+							                	    <div class="movie-items2">
+							                       		<div id="movie-items-pics">
+							                           		<img src="/assets/no_image.gif" class="img-rounded"> 
+							                           	</div>
+								                        <div id="movie-items-info-tiny">
+									                        <p style="font-weight:bold;"><%=movie['title']%></p>
+							                            </div>
+							                        </div>                    	 
+							                    </a>
+							                <%end%>
+					                  	<%elsif movie['photos'].length==0%>
+							            	<a href="#<%=movie['id']%><%=liked['id']%>" data-toggle="modal">
+							                    <div class="movie-items2">
+							                    	<div id="movie-items-pics">
+							                           	<img src="/assets/no_image.gif" class="img-rounded">          
+							                       	</div>
+								                    <div id="movie-items-info-tiny">
+									                        <p style="font-weight:bold;"><%=movie['title']%></p>
+								                    </div>
+							                    </div>                         
+							                </a>                 		
+					                  	<%end%>   
 			                  		</div>  
 			                  	</li>
 	                  		<%end%>  	
@@ -136,23 +176,43 @@
   							<% liked['movies'].each do |movie|%>
 	  							<li>
 		  							<div class="movie-items1">
-										<% if(movie['photos'].length >0) %>
-				                    		<%photo = movie['photos'].first%> 
-				                    		<a href="#<%=movie['id']%><%=liked['id']%>" data-toggle="modal" data-backdrop="true">
-				                          		<div class="movie-items2">
-				                            		<img src="<%=photo['url']%>">      
-				                            		<%=movie['title']%>
-				                            		<%@mid=movie['id']%>
-				                          		</div>
-				                          	</a>
-				                  		<%elsif movie['photos'].length==0%>
-				                    		<a href="#<%=movie['id']%><%=liked['id']%>" data-toggle="modal" data-backdrop="true">
-					                        	<div class="movie-items2">	
-				                     				<img src="/assets/no_image.gif">   
-				                            		<%=movie['title']%>
-				                            	</div>
-				                     		</a>
-				                  		<%end%>    
+		  								<% if(movie['photos'].length >0) %>
+					                    	<%photo = movie['photos'].first%> 
+					                    	<%if photo['poster']==true%>
+							                    <a href="#<%=movie['id']%><%=liked['id']%>" data-toggle="modal">
+							                        <div class="movie-items2">
+														<div id="movie-items-pics">
+								                           	<img src="<%=photo['url']%>" class="img-rounded">
+								                        </div>
+								                        <div id="movie-items-info-tiny">
+									                        <p style="font-weight:bold;"><%=movie['title']%></p>
+									                    </div>
+							                        </div>
+							                    </a>
+							                <%else%>
+							                    <a href="#<%=movie['id']%><%=liked['id']%>" data-toggle="modal">
+							                	    <div class="movie-items2">
+							                       		<div id="movie-items-pics">
+							                           		<img src="/assets/no_image.gif" class="img-rounded"> 
+							                           	</div>
+								                        <div id="movie-items-info-tiny">
+									                        <p style="font-weight:bold;"><%=movie['title']%></p>
+							                            </div>
+							                        </div>                    	 
+							                    </a>
+							                <%end%>
+					                  	<%elsif movie['photos'].length==0%>
+							            	<a href="#<%=movie['id']%><%=liked['id']%>" data-toggle="modal">
+							                    <div class="movie-items2">
+							                    	<div id="movie-items-pics">
+							                           	<img src="/assets/no_image.gif" class="img-rounded">          
+							                       	</div>
+								                    <div id="movie-items-info-tiny">
+									                        <p style="font-weight:bold;"><%=movie['title']%></p>
+								                    </div>
+							                    </div>                         
+							                </a>                 		
+					                  	<%end%>   
 			                  		</div>  
 			                  	</li>
 	                  		<%end%>  	
@@ -177,11 +237,7 @@
 								</div>
 							<%end%>
   						</div>
-  					<%end%>
-  					 
-  						
-
-					
+  					<%end%>					
 				</div><!--theatres-info-->
 			</div><!--theatres-show-->
 	</div>

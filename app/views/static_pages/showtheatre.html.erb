@@ -27,31 +27,79 @@
 					<%elsif (@st['liked']==false && @st['not_interested']==false && cookies.signed[:MO_nearby_theatres]=="false")%>
 					<%elsif (@st['not_interested']==true && cookies.signed[:MO_disliked_theatres]=="false")%>
 					<%else%>	
-<script type="text/javascript"src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDb5IpzvRHH678YrbdxmQyR4J5opeTKlQk&sensor=false">
+
+<script type="text/javascript"src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDb5IpzvRHH678YrbdxmQyR4J5opeTKlQk&sensor=false">
 </script>	
-<script type="text/javascript">
-  function initialize() {
-    var myLatlng = new google.maps.LatLng(<%=@st['location']['latitude']%>,<%=@st['location']['longitude']%>);
-    var myOptions = {
-      zoom: 16,
-      center: myLatlng,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    }
-    var map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
-    
-    var marker = new google.maps.Marker({
-        position: myLatlng, 
-        map: map,
-        title:"<%=@st['name']%>"
-    });   
+
+<script>
+var directionsDisplay;
+var directionsService = new google.maps.DirectionsService();
+var map;
+
+function initialize() {
+  directionsDisplay = new google.maps.DirectionsRenderer();
+
+  var chicago = new google.maps.LatLng(<%=cookies.signed[:latitude]%>,<%=cookies.signed[:longitude]%>);
+  var mapOptions = {
+    zoom:14,
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    center: chicago
   }
+  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+  directionsDisplay.setMap(map);
+}
+
+function calcRoute() {
+  var selectedMode = document.getElementById('mode').value;
+  var start = document.getElementById('start').value;
+  var end = document.getElementById('end').value;
+  var request = {
+      origin:start,
+      destination:end,
+      travelMode: google.maps.TravelMode[selectedMode]
+  };
+  directionsService.route(request, function(response, status) {
+    if (status == google.maps.DirectionsStatus.OK) {
+      directionsDisplay.setDirections(response);
+    }
+  });
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+  </head>
+  <body>
+    <div id="panel">
+    <b>Start: </b>
+    <select id="start" onchange="calcRoute();">
+      <option value="chicago, il">From your profile address</option>
+      <%if @lat_lng%>
+	      <option value="<%=@lat_lng[0]%>,<%=@lat_lng[1]%>">Your Current Position</option>
+	  <%else%>
+	      <option value="<%=cookies.signed[:latitude]%>,<%=cookies.signed[:longitude]%>">Approximately Estimated Location</option>
+	      <%end%>
+    </select>
+    <b>End: </b>
+    <select id="end" onchange="calcRoute();">
+      <option value="<%=@st['location']['latitude']%>, <%=@st['location']['longitude']%>"><%=@st['name']%></option>
+    </select>
+    <b>Mode of Travel: </b>
+    <select id="mode" onchange="calcRoute();">
+      <option value="DRIVING">Driving</option>
+      <option value="WALKING">Walking</option>
+      <option value="BICYCLING">Bicycling</option>
+      <option value="TRANSIT">Transit</option>
+    </select>
+    <p>**If you do not allow it to track you, your location will be estimated.</p>
+
+    <%- unless @lat_lng %>
+<script>
+  getGeoLocation();
 </script>
-<script type="text/javascript">
-	jQuery(document).ready(function() {
-		 initialize();
-	});
-</script>
-					<div id="map-canvas"></div>
+<%- end %>
+    </div>
+    <div id="map-canvas"></div>
 					<%end%>
 				</ul>
 			</div>

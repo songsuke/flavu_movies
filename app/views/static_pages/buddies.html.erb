@@ -16,7 +16,15 @@
 			  		</a>
 				</li>
 			  	<li>
-			  		<a href="#followers" data-toggle="tab">Friends (<%=@followers['total_entries']%>)
+			  		<a href="#followers" data-toggle="tab">Friends 
+			  			<%@x=0%>
+						<% @fw1.each do |follower|%>
+							<%if (follower['status']=="follower") || (follower['status']=="followee")%>
+								<%@x=@x+1%>
+							<%else%>
+							<%end%>
+						<%end%>			  			
+						(<%=@x%>)
 			  			<i class="icon-chevron-right"></i>
 			  		</a>
 				</li>
@@ -96,23 +104,23 @@
 					</div>
 					<%=form_tag '/buddies' do %>					
 						<% @fw1.each do |follower|%>
-							<li class="stream-item">
-								<div id="user-info">
-									<div id="buddy-image">
-										<img src="/assets/gavatar.jpg" width="50">
+							<%if follower['status']=="follower_and_followee"%>
+							<%else%>
+								<li class="stream-item">
+									<div id="user-info">
+										<div id="buddy-image">
+											<img src="/assets/gavatar.jpg" width="50">
+										</div>
+										<div id="buddy-info">
+											<p><%= follower['follower']['username'] %></p>
+											<p><%= follower['follower']['email'] %></p>
+										</div>
 									</div>
-									<div id="buddy-info">
-										<p><%= follower['follower']['username'] %></p>
-										<p><%= follower['follower']['email'] %></p>
+									<div id="user-action">
+										<button name="follow" id="follow" class="btn" value="<%=follower['follower']['id']%>">Follow</button>
 									</div>
-								</div>
-								<%if follower['status']=="follower_and_followee"%>
-								<%else%>
-								<div id="user-action">
-									<button name="follow" id="follow" class="btn" value="<%=follower['follower']['id']%>">Follow</button>
-								</div>
-								<%end%>
-							</li>
+								</li>
+							<%end%>
 						<%end%>
 					<%end%>
 				</div>

@@ -164,8 +164,8 @@
 		<p id="setting_to_left"> Search Options </p>
         <p id="setting_to_right"> Edit </p>
         <p id="setting_to_center"> 
-       		<%=@user_preference['user_preferences'].third['value']%>
-       		<%=@user_preference['user_preferences'].last['value']%>
+       		<%=cookies.signed[:SO_radius]%>
+       		<%=cookies.signed[:SO_unit]%>
         </p>      
       </a>
     </div>
