@@ -1058,35 +1058,22 @@ request.remote_ip
       if ((!cookies.signed[:auth]) && (cookies.signed[:guest_auth]))
           cookies.signed[:check_guest] = "true"
       end
-
-      @user_preference_url = "https://flavumovies.herokuapp.com/user_preferences"
-
       
-      if (cookies.signed[:radius]) && (cookies.signed[:unit])
-        if (cookies.signed[:check_guest] == 'true')
-            @token=cookies.signed[:guest_auth]        
-        else 
-            @token=cookies.signed[:auth] 
-        end
+      if (cookies.signed[:check_guest] == 'true')
+          @token=cookies.signed[:guest_auth]        
+      else 
+          @token=cookies.signed[:auth] 
       end
 
+      @user_preference_url = "https://flavumovies.herokuapp.com/user_preferences"
       @user_preference =HTTParty.get("https://flavumovies.herokuapp.com/user_preferences.json", body: {user: {auth_token: @token}}).parsed_response
       @radius = @user_preference["user_preferences"].find{|x| x["preference"] == "search radius"}
       @unit = @user_preference["user_preferences"].find{|x| x["preference"] == "unit of measure"}
       cookies.signed[:radius]=@radius
       cookies.signed[:unit]=@unit
-      puts cookies.signed[:radius]
-      puts cookies.signed[:unit]
+
       @url_movie = "https://flavumovies.herokuapp.com/movies_browser.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}&radius=#{cookies.signed[:radius]}&unit=#{cookies.signed[:unit]}"
-      
-      if (cookies.signed[:check_guest] == 'true')
-          @movies =HTTParty.get(@url_movie, body: {user: {auth_token: cookies.signed[:guest_auth]}, browser: "1"}).parsed_response
-          #@token=cookies.signed[:guest_auth]        
-      else 
-          @movies =HTTParty.get(@url_movie, body: {user: {auth_token: cookies.signed[:auth]}, browser: "1"}).parsed_response
-          #@token=cookies.signed[:auth] 
-      end
-      
+      @movies =HTTParty.get(@url_movie, body: {user: {auth_token: @token}, browser: "1"}).parsed_response
       @rm=@movies['remaining_movies']
       @im=@movies['interested_movies']
       @nim=@movies['not_interested_movies']
