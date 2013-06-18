@@ -90,8 +90,6 @@ require 'open-uri'
       else 
         @user_preference_url = "https://flavumovies.herokuapp.com/user_preferences"
         @user_preference =HTTParty.get("https://flavumovies.herokuapp.com/user_preferences.json", body: {user: {auth_token: @token}}).parsed_response
-        puts @token
-        puts @user_preference
         @radius = @user_preference["user_preferences"].find{|x| x["preference"] == "search radius"}
         @unit = @user_preference["user_preferences"].find{|x| x["preference"] == "unit of measure"}
         cookies.signed[:radius]=@radius
@@ -115,7 +113,7 @@ require 'open-uri'
       end
     
       @url = "https://flavumovies.herokuapp.com/movies_browser.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}&radius=#{cookies.signed[:radius]}&unit=#{cookies.signed[:unit]}"
-      @movies = HTTParty.get(@url, body: {user: {auth_token: token}, browser: "1"}).parsed_response
+      @movies = HTTParty.get(@url, body: {user: {auth_token: @token}, browser: "1"}).parsed_response
       @rm = @movies['remaining_movies']
       @im = @movies['interested_movies']
       @nim = @movies['not_interested_movies']
