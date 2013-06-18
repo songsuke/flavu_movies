@@ -1055,6 +1055,9 @@ request.remote_ip
       puts cookies.signed[:longitude]
       #puts @ip_address
       puts cookies.signed[:check_guest]
+      if ((!cookies.signed[:auth]) && (cookies.signed[:guest_auth]))
+          cookies.signed[:check_guest] = "true"
+      end
 
       @user_preference_url = "https://flavumovies.herokuapp.com/user_preferences"
 
@@ -1079,9 +1082,7 @@ request.remote_ip
       end
 
       @url_movie = "https://flavumovies.herokuapp.com/movies_browser.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}&radius=#{cookies.signed[:radius]}&unit=#{cookies.signed[:unit]}"
-      if ((!cookies.signed[:auth]) && (cookies.signed[:guest_auth]))
-          cookies.signed[:check_guest] = "true"
-      end
+      
       if (cookies.signed[:check_guest] == 'true')
           @movies =HTTParty.get(@url_movie, body: {user: {auth_token: cookies.signed[:guest_auth]}, browser: "1"}).parsed_response
           #@token=cookies.signed[:guest_auth]        
