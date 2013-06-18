@@ -90,6 +90,8 @@ require 'open-uri'
       else 
         @user_preference_url = "https://flavumovies.herokuapp.com/user_preferences"
         @user_preference =HTTParty.get("https://flavumovies.herokuapp.com/user_preferences.json", body: {user: {auth_token: @token}}).parsed_response
+        puts @token
+        puts @user_preference
         @radius = @user_preference["user_preferences"].find{|x| x["preference"] == "search radius"}
         @unit = @user_preference["user_preferences"].find{|x| x["preference"] == "unit of measure"}
         cookies.signed[:radius]=@radius
