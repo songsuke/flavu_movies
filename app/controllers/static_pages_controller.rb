@@ -1061,27 +1061,23 @@ request.remote_ip
 
       @user_preference_url = "https://flavumovies.herokuapp.com/user_preferences"
 
-      if (cookies.signed[:SO_radius]) && (cookies.signed[:SO_unit])
-        if (cookies.signed[:SO_radius]!=cookies.signed[:radius]) || (cookies.signed[:SO_unit]!=cookies.signed[:unit])
-            cookies.signed[:radius]=cookies.signed[:SO_radius]
-            cookies.signed[:unit]=cookies.signed[:SO_unit]
-            #puts cookies.signed[:radius]
-        end
-      end
+      
       if (cookies.signed[:radius]) && (cookies.signed[:unit])
         if (cookies.signed[:check_guest] == 'true')
             @token=cookies.signed[:guest_auth]        
         else 
             @token=cookies.signed[:auth] 
         end
-        @user_preference =HTTParty.get("https://flavumovies.herokuapp.com/user_preferences.json", body: {user: {auth_token: @token}}).parsed_response
-        @radius = @user_preference["user_preferences"].find{|x| x["preference"] == "search radius"}
-        @unit = @user_preference["user_preferences"].find{|x| x["preference"] == "unit of measure"}
-        cookies.signed[:radius]=@radius
-        cookies.signed[:unit]=@unit
       end
 
-      @url_movie = "https://flavumovies.herokuapp.com/movies_browser.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"
+      @user_preference =HTTParty.get("https://flavumovies.herokuapp.com/user_preferences.json", body: {user: {auth_token: @token}}).parsed_response
+      @radius = @user_preference["user_preferences"].find{|x| x["preference"] == "search radius"}
+      @unit = @user_preference["user_preferences"].find{|x| x["preference"] == "unit of measure"}
+      cookies.signed[:radius]=@radius
+      cookies.signed[:unit]=@unit
+      puts cookies.signed[:radius]
+      puts cookies.signed[:unit]
+      @url_movie = "https://flavumovies.herokuapp.com/movies_browser.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}&radius=#{cookies.signed[:radius]}&unit=#{cookies.signed[:unit]}"
       
       if (cookies.signed[:check_guest] == 'true')
           @movies =HTTParty.get(@url_movie, body: {user: {auth_token: cookies.signed[:guest_auth]}, browser: "1"}).parsed_response
