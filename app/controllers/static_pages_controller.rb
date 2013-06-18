@@ -75,16 +75,17 @@ require 'open-uri'
       redirect_to cover_path
     else
       if cookies.signed[:check_guest] == "true"
-        token = cookies.signed[:guest_auth]
+        @token = cookies.signed[:guest_auth]
       else
-        token = cookies.signed[:auth]
+        @token = cookies.signed[:auth]
       end
 
       #get_radius and unit
-      if cookies.signed[:SO_radius] && cookies.signed[:SO_unit] 
+      if (cookies.signed[:SO_radius]) && (cookies.signed[:SO_unit]) 
         cookies.signed[:radius]=cookies.signed[:SO_radius]
         cookies.signed[:unit]=cookies.signed[:SO_unit] 
       else 
+
         @user_preference_url = "https://flavumovies.herokuapp.com/user_preferences"
         @user_preference =HTTParty.get("https://flavumovies.herokuapp.com/user_preferences.json", body: {user: {auth_token: @token}}).parsed_response
         @radius = @user_preference["user_preferences"].find{|x| x["preference"] == "search radius"}
@@ -108,11 +109,6 @@ require 'open-uri'
       elsif params[:unwatched]
         @unwatched_movies =HTTParty.delete("https://flavumovies.herokuapp.com/watched_movies.json", body: {user: {auth_token: token}, watched_movie: {movie_id:params[:unwatched]}}).parsed_response
       end
-
-      if params[:showid]
-        cookies.signed[:showid] = params[:showid]
-        edirect_to showmovie_path
-      end
     
       @url = "https://flavumovies.herokuapp.com/movies_browser.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}&radius=#{cookies.signed[:radius]}&unit=#{cookies.signed[:unit]}"
       @movies = HTTParty.get(@url, body: {user: {auth_token: token}, browser: "1"}).parsed_response
@@ -127,13 +123,13 @@ require 'open-uri'
       redirect_to cover_path
     else
       if cookies.signed[:check_guest] == 'true'
-        token = cookies.signed[:guest_auth]
+        @token = cookies.signed[:guest_auth]
       else
-        token = cookies.signed[:auth]
+        @token = cookies.signed[:auth]
       end
         
       #get_radius and unit
-      if cookies.signed[:SO_radius] && cookies.signed[:SO_unit] 
+      if (cookies.signed[:SO_radius]) && (cookies.signed[:SO_unit]) 
         cookies.signed[:radius]=cookies.signed[:SO_radius]
         cookies.signed[:unit]=cookies.signed[:SO_unit] 
       else 
@@ -1097,7 +1093,7 @@ request.remote_ip
       end
 
       #get_radius and unit
-      if cookies.signed[:SO_radius] && cookies.signed[:SO_unit] 
+      if (cookies.signed[:SO_radius]) && (cookies.signed[:SO_unit])
         cookies.signed[:radius]=cookies.signed[:SO_radius]
         cookies.signed[:unit]=cookies.signed[:SO_unit] 
       else 
