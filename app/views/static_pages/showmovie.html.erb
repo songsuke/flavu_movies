@@ -150,40 +150,43 @@
 
 
 			<div id="theatre-detail">
-				<%@theatres_for_movie['theatres'].each do |tfm|%>					
-					<div id="result-today">
-						<h2 class="cinema-name"> <%=tfm['name']%> </h2>
-						<div id="result-item">
-							<h3 class="movie-name">
-								<%=@a2%>
-							</h3>
-							<div id="result-info">
-								<div id="item">
-									<div id="picture">
-										<img width="80" height="auto" src="<%= @poster%>">
-									</div>
-									<div class="info group">
-										<div class="showtime group">
-											<%tfm['showtimes'].each do |showtime|%>
-												<%if showtime['date'].to_date == Time.now.to_date%>
-													<ul>							
-														<li>
-															<p> Date </p>
-															<p class="btn btn-inverse"><%=showtime['date']%>
-															</p>
-															<p> Time </p>		
-															<p class="showtime"><%=showtime['start_time']%>
-															</p>
-														</li>
-													</ul>
+				<%@theatres_for_movie.each do |tfm|%>	
+					<%if tfm['showtimes'][0]%>				
+						<div id="result-today">
+							<h2 class="cinema-name"> <%=tfm['name']%> </h2>
+							<div id="result-item">
+								<h3 class="movie-name">
+									<%=@a2%>
+								</h3>
+								<div id="result-info">
+									<div id="item">
+										<div id="picture">
+											<img width="80" height="auto" src="<%= @poster%>">
+										</div>
+										<div class="info group">
+											<div class="showtime group">
+												<%tfm['showtimes'].each do |showtime|%>
+													<%if showtime['date'].to_date == Time.now.to_date%>
+														<ul>							
+															<li>
+																<p> Date </p>
+																<p class="btn btn-inverse"><%=showtime['date']%>
+																</p>
+																<p> Time </p>		
+																<p class="showtime"><%=showtime['start_time']%>
+																</p>
+															</li>
+														</ul>
+													<%end%>
 												<%end%>
-											<%end%>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					</div><!--content-->
+						</div><!--content-->
+					<%else%>
+					<%end%>
 				<%end%>
 			</div>
 		</div>
