@@ -148,7 +148,7 @@ require 'open-uri'
     if (!cookies.signed[:auth]) && (!cookies.signed[:guest_auth])
       redirect_to cover_path
     else
-      @lat_lng = cookies[:lat_lng].split("|")
+      #@lat_lng = cookies[:lat_lng].split("|")
       @url = "https://flavumovies.herokuapp.com/theatres/#{params[:showid]}.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}"     
       if cookies.signed[:check_guest] == "true"
         if params[:showid]
