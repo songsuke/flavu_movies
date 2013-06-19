@@ -38,27 +38,37 @@
 		    				<h3 class="title">Log In</h3>
 		    			</div>
 		    			<div class="modal-body">
-							<%= form_tag '/checklogin' do %>
-								<div class="control-group">
-									<div class="controls">		
-										<%if flash[:error]%><div class="alert"><%= flash[:error]%></div><%end%>
-										<div id="login-bar">
-											<%= label_tag("Login") %>
-											<%= text_field_tag "login"%>
-											<%= label_tag("Password") %>
-											<%= password_field_tag("password") %>
-										</div>
-										<div id="login-button">
-										  	<button name="confirm" id="confirm" value="confirm"> Login </button>
-										</div>
-										<div id="remember-but">
-											<label>
-											<%=check_box("checkbox", "check")%>
-											Remember me</label>
-										</div>
-									</div>
-								</div>
-							<%end%>
+		    				<%if flash[:error]%><div class="alert"><%= flash[:error]%></div><%end%>
+							<%= form_tag '/checklogin' ,:class=>"form-horizontal" do %>
+						        <div class="control-group">
+						          <label class="control-label" for="inputEmail">Login</label>
+						          <div class="controls">    
+						            <%= text_field_tag "login" ,nil,:placeholder=>"Username or Email"%>
+						          </div>
+						        </div>
+						        <div class="control-group">
+						          <label class="control-label" for="inputPassword">Password</label>
+						          <div class="controls">    
+						            <%= password_field_tag "password" ,nil,:placeholder=>"Password" %>
+						          </div>
+						        </div>
+						        <div class="control-group">
+						          <div class="controls">
+						            <label class="checkbox">
+						              <%=check_box("checkbox", "check")%>
+						              Remember me
+						            </label>
+						            <button name="confirm" id="confirm" value="confirm" type="submit" class="btn"> Login </button>  
+						          </div>  
+						        </div>
+						        <div class="control-group">
+						          <div class="controls">
+						          	<div id="forgot-password">
+						          		<%=link_to "forgot password?", forgot_password_path%>
+						          	</div>
+						          </div>  
+						        </div>
+						    <%end%>
 		  				</div>
 					</div>
 				</li>

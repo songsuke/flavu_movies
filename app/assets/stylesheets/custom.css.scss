@@ -118,10 +118,7 @@ body {
   form {
     position: relative;
   }
-  input[type="text"] {
-    margin: 7px 0 0 10px;
-    width: 250px;
-  }
+  
   #bt_find_friends {
     background-color: #fff;
     border: 0;
@@ -146,6 +143,15 @@ body {
     color: white;
   }
 }
+#forgot-password {
+  a {
+    padding: 0;
+  }
+  a:hover, a:focus {
+    color: #999;
+    background: transparent;
+  }
+}
 .navbar-inner {
   background-image: url('/assets/bar-bg.png');
   box-shadow: 0 0 2px rgba(0,0,0,.2);
@@ -154,6 +160,7 @@ body {
   padding-right: 25px;
   background-color: #f9f9f9;
   border: none;
+
   #dropdown1 {
     float: none;
   }
@@ -162,13 +169,16 @@ body {
     text-decoration: none;
     color:black;
     background-image: url('/assets/bar-bg.png');
-
   }
   .nav.left {
     position: relative;
     left: 0;
     display: block;
     margin: 0 10px 0 0;
+    input[type="text"] {
+      margin: 7px 0 0 10px;
+      width: 250px;
+    }
       li {
       float: left;
       line-height: 23px;

@@ -10,9 +10,7 @@ def checklogin
       if (@users.first[0]=="error")
         flash[:error] = "Username or Password is wrong. Please try again"
         #cookies.signed[:check_guest] ={secure: true, httponly: true, domain: 'flavu.com', value: "true"}
-        cookies.permanent.signed[:check_guest] ="true"
-        #puts cookies.signed[:check_guest]
-        redirect_to home_path
+        redirect_to cover_path
       else
         
         if params[:checkbox]['check']=="1"

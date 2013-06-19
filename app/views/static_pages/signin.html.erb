@@ -1,51 +1,36 @@
-<html>
-<head>
-</head>
-<body>
-<h1> Sign In </h1>
-  <!--<form action = "/signin" method ="post">-->
-<%if flash[:error]%>
-  <div class = "alert">
-    <p> <%=flash[:error]%></p>
-  </div>
-<%else%>
-<%end%>
-
-  <%= form_tag '/signin' do %>
-  <%if (!cookies.signed[:auth])%>
-  <div class='control-group'>
-    <div class='controls'>
-      <!--<label for="user_login">Login</label>-->
-      <%= label_tag("Login") %>
-      <!--<input id="user_login" name="user[login]" size="30" type="text">-->
-      <%= text_field_tag "login"%>
+<div id="theatre-content">
+  <div id="content">
+    <h1 class="title"> Sign In </h1>
+    <div id="theatre-show">
+      <%if flash[:error]%><div class="alert"><%= flash[:error]%></div><%end%>
+      <%= form_tag '/signin' ,:class=>"form-horizontal" do %>
+        <div class="control-group">
+          <label class="control-label" for="inputEmail">Login</label>
+          <div class="controls">    
+            <%= text_field_tag "login" ,nil,:placeholder=>"Username or Email"%>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="inputPassword">Password</label>
+          <div class="controls">    
+            <%= password_field_tag "password" ,nil,:placeholder=>"Password" %>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="controls">
+            <label class="checkbox">
+              <%=check_box("checkbox", "check")%>
+              Remember me
+            </label>
+            <button name="confirm" id="confirm" value="confirm" type="submit" class="btn"> Login </button>  
+          </div>  
+        </div>
+        <div class="control-group">
+          <div class="controls">
+            <%=link_to "forgot password?", forgot_password_path%>
+          </div>  
+        </div>
+      <%end%>
     </div>
   </div>
-
-  <div class='control-group'>
-    <div class='controls'>
-      <!--<label for="user_password">Password</label>-->
-      <%= label_tag("Password") %>
-
-      <!--<input id="user_password" name="user[password]" size="30" type="password">-->
-      <%= password_field_tag("password") %>
-
-
-    </div>
-  </div>
-  <div class='controls'>
-  <button name="confirm" id="confirm" value="confirm"> Login </button>
-
-   </div>
-
-  <div>
-    <h11> please login </h11>
-  </div>
-  <%else%>
-    <h11> Your Welcome <%=@username%> </h11>
-  <%end%>
-<!--</form>-->
-<%end%>
-
-</body>
-</html>
+</div>

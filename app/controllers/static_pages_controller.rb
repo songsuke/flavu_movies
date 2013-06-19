@@ -5,25 +5,32 @@ require 'open-uri'
   def signin
     if params[:confirm] !="confirm"
     else
-      cookies.signed[:check_guest] = "false"
       puts "my param #{params[:login]}"
       @users =HTTParty.post("https://flavumovies.herokuapp.com/users/sign_in.json", body: {user: {login: params[:login], password: params[:password]}}).parsed_response 
-      puts @users.first[0]
       if (@users.first[0]=="error")
         flash[:error] = "Username or Password is wrong. Please try again"
       else
-        puts @users
-        @auth_token=@users['auth_token']
-        cookies.signed[:username] = @users['username']
-        cookies.signed[:user] = @users
-        cookies.signed[:auth] = @auth_token
+        
+        if params[:checkbox]['check']=="1"
+          cookies.permanent.signed[:auth] = {value: "#{@users['auth_token']}"}
+          cookies.permanent.signed[:username] = {value: "#{@users['username']}"}
+          cookies.permanent.signed[:user_id] = {value: "#{@users['id']}"}
+          cookies.permanent.signed[:user] = {value: "#{@users}"}
+        elsif params[:checkbox]['check']=="0"
+          cookies.signed[:auth] = {value: "#{@users['auth_token']}"}
+          cookies.signed[:username] = {value: "#{@users['username']}"}
+          cookies.signed[:user_id] = {value: "#{@users['id']}"}
+          cookies.signed[:user] = {value: "#{@users}"}
+        end
+        #cookies.signed[:auth] ={secure: true, httponly: true, domain: 'flavu.com', value: "#{@auth_token}"}
         #cookies.signed[:latitude] = '49.28385281'
        # cookies.signed[:longitude] = '-123.1120815'
-        @username=cookies.signed[:username]
-        @auth=cookies.signed[:auth]
+        #@username=cookies.signed[:username]
+        #@auth=cookies.signed[:auth]
+        cookies.permanent.signed[:check_guest] = {value: "false"}
         redirect_to home_path
       end
-    end   
+    end
   end
 
   def register
@@ -1563,6 +1570,7 @@ request.remote_ip
 
   def token_valid?(*hash)
     if hash.length > 0 && hash[0]["error"] == "Invalid authentication token."
+      cookies.signed[:auth] = nil
       return false
     end
     return true
