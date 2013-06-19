@@ -1,6 +1,7 @@
 class StaticPagesController < ApplicationController
 require 'httparty'
 require 'open-uri'
+before_filter :authenticate_user, :except => [:signin, :register]
 
   def signin
     if params[:confirm] !="confirm"
@@ -1571,6 +1572,15 @@ request.remote_ip
       return false
     end
     return true
+  end
+
+  def authenticate_user
+    if !cookies.signed[:auth]
+      if !cookies.signed[:guest_auth] or cookies.signed[:guest_auth] && cookies.signed[:check_guest] == "false"
+        redirect_to signin_path
+        return
+      end
+    end
   end
 
 end
