@@ -286,11 +286,22 @@ body {
 #slider {
   width: 960px;
   height: 320px;
-  .carousel-indicators {
-  top: 105%;
-  left: 50%;
-  li {
-    background-color: black;
+  #indicators {
+  top: 100%;
+  position: absolute;
+  display: block;
+  margin-right: auto;
+  margin-left:auto;
+  a {
+
+    color: white;
+    font: 11px/18px Arial, Sans;
+    display: inline-block;
+    padding: 2px 8px;
+    margin-right: 5px;
+    height: 18px;
+    background: #C80909 url('/assets/cellshade.png') repeat-x;
+    border-radius: 3px;
   }
  }
 }

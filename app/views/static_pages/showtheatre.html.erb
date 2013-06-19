@@ -28,7 +28,7 @@
 					<%elsif (@st['not_interested']==true && cookies.signed[:MO_disliked_theatres]=="false")%>
 					<%else%>	
 
-<script type="text/javascript"src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDb5IpzvRHH678YrbdxmQyR4J5opeTKlQk&sensor=false">
+<script type="text/javascript"src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=<%=ENV["NAME"]%>&sensor=false">
 </script>	
 
 <script>
