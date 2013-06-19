@@ -66,38 +66,44 @@ function calcRoute() {
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
-
-    </script>
-  </head>
-  <body>
-    <div id="panel">
-    <b>Start: </b>
-    <select id="start" onchange="calcRoute();">
-      <option value="chicago, il">From your profile address</option>
-      <%if @lat_lng%>
-	      <option value="<%=@lat_lng[0]%>,<%=@lat_lng[1]%>">Your Current Position</option>
-	  <%end%>
-      <option value="<%=cookies.signed[:latitude]%>,<%=cookies.signed[:longitude]%>">Approximately Estimated Location</option>
-    </select>
-    <b>End: </b>
-    <select id="end" onchange="calcRoute();">
-      <option value="<%=@st['location']['latitude']%>, <%=@st['location']['longitude']%>"><%=@st['name']%></option>
-    </select>
-    <b>Mode of Travel: </b>
-    <select id="mode" onchange="calcRoute();">
-      <option value="DRIVING">Driving</option>
-      <option value="WALKING">Walking</option>
-      <option value="BICYCLING">Bicycling</option>
-      <option value="TRANSIT">Transit</option>
-    </select>
-    <p>**If you do not allow it to track you, your location will be estimated.</p>
-
-    <%- unless @lat_lng %>
-<script>
-  getGeoLocation();
 </script>
-<%- end %>
-    </div>
+
+<div id="showmap">
+    <div id="panel">
+    	<div id="map-search">
+		    <b>Start: </b>
+		    <select id="start" onchange="calcRoute();">
+		      <option value="chicago, il">From your profile address</option>
+		      <%if @lat_lng%>
+			      <option value="<%=@lat_lng[0]%>,<%=@lat_lng[1]%>">Your Current Position</option>
+			  <%end%>
+		      <option value="<%=cookies.signed[:latitude]%>,<%=cookies.signed[:longitude]%>">Approximately Estimated Location</option>
+		    </select>
+		</div>
+		<div id="map-search">
+	    <b>End: </b>
+		    <select id="end" onchange="calcRoute();">
+		      <option value="<%=@st['location']['latitude']%>, <%=@st['location']['longitude']%>"><%=@st['name']%></option>
+		    </select>
+		</div>
+		<div id="map-search">
+	    <b>Mode of Travel: </b>
+		    <select id="mode" onchange="calcRoute();">
+		      <option value="DRIVING">Driving</option>
+		      <option value="WALKING">Walking</option>
+		      <option value="BICYCLING">Bicycling</option>
+		      <option value="TRANSIT">Transit</option>
+		    </select>
+		</div>
+	    <p>**If you do not allow it to track you, your location will be estimated.</p>
+
+	    <%- unless @lat_lng %>
+			<script>
+			  	getGeoLocation();
+			</script>
+		<%- end %>
+	</div>
+</div>
     <div id="map-canvas"></div>
 					<%end%>
 				</ul>

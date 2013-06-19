@@ -481,22 +481,25 @@ body {
   img {
     width: 135px;
     height: 210px;
+    border: 1px solid #fff;
+    border-radius: 3px;
   }
 }
 
 .movie-items2:hover {
   background-color: #ddd;
   border: 1px solid #ccc;
+  border-radius: 3px;
 }
 
 .movie-items2 {
   float: left;
-  padding: 0px;
+  padding: 5px 0 0 0;
   margin: 0px;
   border: 1px solid #fff;
   border-radius: 3px;
   display: block;
-  width: 147px;
+  width: 143px;
   height: 300px;
   overflow: hidden;
   position: relative;
@@ -505,6 +508,8 @@ body {
     img {
     width: 135px;
     height: 210px;
+    border: 1px solid #fff;
+    border-radius: 3px;
   }
 }
 
@@ -946,6 +951,13 @@ div.hidden{
     li.active {
       background: url('/assets/theatres-list-active.png') no-repeat right center;
     }
+  }
+}
+
+#showmap{
+  margin-top: 10px;
+  #map-search{
+    display: inline;
   }
 }
 
