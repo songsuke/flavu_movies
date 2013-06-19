@@ -1570,7 +1570,6 @@ request.remote_ip
 
   def token_valid?(*hash)
     if hash.length > 0 && hash[0]["error"] == "Invalid authentication token."
-      cookies.signed[:auth] = nil
       return false
     end
     return true
