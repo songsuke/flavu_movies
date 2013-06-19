@@ -71,7 +71,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 <div id="showmap">
     <div id="panel">
     	<div id="map-search">
-		    <b>Start: </b>
+		    <b>Start : </b>
 		    <select id="start" onchange="calcRoute();">
 		      <option value="chicago, il">From your profile address</option>
 		      <%if @lat_lng%>
@@ -81,13 +81,13 @@ google.maps.event.addDomListener(window, 'load', initialize);
 		    </select>
 		</div>
 		<div id="map-search">
-	    <b>End: </b>
+	    <b>End : </b>
 		    <select id="end" onchange="calcRoute();">
 		      <option value="<%=@st['location']['latitude']%>, <%=@st['location']['longitude']%>"><%=@st['name']%></option>
 		    </select>
 		</div>
 		<div id="map-search">
-	    <b>Mode of Travel: </b>
+	    <b>Mode : </b>
 		    <select id="mode" onchange="calcRoute();">
 		      <option value="DRIVING">Driving</option>
 		      <option value="WALKING">Walking</option>

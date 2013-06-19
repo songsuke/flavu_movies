@@ -191,8 +191,6 @@ require 'open-uri'
 
   def showtheatre
    
-    puts cookies.signed[:guest_auth]
-    #puts cookies.signed[:auth]
     if (!cookies.signed[:auth]) && (!cookies.signed[:guest_auth])
       redirect_to cover_path
     else
@@ -205,14 +203,12 @@ require 'open-uri'
       else
         @token=cookies.signed[:auth]
       end
-      puts @token
       @theatres =HTTParty.get(@url, body: {user: {auth_token: @token}, browser: "1"}).parsed_response
       if !token_valid?(@theatres)
         redirect_to signin_path
         return
       end
       @st=@theatres['theatre']
-      puts @theatres
     end
   end
 
