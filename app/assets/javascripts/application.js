@@ -17,5 +17,6 @@
 //= require bootstrap-carousel
 //= require geolocation
 //= require bootstrap
+//= require foundation
 //= require jquery_ujs 
 //= require_tree .

@@ -3,10 +3,12 @@
 <head>
   <title>EasilyxMovie</title>
   <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "vendor/zepto" %>
   <%= javascript_include_tag "jquery" %>
   <%= javascript_include_tag "holder" %>
   <%= javascript_include_tag "bootstrap-transition" %>
   <%= javascript_include_tag "bootstrap-carousel" %>
+  <%= javascript_include_tag "vendor/custom.modernizr" %>
   <%= javascript_include_tag "geolocation" %>
   <%= javascript_include_tag "jquery_ujs" %>
   <%= stylesheet_link_tag    "custom", :media => "screen" %>
@@ -36,6 +38,7 @@ $(function(){
 	});
 });
 </script>
+
 </head>
 <body>
 
@@ -83,9 +86,9 @@ $(function(){
 
 
 <%end%>
-
-
-
+<script>
+$(document).foundation();
+</script>
 
 </body>
 </html>

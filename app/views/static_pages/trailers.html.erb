@@ -1,57 +1,6 @@
-	
-	<div id="slider">
-		<div id="content">
-			<div id="myCarousel" class="carousel slide">
-			    <ol class="carousel-indicators">
-    <a href="#myCarousel" data-slide-to="0" class="active">1</a>
-    <a href="#myCarousel" data-slide-to="1">2</a>
-    <a href="#myCarousel" data-slide-to="2">3</a>
-    <a href="#myCarousel" data-slide-to="3">4</a>
-    <a href="#myCarousel" data-slide-to="4">5</a>
-    <a href="#myCarousel" data-slide-to="5">6</a>
-    <a href="#myCarousel" data-slide-to="6">7</a>
-
-  </ol>
-			  <!-- Carousel items -->
-			  <div class="carousel-inner">
-			    <div class="active item" id = "slider">
-			    	<p> Convenient Finding Nemo </p>
-			    	<p> Find movies and showtimes at theatres near you that you never know that it does exist in this world before </p>
-			    </div>
-			    <div class="item" id="slider">
-			    	<p> Prefer it, Rate it </p>    	
-			    	<p> Rate genres, actors and directors then movies ranked based on your preferences</p>
-				</div>
-				<div class="item" id="slider">
-			    	<p> Manage your own "To Watch" and "Not Interested" list for movies</p>
-				</div>
-				<div class="item" id="slider">
-			    	<p> See which of your buddies want to watch a movie </p>
-				</div>
-				<div class="item" id="slider">
-			    	<p> Go on and watch <a href="/trailers">Trailers now!!</a> </p>
-				</div>
-			    <div class="item" id="slider">    	
-			    	<img src="/assets/responsive-slide.png" alt>
-				</div>
-			    <div class="item"id="slider">
-			    	<img src="/assets/iphone-slide.png" alt>
-			    </div>
-			  </div>
-			  <!-- Carousel nav -->
-			  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-			  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
-			</div>
-		</div>
-	</div>
-	<script>
-$('.carousel').carousel({
-  interval: 5000
-})
-</script>
-	<div id="home-content">
+<div id="home-content">
 		<div id="movies">
-			<h1 class="title"> Movies </h1>
+			<h1 class="title"> Trailers </h1>
 			<div id="nowshowing">
 				<div class="group">
 					<% @im['movies'].each do |movie| %> 
@@ -65,20 +14,7 @@ $('.carousel').carousel({
 				                            	<img src="<%=photo['url']%>" class="img-rounded">
 				                            </div>
 				                            <div id="movie-items-info-tiny">
-					                            <p style="font-weight:bold;"><%=movie['title']%></p>
-				                              	<div id="hiding">
-				                              		<p>
-													<%movie['genres'].each do |a2|%>
-														<%=a2['name']%>
-													<%end%>
-													</p>
-													<p>
-													<%movie['directors'].each do |a2|%>
-														<%=a2['name']%>
-													<%end%>
-													</p>
-
-				                            	</div>
+					                            <p style="font-weight:bold;"><%=movie['title']%></p>                   
 				                            </div>
 			                            </div>
 			                        <%end%>
@@ -89,19 +25,7 @@ $('.carousel').carousel({
 			                              		<img src="/assets/no_image.gif" class="img-rounded">       
 											</div>
 				                            <div id="movie-items-info-tiny">
-					                            <p style="font-weight:bold;"><%=movie['title']%></p>
-			                              		<div id="hiding">
-			                              			<p>
-													<%movie['genres'].each do |a2|%>
-														<%=a2['name']%>
-													<%end%>
-													</p>
-													<p>
-													<%movie['directors'].each do |a2|%>
-														<%=a2['name']%>
-													<%end%>
-													</p>
-			                            		</div>
+					                            <p style="font-weight:bold;"><%=movie['title']%></p>               		
 			                            	</div>
 			                            </div>                           
 			                        <%end%>
@@ -113,19 +37,7 @@ $('.carousel').carousel({
 			                            	<img src="/assets/no_image.gif" class="img-rounded">             
 			                       		</div>
 				                        <div id="movie-items-info-tiny">
-					                            <p style="font-weight:bold;"><%=movie['title']%></p>
-				                            <div id="hiding">
-				                            	<p>
-												<%movie['genres'].each do |a2|%>
-													<%=a2['name']%>
-												<%end%>
-												</p>
-												<p>
-												<%movie['directors'].each do |a2|%>
-													<%=a2['name']%>
-												<%end%>
-												</p>
-				                            </div>
+					                        <p style="font-weight:bold;"><%=movie['title']%></p>                          
 				                        </div>
 			                        </div>                         
 			                    <%end%>                 		
@@ -146,18 +58,6 @@ $('.carousel').carousel({
 				                            </div>
 				                            <div id="movie-items-info-tiny">
 					                            <p style="font-weight:bold;"><%=movie['title']%></p>
-				                              	<div id="hiding">
-				                              		<p>
-													<%movie['genres'].each do |a2|%>
-														<%=a2['name']%>
-													<%end%>
-													</p>
-													<p>
-													<%movie['directors'].each do |a2|%>
-														<%=a2['name']%>
-													<%end%>
-													</p>
-				                            	</div>
 				                            </div>
 			                            </div>
 			                        <%end%>
@@ -168,19 +68,7 @@ $('.carousel').carousel({
 			                              		<img src="/assets/no_image.gif" class="img-rounded">       
 											</div>
 				                            <div id="movie-items-info-tiny">
-					                            <p style="font-weight:bold;"><%=movie['title']%></p>
-			                              		<div id="hiding">
-			                              			<p>
-													<%movie['genres'].each do |a2|%>
-														<%=a2['name']%>
-													<%end%>
-													</p>
-													<p>
-													<%movie['directors'].each do |a2|%>
-														<%=a2['name']%>
-													<%end%>
-													</p>
-			                            		</div>
+					                            <p style="font-weight:bold;"><%=movie['title']%></p>               		
 			                            	</div>
 			                            </div>    
 			                        <%end%>
@@ -192,19 +80,7 @@ $('.carousel').carousel({
 			                            	<img src="/assets/no_image.gif" class="img-rounded">             
 			                       		</div>
 				                        <div id="movie-items-info-tiny">
-					                            <p style="font-weight:bold;"><%=movie['title']%></p>
-				                            <div id="hiding">
-				                            	<p>
-												<%movie['genres'].each do |a2|%>
-													<%=a2['name']%>
-												<%end%>
-												</p>
-												<p>
-												<%movie['directors'].each do |a2|%>
-													<%=a2['name']%>
-												<%end%>
-												</p>
-				                            </div>
+					                        <p style="font-weight:bold;"><%=movie['title']%></p>                  
 				                        </div>
 			                        </div>                           
 			                    <%end%>    
@@ -224,19 +100,6 @@ $('.carousel').carousel({
 				                            </div>
 				                            <div id="movie-items-info-tiny">
 					                            <p style="font-weight:bold;"><%=movie['title']%></p>
-				                              	<div id="hiding">
-				                              		<p>
-													<%movie['genres'].each do |a2|%>
-														<%=a2['name']%>
-													<%end%>
-													</p>
-													<p>
-													<%movie['directors'].each do |a2|%>
-														<%=a2['name']%>
-													<%end%>
-													</p>
-
-				                            	</div>
 				                            </div>
 			                            </div>
 			                        <%end%>
@@ -248,18 +111,6 @@ $('.carousel').carousel({
 											</div>
 				                            <div id="movie-items-info-tiny">
 					                            <p style="font-weight:bold;"><%=movie['title']%></p>
-			                              		<div id="hiding">
-			                              			<p>
-													<%movie['genres'].each do |a2|%>
-														<%=a2['name']%>
-													<%end%>
-													</p>
-													<p>
-													<%movie['directors'].each do |a2|%>
-														<%=a2['name']%>
-													<%end%>
-													</p>
-			                            		</div>
 			                            	</div>
 			                            </div>    
 			                        <%end%>
@@ -271,19 +122,7 @@ $('.carousel').carousel({
 			                            	<img src="/assets/no_image.gif" class="img-rounded">             
 			                       		</div>
 				                        <div id="movie-items-info-tiny">
-					                            <p style="font-weight:bold;"><%=movie['title']%></p>
-				                            <div id="hiding">
-				                            	<p>
-												<%movie['genres'].each do |a2|%>
-													<%=a2['name']%>
-												<%end%>
-												</p>
-												<p>
-												<%movie['directors'].each do |a2|%>
-													<%=a2['name']%>
-												<%end%>
-												</p>
-				                            </div>
+					                        <p style="font-weight:bold;"><%=movie['title']%></p>	                     
 				                        </div>
 			                        </div>                          
 			                    <%end%> 

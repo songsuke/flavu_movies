@@ -1583,4 +1583,44 @@ request.remote_ip
     end
   end
 
+  def trailers
+    puts cookies.signed[:guest_auth]
+    if (!cookies.signed[:auth]) && (!cookies.signed[:guest_auth])
+      redirect_to cover_path
+    else    
+      if (cookies.signed[:check_guest] == 'true')
+          @token=cookies.signed[:guest_auth]        
+      else 
+          @token=cookies.signed[:auth] 
+      end
+      #get_radius and unit
+      if (cookies.signed[:SO_radius]) && (cookies.signed[:SO_unit])
+        cookies.signed[:radius]=cookies.signed[:SO_radius]
+        cookies.signed[:unit]=cookies.signed[:SO_unit] 
+      end
+      if (cookies.signed[:radius]) && (cookies.signed[:unit])
+      else 
+        @user_preference_url = "https://flavumovies.herokuapp.com/user_preferences"
+        @user_preference =HTTParty.get("https://flavumovies.herokuapp.com/user_preferences.json", body: {user: {auth_token: @token}}).parsed_response
+        if !token_valid?(@user_preference)
+          redirect_to signin_path
+          return
+        end
+        @radius = @user_preference["user_preferences"].find{|x| x["preference"] == "search radius"}
+        @unit = @user_preference["user_preferences"].find{|x| x["preference"] == "unit of measure"}
+        cookies.signed[:radius]=@radius
+        cookies.signed[:unit]=@unit
+      end
+      
+      @url_movie = "https://flavumovies.herokuapp.com/movie_trailers.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}&radius=#{cookies.signed[:radius]}&unit=#{cookies.signed[:unit]}"
+      @movies =HTTParty.get(@url_movie, body: {user: {auth_token: @token}, browser: "1"}).parsed_response
+        if !token_valid?(@movies)
+          redirect_to signin_path
+          return
+        end
+      @rm=@movies['remaining_movies']
+      @im=@movies['interested_movies']
+      @nim=@movies['not_interested_movies']
+    end
+  end
 end

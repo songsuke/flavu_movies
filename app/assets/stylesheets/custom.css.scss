@@ -1,5 +1,6 @@
 @import "bootstrap";
 @import "bootstrap-responsive";
+@import "foundation";
 
 /* Large desktop */
 
@@ -286,24 +287,27 @@ body {
 #slider {
   width: 960px;
   height: 320px;
-  #indicators {
-  top: 100%;
-  position: absolute;
-  display: block;
-  margin-right: auto;
-  margin-left:auto;
-  a {
-
-    color: white;
-    font: 11px/18px Arial, Sans;
-    display: inline-block;
-    padding: 2px 8px;
-    margin-right: 5px;
-    height: 18px;
-    background: #C80909 url('/assets/cellshade.png') repeat-x;
-    border-radius: 3px;
+  .carousel-indicators {
+    right: initial;
+    top: 100%;
+    left:40%;
+    position: absolute;
+    a {
+      text-indent: 1px;
+      color: white;
+      display: block;
+      font: 11px/18px Arial, Sans;
+      display: inline-block;
+      padding: 2px 8px;
+      margin-right: 5px;
+      height: 18px;
+      background: #C80909 url('/assets/cellshade.png') repeat-x;
+      border-radius: 3px;
+    }
+    a.active {
+      background:#C4C4C4 url('/assets/cellshade.png') repeat-x;
+    }
   }
- }
 }
 
 #side {
