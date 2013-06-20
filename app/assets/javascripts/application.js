@@ -15,8 +15,11 @@
 //= require holder
 //= require bootstrap-transition
 //= require bootstrap-carousel
-//= require geolocation
 //= require bootstrap
+//= require vendor/zepto
+//= require vendor/custom.modernizr
+//= require foundation.reveal
 //= require foundation
+//= require geolocation
 //= require jquery_ujs 
 //= require_tree .
