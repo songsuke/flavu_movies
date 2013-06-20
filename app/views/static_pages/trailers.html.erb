@@ -1,28 +1,135 @@
-<a class="btn" data-toggle="modal"href="#myModal11" >Launch Modal</a>
+<div id="home-content">
+		<div id="movies">
+			<h1 class="title"> Movies </h1>
+			<div id="nowshowing">
+				<div class="group">
+					<% @im['movies'].each do |movie| %> 
+						<div class="movie-items1">
+							<% if(movie['photos'].length >0) %>
+	                    	<%photo = movie['photos'].first%> 
+	                    		<%if photo['poster']==true%>
+			                        <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid => movie['id'] do%>
+			                            <div class="movie-items2">
+											<div id="movie-items-pics">
+				                            	<img src="<%=photo['url']%>" class="img-rounded">
+				                            </div>
+				                            <div id="movie-items-info-tiny">
+					                            <p style="font-weight:bold;"><%=movie['title']%></p>
+				                            </div>
+			                            </div>
+			                        <%end%>
+			                    <%else%>
+			                        <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid => movie['id'] do%>
+			                            <div class="movie-items2">
+			                        		<div id="movie-items-pics">
+			                              		<img src="/assets/no_image.gif" class="img-rounded">       
+											</div>
+				                            <div id="movie-items-info-tiny">
+					                            <p style="font-weight:bold;"><%=movie['title']%></p>
+			                              	</div>
+			                            </div>                           
+			                        <%end%>
+			                      <%end%>
+	                  		<%elsif movie['photos'].length==0%>
+			                    <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid => movie['id'] do%>
+			                        <div class="movie-items2">
+			                        	<div id="movie-items-pics">
+			                            	<img src="/assets/no_image.gif" class="img-rounded">             
+			                       		</div>
+				                        <div id="movie-items-info-tiny">
+					                        <p style="font-weight:bold;"><%=movie['title']%></p>
+				                        </div>
+			                        </div>                         
+			                    <%end%>                 		
+	                  		<%end%>    
+	                  	</div>    				
+        			<%end%><!--imloop-->
 
 
+					<% @rm['movies'].each do |movie| %> 
+						<div class="movie-items1">
+							<% if(movie['photos'].length >0) %>
+	                    	<%photo = movie['photos'].first%> 
+	                    		<%if photo['poster']==true%>
+			                        <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid => movie['id'] do%>
+										<div class="movie-items2">
+											<div id="movie-items-pics">
+				                            	<img src="<%=photo['url']%>" class="img-rounded">
+				                            </div>
+				                            <div id="movie-items-info-tiny">
+					                            <p style="font-weight:bold;"><%=movie['title']%></p>
+				                            </div>
+			                            </div>
+			                        <%end%>
+			                    <%else%>
+			                        <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid => movie['id'] do%>
+			                            <div class="movie-items2">
+			                        		<div id="movie-items-pics">
+			                              		<img src="/assets/no_image.gif" class="img-rounded">       
+											</div>
+				                            <div id="movie-items-info-tiny">
+					                            <p style="font-weight:bold;"><%=movie['title']%></p>
+			                              	</div>
+			                            </div>    
+			                        <%end%>
+			                    <%end%>
+	                  		<%elsif movie['photos'].length==0%>
+	                     		<%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid => movie['id'] do%>
+			                        <div class="movie-items2">
+			                        	<div id="movie-items-pics">
+			                            	<img src="/assets/no_image.gif" class="img-rounded">             
+			                       		</div>
+				                        <div id="movie-items-info-tiny">
+					                        <p style="font-weight:bold;"><%=movie['title']%></p>
+				                        </div>
+			                        </div>                           
+			                    <%end%>    
+			                <%end%> 
+	                  	</div>    				
+        			<%end%><!--rmloop-->
 
-<div class="modal hide" id="myModal11">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal">×</button>
-    <h3>Modal header</h3>
-  </div>
-  <div class="modal-body">
-      
-    <p>One fine body…</p>
-
-  </div>
-  <div class="modal-footer">
-    <a href="#" class="btn" data-dismiss="modal">Close</a>
-    <a href="#" class="btn btn-primary">Save changes</a>
-  </div>
-</div>
-
-<script>
-$('#myModal11').on('show', function () {
-  $('div.modal-body').html('<iframe src="http://www.youtube.com/v/itTskyFLSS8&amp;rel=0&amp;autohide=1&amp;showinfo=0&amp;autoplay=1" width="500" height="281" frameborder="0" allowfullscreen=""></iframe>');  
-});
-$('#myModal11').on('hide', function () {
-  $('div.modal-body').html('');
-});
-</script>
+        			<% @nim['movies'].each do |movie| %> 
+						<div class="movie-items1">
+							<% if(movie['photos'].length >0) %>
+	                    	<%photo = movie['photos'].first%> 
+	                    		<%if photo['poster']==true%>
+			                        <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid => movie['id'] do%>
+			                            <div class="movie-items2">
+											<div id="movie-items-pics">
+				                            	<img src="<%=photo['url']%>" class="img-rounded">
+				                            </div>
+				                            <div id="movie-items-info-tiny">
+					                            <p style="font-weight:bold;"><%=movie['title']%></p>
+				                            </div>
+			                            </div>
+			                        <%end%>
+			                    <%else%>
+			                        <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid => movie['id'] do%>
+			                            <div class="movie-items2">
+			                        		<div id="movie-items-pics">
+			                              		<img src="/assets/no_image.gif" class="img-rounded">       
+											</div>
+				                            <div id="movie-items-info-tiny">
+					                            <p style="font-weight:bold;"><%=movie['title']%></p>
+			                              	</div>
+			                            </div>    
+			                        <%end%>
+			                      <%end%>
+	                  		<%elsif movie['photos'].length==0%>
+	                     		<%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid => movie['id'] do%>
+			                        <div class="movie-items2">
+			                        	<div id="movie-items-pics">
+			                            	<img src="/assets/no_image.gif" class="img-rounded">             
+			                       		</div>
+				                        <div id="movie-items-info-tiny">
+					                        <p style="font-weight:bold;"><%=movie['title']%></p>
+				                        </div>
+			                        </div>                          
+			                    <%end%> 
+	                  		<%end%>    
+	                  	</div>    				
+        			<%end%><!--nimloop-->
+        		</div>
+			</div>
+		</div><!--movies-->
+	</div><!--home-content-->
