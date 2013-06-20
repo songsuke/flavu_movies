@@ -430,6 +430,12 @@ body {
 
 }
 
+.modal-body2 {
+  position: relative;
+  max-height: 400px;
+  padding: 15px;
+  overflow-y: auto;
+}
 .movie-items{
   float: left;
   padding: 0px;
@@ -450,6 +456,7 @@ body {
     left: 33.33%;
     width: auto;
   }
+
   h3 {
     color: #333;
     margin: 0;
