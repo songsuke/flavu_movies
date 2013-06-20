@@ -193,19 +193,19 @@
 	</div>
 </div>
 
+
+<script>
+$('.carousel').carousel({
+  interval: 4000
+})
+</script>
+
 <script>
 $('#myModal1').on('show', function () {
   $('div.modal-body').html('<iframe id="trailer" width="960" height="480" src="<%=@trailer%>" frameborder="0" >allowfullscreen </iframe>');  
 });
 $('#myModal').on('hide', function () {
   $('div.modal-body').html('');  
-  $('.modal-backdrop').remove(); 
 });
-</script>
-
-<script>
-$('.carousel').carousel({
-  interval: 4000
-})
 </script>
 
