@@ -16,9 +16,8 @@
 //= require bootstrap-transition
 //= require bootstrap-carousel
 //= require bootstrap
-//= require vendor/zepto
 //= require vendor/custom.modernizr
-//= require foundation.reveal
+//= require vendor/zepto
 //= require foundation
 //= require geolocation
 //= require jquery_ujs 
