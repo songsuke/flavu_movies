@@ -402,7 +402,9 @@ before_filter :authenticate_user, :except => [:signin, :register]
   def edit
     cookies.delete(:auth, :auth_token=>'cookies[:auth]')
     cookies.signed[:guest_auth] = nil
+    cookies.signed[:check_guest] == 'false'
     redirect_to cover_path
+
   end
 
   def settings 
