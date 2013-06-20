@@ -11,7 +11,7 @@
 						<% if(@sm['photos'].length >0) %>
 			                <%@photo = @sm['photos'].first%>
 			                <div class="movie-items">
-				                <a href="#myModal1" data-toggle="modal" data-backdrop="true">
+				                <a href="#myModal1" data-toggle="modal">
 				                	<span class="play"></span>
 				                	<img class="img-rounded" width="140" height="210" src="<%=@photo['url']%>">
 				                </a>
@@ -23,7 +23,7 @@
     									</h1>
     								</div>
     								<div id="modal-body" class="modal-body">
-				                		<iframe id="trailer" width="960" height="480" src="<%=@trailer%>" frameborder="0" allowfullscreen></iframe>
+				                		
 				               		</div>
 				                </div>
 
@@ -32,7 +32,7 @@
 			            <%elsif(@sm['photos'].length ==0) %>
 			            	<%@photo = @sm['photos'].first%>
 			            	<div class="movie-items">
-			            		<a href="#myModal1" data-toggle="modal" data-backdrop="true">
+			            		<a href="#myModal1" data-toggle="modal">
 				                	<span class="play"></span>
 				                	<img class="img-rounded" width="140" height="210" src="/assets/no_image.gif">
 				                </a>
@@ -44,7 +44,7 @@
     									</h1>
     								</div>
     								<div id="modal-body" class="modal-body">
-				                		<iframe id="trailer" width="960" height="480" src="<%=@trailer%>" frameborder="0" >allowfullscreen </iframe>
+				                		
 				               		</div>
 				                </div>
 			                <%@poster="/assets/no_image.gif"%>
@@ -91,7 +91,7 @@
 							<%elsif @sm['buddies'].length>1%>
 								<p> 
 									Your movies buddy <a><%=@sm['buddies'].first['display_name']%> </a> and 
-									<a href="#other_modal" data-toggle="modal" data-backdrop="true">other</a> like this movie 
+									<a href="#other_modal" data-toggle="modal">other</a> like this movie 
 								</p>
 								<div id="other_modal" class="modal fade hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 									<div class="modal-header" style="background-color:#2E2E2E;margin:0;padding:0 0 0 10px;">
@@ -192,8 +192,20 @@
 		</div>
 	</div>
 </div>
-	<script>
+
+<script>
+$('#myModal1').on('show', function () {
+  $('div.modal-body').html('<iframe id="trailer" width="960" height="480" src="<%=@trailer%>" frameborder="0" >allowfullscreen </iframe>');  
+});
+$('#myModal').on('hide', function () {
+  $('div.modal-body').html('');  
+  $('.modal-backdrop').remove(); 
+});
+</script>
+
+<script>
 $('.carousel').carousel({
   interval: 4000
 })
 </script>
+
