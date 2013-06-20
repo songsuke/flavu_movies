@@ -11,11 +11,11 @@
 						<% if(@sm['photos'].length >0) %>
 			                <%@photo = @sm['photos'].first%>
 			                <div class="movie-items">
-				                <a href="#myModal1" data-toggle="modal">
+				                <a href="#myModal55" data-toggle="modal">
 				                	<span class="play"></span>
 				                	<img class="img-rounded" width="140" height="210" src="<%=@photo['url']%>">
 				                </a>
-				               	<div id="myModal1" class="modal fade hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				               	<div id="myModal55" class="modal fade hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				                	<div id="modal-header" class="modal-header">
     									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     									<h1 class="title">
@@ -32,11 +32,11 @@
 			            <%elsif(@sm['photos'].length ==0) %>
 			            	<%@photo = @sm['photos'].first%>
 			            	<div class="movie-items">
-			            		<a href="#myModal1" data-toggle="modal">
+			            		<a href="#myModal55" data-toggle="modal">
 				                	<span class="play"></span>
 				                	<img class="img-rounded" width="140" height="210" src="/assets/no_image.gif">
 				                </a>
-				               	<div id="myModal1" class="modal fade hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				               	<div id="myModal55" class="modal fade hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				                	<div id="modal-header" class="modal-header">
     									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     									<h1 class="title">
@@ -201,10 +201,10 @@ $('.carousel').carousel({
 </script>
 
 <script>
-$('#myModal1').on('show', function () {
+$('#myModal55').on('show', function () {
   $('div.modal-body').html('<iframe id="trailer" width="960" height="480" src="<%=@trailer%>" frameborder="0" >allowfullscreen </iframe>');  
 });
-$('#myModal').on('hide', function () {
+$('#myModal55').on('hide', function () {
   $('div.modal-body').html('');  
 });
 </script>
