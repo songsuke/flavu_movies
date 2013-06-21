@@ -11,7 +11,7 @@
 						<% if(@sm['photos'].length >0) %>
 			                <%@photo = @sm['photos'].first%>
 			                <div class="movie-items">
-				                <a href="#myModal55" data-toggle="modal">
+				                <a href="#myModal55" data-toggle="modal" data-backdrop="false">
 				                	<span class="play"></span>
 				                	<img class="img-rounded" width="140" height="210" src="<%=@photo['url']%>">
 				                </a>
