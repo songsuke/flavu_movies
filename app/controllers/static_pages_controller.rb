@@ -1586,6 +1586,7 @@ request.remote_ip
   end
 
   def trailers
+
     if (!cookies.signed[:auth]) && (!cookies.signed[:guest_auth])
       redirect_to cover_path
     else
@@ -1595,7 +1596,7 @@ request.remote_ip
       else 
           @token=cookies.signed[:auth] 
       end
-
+      puts @token
       #get_radius and unit
       if (cookies.signed[:SO_radius]) && (cookies.signed[:SO_unit])
         cookies.signed[:radius]=cookies.signed[:SO_radius]

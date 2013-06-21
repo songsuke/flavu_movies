@@ -8,18 +8,30 @@
 							<% if(movie['photos'].length >0) %>
 	                    	<%photo = movie['photos'].first%> 
 	                    		<%if photo['poster']==true%>
-			                        <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid => movie['id'] do%>
-			                            <div class="movie-items2">
+	                    			<a href="#modal_trailer" data-toggle="modal">
+			                        	<div class="movie-items2">
 											<div id="movie-items-pics">
+											
 				                            	<img src="<%=photo['url']%>" class="img-rounded">
-				                            </div>
+				                        	</div>
 				                            <div id="movie-items-info-tiny">
 					                            <p style="font-weight:bold;"><%=movie['title']%></p>
 				                            </div>
 			                            </div>
-			                        <%end%>
+			                        </a>
+				                    <div id="modal_trailer" class="modal fade hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					                	<div id="modal-header" class="modal-header">
+	    									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	    									<h1 class="title">
+	    										<%=@rm['title']%>
+	    									</h1>
+	    								</div>
+	    								<div id="modal-body" class="modal-body">
+					                		
+					               		</div>
+					                </div>
 			                    <%else%>
-			                        <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid => movie['id'] do%>
+	                    			<a href="#modal_trailer" data-toggle="modal">
 			                            <div class="movie-items2">
 			                        		<div id="movie-items-pics">
 			                              		<img src="/assets/no_image.gif" class="img-rounded">       
@@ -27,11 +39,22 @@
 				                            <div id="movie-items-info-tiny">
 					                            <p style="font-weight:bold;"><%=movie['title']%></p>
 			                              	</div>
-			                            </div>                           
-			                        <%end%>
-			                      <%end%>
+			                            </div> 
+			                       	</a>
+			                       	<div id="modal_trailer" class="modal fade hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					                	<div id="modal-header" class="modal-header">
+	    									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	    									<h1 class="title">
+	    										<%=@rm['title']%>
+	    									</h1>
+	    								</div>
+	    								<div id="modal-body" class="modal-body">
+					                		
+					               		</div>
+					                </div>                                    
+			                    <%end%>
 	                  		<%elsif movie['photos'].length==0%>
-			                    <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid => movie['id'] do%>
+	                    		<a href="#modal_trailer" data-toggle="modal">
 			                        <div class="movie-items2">
 			                        	<div id="movie-items-pics">
 			                            	<img src="/assets/no_image.gif" class="img-rounded">             
@@ -39,30 +62,44 @@
 				                        <div id="movie-items-info-tiny">
 					                        <p style="font-weight:bold;"><%=movie['title']%></p>
 				                        </div>
-			                        </div>                         
-			                    <%end%>                 		
+			                        </div>     
+			                    </a>                    
 	                  		<%end%>    
 	                  	</div>    				
         			<%end%><!--imloop-->
 
 
 					<% @rm['movies'].each do |movie| %> 
+						<%@trailer="http://www.youtube.com/embed/" +movie['youtube_trailer'] +"?feature=player_detailpage"%>
+
 						<div class="movie-items1">
 							<% if(movie['photos'].length >0) %>
 	                    	<%photo = movie['photos'].first%> 
 	                    		<%if photo['poster']==true%>
-			                        <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid => movie['id'] do%>
-										<div class="movie-items2">
+	                    			<a href="#modal_trailer" data-toggle="modal">
+
+			                        	<div class="movie-items2">
 											<div id="movie-items-pics">
+											
 				                            	<img src="<%=photo['url']%>" class="img-rounded">
-				                            </div>
+				                        	</div>
 				                            <div id="movie-items-info-tiny">
 					                            <p style="font-weight:bold;"><%=movie['title']%></p>
 				                            </div>
 			                            </div>
-			                        <%end%>
+			                        </a>
+				                    <div id="modal_trailer" class="modal fade hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					                	<div id="modal-header" class="modal-header">
+	    									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	    									<h1 class="title">
+	    										<%=@rm['title']%>
+	    									</h1>
+	    								</div>
+	    								<div id="modal-body" class="modal-body">
+					               		</div>
+					                </div>
 			                    <%else%>
-			                        <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid => movie['id'] do%>
+	                    			<a href="#modal_trailer" data-toggle="modal">
 			                            <div class="movie-items2">
 			                        		<div id="movie-items-pics">
 			                              		<img src="/assets/no_image.gif" class="img-rounded">       
@@ -70,11 +107,22 @@
 				                            <div id="movie-items-info-tiny">
 					                            <p style="font-weight:bold;"><%=movie['title']%></p>
 			                              	</div>
-			                            </div>    
-			                        <%end%>
+			                            </div> 
+			                       	</a>
+			                       	<div id="modal_trailer" class="modal fade hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					                	<div id="modal-header" class="modal-header">
+	    									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	    									<h1 class="title">
+	    										<%=@rm['title']%>
+	    									</h1>
+	    								</div>
+	    								<div id="modal-body" class="modal-body">
+					                		
+					               		</div>
+					                </div>                                    
 			                    <%end%>
 	                  		<%elsif movie['photos'].length==0%>
-	                     		<%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid => movie['id'] do%>
+	                    		<a href="#modal_trailer" data-toggle="modal">
 			                        <div class="movie-items2">
 			                        	<div id="movie-items-pics">
 			                            	<img src="/assets/no_image.gif" class="img-rounded">             
@@ -82,9 +130,9 @@
 				                        <div id="movie-items-info-tiny">
 					                        <p style="font-weight:bold;"><%=movie['title']%></p>
 				                        </div>
-			                        </div>                           
-			                    <%end%>    
-			                <%end%> 
+			                        </div>     
+			                    </a>                    
+	                  		<%end%>    
 	                  	</div>    				
         			<%end%><!--rmloop-->
 
@@ -93,18 +141,30 @@
 							<% if(movie['photos'].length >0) %>
 	                    	<%photo = movie['photos'].first%> 
 	                    		<%if photo['poster']==true%>
-			                        <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid => movie['id'] do%>
-			                            <div class="movie-items2">
+	                    			<a href="#modal_trailer" data-toggle="modal">
+			                        	<div class="movie-items2">
 											<div id="movie-items-pics">
+											
 				                            	<img src="<%=photo['url']%>" class="img-rounded">
-				                            </div>
+				                        	</div>
 				                            <div id="movie-items-info-tiny">
 					                            <p style="font-weight:bold;"><%=movie['title']%></p>
 				                            </div>
 			                            </div>
-			                        <%end%>
+			                        </a>
+				                    <div id="modal_trailer" class="modal fade hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					                	<div id="modal-header" class="modal-header">
+	    									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	    									<h1 class="title">
+	    										<%=@rm['title']%>
+	    									</h1>
+	    								</div>
+	    								<div id="modal-body" class="modal-body">
+					                		
+					               		</div>
+					                </div>
 			                    <%else%>
-			                        <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid => movie['id'] do%>
+	                    			<a href="#modal_trailer" data-toggle="modal">
 			                            <div class="movie-items2">
 			                        		<div id="movie-items-pics">
 			                              		<img src="/assets/no_image.gif" class="img-rounded">       
@@ -112,11 +172,22 @@
 				                            <div id="movie-items-info-tiny">
 					                            <p style="font-weight:bold;"><%=movie['title']%></p>
 			                              	</div>
-			                            </div>    
-			                        <%end%>
-			                      <%end%>
+			                            </div> 
+			                       	</a>
+			                       	<div id="modal_trailer" class="modal fade hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					                	<div id="modal-header" class="modal-header">
+	    									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	    									<h1 class="title">
+	    										<%=@rm['title']%>
+	    									</h1>
+	    								</div>
+	    								<div id="modal-body" class="modal-body">
+					                		
+					               		</div>
+					                </div>                                    
+			                    <%end%>
 	                  		<%elsif movie['photos'].length==0%>
-	                     		<%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid => movie['id'] do%>
+	                    		<a href="#modal_trailer" data-toggle="modal">
 			                        <div class="movie-items2">
 			                        	<div id="movie-items-pics">
 			                            	<img src="/assets/no_image.gif" class="img-rounded">             
@@ -124,8 +195,8 @@
 				                        <div id="movie-items-info-tiny">
 					                        <p style="font-weight:bold;"><%=movie['title']%></p>
 				                        </div>
-			                        </div>                          
-			                    <%end%> 
+			                        </div>     
+			                    </a>                    
 	                  		<%end%>    
 	                  	</div>    				
         			<%end%><!--nimloop-->
@@ -133,3 +204,16 @@
 			</div>
 		</div><!--movies-->
 	</div><!--home-content-->
+
+
+
+
+<script>
+$('#modal_trailer').on('show', function () {
+  $('div.modal-body').html('<iframe id="trailer" width="480" height="360" src="<%=@trailer%>" frameborder="0" >allowfullscreen </iframe>');  
+});
+$('#modal_trailer').on('hide', function () {
+  $('div.modal-body').html('');  
+
+});
+</script>
