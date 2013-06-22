@@ -363,7 +363,7 @@ body {
   }
 }
 
-#home-content {
+#home-content,#trailer-content {
   margin: 35px 0px 0 0px;  
   width: 960px;
   h1 {
@@ -534,19 +534,22 @@ body {
   }
 }
 
-.movie-items3{
-  float: right;
+.movie-trailer1{
+  float: left;
   padding: 0px;
   margin: 0px;
   border: 1px solid #fff;
   border-radius: 3px;
   display: block;
-  width: auto;
-  height: 275px;
+  width: 147px;
+  height: 330px;
   overflow: hidden;
   position: relative;
   text-shadow: 0 1px 0 #fff;
-  text-align: center;
+  .modal {
+    left: 33.33%;
+    width: auto;
+  }
   h3 {
     color: #333;
     margin: 0;
@@ -556,10 +559,38 @@ body {
   a {
     color: black;
   }
-  img {
-    width: 150px;
+}
+
+.movie-trailer2:hover {
+  opacity: 0.9;
+  position: absolute;
+}
+
+.restrict {
+  background-image: url('/assets/restrict.gif');
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.movie-trailer2 {
+  float: left;
+  padding: 5px 0 0 0;
+  margin: 0px;
+  border: 1px solid #fff;
+  border-radius: 3px;
+  width: 143px;
+  height: 300px;
+  overflow: hidden;
+  position: relative;
+  text-shadow: 0 1px 0 #fff;
+  text-align: center;
+    img {
+    width: 135px;
     height: 210px;
-  }
+    border: 1px solid #fff;
+    border-radius: 3px;
+   }
 }
 
 .watched-lists1 {

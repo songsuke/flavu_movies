@@ -1,17 +1,19 @@
-<div id="home-content">
+<div id="trailer-content">
 		<div id="movies">
-			<h1 class="title"> Movies </h1>
+			<h1 class="title"> Trailers </h1>
 			<div id="nowshowing">
 				<div class="group">
 					<% @im['movies'].each do |movie| %> 
-						<div class="movie-items1">
+						<div class="movie-trailer1">
 							<% if(movie['photos'].length >0) %>
-	                    	<%photo = movie['photos'].first%> 
-	                    		<%if photo['poster']==true%>
-	                    			<a href="#modal_trailer" data-toggle="modal">
-			                        	<div class="movie-items2">
+	                    		<%photo = movie['photos'].first%> 
+	                    		<%if photo['poster']==true%>	            
+									<%@x="http://www.youtube.com/embed/" +movie['youtube_trailer']+"?feature=player_detailpage"%>
+	                    			<%if movie['youtube_trailer']==""%>
+	                    			<a id="bcd" href="#" style="cursor: default; pointer-events: none;">
+			                        	<div class="movie-trailer2">
 											<div id="movie-items-pics">
-											
+											<span class="restrict"></span>
 				                            	<img src="<%=photo['url']%>" class="img-rounded">
 				                        	</div>
 				                            <div id="movie-items-info-tiny">
@@ -19,34 +21,61 @@
 				                            </div>
 			                            </div>
 			                        </a>
+			                        <%else%>
+	                    			<a href="#modal_trailer" data-toggle="modal" data-backdrop="false" onclick=show_trailer("<%=@x%>")>
+			                        	<div class="movie-trailer2">
+											<div id="movie-items-pics">
+				                            	<img src="<%=photo['url']%>" class="img-rounded">
+				                        	</div>
+				                            <div id="movie-items-info-tiny">
+					                            <p style="font-weight:bold;"><%=movie['title']%></p>
+				                            </div>
+			                            </div>
+			                        </a>
+			                   		<%end%>
 				                    <div id="modal_trailer" class="modal fade hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 					                	<div id="modal-header" class="modal-header">
 	    									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-	    									<h1 class="title">
-	    										<%=@rm['title']%>
-	    									</h1>
+	    									<!--<h1 class="title">
+	    										<%=movie['title']%>
+	    									</h1>-->
 	    								</div>
 	    								<div id="modal-body" class="modal-body">
 					                		
 					               		</div>
 					                </div>
 			                    <%else%>
-	                    			<a href="#modal_trailer" data-toggle="modal">
-			                            <div class="movie-items2">
-			                        		<div id="movie-items-pics">
-			                              		<img src="/assets/no_image.gif" class="img-rounded">       
-											</div>
+									<%@x="http://www.youtube.com/embed/" +movie['youtube_trailer']+"?feature=player_detailpage"%>
+	                    			<%if movie['youtube_trailer']==""%>
+	                    			<a id="bcd" href="#" style="cursor: default; pointer-events: none;">
+			                        	<div class="movie-trailer2">
+											<div id="movie-items-pics">
+											<span class="restrict"></span>
+				                            	<img src="/assets/no_image.gif" class="img-rounded">
+				                        	</div>
 				                            <div id="movie-items-info-tiny">
 					                            <p style="font-weight:bold;"><%=movie['title']%></p>
-			                              	</div>
-			                            </div> 
-			                       	</a>
+				                            </div>
+			                            </div>
+			                        </a>
+			                        <%else%>
+	                    			<a href="#modal_trailer" data-toggle="modal" data-backdrop="false" onclick=show_trailer("<%=@x%>")>
+			                        	<div class="movie-trailer2">
+											<div id="movie-items-pics">
+				                            	<img src="/assets/no_image.gif" class="img-rounded">
+				                        	</div>
+				                            <div id="movie-items-info-tiny">
+					                            <p style="font-weight:bold;"><%=movie['title']%></p>
+				                            </div>
+			                            </div>
+			                        </a>
+			                   		<%end%>
 			                       	<div id="modal_trailer" class="modal fade hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 					                	<div id="modal-header" class="modal-header">
 	    									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-	    									<h1 class="title">
-	    										<%=@rm['title']%>
-	    									</h1>
+	    									<!--<h1 class="title">
+	    										<%=movie['title']%>
+	    									</h1>-->
 	    								</div>
 	    								<div id="modal-body" class="modal-body">
 					                		
@@ -54,33 +83,47 @@
 					                </div>                                    
 			                    <%end%>
 	                  		<%elsif movie['photos'].length==0%>
-	                    		<a href="#modal_trailer" data-toggle="modal">
-			                        <div class="movie-items2">
-			                        	<div id="movie-items-pics">
-			                            	<img src="/assets/no_image.gif" class="img-rounded">             
-			                       		</div>
-				                        <div id="movie-items-info-tiny">
-					                        <p style="font-weight:bold;"><%=movie['title']%></p>
-				                        </div>
-			                        </div>     
-			                    </a>                    
+	                    		<%@x="http://www.youtube.com/embed/" +movie['youtube_trailer']+"?feature=player_detailpage"%>
+	                    		<%if movie['youtube_trailer']==""%>
+	                    			<a id="bcd" href="#" style="cursor: default; pointer-events: none;">
+			                        	<div class="movie-trailer2">
+											<div id="movie-items-pics">
+											<span class="restrict"></span>
+				                            	<img src="/assets/no_image.gif" class="img-rounded">
+				                        	</div>
+				                            <div id="movie-items-info-tiny">
+					                            <p style="font-weight:bold;"><%=movie['title']%></p>
+				                            </div>
+			                            </div>
+			                        </a>
+			                        <%else%>
+	                    			<a href="#modal_trailer" data-toggle="modal" data-backdrop="false" onclick=show_trailer("<%=@x%>")>
+			                        	<div class="movie-trailer2">
+											<div id="movie-items-pics">
+				                            	<img src="/assets/no_image.gif" class="img-rounded">
+				                        	</div>
+				                            <div id="movie-items-info-tiny">
+					                            <p style="font-weight:bold;"><%=movie['title']%></p>
+				                            </div>
+			                            </div>
+			                        </a>
+			                   		<%end%>                  
 	                  		<%end%>    
 	                  	</div>    				
         			<%end%><!--imloop-->
 
 
 					<% @rm['movies'].each do |movie| %> 
-						<%@trailer="http://www.youtube.com/embed/" +movie['youtube_trailer'] +"?feature=player_detailpage"%>
-
-						<div class="movie-items1">
+						<div class="movie-trailer1">
 							<% if(movie['photos'].length >0) %>
 	                    	<%photo = movie['photos'].first%> 
 	                    		<%if photo['poster']==true%>
-	                    			<a href="#modal_trailer" data-toggle="modal">
-
-			                        	<div class="movie-items2">
+	                    			<%@x="http://www.youtube.com/embed/" +movie['youtube_trailer']+"?feature=player_detailpage"%>
+	                    			<%if movie['youtube_trailer']==""%>
+	                    			<a id="bcd" href="#" style="cursor: default; pointer-events: none;">
+			                        	<div class="movie-trailer2">
 											<div id="movie-items-pics">
-											
+											<span class="restrict"></span>
 				                            	<img src="<%=photo['url']%>" class="img-rounded">
 				                        	</div>
 				                            <div id="movie-items-info-tiny">
@@ -88,33 +131,61 @@
 				                            </div>
 			                            </div>
 			                        </a>
+			                        <%else%>
+	                    			<a href="#modal_trailer" data-toggle="modal" data-backdrop="false" onclick=show_trailer("<%=@x%>")>
+			                        	<div class="movie-trailer2">
+											<div id="movie-items-pics">
+				                            	<img src="<%=photo['url']%>" class="img-rounded">
+				                        	</div>
+				                            <div id="movie-items-info-tiny">
+					                            <p style="font-weight:bold;"><%=movie['title']%></p>
+				                            </div>
+			                            </div>
+			                        </a>
+			                   		<%end%>
+
 				                    <div id="modal_trailer" class="modal fade hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 					                	<div id="modal-header" class="modal-header">
 	    									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-	    									<h1 class="title">
-	    										<%=@rm['title']%>
-	    									</h1>
+	    									<!--<h1 class="title">
+	    										<%=movie['title']%>
+	    									</h1>-->
 	    								</div>
 	    								<div id="modal-body" class="modal-body">
 					               		</div>
 					                </div>
 			                    <%else%>
-	                    			<a href="#modal_trailer" data-toggle="modal">
-			                            <div class="movie-items2">
-			                        		<div id="movie-items-pics">
-			                              		<img src="/assets/no_image.gif" class="img-rounded">       
-											</div>
+	                    			<%@x="http://www.youtube.com/embed/" +movie['youtube_trailer']+"?feature=player_detailpage"%>
+	                    			<%if movie['youtube_trailer']==""%>
+	                    			<a id="bcd" href="#" style="cursor: default; pointer-events: none;">
+			                        	<div class="movie-trailer2">
+											<div id="movie-items-pics">
+											<span class="restrict"></span>
+				                            	<img src="/assets/no_image.gif" class="img-rounded">
+				                        	</div>
 				                            <div id="movie-items-info-tiny">
 					                            <p style="font-weight:bold;"><%=movie['title']%></p>
-			                              	</div>
-			                            </div> 
-			                       	</a>
+				                            </div>
+			                            </div>
+			                        </a>
+			                        <%else%>
+	                    			<a href="#modal_trailer" data-toggle="modal" data-backdrop="false" onclick=show_trailer("<%=@x%>")>
+			                        	<div class="movie-trailer2">
+											<div id="movie-items-pics">
+				                            	<img src="/assets/no_image.gif" class="img-rounded">
+				                        	</div>
+				                            <div id="movie-items-info-tiny">
+					                            <p style="font-weight:bold;"><%=movie['title']%></p>
+				                            </div>
+			                            </div>
+			                        </a>
+			                   		<%end%>
 			                       	<div id="modal_trailer" class="modal fade hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 					                	<div id="modal-header" class="modal-header">
 	    									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-	    									<h1 class="title">
-	    										<%=@rm['title']%>
-	    									</h1>
+	    									<!--<h1 class="title">
+	    										<%=movie['title']%>
+	    									</h1>-->
 	    								</div>
 	    								<div id="modal-body" class="modal-body">
 					                		
@@ -122,29 +193,46 @@
 					                </div>                                    
 			                    <%end%>
 	                  		<%elsif movie['photos'].length==0%>
-	                    		<a href="#modal_trailer" data-toggle="modal">
-			                        <div class="movie-items2">
-			                        	<div id="movie-items-pics">
-			                            	<img src="/assets/no_image.gif" class="img-rounded">             
-			                       		</div>
-				                        <div id="movie-items-info-tiny">
-					                        <p style="font-weight:bold;"><%=movie['title']%></p>
-				                        </div>
-			                        </div>     
-			                    </a>                    
+	                    		<%@x="http://www.youtube.com/embed/" +movie['youtube_trailer']+"?feature=player_detailpage"%>
+	                    		<%if movie['youtube_trailer']==""%>
+	                    			<a id="bcd" href="#" style="cursor: default; pointer-events: none;">
+			                        	<div class="movie-trailer2">
+											<div id="movie-items-pics">
+											<span class="restrict"></span>
+				                            	<img src="/assets/no_image.gif" class="img-rounded">
+				                        	</div>
+				                            <div id="movie-items-info-tiny">
+					                            <p style="font-weight:bold;"><%=movie['title']%></p>
+				                            </div>
+			                            </div>
+			                        </a>
+			                        <%else%>
+	                    			<a href="#modal_trailer" data-toggle="modal" data-backdrop="false" onclick=show_trailer("<%=@x%>")>
+			                        	<div class="movie-trailer2">
+											<div id="movie-items-pics">
+				                            	<img src="/assets/no_image.gif" class="img-rounded">
+				                        	</div>
+				                            <div id="movie-items-info-tiny">
+					                            <p style="font-weight:bold;"><%=movie['title']%></p>
+				                            </div>
+			                            </div>
+			                        </a>
+			                   		<%end%>                
 	                  		<%end%>    
 	                  	</div>    				
         			<%end%><!--rmloop-->
 
         			<% @nim['movies'].each do |movie| %> 
-						<div class="movie-items1">
+						<div class="movie-trailer1">
 							<% if(movie['photos'].length >0) %>
 	                    	<%photo = movie['photos'].first%> 
 	                    		<%if photo['poster']==true%>
-	                    			<a href="#modal_trailer" data-toggle="modal">
-			                        	<div class="movie-items2">
+	                    			<%@x="http://www.youtube.com/embed/" +movie['youtube_trailer']+"?feature=player_detailpage"%>
+	                    			<%if movie['youtube_trailer']==""%>
+	                    			<a id="bcd" href="#" style="cursor: default; pointer-events: none;">
+			                        	<div class="movie-trailer2">
 											<div id="movie-items-pics">
-											
+											<span class="restrict"></span>
 				                            	<img src="<%=photo['url']%>" class="img-rounded">
 				                        	</div>
 				                            <div id="movie-items-info-tiny">
@@ -152,34 +240,61 @@
 				                            </div>
 			                            </div>
 			                        </a>
+			                        <%else%>
+	                    			<a href="#modal_trailer" data-toggle="modal" data-backdrop="false" onclick=show_trailer("<%=@x%>")>
+			                        	<div class="movie-trailer2">
+											<div id="movie-items-pics">
+				                            	<img src="<%=photo['url']%>" class="img-rounded">
+				                        	</div>
+				                            <div id="movie-items-info-tiny">
+					                            <p style="font-weight:bold;"><%=movie['title']%></p>
+				                            </div>
+			                            </div>
+			                        </a>
+			                   		<%end%>
 				                    <div id="modal_trailer" class="modal fade hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 					                	<div id="modal-header" class="modal-header">
 	    									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-	    									<h1 class="title">
-	    										<%=@rm['title']%>
-	    									</h1>
+	    									<!--<h1 class="title">
+	    										<%=movie['title']%>
+	    									</h1>-->
 	    								</div>
 	    								<div id="modal-body" class="modal-body">
 					                		
 					               		</div>
 					                </div>
 			                    <%else%>
-	                    			<a href="#modal_trailer" data-toggle="modal">
-			                            <div class="movie-items2">
-			                        		<div id="movie-items-pics">
-			                              		<img src="/assets/no_image.gif" class="img-rounded">       
-											</div>
+	                    			<%@x="http://www.youtube.com/embed/" +movie['youtube_trailer']+"?feature=player_detailpage"%>
+	                    			<%if movie['youtube_trailer']==""%>
+	                    			<a id="bcd" href="#" style="cursor: default; pointer-events: none;">
+			                        	<div class="movie-trailer2">
+											<div id="movie-items-pics">
+											<span class="restrict"></span>
+				                            	<img src="/assets/no_image.gif" class="img-rounded">
+				                        	</div>
 				                            <div id="movie-items-info-tiny">
 					                            <p style="font-weight:bold;"><%=movie['title']%></p>
-			                              	</div>
-			                            </div> 
-			                       	</a>
+				                            </div>
+			                            </div>
+			                        </a>
+			                        <%else%>
+	                    			<a href="#modal_trailer" data-toggle="modal" data-backdrop="false" onclick=show_trailer("<%=@x%>")>
+			                        	<div class="movie-trailer2">
+											<div id="movie-items-pics">
+				                            	<img src="<%=photo['url']%>" class="img-rounded">
+				                        	</div>
+				                            <div id="movie-items-info-tiny">
+					                            <p style="font-weight:bold;"><%=movie['title']%></p>
+				                            </div>
+			                            </div>
+			                        </a>
+			                   		<%end%>
 			                       	<div id="modal_trailer" class="modal fade hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 					                	<div id="modal-header" class="modal-header">
 	    									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-	    									<h1 class="title">
-	    										<%=@rm['title']%>
-	    									</h1>
+	    									<!--<h1 class="title">
+	    										<%=movie['title']%>
+	    									</h1>-->
 	    								</div>
 	    								<div id="modal-body" class="modal-body">
 					                		
@@ -187,16 +302,31 @@
 					                </div>                                    
 			                    <%end%>
 	                  		<%elsif movie['photos'].length==0%>
-	                    		<a href="#modal_trailer" data-toggle="modal">
-			                        <div class="movie-items2">
-			                        	<div id="movie-items-pics">
-			                            	<img src="/assets/no_image.gif" class="img-rounded">             
-			                       		</div>
-				                        <div id="movie-items-info-tiny">
-					                        <p style="font-weight:bold;"><%=movie['title']%></p>
-				                        </div>
-			                        </div>     
-			                    </a>                    
+	                    		<%@x="http://www.youtube.com/embed/" +movie['youtube_trailer']+"?feature=player_detailpage"%>
+	                    		<%if movie['youtube_trailer']==""%>
+	                    			<a id="bcd" href="#" style="cursor: default; pointer-events: none;">
+			                        	<div class="movie-trailer2">
+											<div id="movie-items-pics">
+											<span class="restrict"></span>
+				                            	<img src="/assets/no_image.gif" class="img-rounded">
+				                        	</div>
+				                            <div id="movie-items-info-tiny">
+					                            <p style="font-weight:bold;"><%=movie['title']%></p>
+				                            </div>
+			                            </div>
+			                        </a>
+			                        <%else%>
+	                    			<a href="#modal_trailer" data-toggle="modal" data-backdrop="false" onclick=show_trailer("<%=@x%>")>
+			                        	<div class="movie-trailer2">
+											<div id="movie-items-pics">
+				                            	<img src="/assets/no_image.gif" class="img-rounded">
+				                        	</div>
+				                            <div id="movie-items-info-tiny">
+					                            <p style="font-weight:bold;"><%=movie['title']%></p>
+				                            </div>
+			                            </div>
+			                        </a>
+			                   		<%end%>                    
 	                  		<%end%>    
 	                  	</div>    				
         			<%end%><!--nimloop-->
@@ -205,15 +335,20 @@
 		</div><!--movies-->
 	</div><!--home-content-->
 
-
-
-
 <script>
-$('#modal_trailer').on('show', function () {
-  $('div.modal-body').html('<iframe id="trailer" width="480" height="360" src="<%=@trailer%>" frameborder="0" >allowfullscreen </iframe>');  
-});
-$('#modal_trailer').on('hide', function () {
-  $('div.modal-body').html('');  
-
-});
+	function show_trailer(a){
+		$('#modal_trailer').on('show', function (){
+		  	$('div.modal-body').html('<iframe id="trailer" width="960" height="480" src="'+a+'" frameborder="0" >allowfullscreen </iframe>');  
+			});
+		$('#modal_trailer').on('hide', function (){
+		  	$('div.modal-body').html('');  
+		});
+};
 </script>
+
+<script type="text/javascript">
+$(function() {
+    $("#bcd").click(function() {
+        alert("Unfortunately, there is no trailer for this movie now.");
+    });
+});</script>
