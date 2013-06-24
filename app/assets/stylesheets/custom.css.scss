@@ -2120,6 +2120,7 @@ div.hidden{
     background-color: white;
     margin: 5px 0 10px 0;
     padding: 5px 0 5px 0;
+    overflow: hidden;
   }
   #nowshowing1 {
     #myTabContent {
@@ -2509,6 +2510,49 @@ div.hidden{
       display: block;
     }
   }
+  .movie-trailer1 {
+    float: left;
+    padding: 0px;
+    margin: 5px;
+    border-radius: 3px;
+    display: block;
+    width: 100px;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    text-shadow: 0 1px 0 #fff;
+    text-align: center;
+    list-style: none;
+    a {
+      color: black;
+    }
+    img {
+      height: 150px;
+      width: 80px;
+    }
+    .restrict {
+      background-image: url('/assets/restrict.gif');
+      position: absolute;
+      display: block;
+      width: auto;
+      height: auto;
+    }
+    .modal-body {
+      position: relative;
+      overflow-y: auto;
+      width: auto;
+      height: auto;
+      max-height: 400px;
+      padding: 15px 0 0 0;
+      iframe {
+        width: 100%;
+        height: auto;
+      }
+    }
+    .modal-header {
+      overflow: hidden;
+    }
+  }
 }
 
 
@@ -2678,6 +2722,7 @@ div.hidden{
     background-color: white;
     margin: 5px 0 10px 0;
     padding: 5px 0 5px 0;
+    overflow: hidden;
   }
   #nowshowing1 {
     #myTabContent {
@@ -3066,6 +3111,50 @@ div.hidden{
     }
     .active {
       display: block;
+    }
+  }
+
+  .movie-trailer1 {
+    float: left;
+    padding: 0px;
+    margin: 5px;
+    border-radius: 3px;
+    display: block;
+    width: 70px;
+    height: 150px;
+    overflow: hidden;
+    position: relative;
+    text-shadow: 0 1px 0 #fff;
+    text-align: center;
+    list-style: none;
+    a {
+      color: black;
+    }
+    img {
+      height: 90px;
+      width: 55px;
+    }
+    .restrict {
+      background-image: url('/assets/restrict.gif');
+      position: absolute;
+      display: block;
+      width: auto;
+      height: auto;
+    }
+    .modal-body {
+      position: relative;
+      overflow-y: auto;
+      width: auto;
+      height: auto;
+      max-height: 400px;
+      padding: 15px 0 0 0;
+      iframe {
+        width: 100%;
+        height: auto;
+      }
+    }
+    .modal-header {
+      overflow: hidden;
     }
   }
 }
