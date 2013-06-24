@@ -2114,18 +2114,18 @@ div.hidden{
       margin:0;
         li {
         float: none;
-        line-height: 23px;
-          .caret {
-            margin-top: 11px;
-          }
+        line-height: 40px;
+        .caret {
+          margin-top: 20px;
+        }
         a.brand {
           font-size: 22px;
         }
         a {
-          display: block;
+          display: inline;
           float: none;
           font-size: 15px;
-          padding: 10px 15px 10px;
+          padding: 5px 10px;
           color: #777777;
           text-decoration: none;
           text-shadow: 0 1px 0 #ffffff;
