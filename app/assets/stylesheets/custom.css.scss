@@ -307,6 +307,7 @@ body {
     }
     a.active {
       background:#C4C4C4 url('/assets/cellshade.png') repeat-x;
+      border-radius: 3px;
     }
   }
 }
@@ -1555,6 +1556,27 @@ div.hidden{
 
   #slider {
     margin-top: 10px;
+    height: 230px;
+    .carousel-indicators {
+      right: initial;
+      top: 100%;
+      left: 30%;
+      position: absolute;
+      a {
+        background: #C80909 url('/assets/cellshade.png') repeat-x;
+        color: white;
+        display: block;
+        font: 11px/18px Arial, Sans;
+        display: inline;
+        padding: 2px 6px;
+        margin: 0 5px 10px 0;
+        border-radius: 3px;
+      }
+      a.active {
+        background:#C4C4C4 url('/assets/cellshade.png') repeat-x;
+        border-radius: 3px;
+      }
+    }
     .carousel-inner > .item > img {
       height: auto;
     }
@@ -2000,6 +2022,9 @@ div.hidden{
       overflow: hidden;
     }
   }
+  #home-content {
+    margin-top: 25px;
+  }
 }
 
 
@@ -2162,6 +2187,27 @@ div.hidden{
 
   #slider {
     margin-top: 10px;
+    height: 110px;
+    .carousel-indicators {
+      right: initial;
+      top: 100%;
+      left: 25%;
+      position: absolute;
+      a {
+        background: #C80909 url('/assets/cellshade.png') repeat-x;
+        color: white;
+        display: block;
+        font: 11px/18px Arial, Sans;
+        display: inline;
+        padding: 2px 6px;
+        margin: 0 5px 10px 0;
+        border-radius: 3px;
+      }
+      a.active {
+        background:#C4C4C4 url('/assets/cellshade.png') repeat-x;
+        border-radius: 3px;
+      }
+    }
     .carousel-inner > .item > img {
       height: auto;
     }
@@ -2606,6 +2652,9 @@ div.hidden{
       overflow: hidden;
     }
   }
+  #home-content {
+    margin-top: 25px;
+  }
 }
 
 
@@ -2768,6 +2817,27 @@ div.hidden{
 
   #slider {
     margin-top: 10px;
+    height: 110px;
+    .carousel-indicators {
+      right: initial;
+      top: 100%;
+      left: 25%;
+      position: absolute;
+      a {
+        background: #C80909 url('/assets/cellshade.png') repeat-x;
+        color: white;
+        display: block;
+        font: 11px/18px Arial, Sans;
+        display: inline;
+        padding: 2px 6px;
+        margin: 0 5px 10px 0;
+        border-radius: 3px;
+      }
+      a.active {
+        background:#C4C4C4 url('/assets/cellshade.png') repeat-x;
+        border-radius: 3px;
+      }
+    }
     .carousel-inner > .item > img {
       height: auto;
     }
@@ -3213,5 +3283,8 @@ div.hidden{
     .modal-header {
       overflow: hidden;
     }
+  }
+  #home-content {
+    margin-top: 25px;
   }
 }
