@@ -505,14 +505,13 @@ body {
     width: 135px;
     height: 210px;
     border: 1px solid #fff;
-    border-radius: 3px;
   }
 }
 
 .movie-items2:hover {
   background-color: #ddd;
   border: 1px solid #ccc;
-  border-radius: 3px;
+  border-radius: 6px;
 }
 
 .movie-items2 {
@@ -532,7 +531,6 @@ body {
     width: 135px;
     height: 210px;
     border: 1px solid #fff;
-    border-radius: 3px;
   }
 }
 
@@ -591,7 +589,6 @@ body {
     width: 135px;
     height: 210px;
     border: 1px solid #fff;
-    border-radius: 3px;
    }
 }
 
@@ -780,6 +777,7 @@ div.hidden{
   padding: 9px 15px;
   border-bottom: 1px solid #eee;
   width: auto;
+  overflow: hidden;
 }
 #modal-body {
   position: relative;
