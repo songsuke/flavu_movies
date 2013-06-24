@@ -2513,7 +2513,7 @@ div.hidden{
   .movie-trailer1 {
     float: left;
     padding: 0px;
-    margin: 5px;
+    margin: 5px 0 5px 5px;
     border-radius: 3px;
     display: block;
     width: 100px;
@@ -2528,7 +2528,7 @@ div.hidden{
     }
     img {
       height: 150px;
-      width: 80px;
+      width: 90px;
     }
     .restrict {
       background-image: url('/assets/restrict.gif');
@@ -3117,7 +3117,7 @@ div.hidden{
   .movie-trailer1 {
     float: left;
     padding: 0px;
-    margin: 5px 0 5px 5px;
+    margin: 5px;
     border-radius: 3px;
     display: block;
     width: 70px;
@@ -3131,7 +3131,7 @@ div.hidden{
       color: black;
     }
     img {
-      height: 80px;
+      height: 90px;
       width: 55px;
     }
     .restrict {
