@@ -1951,6 +1951,49 @@ div.hidden{
       display: block;
     }
   }
+  .movie-trailer1 {
+    float: left;
+    padding: 0px;
+    margin: 5px 0 5px 5px;
+    border-radius: 3px;
+    display: block;
+    width: 100px;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    text-shadow: 0 1px 0 #fff;
+    text-align: center;
+    list-style: none;
+    a {
+      color: black;
+    }
+    img {
+      height: 150px;
+      width: 90px;
+    }
+    .restrict {
+      background-image: url('/assets/restrict.gif');
+      position: absolute;
+      display: block;
+      width: auto;
+      height: auto;
+    }
+    .modal-body {
+      position: relative;
+      overflow-y: auto;
+      width: auto;
+      height: auto;
+      max-height: 400px;
+      padding: 15px 0 0 0;
+      iframe {
+        width: 100%;
+        height: auto;
+      }
+    }
+    .modal-header {
+      overflow: hidden;
+    }
+  }
 }
 
 
