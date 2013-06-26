@@ -1,7 +1,7 @@
 class StaticPagesController < ApplicationController
 require 'httparty'
 require 'open-uri'
-before_filter :authenticate_user, :except => [:signin, :register]
+before_filter :authenticate_user, :except => [:signin, :register, :facebook]
 
   def signin
     if params[:confirm] !="confirm"
@@ -1624,5 +1624,19 @@ request.remote_ip
 
     end
   end
+
+  def facebook
+      token = env["omniauth.auth"]["credentials"]["token"]
+      
+        @user = HTTParty.post("https://flavumovies.herokuapp.com/other_logins/facebook.json", body: {access_token: token}).parsed_response
+      
+        cookies.permanent.signed[:auth] = @user["auth_token"]
+        cookies.permanent.signed[:username] = @user["username"]
+        cookies.permanent.signed[:user_id] = @user["id"]
+        cookies.permanent.signed[:user] = @user
+      
+    redirect_to home_path
+  end
+
 
 end

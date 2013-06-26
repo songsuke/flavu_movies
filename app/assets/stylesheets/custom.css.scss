@@ -217,6 +217,9 @@ body {
       li {
       float: left;
       line-height: 23px;
+      .caret {
+        margin-top: 11px;
+      }
       a {
         float: none;
         font-size: 15px;

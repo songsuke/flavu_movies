@@ -5,6 +5,7 @@ gem 'devise'
 gem 'therubyracer', :platforms => :ruby
 gem "rack-ssl", "~> 1.3.3"
 gem "rack-ssl-enforcer", "~> 0.2.5"
+gem "omniauth-facebook", "~> 1.4.1"
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 

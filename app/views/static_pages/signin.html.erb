@@ -31,14 +31,20 @@
           </div>  
         </div>
       <%end%>
-<%=form_tag '/cover' ,:class=>"form-horizontal" do %>
+    <%=form_tag '/cover' ,:class=>"form-horizontal" do %>
       <div class="control-group">
         <div class="controls">
             <p>or</p>
             <button class="btn" name="guest"  value="true"> Enter the website </button>
         </div>  
       </div>
-          <%end%>
+    <%end%>
+    <div class="control-group">
+        <div class="controls">
+            <p>or</p>
+            <%= link_to "Sign in with Facebook", "/auth/facebook" %>
+        </div>  
+      </div>
 
     </div>
   </div>
