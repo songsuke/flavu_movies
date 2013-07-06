@@ -19,9 +19,9 @@ EasilyxMovie::Application.routes.draw do
   match '/contact', to: 'static_pages#contact'
   match '/aboutus', to: 'static_pages#aboutus'
   match '/idevice', to: 'static_pages#idevice'
-match 'auth/:provider/callback', to: 'static_pages#facebook'
-  
-
+match '/auth/:provider/callback', to: 'static_pages#facebook'
+    match '/link_fb', to: 'static_pages#link_fb'
+match '/share', to: 'static_pages#share'
 
   #get "static_pages/signin"
   match '/signin', to: 'static_pages#signin'

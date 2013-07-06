@@ -1441,6 +1441,7 @@ request.remote_ip
           @token=cookies.signed[:auth]
           if params[:showid]#should be movies in theatres page
             @id_showmovie = params[:showid]
+            cookies.signed[:showmovie_id] = @id_showmovie
           end  
         end
         @movies =HTTParty.get(@url, body: {user: {auth_token: @token}, browser: "1"}).parsed_response
@@ -1450,6 +1451,7 @@ request.remote_ip
         end
         @sm=@movies['movie']
         @theatres_for_movie=@movies['movie']['theatres']
+        
     end
 
   end
@@ -1626,6 +1628,20 @@ request.remote_ip
   end
 
   def facebook
+    @token = request.env['omniauth.auth']['credentials']['token']
+    puts "token = #{@token}"
+    @facebook =HTTParty.post("https://flavumovies.herokuapp.com/social_accounts/facebook/sign_in.json", body: {access_token: @token}).parsed_response
+    cookies.permanent.signed[:facebook_auth]=@token
+    if @facebook['auth_token']
+      cookies.permanent.signed[:auth] = @facebook["auth_token"]
+      redirect_to home_path
+    else
+      flash[:error]=@facebook['error']
+      redirect_to signin_path
+    end
+    #@facebook_login = HTTParty.post("https://flavumovies.herokuapp.com/social_accounts/facebook/sign_in.json", body: {access_token: @token}).parsed_response
+
+=begin      
       token = env["omniauth.auth"]["credentials"]["token"]
       
         @user = HTTParty.post("https://flavumovies.herokuapp.com/other_logins/facebook.json", body: {access_token: token}).parsed_response
@@ -1636,7 +1652,33 @@ request.remote_ip
         cookies.permanent.signed[:user] = @user
       
     redirect_to home_path
+  
+=end
+
   end
 
+  def link_fb
+      @facebook =HTTParty.post("https://flavumovies.herokuapp.com/social_accounts/facebook/link.json", body: {access_token: cookies.signed[:facebook_auth], auth_token: cookies.signed[:auth]}).parsed_response
+      puts @facebook
+      redirect_to home_path
+  end
+
+   def share
+        puts cookies.signed[:facebook_auth]
+        @id=params[:showid]
+        @poster=params[:poster]
+        @synopsis=params[:synopsis]
+        @title_name=params[:title_name]
+        me = FbGraph::User.me(cookies.signed[:facebook_auth])
+        me.feed!(
+          :message => @title_name,
+          :picture => @poster,
+          :link => 'http://www.flavu.com/showmovie?showid='+@id,
+          :name => 'Flavu Movies',
+          :description => @synopsis
+        )
+
+        redirect_to :back            
+  end
 
 end

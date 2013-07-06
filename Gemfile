@@ -8,7 +8,7 @@ gem "rack-ssl-enforcer", "~> 0.2.5"
 gem "omniauth-facebook", "~> 1.4.1"
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-
+gem "fb_graph", "~> 2.7.6"
 gem "httparty", "~> 0.11.0"
 gem 'pg'
 # Gems used only for assets and not required

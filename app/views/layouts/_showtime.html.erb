@@ -12,6 +12,7 @@
 				</li>
 			</li>
 			<li><%= link_to "News" , news_path%></li>
+
 			<li><%= link_to "Showtimes" , showtimes_path%></li>
 			<li><%= link_to "Trailers" , trailers_path%></li>
 			<!--<li><%= link_to "Reviews" , reviews_path%></li>
@@ -81,7 +82,9 @@
 			<li class="dropdown">
 				<a id="drop1" class="brand dropdown-toggle" href="#" role="button" data-toggle="dropdown">Your Welcome <%=cookies.signed['username']%> <span class="caret"></span></a>
 				<ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-					<li id="dropdown1" role="presentation"><a role="menuitem" tabindex="-1" href="/signout">Sing Out</a></li>
+					<li id="dropdown1" role="presentation"><a role="menuitem" tabindex="-1" href="/signout">Sign Out</a></li>
+					<li id="dropdown1" role="presentation"><a role="menuitem" tabindex="-1" href="/link_fb">Link Facebook</a></li>
+					<li id="dropdown1" role="presentation"><a role="menuitem" tabindex="-1" href="/auth/facebook">Log in Facebook</a></li>
 				</ul>
 			</li>
 			<%end%>

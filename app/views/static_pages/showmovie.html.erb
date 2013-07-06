@@ -27,7 +27,12 @@
 				               		</div>
 				                </div>
 
-			                <%@poster=@photo['url']%>
+			                	<%@poster=@photo['url']%>
+			                </div>
+			                <div>
+			                	<%=link_to :action=>"share" , :controller=>"static_pages" , :showid => @sm['id'],:poster =>@photo['url'],:synopsis=>@sm['synopsis'],:title_name=> @sm['title'] do%>
+			                		Share
+			                	<%end%>
 			                </div>
 			            <%elsif(@sm['photos'].length ==0) %>
 			            	<%@photo = @sm['photos'].first%>
