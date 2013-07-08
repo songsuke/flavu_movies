@@ -1637,6 +1637,7 @@ request.remote_ip
       redirect_to home_path
     else
       flash[:error]=@facebook['error']
+
       redirect_to signin_path
     end
     #@facebook_login = HTTParty.post("https://flavumovies.herokuapp.com/social_accounts/facebook/sign_in.json", body: {access_token: @token}).parsed_response
@@ -1658,13 +1659,28 @@ request.remote_ip
   end
 
   def link_fb
-      @facebook =HTTParty.post("https://flavumovies.herokuapp.com/social_accounts/facebook/link.json", body: {access_token: cookies.signed[:facebook_auth], auth_token: cookies.signed[:auth]}).parsed_response
-      puts @facebook
-      redirect_to home_path
+      @facebook_link =HTTParty.post("https://flavumovies.herokuapp.com/social_accounts/facebook/link.json", body: {access_token: cookies.signed[:facebook_auth], auth_token: cookies.signed[:auth]}).parsed_response
+      @social_accounts=HTTParty.get("https://flavumovies.herokuapp.com/social_accounts.json", body: {auth_token: cookies.signed[:auth]}).parsed_response
+      puts @social_accounts
+      cookies.signed[:social_accounts]=@social_accounts['linked_accounts']
+      puts cookies.signed[:social_accounts]
+      #puts @facebook_link
+      redirect_to :back
   end
 
+  def unlink_fb
+      
+      @facebook_link =HTTParty.post("https://flavumovies.herokuapp.com/social_accounts/facebook/unlink.json", body: {auth_token: cookies.signed[:auth]}).parsed_response
+      @social_accounts=HTTParty.get("https://flavumovies.herokuapp.com/social_accounts.json", body: {auth_token: cookies.signed[:auth]}).parsed_response
+      cookies.signed[:social_accounts]=@social_accounts['linked_accounts']
+      puts cookies.signed[:social_accounts]
+      #puts @facebook_link['response']
+      redirect_to :back
+    end
+
    def share
-        puts cookies.signed[:facebook_auth]
+        #puts cookies.signed[:facebook_auth]
+        #puts "text=#{params[:text]}"
         @id=params[:showid]
         @poster=params[:poster]
         @synopsis=params[:synopsis]

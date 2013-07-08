@@ -21,6 +21,8 @@ EasilyxMovie::Application.routes.draw do
   match '/idevice', to: 'static_pages#idevice'
 match '/auth/:provider/callback', to: 'static_pages#facebook'
     match '/link_fb', to: 'static_pages#link_fb'
+        match '/unlink_fb', to: 'static_pages#unlink_fb'
+
 match '/share', to: 'static_pages#share'
 
   #get "static_pages/signin"

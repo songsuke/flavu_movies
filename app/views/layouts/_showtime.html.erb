@@ -83,8 +83,15 @@
 				<a id="drop1" class="brand dropdown-toggle" href="#" role="button" data-toggle="dropdown">Your Welcome <%=cookies.signed['username']%> <span class="caret"></span></a>
 				<ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
 					<li id="dropdown1" role="presentation"><a role="menuitem" tabindex="-1" href="/signout">Sign Out</a></li>
-					<li id="dropdown1" role="presentation"><a role="menuitem" tabindex="-1" href="/link_fb">Link Facebook</a></li>
-					<li id="dropdown1" role="presentation"><a role="menuitem" tabindex="-1" href="/auth/facebook">Log in Facebook</a></li>
+					<%if%>
+					<li id="dropdown1" role="presentation"><a role="menuitem" tabindex="-1" href="/auth/facebook">Log in with Facebook</a></li>
+					<%else%>
+					<%end%>
+					<%if cookies.signed[:social_accounts].empty?%>
+					<li id="dropdown1" role="presentation"><a role="menuitem" tabindex="-1" href="/link_fb">Link to Facebook</a></li>
+					<%else%>
+					<li id="dropdown1" role="presentation"><a role="menuitem" tabindex="-1" href="/unlink_fb">Unlink from Facebook</a></li>
+					<%end%>
 				</ul>
 			</li>
 			<%end%>
