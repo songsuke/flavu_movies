@@ -87,7 +87,7 @@
 					<li id="dropdown1" role="presentation"><a role="menuitem" tabindex="-1" href="/auth/facebook">Log in with Facebook</a></li>
 					<%else%>
 					<%end%>
-					<%if cookies.signed[:social_accounts].empty?%>
+					<%if !cookies.signed[:social_accounts]%>
 					<li id="dropdown1" role="presentation"><a role="menuitem" tabindex="-1" href="/link_fb">Link to Facebook</a></li>
 					<%else%>
 					<li id="dropdown1" role="presentation"><a role="menuitem" tabindex="-1" href="/unlink_fb">Unlink from Facebook</a></li>
