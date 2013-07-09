@@ -541,11 +541,13 @@ box-shadow: 0 0 2px 2px #888;
     height: 220px;
   }
   #movie-items-pics {
-    float: left;
+    
     border-bottom: 1px solid rgb(135,135,135);
+    overflow: hidden;
   }
   #movie-items-info-tiny {
-    border-top: 2px solid rgb(220, 220, 220);
+    border-top: 1px solid rgb(220, 220, 220);
+    overflow: hidden;
   }
 }
 
