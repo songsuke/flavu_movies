@@ -1299,7 +1299,8 @@ request.remote_ip
     #reset_cookies.signed 
     cookies.signed[:check_guest] = "true"
     cookies.signed[:auth] = nil
-
+    cookies.signed[:facebook_auth]=nil
+    puts "here"
     redirect_to home_path
   end
 
@@ -1629,11 +1630,19 @@ request.remote_ip
 
   def facebook
     @token = request.env['omniauth.auth']['credentials']['token']
-    puts "token = #{@token}"
+    #puts "token = #{@token}"
+    puts cookies.signed[:auth]
+    
     @facebook =HTTParty.post("https://flavumovies.herokuapp.com/social_accounts/facebook/sign_in.json", body: {access_token: @token}).parsed_response
+    
+    puts "aaa = #{@facebook['auth_token']}"
+
     cookies.permanent.signed[:facebook_auth]=@token
     if @facebook['auth_token']
       cookies.permanent.signed[:auth] = @facebook["auth_token"]
+      @facebook_link =HTTParty.post("https://flavumovies.herokuapp.com/social_accounts/facebook/link.json", body: {access_token: cookies.signed[:facebook_auth], auth_token: cookies.signed[:auth]}).parsed_response
+      @social_accounts=HTTParty.get("https://flavumovies.herokuapp.com/social_accounts.json", body: {auth_token: cookies.signed[:auth]}).parsed_response
+      
       redirect_to home_path
     else
       flash[:error]=@facebook['error']
@@ -1666,6 +1675,7 @@ request.remote_ip
       puts cookies.signed[:social_accounts]
       #puts @facebook_link
       redirect_to :back
+
   end
 
   def unlink_fb
@@ -1674,6 +1684,7 @@ request.remote_ip
       @social_accounts=HTTParty.get("https://flavumovies.herokuapp.com/social_accounts.json", body: {auth_token: cookies.signed[:auth]}).parsed_response
       cookies.signed[:social_accounts]=@social_accounts['linked_accounts']
       puts cookies.signed[:social_accounts]
+      cookies.signed[:facebook_auth]=nil
       #puts @facebook_link['response']
       redirect_to :back
     end

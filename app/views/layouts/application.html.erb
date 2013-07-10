@@ -49,8 +49,12 @@ $(function(){
 
 <div id="wrapper">
 	<header id="head">
-		<h1 id="logo" class="current"> 
-			<%= link_to image_tag('/assets/logof.png'), home_path %> </h1>
+		<div id="logo" class="current"> 
+			<%=form_tag '/buddy' do%>
+				<input id="search" name="search" type="text">
+				<button id="bt_search" name="commit" class="icon-search" type="submit"></button>
+			<%end%>
+		</div>
 		<nav id="mainnav">
 			<div class="main-menu">
 				<ul id= "main-menu" class="menu">

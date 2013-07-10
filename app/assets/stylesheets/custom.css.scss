@@ -47,9 +47,26 @@ body {
 }
 
 #head {
-  float: left;
-  padding: 22px 17px 10px 15px;
   color: white;
+  margin-right: auto;
+  overflow: hidden;
+  margin-left: auto;
+  width: 960px;
+  input[type="text"] {
+    width: 190px;
+    height: 30px;
+    padding:0;
+    border-radius: 3px 3px 3px 3px;
+    background-color: rgb(209,211,212);
+    /*box-shadow: 0 0 3px 0px rgb(180,180,180) inset;*/
+    margin: 0;
+    line-height: 0;
+    border: 1 solid #D1D3D4;
+  }
+  form {
+    padding: 0;
+    margin:0;
+  }
 }
 
 #foot {
@@ -70,16 +87,28 @@ body {
 }
 #logo { 
   float: left;
-  width: 176px;
-  margin: 0;
+  width: 190px;
+  margin: 22.5px 0 0 0;
+  width: auto;
+  height: auto;
   color: white;
+  #bt_search {
+    position: absolute;
+    margin: 10px 0px 0px -20px;
+    padding: 0px;
+    border: 0px;
+    background-color: rgb(209,211,212);
+
+  }
 }
 
 
 #wrapper {
-  width: 960px;
-  margin: 0 auto;
-  position: relative;
+  width: auto;
+  height: 75px;
+  overflow: hidden;
+  background-color: white;
+  box-shadow: 0 0 2px 2px #888;
 }
 
 #mainnav {
