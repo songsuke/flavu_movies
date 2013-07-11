@@ -49,25 +49,35 @@ $(function(){
 
 <div id="wrapper">
 	<header id="head">
-		<div id="logo" class="current"> 
+		<div id="search_bar" class="current"> 
 			<%=form_tag '/buddy' do%>
 				<input id="search" name="search" type="text">
 				<button id="bt_search" name="commit" class="icon-search" type="submit"></button>
 			<%end%>
 		</div>
-		<nav id="mainnav">
-			<div class="main-menu">
+		<div id="logo">
+			<img src="/assets/logof.png">
+		</div>
+		<div id="mainnav">
 				<ul id= "main-menu" class="menu">
-					<li id="movie-link"><%= link_to "Logo Place Holder Hieght 55px", home_path %> </li>
-					
-					<li id="app_store">
-						<%=link_to "#" do%>
-							<img src="/assets/apple_store.png">
-						<%end%>
+					<li id="gavatar">
+						<img src="/assets/account_icon.png">
+					</li>
+					<li>
+						<div id="jewel_container">
+							<div id="jewel_buddies">
+								<p id="jp_c" class="icon-cog"></p>
+							</div>
+							<div id="jewel_profile">
+								<p id="jp">Taste Profile</p>
+							</div>
+							<div id="jewel_notification">
+								<p id="jp_c" class="icon-comment"></p>
+							</div>
+						</div>
 					</li>
 				</ul>
-			</div>
-		</nav>
+		</div>
 	</header>
 	
 </div>
