@@ -1,6 +1,17 @@
 <div id="quick-showtime">
-	<div class="navbar-inner">
-		<ul class="nav left">
+	<div id="navigation-bar">
+		<div id="left">
+				<div id="movies-link" class="current" >
+					<%= link_to "MOVIES" , root_path%>
+				</div>
+				<div id="movies-link" class="current" >
+					<%= link_to "THEATRES" , theatres_path%>
+				</div>
+				<div id="movies-link" class="current" >
+					<%= link_to "BUDDIES" , buddies_path%>
+				</div>
+		</div>
+			<!--
 			<li role="navigation">
 				<li class="dropdown">
 					<a id="drop1" class="brand dropdown-toggle" href="#" role="button" data-toggle="dropdown">Flavu <span class="caret"></span></a>
@@ -19,7 +30,7 @@
 
 			<!--<li><%= link_to "Reviews" , reviews_path%></li>
 			
-			<li><%= link_to "Box Office" , boxoffice_path%></li>-->
+			<li><%= link_to "Box Office" , boxoffice_path%></li>
 			<%if cookies.signed['auth']%>
 			<li>
 				<%=form_tag '/buddies' ,:style=>"margin:0;" do%>
@@ -29,9 +40,9 @@
 			</li>
 			<%else%>
 			<%end%>
-			
-		</ul>
-		<ul class="nav right">
+			-->
+
+			<!--
 			<%if (!cookies.signed[:auth])%>
 				<li>
 		
@@ -88,7 +99,7 @@
 					<!--<%#if%>
 					<li id="dropdown1" role="presentation"><a role="menuitem" tabindex="-1" href="/auth/facebook">Log in with Facebook</a></li>
 					<%#else%>
-					<%#end%>-->
+					<%#end%>
 					<%if !cookies.signed[:social_accounts]%>
 					<li id="dropdown1" role="presentation"><a role="menuitem" tabindex="-1" href="/link_fb">Link to Facebook</a></li>
 					<%else%>
@@ -96,8 +107,23 @@
 					<%end%>
 				</ul>
 			</li>
-			<%end%>
-		</ul>
-
+			<%end%>-->
+			<ul class ="right">
+				
+				<%if @layout_type == "movies"%>
+					<li><a href="#interested" data-toggle="tab">Interested Movies</a></li>
+					<li class="active"><a href="#remaining" data-toggle="tab">Remaining Movies</a></li>
+					<li><a href="#not_interested" data-toggle="tab">Not Interested Movies</a></li>
+					<li><a href="#watched_lists" data-toggle="tab">Watched Lists</a></li>
+				<%elsif @layout_type == "theatres"%>
+					<li><a href="#liked" data-toggle="tab">Liked</a></li>
+					<li class="active"><a href="#nearby" data-toggle="tab">Nearby</a></li>
+					<li><a href="#unliked_th" data-toggle="tab">Unliked</a></li>
+				<%elsif @layout_type == "buddies"%>
+					<li class="active"><a href="#movie_buddies" data-toggle="tab">Movie Buddies</a></li>
+					<li><a href="#requests" data-toggle="tab">Requests(<%=@requests['total_entries']%>)</a></li>
+					<li><a href="#friends" data-toggle="tab">Friends</a></li>
+				<%end%>
+			</ul>
 	</div><!--navbar-inner-->
 </div>

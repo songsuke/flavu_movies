@@ -3,6 +3,7 @@ require 'httparty'
 require 'open-uri'
 before_filter :authenticate_user, :except => [:signin, :register, :facebook]
 
+
   def signin
     if params[:confirm] !="confirm"
     else
@@ -29,7 +30,7 @@ before_filter :authenticate_user, :except => [:signin, :register, :facebook]
         #@username=cookies.signed[:username]
         #@auth=cookies.signed[:auth]
         cookies.permanent.signed[:check_guest] = {value: "false"}
-        redirect_to home_path
+        redirect_to root_path
       end
     end
   end
@@ -79,6 +80,7 @@ before_filter :authenticate_user, :except => [:signin, :register, :facebook]
 
   def movies
 
+    @layout_type = "movies"
     if (!cookies.signed[:auth]) && (!cookies.signed[:guest_auth])
       redirect_to cover_path
     else
@@ -105,19 +107,19 @@ before_filter :authenticate_user, :except => [:signin, :register, :facebook]
       end
         
       if params[:liked]
-        @liked_movies =HTTParty.post("https://flavumovies.herokuapp.com/interested_movies.json", body: {user: {auth_token: token}, interested_movie: { movie_id:params[:liked]}}).parsed_response
+        @liked_movies =HTTParty.post("https://flavumovies.herokuapp.com/interested_movies.json", body: {user: {auth_token: @token}, interested_movie: { movie_id:params[:liked]}}).parsed_response
       elsif params[:unliked]
-        @unliked_movies =HTTParty.post("https://flavumovies.herokuapp.com/not_interested_movies.json", body: {user: {auth_token: token}, not_interested_movie: { movie_id:params[:unliked]}}).parsed_response
+        @unliked_movies =HTTParty.post("https://flavumovies.herokuapp.com/not_interested_movies.json", body: {user: {auth_token: @token}, not_interested_movie: { movie_id:params[:unliked]}}).parsed_response
       elsif params[:soso1]
-        @soso_movies =HTTParty.delete("https://flavumovies.herokuapp.com/interested_movies.json", body: {user: {auth_token: token}, interested_movie: { movie_id:params[:soso1]}}).parsed_response
+        @soso_movies =HTTParty.delete("https://flavumovies.herokuapp.com/interested_movies.json", body: {user: {auth_token: @token}, interested_movie: { movie_id:params[:soso1]}}).parsed_response
       elsif params[:soso2]
-        @soso_movies =HTTParty.delete("https://flavumovies.herokuapp.com/not_interested_movies.json", body: {user: {auth_token: token}, not_interested_movie: { movie_id:params[:soso2]}}).parsed_response
+        @soso_movies =HTTParty.delete("https://flavumovies.herokuapp.com/not_interested_movies.json", body: {user: {auth_token: @token}, not_interested_movie: { movie_id:params[:soso2]}}).parsed_response
       end
         
       if params[:watched]
-        @watched_movies =HTTParty.post("https://flavumovies.herokuapp.com/watched_movies.json", body: {user: {auth_token: token}, watched_movie: {movie_id:params[:watched] }}).parsed_response
+        @watched_movies =HTTParty.post("https://flavumovies.herokuapp.com/watched_movies.json", body: {user: {auth_token: @token}, watched_movie: {movie_id:params[:watched] }}).parsed_response
       elsif params[:unwatched]
-        @unwatched_movies =HTTParty.delete("https://flavumovies.herokuapp.com/watched_movies.json", body: {user: {auth_token: token}, watched_movie: {movie_id:params[:unwatched]}}).parsed_response
+        @unwatched_movies =HTTParty.delete("https://flavumovies.herokuapp.com/watched_movies.json", body: {user: {auth_token: @token}, watched_movie: {movie_id:params[:unwatched]}}).parsed_response
       end
       
       @url = "https://flavumovies.herokuapp.com/movies_browser.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}&radius=#{cookies.signed[:radius]}&unit=#{cookies.signed[:unit]}"
@@ -134,6 +136,7 @@ before_filter :authenticate_user, :except => [:signin, :register, :facebook]
   end
 
   def theatres
+    @layout_type = "theatres"
     if (!cookies.signed[:auth] && !cookies.signed[:guest_auth])
       redirect_to cover_path
     else
@@ -178,12 +181,13 @@ before_filter :authenticate_user, :except => [:signin, :register, :facebook]
         @theatres =HTTParty.delete(@url, body: {user: {auth_token: @token}, not_interested_theatre: {theatre_id: params[:soso2]} }).parsed_response
       end
         
-      @url = "https://flavumovies.herokuapp.com/theatres_browser.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}&radius=#{cookies.signed[:radius]}&unit=#{cookies.signed[:unit]}"
+      @url = "https://flavumovies.herokuapp.com/theatres_ios.json?latitude=#{cookies.signed[:latitude]}&longitude=#{cookies.signed[:longitude]}&radius=#{cookies.signed[:radius]}&unit=#{cookies.signed[:unit]}"
       @theatres = HTTParty.get(@url, body: {user: {auth_token: @token}, browser: "1"}).parsed_response
       if !token_valid?(@theatres)
         redirect_to signin_path
         return
       end
+      puts @theatres
       @lt = @theatres['liked_theatres']
       @nt = @theatres['nearby_theatres']
       @nit = @theatres['not_interested_theatres']
@@ -214,6 +218,7 @@ before_filter :authenticate_user, :except => [:signin, :register, :facebook]
   end
 
   def buddies
+    @layout_type = "buddies"
     if (cookies.signed[:auth])
       if params[:request]
         @requesting =HTTParty.post("https://flavumovies.herokuapp.com/send_request.json", body: {user: {auth_token: cookies.signed[:auth]}, friend_contact_info: params[:request]}).parsed_response
@@ -1301,7 +1306,7 @@ request.remote_ip
     cookies.signed[:auth] = nil
     cookies.signed[:facebook_auth]=nil
     puts "here"
-    redirect_to home_path
+    redirect_to root_path
   end
 
 
@@ -1528,7 +1533,7 @@ request.remote_ip
     @url = "https://flavumovies.herokuapp.com/users/confirmation.json"
     @confirm_account =HTTParty.get(@url, body: {confirmation_token: params[:confirmation_token]}).parsed_response
     cookies.signed[:auth]=@confirm_account['auth_token']   
-    redirect_to home_path
+    redirect_to root_path
   end
 
   def forgot_password
@@ -1556,7 +1561,7 @@ request.remote_ip
       @password_reset_token =HTTParty.put(@url, body: { user: {reset_password_token: params[:reset_password], password: params[:password], password_confirmation: params[:password_confirmation] }}).parsed_response
       cookies.signed[:auth]=@password_reset_token['auth_token']   
       puts @password_reset_token
-      redirect_to home_path
+      redirect_to root_path
     else
 
     end
@@ -1643,7 +1648,7 @@ request.remote_ip
       @facebook_link =HTTParty.post("https://flavumovies.herokuapp.com/social_accounts/facebook/link.json", body: {access_token: cookies.signed[:facebook_auth], auth_token: cookies.signed[:auth]}).parsed_response
       @social_accounts=HTTParty.get("https://flavumovies.herokuapp.com/social_accounts.json", body: {auth_token: cookies.signed[:auth]}).parsed_response
       
-      redirect_to home_path
+      redirect_to root_path
     else
       flash[:error]=@facebook['error']
 
@@ -1661,7 +1666,7 @@ request.remote_ip
         cookies.permanent.signed[:user_id] = @user["id"]
         cookies.permanent.signed[:user] = @user
       
-    redirect_to home_path
+    redirect_to root_path
   
 =end
 

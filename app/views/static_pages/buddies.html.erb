@@ -1,6 +1,68 @@
 <%if cookies.signed[:auth]%>
+<div id="buddy-content">
+  <div id="myTabContent" class="tab-content">
+    <div id="movie_buddies" class="tab-pane active">
+    	<% @fw2.each do |followee|%>
+    		<div class="buddy-items">
+				<div id="buddy-picture">
+					<img src="/assets/acount_no_image.png">
+				</div>
+				<div id="buddy-name">
+					<p><%= followee['followee']['username'] %></p>
+					<p><%= followee['followee']['email'] %></p>
+				</div>
+				<div id="buddy-activities">
+					<%=form_tag '/buddies' do %>
+						<button name="unfollow" id="unfollow" class="btn" value="<%=followee['followee']['id']%>">Unfollow</button>
+					<%end%>
+				</div>
+			</div>
+		<%end%>
+    </div>
 
-<div id="side-buddy">
+   	<div id="requests" class="tab-pane">
+   		<% @rq.each do |followee|%>
+    		<div class="buddy-items">
+				<div id="buddy-picture">
+					<img src="/assets/acount_no_image.png">
+				</div>
+				<div id="buddy-name">
+					<p><%= request['requester']['username'] %></p>
+					<p><%= request['requester']['email'] %></p>
+				</div>
+				<div id="buddy-activities">
+					<%=form_tag '/buddies' do %>
+						<button name="accept_and_follow" id="accept_and_follow" class="btn"value="<%=request['requester']['id']%>">Accept and Follow</button>
+						<button name="accept" id="accept" class="btn"value="<%=request['requester']['id']%>">Accept</button>
+						<button name="reject" id="reject" class="btn"value="<%=request['requester']['id']%>">Reject</button>
+					<%end%>
+				</div>
+			</div>
+		<%end%>
+    </div>
+
+    <div id="friends" class="tab-pane">
+    	<% @fw1.each do |follower|%>
+			<%if follower['status']=="follower_and_followee"%>
+			<%else%>
+			<div class="buddy-items">
+				<div id="buddy-picture">
+					<img src="/assets/acount_no_image.png">
+				</div>
+				<div id="buddy-name">
+					<p><%= follower['follower']['username'] %></p>
+					<p><%= follower['follower']['email'] %></p>
+				</div>
+				<div id="buddy-activities">
+					<button name="follow" id="follow" class="btn" value="<%=follower['follower']['id']%>">Follow</button>
+				</div>
+			</div>
+			<%end%>
+		<%end%>
+    </div>
+  </div>
+</div>
+<!--<div id="side-buddy">
 	<div id="setting">
 		<h1 class="title">Friendships</h1>
 		<div id="buddy-box">
@@ -30,9 +92,9 @@
 				</li>
 			</ul>
 
-		</div> <!--side-setting-box-->
-	</div> <!--setting-->
-</div> <!--side-->
+		</div> <!--side-setting-box-
+	</div> <!--setting--
+</div> <!--side--
 
 
 
@@ -129,6 +191,8 @@
 		</div>
 	</div>
 </div>
+
+-->
 
 
 <%else%>

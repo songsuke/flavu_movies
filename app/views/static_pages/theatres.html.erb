@@ -1,4 +1,142 @@
 <div id="theatre-content">
+  <div id="myTabContent" class="tab-content">
+  	<div id="liked" class="tab-pane">
+  		<% @lt['theatres'].each do |nearby| %>
+
+		<div class="theatre-items">
+			<%=link_to :action=>"showtheatre" , :controller=>"static_pages" , :showid => nearby['id'] do%>
+				<div id="theatre-name">
+					<%=nearby['name']%>
+				</div>
+				<div id="theatre-poster">
+					<%@count = nearby['movie_posters'].length-1%>
+					<%(0..@count).each do |i|%>
+					<div id="theatre-poster-items">
+						<img src="<%=nearby['movie_posters'][i]%>">
+					</div>
+					<%end%>
+				</div>
+				<div id="theatre-information-page">
+					<%if cookies.signed[:TLO_address]=="false"%>
+	  			  	<%else%>
+		  				<li> Address : </li>
+		  				<li><%=nearby['location']['address']%> <%=nearby['location']['city']%>
+		  				</li>
+		  			<%end%>	  								
+	  				<%if cookies.signed[:TLO_phone_number]=="false"%>
+	  			  	<%else%>
+	  					<li>Phone number : <%=nearby['phone_number']%></li>
+	  				<%end%>
+	  				<%if cookies.signed[:TLO_distance]=="false"%>
+	  			  	<%else%>
+	  					<li>Distance : <%=nearby['distance']%></li>
+					<%end%>
+				</div>
+				<div id="theatre-activities">
+					<%=form_tag '/theatres' do %>
+						<li><button name="liked" id="liked" value="<%=nearby['id']%>" class='btn btn-mini'> <i class="icon-thumbs-up"></i></button>
+						<button name="unliked" id="unliked" value="<%=nearby['id']%>" class='btn btn-mini'> <i class="icon-thumbs-down"></i></button></li>
+					<%end%>
+				</div>
+			<%end%>
+		</div>
+		
+		<%end%>
+	</div>
+  	<div id="nearby" class="tab-pane active">
+  		
+		<% @nt['theatres'].each do |nearby| %>
+
+		<div class="theatre-items">
+			<%=link_to :action=>"showtheatre" , :controller=>"static_pages" , :showid => nearby['id'] do%>
+				<div id="theatre-name">
+					<%=nearby['name']%>
+				</div>
+				<div id="theatre-poster">
+					<%@count = nearby['movie_posters'].length-1%>
+					<%(0..@count).each do |i|%>
+					<div id="theatre-poster-items">
+						<img src="<%=nearby['movie_posters'][i]%>">
+					</div>
+					<%end%>
+				</div>
+				<div id="theatre-information-page">
+					<%if cookies.signed[:TLO_address]=="false"%>
+	  			  	<%else%>
+		  				<li> Address : </li>
+		  				<li><%=nearby['location']['address']%> <%=nearby['location']['city']%>
+		  				</li>
+		  			<%end%>	  								
+	  				<%if cookies.signed[:TLO_phone_number]=="false"%>
+	  			  	<%else%>
+	  					<li>Phone number : <%=nearby['phone_number']%></li>
+	  				<%end%>
+	  				<%if cookies.signed[:TLO_distance]=="false"%>
+	  			  	<%else%>
+	  					<li>Distance : <%=nearby['distance']%></li>
+					<%end%>
+				</div>
+				<div id="theatre-activities">
+					<%=form_tag '/theatres' do %>
+						<li><button name="liked" id="liked" value="<%=nearby['id']%>" class='btn btn-mini'> <i class="icon-thumbs-up"></i></button>
+						<button name="unliked" id="unliked" value="<%=nearby['id']%>" class='btn btn-mini'> <i class="icon-thumbs-down"></i></button></li>
+					<%end%>
+				</div>
+			<%end%>
+		</div>
+		
+		<%end%>
+	</div>
+
+<div id="unliked_th" class="tab-pane">
+  		<% @nit['theatres'].each do |nearby| %>
+
+		<div class="theatre-items">
+			<%=link_to :action=>"showtheatre" , :controller=>"static_pages" , :showid => nearby['id'] do%>
+				<div id="theatre-name">
+					<%=nearby['name']%>
+				</div>
+				<div id="theatre-poster">
+					<%@count = nearby['movie_posters'].length-1%>
+					<%(0..@count).each do |i|%>
+					<div id="theatre-poster-items">
+						<img src="<%=nearby['movie_posters'][i]%>">
+					</div>
+					<%end%>
+				</div>
+				<div id="theatre-information-page">
+					<%if cookies.signed[:TLO_address]=="false"%>
+	  			  	<%else%>
+		  				<li> Address : </li>
+		  				<li><%=nearby['location']['address']%> <%=nearby['location']['city']%>
+		  				</li>
+		  			<%end%>	  								
+	  				<%if cookies.signed[:TLO_phone_number]=="false"%>
+	  			  	<%else%>
+	  					<li>Phone number : <%=nearby['phone_number']%></li>
+	  				<%end%>
+	  				<%if cookies.signed[:TLO_distance]=="false"%>
+	  			  	<%else%>
+	  					<li>Distance : <%=nearby['distance']%></li>
+					<%end%>
+				</div>
+				<div id="theatre-activities">
+					<%=form_tag '/theatres' do %>
+						<li><button name="liked" id="liked" value="<%=nearby['id']%>" class='btn btn-mini'> <i class="icon-thumbs-up"></i></button>
+						<button name="unliked" id="unliked" value="<%=nearby['id']%>" class='btn btn-mini'> <i class="icon-thumbs-down"></i></button></li>
+					<%end%>
+				</div>
+			<%end%>
+		</div>
+		
+		<%end%>
+	</div>
+
+
+
+  </div>
+</div>
+<!--<div id="theatre-content">
 	<div id="content">
 		<h1 class="title"> Theatres </h1>
 		<div id="theatre-show">
@@ -21,11 +159,11 @@
   								<li><a href="#<%=unliked['id']%>"  data-toggle="tab"><%=unliked['name']%></a></li>	
 							<%end%>
 						</ul>
-					</div><!--by-near-->
-				</div><!--theatres-filters-->
-			</div><!--theatres-list group-->
+					</div><!--by-near
+				</div><!--theatres-filters
+			</div><!--theatres-list group
 				<div class="theatres-info">
-					<!--liked theatres-->
+					<!--liked theatres
 					<% @lt['theatres'].each do |liked| %>
   						<div class="tab-pane" id="<%=liked['id']%>">
   							<h2><%=liked['name']%></h2>
@@ -53,7 +191,7 @@
   							</ul>
   						</div>
   					<%end%>
-  					<!--nearby-theatres-->
+  					<!--nearby-theatres
 					<% @nt['theatres'].each do |nearby| %>
   						<div class="tab-pane" id="<%=nearby['id']%>">
   							<h2><%=nearby['name']%></h2>
@@ -81,7 +219,7 @@
   							</ul>
   						</div>
   					<%end%>
-  					<!--not-interested-theatres-->
+  					<!--not-interested-theatres
 					<% @nit['theatres'].each do |unliked| %>
   						<div class="tab-pane" id="<%=unliked['id']%>">
   							<h2><%=unliked['name']%></h2>
@@ -110,8 +248,8 @@
   						</div>
   					<%end%>
 
-				</div><!--theatres-info-->
-			</div><!--theatres-show-->
+				</div><!--theatres-info
+			</div><!--theatres-show
 		
 	</div>
 </div><!--theatre-content-->

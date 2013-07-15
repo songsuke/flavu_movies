@@ -52,7 +52,7 @@ match '/share', to: 'static_pages#share'
   #match '/cover', to: 'static_pages#cover'
   resources :static_pages
 
-  root to: 'static_pages#home'
+  root to: 'static_pages#movies'
  # root :to => 'posts#index'
   #match '/index', to: 'preferences#index'
   #match '/edit', to: 'preferences#edit'

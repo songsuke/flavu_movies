@@ -63,13 +63,18 @@ $(function(){
 					<li id="gavatar">
 						<img src="/assets/account_icon.png">
 					</li>
-					<li>
+					<li id="jewel " class="dropdown">
 						<div id="jewel_container">
 							<div id="jewel_buddies">
 								<p id="jp_c" class="icon-cog"></p>
 							</div>
 							<div id="jewel_profile">
-								<p id="jp">Taste Profile</p>
+									<a id="drop1" class="brand dropdown-toggle" href="#" role="button" data-toggle="dropdown">Taste Profile</a>
+									<ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+										<li id="dropdown1" role="presentation"><a role="menuitem" tabindex="-1" href="/preferences">Preferences</a></li>
+										<li id="dropdown1" role="presentation"><a role="menuitem" tabindex="-1" href="/settings">Settings</a></li>
+										<li id="dropdown1" role="presentation"><a role="menuitem" tabindex="-1" href="/signout">Sign Out</a></li>
+									</ul>
 							</div>
 							<div id="jewel_notification">
 								<p id="jp_c" class="icon-comment"></p>
@@ -82,15 +87,15 @@ $(function(){
 	
 </div>
 
-	<div class = "container">
+<div class = "container">
 
 	<%=render 'layouts/showtime'%>
-<div id="main" class="group" role="main">
+		<div id="main" class="group" role="main">
 
-<%=yield%>
+			<%=yield%>
 
-</div>
-<%=render 'layouts/footer' %>
+		</div>
+	<%=render 'layouts/footer' %>
 
 </div>
 
