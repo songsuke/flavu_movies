@@ -2,6 +2,7 @@
   <div id="myTabContent" class="tab-content">
     <div id="interested" class="tab-pane">
       <% @im['movies'].each do |movie| %> 
+      <!--Display Interesting movies-->
         <%if(movie['photos'].length >0 && movie['watched']==false) %>
           <div class="movie-items">
           <%photo = movie['photos'].first%> 
@@ -28,7 +29,7 @@
                   </div>
                 </div>
               <%end%>
-            <%end%><!--link-->
+            <%end%>
             <div id="movie-activities">
               <%=form_tag '/movies' do%>
                 <div id="button2">
@@ -61,7 +62,7 @@
                   <%=movie['title']%>
                 </div>
               </div>
-            <%end%><!--link-->
+            <%end%>
           <div id="movie-activities">
             <%=form_tag '/movies' do%>
               <div id="button2">
@@ -86,7 +87,7 @@
         <%end%>
       <%end%>
     </div>
-
+<!--Display Remaining movies-->
     <div id="remaining" class="tab-pane active">
       <% @rm['movies'].each do |movie| %> 
         
@@ -115,7 +116,7 @@
                   </div>
                 </div>
               <%end%>
-            <%end%><!--link-->
+            <%end%>
             <div id="movie-activities">
           <%=form_tag '/movies' do%>
             <div id="button2">
@@ -148,7 +149,7 @@
                   <%=movie['title']%>
                 </div>
               </div>
-            <%end%><!--link-->
+            <%end%>
             <div id="movie-activities">
           <%=form_tag '/movies' do%>
             <div id="button2">
@@ -174,7 +175,7 @@
         
       <%end%>
     </div>
-
+<!--Display Not Interested movies-->
     <div id="not_interested" class="tab-pane">
       <% @nim['movies'].each do |movie| %> 
       
@@ -191,7 +192,7 @@
                     <%=movie['title']%>
                   </div>
                 </div>
-              <%end%><!--link-->
+              <%end%>
             <%else%>
               <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid => movie['id'] do%>
                 <div id="movie-hover">
@@ -203,7 +204,7 @@
                   </div>
                 </div>
               <%end%>
-            <%end%><!--link-->
+            <%end%>
             <div id="movie-activities">
           <%=form_tag '/movies' do%>
             <div id="button2">
@@ -236,7 +237,7 @@
                   <%=movie['title']%>
                 </div>
               </div>
-            <%end%><!--link-->
+            <%end%>
             <div id="movie-activities">
           <%=form_tag '/movies' do%>
             <div id="button2">
@@ -262,7 +263,7 @@
         
       <%end%>
     </div>
-
+<!--Display Watched LIsts-->
     <div id="watched_lists" class="tab-pane">
       <% @im['movies'].each do |movie| %> 
         <%if(movie['photos'].length >0 && movie['watched']==true) %>
@@ -278,7 +279,7 @@
                     <%=movie['title']%>
                   </div>
                 </div>
-              <%end%><!--link-->
+              <%end%>
             <%else%>
               <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid => movie['id'] do%>
                 <div id="movie-hover">
@@ -290,7 +291,7 @@
                   </div>
                 </div>
               <%end%>
-            <%end%><!--link-->
+            <%end%>
             <div id="movie-activities">
           <%=form_tag '/movies' do%>
             <div id="button2">
@@ -322,7 +323,7 @@
                   <%=movie['title']%>
                 </div>
               </div>
-            <%end%><!--link-->
+            <%end%>
             <div id="movie-activities">
           <%=form_tag '/movies' do%>
             <div id="button2">
@@ -361,7 +362,7 @@
                     <%=movie['title']%>
                   </div>
                 </div>
-              <%end%><!--link-->
+              <%end%>
             <%else%>
               <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid => movie['id'] do%>
                 <div id="movie-hover">
@@ -373,7 +374,7 @@
                   </div>
                 </div>
               <%end%>
-            <%end%><!--link-->
+            <%end%>
             <div id="movie-activities">
           <%=form_tag '/movies' do%>
             <div id="button2">
@@ -406,7 +407,7 @@
                   <%=movie['title']%>
                 </div>
               </div>
-            <%end%><!--link-->
+            <%end%>
             <div id="movie-activities">
           <%=form_tag '/movies' do%>
             <div id="button2">
@@ -446,7 +447,7 @@
                     <%=movie['title']%>
                   </div>
                 </div>
-              <%end%><!--link-->
+              <%end%>
             <%else%>
               <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid => movie['id'] do%>
                 <div id="movie-hover">
@@ -458,7 +459,7 @@
                   </div>
                 </div>
               <%end%>
-            <%end%><!--link-->
+            <%end%>
             <div id="movie-activities">
           <%=form_tag '/movies' do%>
             <div id="button2">
@@ -491,7 +492,7 @@
                   <%=movie['title']%>
                 </div>
               </div>
-            <%end%><!--link-->
+            <%end%>
             <div id="movie-activities">
           <%=form_tag '/movies' do%>
             <div id="button2">

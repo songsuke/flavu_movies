@@ -1,6 +1,7 @@
 <%if cookies.signed[:auth]%>
 <div id="buddy-content">
   <div id="myTabContent" class="tab-content">
+  <!--Display Movie BUddies-->
     <div id="movie_buddies" class="tab-pane active">
     	<% @fw2.each do |followee|%>
     		<div class="buddy-items">
@@ -20,6 +21,7 @@
 		<%end%>
     </div>
 
+<!--Display Requests-->
    	<div id="requests" class="tab-pane">
    		<% @rq.each do |followee|%>
     		<div class="buddy-items">
@@ -41,6 +43,7 @@
 		<%end%>
     </div>
 
+<!--Display Friends-->
     <div id="friends" class="tab-pane">
     	<% @fw1.each do |follower|%>
 			<%if follower['status']=="follower_and_followee"%>

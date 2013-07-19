@@ -1,5 +1,6 @@
 <div id="theatre-content">
   <div id="myTabContent" class="tab-content">
+  	<!--Display Liked Theatres-->
   	<div id="liked" class="tab-pane">
   		<% @lt['theatres'].each do |nearby| %>
 
@@ -43,8 +44,9 @@
 		
 		<%end%>
 	</div>
-  	<div id="nearby" class="tab-pane active">
-  		
+
+<!--Display Nearby Theatres-->
+  	<div id="nearby" class="tab-pane active">	
 		<% @nt['theatres'].each do |nearby| %>
 
 		<div class="theatre-items">
@@ -88,6 +90,7 @@
 		<%end%>
 	</div>
 
+<!--Display Unliked Theatres-->
 <div id="unliked_th" class="tab-pane">
   		<% @nit['theatres'].each do |nearby| %>
 

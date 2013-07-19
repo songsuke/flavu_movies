@@ -19,7 +19,10 @@
   <%= stylesheet_link_tag    "custom", :media => "screen" %>
 
   <%= csrf_meta_tags %>
+	<!--Reponsive-->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="shortcut icon" href="/assets/Favicon.png" type="image/png">
+	<!--Google Analytics-->
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -34,6 +37,7 @@
   <meta http-equiv="refresh" content="0; url=/cover"> 
 
 <%else%>
+<!--Hightlight the current page-->
 <script>
 $(function(){
 	$('a').each(function() {
@@ -48,26 +52,36 @@ $(function(){
 <body>
 
 <div id="wrapper">
+
 	<header id="head">
+		<!--
 		<div id="search_bar" class="current"> 
 			<%=form_tag '/buddy' do%>
+			<div id="search_bar_text">
 				<input id="search" name="search" type="text">
 				<button id="bt_search" name="commit" class="icon-search" type="submit"></button>
+			</div>
+
 			<%end%>
-		</div>
-		<div id="logo">
-			<img src="/assets/logof.png">
-		</div>
+		</div>-->
 		<div id="mainnav">
 				<ul id= "main-menu" class="menu">
-					<li id="gavatar">
-						<img src="/assets/account_icon.png">
-					</li>
+					
 					<li id="jewel " class="dropdown">
 						<div id="jewel_container">
+							<!--settings-->
 							<div id="jewel_buddies">
-								<p id="jp_c" class="icon-cog"></p>
+								<a href="/settings">
+									<p id="jp_c" class="icon-cog"></p>
+								</a>
 							</div>
+							<!--Preferences-->
+							<div id="jewel_profile">
+								<a href="preferences">
+									Taste Profile
+								</a>
+							</div>
+							<!--							
 							<div id="jewel_profile">
 									<a id="drop1" class="brand dropdown-toggle" href="#" role="button" data-toggle="dropdown">Taste Profile</a>
 									<ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
@@ -76,19 +90,31 @@ $(function(){
 										<li id="dropdown1" role="presentation"><a role="menuitem" tabindex="-1" href="/signout">Sign Out</a></li>
 									</ul>
 							</div>
+							-->
 							<div id="jewel_notification">
 								<p id="jp_c" class="icon-comment"></p>
 							</div>
 						</div>
 					</li>
+					<li id="gavatar">
+						<img src="/assets/account_icon.png">
+					</li>
 				</ul>
 		</div>
+		<div id="logo">
+			<img src="/assets/Flavu-Website-logo-200.png">
+		</div>
+		
+		<div id="download-app">
+			<a href="#"><img src="/assets/apple_store.png"></a>
+		</div>
 	</header>
-	
+			
 </div>
 
 <div class = "container">
 
+	<!--Main Menu-->
 	<%=render 'layouts/showtime'%>
 		<div id="main" class="group" role="main">
 

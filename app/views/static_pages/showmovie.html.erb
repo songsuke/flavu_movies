@@ -10,10 +10,10 @@
 					<div id="movie-pic">
 						<% if(@sm['photos'].length >0) %>
 			                <%@photo = @sm['photos'].first%>
-			                <div class="movie-items">
+			                <div class="showmovie-items">
 				                <a href="#myModal55" data-toggle="modal" data-backdrop="false">
 				                	<span class="play"></span>
-				                	<img class="img-rounded" width="140" height="210" src="<%=@photo['url']%>">
+				                	<img width="140" height="210" src="<%=@photo['url']%>">
 				                </a>
 				               	<div id="myModal55" class="modal fade hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				                	<div id="modal-header" class="modal-header">
@@ -56,10 +56,10 @@
 									</div>-->
 			            <%elsif(@sm['photos'].length ==0) %>
 			            	<%@photo = @sm['photos'].first%>
-			            	<div class="movie-items">
-			            		<a href="#myModal55" data-toggle="modal">
+			            	<div class="showmovie-items">
+			            		<a href="#myModal55" data-toggle="modal" data-backdrop="false">
 				                	<span class="play"></span>
-				                	<img class="img-rounded" width="140" height="210" src="/assets/no_image.gif">
+				                	<img width="140" height="210" src="/assets/no_image.gif">
 				                </a>
 				               	<div id="myModal55" class="modal fade hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				                	<div id="modal-header" class="modal-header">
@@ -75,7 +75,7 @@
 			                <%@poster="/assets/no_image.gif"%>
 			                </div>
 			                <div>
-			                	<%=link_to :action=>"share", :controller=>"static_pages" , :showid => @sm['id'], :poster =>@photo['url'], :synopsis=>@sm['synopsis'], :title_name=> @sm['title'],:text=>params[:text] do%>  
+			                	<%=link_to :action=>"share", :controller=>"static_pages" , :showid => @sm['id'], :poster =>"", :synopsis=>@sm['synopsis'], :title_name=> @sm['title'],:text=>params[:text] do%>  
 			                	Share on Facebook
 				                		<%end%>
 				                	</div>
@@ -88,11 +88,11 @@
 											<% photos = @sm['photos'].select{|photo| photo['poster'] == false} %>
 											<% if photos.length > 0 %> 
 											  <div class="item active" id ="movie-slide">
-												<img class="img-rounded" src="<%=photos.first['url']%>">
+												<img src="<%=photos.first['url']%>">
 											  </div>
 											<%elsif(@sm['photos'].length ==0) %>
 											  <div class="item active" id ="movie-slide">
-												<img class="img-rounded" src="/assets/no_image.gif">
+												<img src="/assets/no_image.gif">
 											  </div>
 											<% end %>
 											<% photos.each do |photo| %>
@@ -100,7 +100,7 @@
 											    <% next %>
 											  <% end %>
 												<div class="item" id = "movie-slide">
-													<img class="img-rounded" src="<%=photo['url']%>">
+													<img src="<%=photo['url']%>">
 												</div>
 											<% end %>
 											
@@ -182,27 +182,57 @@
 			<div id="theatre-detail">
 				<%@theatres_for_movie.each do |tfm|%>	
 					<%if tfm['showtimes'][0]%>				
-						<div id="result-today">
+						<div id="showtime-result">
+							<div id="cinema-name">
+								Showtimes@<%=tfm['name']%>
+							</div>
+							<div id="showtime-date">
+								<%tfm['showtimes'].each do |showtime|%>
+									<%if showtime['date'] == showtime['date']%>
+										<div id="date">
+											<ul>							
+												<li>
+													<%=showtime['date']%>
+												</li>
+											</ul>
+										</div>
+									<%end%>
+								<%end%>
+							</div>
+							<div id="showtime-schedule">
+								<%tfm['showtimes'].each do |showtime|%>
+									<%if showtime['date'] == showtime['date']%>
+										<div id="start-time">
+											<ul>							
+												<li>
+													<%=showtime['start_time']%>
+												</li>
+											</ul>
+										</div>
+									<%end%>
+								<%end%>
+							</div>
+
+						</div>
+
+
+
+						<!--<div id="result-today">
 							<h2 class="cinema-name"> <%=tfm['name']%> </h2>
 							<div id="result-item">
+								<%time = Time.new%>
 								<h3 class="movie-name">
-									<%=@a2%>
+									<%=time.day%>-<%=time.month%>-<%=time.year%>
 								</h3>
 								<div id="result-info">
 									<div id="item">
-										<div id="picture">
-											<img width="80" height="auto" src="<%= @poster%>">
-										</div>
+
 										<div class="info group">
 											<div class="showtime group">
 												<%tfm['showtimes'].each do |showtime|%>
 													<%if showtime['date'].to_date == Time.now.to_date%>
 														<ul>							
 															<li>
-																<p> Date </p>
-																<p class="btn btn-inverse"><%=showtime['date']%>
-																</p>
-																<p> Time </p>		
 																<p class="showtime"><%=showtime['start_time']%>
 																</p>
 															</li>
@@ -214,7 +244,7 @@
 									</div>
 								</div>
 							</div>
-						</div><!--content-->
+						</div>content-->
 					<%else%>
 					<%end%>
 				<%end%>
