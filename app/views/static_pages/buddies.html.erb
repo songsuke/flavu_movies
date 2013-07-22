@@ -1,0 +1,205 @@
+<%if cookies.signed[:auth]%>
+<div id="buddy-content">
+  <div id="myTabContent" class="tab-content">
+  <!--Display Movie BUddies-->
+    <div id="movie_buddies" class="tab-pane active">
+    	<% @fw2.each do |followee|%>
+    		<div class="buddy-items">
+				<div id="buddy-picture">
+					<img src="/assets/acount_no_image.png">
+				</div>
+				<div id="buddy-name">
+					<p><%= followee['followee']['username'] %></p>
+					<p><%= followee['followee']['email'] %></p>
+				</div>
+				<div id="buddy-activities">
+					<%=form_tag '/buddies' do %>
+						<button name="unfollow" id="unfollow" class="btn" value="<%=followee['followee']['id']%>">Unfollow</button>
+					<%end%>
+				</div>
+			</div>
+		<%end%>
+    </div>
+
+<!--Display Requests-->
+   	<div id="requests" class="tab-pane">
+   		<% @rq.each do |followee|%>
+    		<div class="buddy-items">
+				<div id="buddy-picture">
+					<img src="/assets/acount_no_image.png">
+				</div>
+				<div id="buddy-name">
+					<p><%= request['requester']['username'] %></p>
+					<p><%= request['requester']['email'] %></p>
+				</div>
+				<div id="buddy-activities">
+					<%=form_tag '/buddies' do %>
+						<button name="accept_and_follow" id="accept_and_follow" class="btn"value="<%=request['requester']['id']%>">Accept and Follow</button>
+						<button name="accept" id="accept" class="btn"value="<%=request['requester']['id']%>">Accept</button>
+						<button name="reject" id="reject" class="btn"value="<%=request['requester']['id']%>">Reject</button>
+					<%end%>
+				</div>
+			</div>
+		<%end%>
+    </div>
+
+<!--Display Friends-->
+    <div id="friends" class="tab-pane">
+    	<% @fw1.each do |follower|%>
+			<%if follower['status']=="follower_and_followee"%>
+			<%else%>
+			<div class="buddy-items">
+				<div id="buddy-picture">
+					<img src="/assets/acount_no_image.png">
+				</div>
+				<div id="buddy-name">
+					<p><%= follower['follower']['username'] %></p>
+					<p><%= follower['follower']['email'] %></p>
+				</div>
+				<div id="buddy-activities">
+					<button name="follow" id="follow" class="btn" value="<%=follower['follower']['id']%>">Follow</button>
+				</div>
+			</div>
+			<%end%>
+		<%end%>
+    </div>
+  </div>
+</div>
+<!--<div id="side-buddy">
+	<div id="setting">
+		<h1 class="title">Friendships</h1>
+		<div id="buddy-box">
+			<ul id="myTab1">
+				<li class="active">
+					<a href="#requests" data-toggle="tab">Requests (<%=@requests['total_entries']%>)
+						<i class="icon-chevron-right"></i>
+			  		</a>
+				</li>
+				<li>
+					<a href="#following" data-toggle="tab">Movies Buddies (<%=@followees['total_entries']%>)
+						<i class="icon-chevron-right"></i>
+			  		</a>
+				</li>
+			  	<li>
+			  		<a href="#followers" data-toggle="tab">Friends 
+			  			<%@x=0%>
+						<% @fw1.each do |follower|%>
+							<%if (follower['status']=="follower") || (follower['status']=="followee")%>
+								<%@x=@x+1%>
+							<%else%>
+							<%end%>
+						<%end%>			  			
+						(<%=@x%>)
+			  			<i class="icon-chevron-right"></i>
+			  		</a>
+				</li>
+			</ul>
+
+		</div> <!--side-setting-box-
+	</div> <!--setting--
+</div> <!--side--
+
+
+
+<div id ="buddy-content">
+	<div id="content">
+		<h1 class="title">Buddies</h1>
+		<div id="buddy-detail">
+			<div id="myTabContent" class="tab-content">
+				<div class="tab-pane active" id="requests">
+					<div class="buddy-content-header">
+						<h4>Requests</h4>
+					</div>
+					<%=form_tag '/buddies' do %>
+						<li class="stream-item">	
+							<%= label_tag 'Send your request by enter the email, username, or phone number of the person you want to follow ' ,nil%>
+							<input id="request" name="request" type="text" placeholder="send your request">
+							<button id="bt_find_friends" name="commit" class="btn" type="submit" title="send your request">Send your request</button>
+						</li>
+					<%end%>
+					<%=form_tag '/buddies' do %>
+						<% @rq.each do |request|%>
+							<li class="stream-item">	
+								<div id="user-info">
+									<div id="buddy-image">
+										<img src="/assets/gavatar.jpg" width="50">
+									</div>
+									<div id="buddy-info">
+										<p><%= request['requester']['username'] %></p>
+										<p><%= request['requester']['email'] %></p>
+									</div>
+								</div>
+								<div id="user-action">
+									<button name="accept_and_follow" id="accept_and_follow" class="btn"value="<%=request['requester']['id']%>">Accept and Follow</button>
+									<button name="accept" id="accept" class="btn"value="<%=request['requester']['id']%>">Accept</button>
+									<button name="reject" id="reject" class="btn"value="<%=request['requester']['id']%>">Reject</button>
+								</div>
+							</li>
+						<%end%>
+					<%end%>
+				</div>
+
+				<div class="tab-pane" id="following">
+					<div class="buddy-content-header">
+						<h4>Movies Buddies</h4>
+					</div>
+					<%=form_tag '/buddies' do %>
+						<% @fw2.each do |followee|%>
+							<li class="stream-item">
+								<div id="user-info">
+									<div id="buddy-image">
+										<img src="/assets/gavatar.jpg" width="50">
+									</div>
+									<div id="buddy-info">
+										<p><%= followee['followee']['username'] %></p>
+										<p><%= followee['followee']['email'] %></p>
+									</div>
+								</div>
+								<div id="user-action">
+									<button name="unfollow" id="unfollow" class="btn" value="<%=followee['followee']['id']%>">Unfollow</button>
+								</div>
+							</li>
+						<%end%>
+					<%end%>
+				</div>
+
+				<div class="tab-pane" id="followers">
+					<div class="buddy-content-header">
+						<h4>Friends</h4>
+					</div>
+					<%=form_tag '/buddies' do %>					
+						<% @fw1.each do |follower|%>
+							<%if follower['status']=="follower_and_followee"%>
+							<%else%>
+								<li class="stream-item">
+									<div id="user-info">
+										<div id="buddy-image">
+											<img src="/assets/gavatar.jpg" width="50">
+										</div>
+										<div id="buddy-info">
+											<p><%= follower['follower']['username'] %></p>
+											<p><%= follower['follower']['email'] %></p>
+										</div>
+									</div>
+									<div id="user-action">
+										<button name="follow" id="follow" class="btn" value="<%=follower['follower']['id']%>">Follow</button>
+									</div>
+								</li>
+							<%end%>
+						<%end%>
+					<%end%>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+-->
+
+
+<%else%>
+<meta http-equiv="refresh" content="5; url=/register"> 
+
+ <h11> Sign up and enjoy with your friends! (If it does not redirect, please click --><%= link_to "Here", register_path%> )</h11>
+ <%end%> 

@@ -1,0 +1,325 @@
+
+  <%= javascript_include_tag "jquery.raty.min" %>
+  <%= javascript_include_tag "jquery.raty" %>
+
+<script type="text/javascript">
+$(function () {
+	$.fn.raty.defaults.path = '/assets/';
+    $('#star').raty({
+   	space: false,
+   	starOff: 'rate_off.png',
+  	starOn : 'rate_on.png',
+  	width: 200,
+    size: 1,
+   	numberMax: 100,
+   	number: 100,
+  	targetType: 'number',
+  	targetKeep: true
+	});
+})
+</script>
+
+<script type="text/javascript">
+$(function () {
+	$.fn.raty.defaults.path = '/assets/';
+    $('#star_director').raty({
+   	space: false,
+   	starOff: 'rate_off.png',
+  	starOn : 'rate_on.png',
+  	width: 200,
+    size: 1,
+   	numberMax: 100,
+   	number: 100,
+  	targetType: 'number',
+  	targetKeep: true
+	});
+})
+</script>
+
+<script type="text/javascript">
+$(function () {
+	$.fn.raty.defaults.path = '/assets/';
+    $('#star_actor').raty({
+   	space: false,
+   	starOff: 'rate_off.png',
+  	starOn : 'rate_on.png',
+  	width: 200,
+    size: 1,
+   	numberMax: 100,
+   	number: 100,
+  	targetType: 'number',
+  	targetKeep: true
+	});
+})
+</script>
+
+<div id="preference-content">
+	<div id="myTabContent" class="tab-content">
+    	<div id="genres_p" class="tab-pane active">
+    		<%@gp.each do |gp1| %>
+	    		<div class="preference-items">
+	    			<div id="preference-picture">
+	    				<img src="/assets/web_genre.png">
+	    			</div>
+	    			<div id="preference-name">
+	    				 <%=gp1['genre']%>
+	    			</div>
+	    			<div id="preference-activities">
+<script type="text/javascript">
+	$(function () {
+		$.fn.raty.defaults.path = '/assets/';
+	   	$("#<%= gp1['genre'] %>").raty({
+	   	space: false,
+	   	starOff: 'rate_off.png',
+	  	starOn : 'rate_on.png',
+	  	width: 200,
+	    size: 1,
+	   	numberMax: 100,
+	   	number: 100,
+	  	score: function() {
+	    return $(this).attr('data-score');
+	  	}
+		});
+	})
+</script>
+	    				<div id="<%= gp1['genre'] %>" data-score="<%= gp1['score'] %>" style="height:30px;"></div>
+	    				
+	    				<div id="pcreate-button">
+							<input name="create1" id="create1" type="submit" class="btn btn-primary" value="Create">
+						</div>
+						
+					</div>
+						
+	    		</div>
+			<%end%>
+	    </div>
+	
+    		
+    	<div id="directors_p" class="tab-pane">
+    		<%@dp.each do |dp1| %>
+	    		<div class="preference-items">
+	    			<div id="preference-picture">
+	    				<img src="/assets/web_director.png">
+	    			</div>
+	    			<div id="preference-name">
+	    				 <%=dp1['director']%>
+	    			</div>
+	    			<div id="preference-activities">
+	    				<div id="star" data-score="1"></div>
+	    				<div id="pcreate-button">
+							<input name="create1" id="create1" type="submit" class="btn btn-primary" value="Create">
+						</div>
+						
+					</div>
+						
+	    		</div>
+			<%end%>
+    	</div>
+    	<div id="actors_p" class="tab-pane">
+    		<%@ap.each do |ap1| %>
+	    		<div class="preference-items">
+	    			<div id="preference-picture">
+	    				<img src="/assets/web_actor.png">
+	    			</div>
+	    			<div id="preference-name">
+	    				 <%=ap1['actor']%>
+	    			</div>
+	    			<div id="preference-activities">
+
+	    				<div id="pcreate-button">
+							<input name="create1" id="create1" type="submit" class="btn btn-primary" value="Create">
+						</div>
+						
+					</div>
+						
+	    		</div>
+			<%end%>
+    	</div>
+    </div>
+</div>
+
+
+
+	<!--
+	<div id="content">
+		<h1 class="title"> Preferences </h1>
+		<div id="preference-entire">
+			<div id="preference-container">
+				<div id="preference-menu">
+					<ul id="myTab">
+						<li class="active"><a href="#genre" data-toggle="tab">Genre Preferences</a></li><li><a href="#director" data-toggle="tab">Director Preferences</a></li>
+						<li><a href="#actor" data-toggle="tab">Actor Preferences</a></li>
+					</ul>
+				</div>
+				<ul id="preference-info">
+					<div id="myTabContent" class="tab-content">
+
+						<div class="tab-pane active" id="genre">
+							<%#=form_tag #'/preferences' do%>
+						<div id="genre1">
+							<div id="genre-create">
+								<p> Create your genres preferences</p>
+								<select id = "genre_create" name = "genre_create" style="width:175px;">
+						        	<%##@all_genres['genres'].each do |all_genre| %>
+						        		<%#@x1= all_genre#['name']%>
+						        		<option name = "<%#=@x1%>" id=genre value="<%#=@x1%>"> <%#=@x1%></option>
+						        	<%##end%>
+						        </select>
+						    </div>
+							<div id="star" data-score="1"></div>
+						</div><!--genre1
+							<div id="pcreate-button">
+								<input name="create1" id="create1" type="submit" class="btn btn-primary" value="Create">
+							</div>
+						
+							<%##end%>
+							<div id="genre-update">
+								<%# @gp.each #do |gp1| %>
+								<%#=form_tag #'/preferences' do %>
+<script type="text/javascript">
+	$(function () {
+		$.fn.raty.defaults.path = '/assets/';
+	   	$('#<%#= gp1[#'genre'] %>').raty({
+	   	space: false,
+	   	starOff: 'rate_off.png',
+	  	starOn : 'rate_on.png',
+	  	width: 200,
+	    size: 1,
+	   	numberMax: 100,
+	   	number: 100,
+	  	score: function() {
+	    return $(this).attr('data-score');
+	  	}
+		});
+	})
+</script>
+									
+								   	<%#= gp1[#'genre'] %>
+									<%# @gp2=gp1[#'genre'] %>
+
+									<div id="<%#= gp1[#'genre'] %>" data-score="<%#= gp1[#'score'] %>" style="height:30px;"></div>
+									<input type="hidden" name="genre_update" value="<%#= #gp1['genre'] %>">
+									<button id="update" class="btn btn-success" name="update" value="Update">Update</button>  
+
+									<button id="delete" class="btn btn-danger" name="delete" value="Delete">Delete</button>  
+								<%##end%>
+								<%##end%>
+							</div>
+						</div>
+
+						<!--director preferences
+					<div class="tab-pane" id="director">
+							<%#=form_tag '/preferences' do%>
+						<div id="genre1">
+							<div id="genre-create">
+								<p> Create your director preferences</p>
+								<select id = "director_create" name = "director_create" style="width:175px;">
+						        	<%#@all_directors['directors'].each do |all_director| %>
+						        		<%#@x2= all_director['name']%>
+						        		<option name = "<%#=@x2%>" id=genre value="<%#=@x2%>"> <%#=@x2%></option>
+						        	<%#end%>
+						        </select>
+						    </div>
+							<div id="star_director" data-score="1"></div>
+						</div><!--genre1-
+							<div id="pcreate-button">
+								<input name="create2" id="create2" type="submit" class="btn btn-primary" value="Create">
+							</div>
+						
+							<%#end%>
+							<div id="genre-update">
+								<%# @dp.each do |dp1| %>
+								<%#=form_tag '/preferences' do %>
+<script type="text/javascript">
+	$(function () {
+		$.fn.raty.defaults.path = '/assets/';
+	   	$('#<%#= dp1['director_id'] %>').raty({
+	   	space: false,
+	   	starOff: 'rate_off.png',
+	  	starOn : 'rate_on.png',
+	  	width: 200,
+	    size: 1,
+	   	numberMax: 100,
+	   	number: 100,
+	  	score: function() {
+	    return $(this).attr('data-score');
+	  	}
+		});
+	})
+</script>
+									
+								   	<%#= dp1['director'] %>
+									<%# @dp2=dp1['director'] %>
+
+									<div id="<%#= dp1['director_id'] %>" data-score="<%#= dp1['score'] %>" style="height:30px;"></div>
+									<input type="hidden" name="director_update" value="<%#= dp1['director'] %>">
+									<button id="update2" class="btn btn-success" name="update2" value="Update">Update</button>  
+
+									<button id="delete2" class="btn btn-danger" name="delete2" value="Delete">Delete</button>  
+								<%#end%>
+								<%#end%>
+							</div>
+						</div>				
+
+						<!--actor preferences
+						<div class="tab-pane" id="actor">
+							<%#=form_tag '/preferences' do%>
+						<div id="genre1">
+							<div id="genre-create">
+								<p> Create your actor preferences</p>
+								<select id = "actor_create" name = "actor_create" style="width:175px;">
+						        	<%#@all_actors['actors'].each do |all_actor| %>
+						        		<%#@x3= all_actor['name']%>
+						        		<option name = "<%#=@x3%>" id=genre value="<%#=@x3%>"> <%#=@x3%></option>
+
+
+						     
+						        	<%#end%>
+						        </select>
+						    </div>
+							<div id="star_actor" data-score="1"></div>
+						</div><!--genre1
+							<div id="pcreate-button">
+								<input name="create3" id="create3" type="submit" class="btn btn-primary" value="Create">
+							</div>
+						
+							<%#end%>
+							<div id="genre-update">
+								<%# @ap.each do |ap1| %>
+								<%#=form_tag '/preferences' do %>
+<script type="text/javascript">
+	$(function () {
+		$.fn.raty.defaults.path = '/assets/';
+	   	$('#<%#= ap1['id'] %>').raty({
+	   	space: false,
+	   	starOff: 'rate_off.png',
+	  	starOn : 'rate_on.png',
+	  	width: 200,
+	    size: 1,
+	   	numberMax: 100,
+	   	number: 100,
+	  	score: function() {
+	    return $(this).attr('data-score');
+	  	}
+		});
+	})
+</script>
+									
+								   	<%#= ap1['actor'] %>
+									<%# @ap2=ap1['actor'] %>
+									
+									<div id="<%#= ap1['id'] %>" data-score="<%#= ap1['score'] %>" style="height:30px;"></div>
+									<input type="hidden" name="actor_update" value="<%#= ap1['actor'] %>">
+									<button id="update3" class="btn btn-success" name="update3" value="Update">Update</button>  
+
+									<button id="delete3" class="btn btn-danger" name="delete3" value="Delete">Delete</button>  
+								<%#end%>
+								<%#end%>
+							</div>
+						</div>
+					</div>
+				</ul>
+			</div>
+		</div><!--preference-entire--
+	</div>
+</div><!--preference-content-->

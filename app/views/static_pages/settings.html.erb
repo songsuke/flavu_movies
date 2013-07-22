@@ -1,0 +1,417 @@
+<!--<div id="main" class="group" role="main">-->
+
+<div id="side">
+	<div id="setting">
+		<div id="side-setting-box">
+			<ul id="myTab1">
+			  <li class="active"><a href="#account_settings" data-toggle="tab">Account Settings</a></li>
+			  <li><a href="#options_settings" data-toggle="tab">Options Settings</a></li>
+			  <li><a href="#privacy" data-toggle="tab">Privacy</a></li>
+			</ul>
+
+		</div> <!--side-setting-box-->
+	</div> <!--setting-->
+</div> <!--side-->
+
+
+<div id="setting-content">
+	<div id="content">
+		<div id="setting-detail">
+			<div id="myTabContent" class="tab-content">
+				<div class="tab-pane active" id="account_settings">
+          <%if(!cookies.signed[:auth])%>
+             <h11> Sign up to have an account--><%= link_to "Here", register_path%> )</h11>
+          <%else%>
+					<div id="setting-head">
+						<h1 class="title">General Account Setting</h1>
+					</div>
+					<%if flash[:error1]%>
+				    	<div class="alert alert-error"><%= flash[:error1]%></div>
+				    <%elsif flash[:notice1]%>
+				    	<div class="alert alert-success"><%= flash[:notice1]%></div>
+				    <%end%>
+<%=form_tag '/settings' do %>
+<div class="accordion" id="accordion2">
+  <div class="accordion-group"> <!--email-->
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+        <p id="setting_to_left"> Email </p>
+        <p id="setting_to_right"> Edit </p>
+        <p id="setting_to_center"> <%=@account['email']%> </p>
+      </a>
+    </div>
+    <div id="collapseOne" class="accordion-body collapse" style="height:0px;">
+      <div class="accordion-inner">
+      	<div id="arrange">
+			<%= label_tag 'Email : ' ,nil, :class => 'inline_label'%>
+	    	<%= text_field_tag "email" , "#{@account['email']}", :class=>'setting-text'%>
+	    	<div class="alert alert-info">
+	    		<p>Email should be in form like this youremail@example.com</p>
+	    	</div>
+
+	 	</div>
+	  </div>
+    </div>
+  </div>
+
+  <div class="accordion-group"> <!--username-->
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+		<p id="setting_to_left"> Username </p>
+        <p id="setting_to_right"> Edit </p>
+        <p id="setting_to_center"> <%=@account['username']%> </p>      
+      </a>
+    </div>
+    <div id="collapseTwo" class="accordion-body collapse">
+      <div class="accordion-inner">
+		<div id="arrange">
+			<%= label_tag 'Username : ' ,nil, :class => 'inline_label'%>
+	    	<%= text_field_tag "username" , "#{@account['username']}", :class=>'setting-text'%>
+
+	 	</div>
+	  </div>
+    </div>
+  </div>
+
+  <div class="accordion-group"> <!--display name-->
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
+		<p id="setting_to_left"> Display Name </p>
+        <p id="setting_to_right"> Edit </p>
+        <p id="setting_to_center"> <%=@account['display_name']%> </p>
+      </a>
+    </div>
+    <div id="collapseThree" class="accordion-body collapse">
+      <div class="accordion-inner">
+        <div id="arrange">
+			<%= label_tag 'Display Name : ' ,nil, :class => 'inline_label'%>
+	    	<%= text_field_tag "display_name" , "#{@account['display_name']}", :class=>'setting-text'%>      
+ 	
+	 	</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion-group"> <!--phone number-->
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseFour">
+		<p id="setting_to_left"> Phone Number </p>
+        <p id="setting_to_right"> Edit </p>
+        <p id="setting_to_center"> <%=@account['phone_number']%> </p>
+      </a>
+    </div>
+    <div id="collapseFour" class="accordion-body collapse">
+      <div class="accordion-inner">
+        <div id="arrange">
+			<%= label_tag 'Phone Number : ' ,nil, :class => 'inline_label'%>
+	    	<%= text_field_tag "phone_number" , "#{@account['phone_number']}", :class=>'setting-text'%>    
+ 
+	 	</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion-group"> <!--password-->
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseFive">
+		<p id="setting_to_left"> Password </p>
+        <p id="setting_to_right"> Edit </p>
+        <p id="setting_to_center"> Change Password </p>
+      </a>
+    </div>
+    <div id="collapseFive" class="accordion-body collapse">
+      <div class="accordion-inner">
+        <div id="arrange">
+			     
+	    	<%= label_tag 'Password : ' ,nil, :class => 'inline_label' %>
+			<%= password_field_tag "password" ,nil ,:class=>'setting-text' %>
+	 	</div>
+
+	 	 <div id="arrange">
+			     
+	    	<%= label_tag 'Password Confirmation : ' ,nil, :class => 'inline_label' %>
+			<%= password_field_tag "password_confirmation" ,nil ,:class=>'setting-text' %>
+	 	</div>
+	 	<div class="alert alert-info">
+	 		<p>Password has to be more than 6 characters</p>
+	 	</div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+</div><!--accordion2-->
+      <%= label_tag 'Please enter your password : ' ,nil, :class => 'inline_label' %>
+      <%= password_field_tag "current_password" ,nil ,:class=>'setting-text' %>
+      <div class='controls'>
+        <input name="commit1" id="commit1" type="submit" class="btn btn-primary" value="Update" style="float:right; margin-right:20px; margin-bottom:10px;">
+    </div>
+<%end%>
+<%end%>
+				</div><!--account_settings-->
+
+
+				<div class="tab-pane" id="options_settings">
+					<div id="setting-head">
+						<h1 class="title">Options Setting</h1>
+					</div>
+<div class="accordion" id="accordion3">
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapseSO">
+		<p id="setting_to_left"> Search Options </p>
+        <p id="setting_to_right"> Edit </p>
+        <p id="setting_to_center"> 
+       		<%=cookies.signed[:SO_radius]%>
+       		<%=cookies.signed[:SO_unit]%>
+        </p>      
+      </a>
+    </div>
+    <div id="collapseSO" class="accordion-body collapse">
+      <div class="accordion-inner">
+
+		  <%=form_tag '/settings' do %>
+        <p style="display:block; margin-bottom:0px; margin-top:5px">Radius</p>
+        <% if cookies.signed[:SO_radius] == "5" %>
+          <%= radio_button_tag(:radius, "5", :checked => 1) %>
+          <%= label_tag '5' ,nil, :class => 'inline_label' %>
+          <%= radio_button_tag(:radius, "10") %>
+          <%= label_tag '10' ,nil, :class => 'inline_label' %>
+          <%= radio_button_tag(:radius, "30") %>
+          <%= label_tag '30' ,nil, :class => 'inline_label' %>
+        <% elsif cookies.signed[:SO_radius] == "10" %>
+          <%= radio_button_tag(:radius, "5") %>
+          <%= label_tag '5' ,nil, :class => 'inline_label' %>
+          <%= radio_button_tag(:radius, "10", :checked => 1) %>
+          <%= label_tag '10' ,nil, :class => 'inline_label' %>
+          <%= radio_button_tag(:radius, "30") %>
+          <%= label_tag '30' ,nil, :class => 'inline_label' %>
+        <% else %>
+          <%= radio_button_tag(:radius, "5") %>
+          <%= label_tag '5' ,nil, :class => 'inline_label' %>
+          <%= radio_button_tag(:radius, "10") %>
+          <%= label_tag '10' ,nil, :class => 'inline_label' %>
+          <%= radio_button_tag(:radius, "30", :checked => 1) %>
+          <%= label_tag '30' ,nil, :class => 'inline_label' %>
+        <% end %>
+
+        <p style="display:block; margin-bottom:0px; margin-top:5px">Unit</p>
+        <% if cookies.signed[:SO_unit] == "km" %>
+          <%= radio_button_tag(:unit, "km", :checked => 1) %>
+          <%= label_tag 'Kilometres' ,nil, :class => 'inline_label' %>
+          <%= radio_button_tag(:unit, "mi") %>
+          <%= label_tag 'Miles' ,nil, :class => 'inline_label' %>
+        <% else %>
+          <%= radio_button_tag(:unit, "km") %>
+          <%= label_tag 'Kilometres' ,nil, :class => 'inline_label' %>
+          <%= radio_button_tag(:unit, "mi", :checked => 1) %>
+          <%= label_tag 'Miles' ,nil, :class => 'inline_label' %>
+        <% end %>
+
+        <div class='controls'>
+		      <input name="commitSO" id="commitSO" type="submit" class="btn btn-primary" value="Update" style="float:right; margin-right:20px; margin-bottom:10px;">
+		    </div>
+      <%end%>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapseMLO">
+        Movies List Options
+      </a>
+    </div>
+    <div id="collapseMLO" class="accordion-body collapse">
+      <div class="accordion-inner">
+        <%=form_tag '/settings' do %>
+          <p style="display:block; margin-bottom:0px; margin-top:5px">Genres Option</p>
+          <% if cookies.signed[:MLO_genres] == "true" %>
+            <%= radio_button_tag(:genres, "true", :checked => 1) %>
+            <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+            <%= radio_button_tag(:genres, "false") %>
+            <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <% else %>
+            <%= radio_button_tag(:genres, "true") %>
+            <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+            <%= radio_button_tag(:genres, "false", :checked => 1) %>
+            <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <% end %>
+
+          <p style="display:block; margin-bottom:0px; margin-top:5px">Actors Options</p>
+          <% if cookies.signed[:MLO_actors] == "true" %>
+            <%= radio_button_tag(:actors, "true", :checked => 1) %>
+            <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+            <%= radio_button_tag(:actors, "false") %>
+            <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <% else %>
+            <%= radio_button_tag(:actors, "true") %>
+            <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+            <%= radio_button_tag(:actors, "false", :checked => 1) %>
+            <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <% end %>
+
+          <p style="display:block; margin-bottom:0px; margin-top:5px">Directors Option</p>
+          <% if cookies.signed[:MLO_directors] == "true" %>
+            <%= radio_button_tag(:directors, "true", :checked => 1) %>
+            <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+            <%= radio_button_tag(:directors, "false") %>
+            <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <% else %>
+            <%= radio_button_tag(:directors, "true") %>
+            <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+            <%= radio_button_tag(:directors, "false", :checked => 1) %>
+            <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <% end %>
+
+          <p style="display:block; margin-bottom:0px; margin-top:5px">Rating and Runtime Option</p>
+          <% if cookies.signed[:MLO_raterun] == "true" %>
+            <%= radio_button_tag(:raterun, "true", :checked => 1) %>
+            <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+            <%= radio_button_tag(:raterun, "false") %>
+            <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <% else %>
+            <%= radio_button_tag(:raterun, "true") %>
+            <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+            <%= radio_button_tag(:raterun, "false", :checked => 1) %>
+            <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <% end %>
+
+          <div class='controls'>
+            <input name="commitMLO" id="commitMLO" type="submit" class="btn btn-primary" value="Update" style="float:right; margin-right:20px; margin-bottom:10px;">
+          </div>
+        <%end%>
+      </div>
+    </div>
+  </div>
+<div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapseTLO">
+        Theatres List Options
+      </a>
+    </div>
+    <div id="collapseTLO" class="accordion-body collapse">
+      <div class="accordion-inner">
+        <%=form_tag '/settings' do %>
+          <p style="display:block; margin-bottom:0px; margin-top:5px">Address Option</p>
+          <% if cookies.signed[:TLO_address] == "true" %>
+            <%= radio_button_tag(:address, "true", :checked => 1) %>
+            <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+            <%= radio_button_tag(:address, "false") %>
+            <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <% else %>
+            <%= radio_button_tag(:address, "true") %>
+            <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+            <%= radio_button_tag(:address, "false", :checked => 1) %>
+            <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <% end %>
+
+          <p style="display:block; margin-bottom:0px; margin-top:5px">Phone Number Option</p>
+          <% if cookies.signed[:TLO_phone_number] == "true" %>
+            <%= radio_button_tag(:phone_number, "true", :checked => 1) %>
+            <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+            <%= radio_button_tag(:phone_number, "false") %>
+            <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <% else %>
+            <%= radio_button_tag(:phone_number, "true") %>
+            <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+            <%= radio_button_tag(:phone_number, "false", :checked => 1) %>
+            <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <% end %>
+
+          <p style="display:block; margin-bottom:0px; margin-top:5px">Distance Option</p>
+          <% if cookies.signed[:TLO_distance] == "true" %>
+            <%= radio_button_tag(:distance, "true", :checked => 1) %>
+            <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+            <%= radio_button_tag(:distance, "false") %>
+            <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <% else %>
+            <%= radio_button_tag(:distance, "true") %>
+            <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+            <%= radio_button_tag(:distance, "false", :checked => 1) %>
+            <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <% end %>
+
+          <div class='controls'>
+            <input name="commitTLO" id="commitTLO" type="submit" class="btn btn-primary" value="Update" style="float:right; margin-right:20px; margin-bottom:10px;">
+          </div>
+        <%end%>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapseMO">
+        Map Options
+      </a>
+    </div>
+    <div id="collapseMO" class="accordion-body collapse">
+      <div class="accordion-inner">
+        <%=form_tag '/settings' do %>
+          <p style="display:block; margin-bottom:0px; margin-top:5px">Liked Theatres Option</p>
+          <% if cookies.signed[:MO_liked_theatres] == "true" %>
+            <%= radio_button_tag(:liked_theatres, "true", :checked => 1) %>
+            <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+            <%= radio_button_tag(:liked_theatres, "false") %>
+            <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <% else %>
+            <%= radio_button_tag(:liked_theatres, "true") %>
+            <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+            <%= radio_button_tag(:liked_theatres, "false", :checked => 1) %>
+            <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <% end %>
+
+          <p style="display:block; margin-bottom:0px; margin-top:5px">Nearby Theatres Option</p>
+          <% if cookies.signed[:MO_nearby_theatres] == "true" %>
+            <%= radio_button_tag(:nearby_theatres, "true", :checked => 1) %>
+            <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+            <%= radio_button_tag(:nearby_theatres, "false") %>
+            <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <% else %>
+            <%= radio_button_tag(:nearby_theatres, "true") %>
+            <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+            <%= radio_button_tag(:nearby_theatres, "false", :checked => 1) %>
+            <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <% end %>
+
+          <p style="display:block; margin-bottom:0px; margin-top:5px">Disliked Theatres Option</p>
+          <% if cookies.signed[:MO_disliked_theatres] == "true" %>
+            <%= radio_button_tag(:disliked_theatres, "true", :checked => 1) %>
+            <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+            <%= radio_button_tag(:disliked_theatres, "false") %>
+            <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <% else %>
+            <%= radio_button_tag(:disliked_theatres, "true") %>
+            <%= label_tag 'on' ,nil, :class => 'inline_label' %>
+            <%= radio_button_tag(:disliked_theatres, "false", :checked => 2) %>
+            <%= label_tag 'off' ,nil, :class => 'inline_label' %>
+          <% end %>
+          
+          <div class='controls'>
+            <input name="commitMO" id="commitMO" type="submit" class="btn btn-primary" value="Update" style="float:right; margin-right:20px; margin-bottom:10px;">
+          </div>
+        <%end%>
+      </div>
+    </div>
+  </div>
+
+</div>
+				</div><!--options_settings-->
+
+				<div class="tab-pane" id="privacy">
+					<div id="setting-head">
+						<h1 class="title">Privacy</h1>
+					</div>
+
+				</div><!--privacy-->
+			</div><!--tab-content-->
+
+		</div><!--setting-detail-->
+	</div><!--content-->
+</div><!--setting-content-->
+
+
+
+	   

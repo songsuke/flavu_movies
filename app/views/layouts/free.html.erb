@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>EasilyxMovie</title>
+  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "bootstrap/js/bootstrap" %>
+  <%= javascript_include_tag "bootstrap/js/bootstrap.min" %>
+  <%= stylesheet_link_tag "bootstrap/css/bootstrap", :media => "all" %>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= stylesheet_link_tag    "custom", :media => "all" %>
+
+  <%= csrf_meta_tags %>
+
+  <%if @a1 && @guests %>
+  <meta http-equiv="refresh" content="0; url=/cover"> 
+
+<%else%>
+</head>
+<body>
+
+<div id="wrapper">
+	<header id="head">
+		<h1 id="logo"> <%= link_to "Flavu MoviesX", home_path %> </h1>
+		<nav id="mainnav">
+			<div class="main-menu">
+				<ul id= "main-menu" class="menu">
+					<li><%= link_to "Movies", movies_path %> </li>
+					<li><%= link_to "Theatres", theatres_path %> </li>
+					<li><%= link_to "Buddies", buddies_path %> </li>
+					<li><%= link_to "Preferences", preferences_path %> </li>
+
+						
+					<%if (!session['auth'])%>
+					<li><%= link_to "Register", register_path %></li>
+						
+					<li><%= link_to "Sign In", signin_path %>  </li>
+					<%else%>
+					<li><%= link_to "Setting", settings_path %> </li>
+					<li><%= link_to "Sign out", signout_path %>  </li>
+					<%end%>
+
+				</ul>
+			</div>
+		</nav>
+	</header>
+	
+</div>
+
+	<div class = "container">
+
+	<%=render 'layouts/showtime'%>
+<div id="main" class="group" role="main">
+
+<%=yield%>
+</div>
+<%=render 'layouts/footer' %>
+
+</div>
+
+
+<%end%>
+
+
+
+
+</body>
+</html>

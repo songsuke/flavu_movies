@@ -1,0 +1,143 @@
+<div id="quick-showtime">
+	<div id="navigation-bar">
+		<div id="left">
+			<!--Main Menus-->
+				<div id="movies-link" class="current" >
+					<%= link_to "MOVIES" , root_path%>
+				</div>
+				<div id="movies-link" class="current" >
+					<%= link_to "THEATRES" , theatres_path%>
+				</div>
+				<div id="movies-link" class="current" >
+					<%= link_to "BUDDIES" , buddies_path%>
+				</div>
+				<!--Check if preferences page is on-->
+				<%if @layout_type == "preferences"%>
+					<div id="movies-link" class="current" >
+						<%= link_to "TASTE PROFILE" , preferences_path%>
+					</div>
+				<%end%>
+		</div>
+			<!--
+			<li role="navigation">
+				<li class="dropdown">
+					<a id="drop1" class="brand dropdown-toggle" href="#" role="button" data-toggle="dropdown">Flavu <span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+						<li id="dropdown1" role="presentation"><a role="menuitem" tabindex="-1" href="http://blog.flavu.com/">Blog</a></li>
+						<li id="dropdown1" role="presentation"><a role="menuitem" tabindex="-1" href="/contact">Contact</a></li>
+						<li id="dropdown1" role="presentation"><a role="menuitem" tabindex="-1" href="aboutus">About Us</a></li>
+					</ul>
+				</li>
+			</li>
+			<li><%= link_to "News" , news_path%></li>
+
+			<li><%= link_to "Showtimes" , showtimes_path%></li>
+			<li><%= link_to "Trailers" , trailers_path%></li>
+			
+
+			<!--<li><%= link_to "Reviews" , reviews_path%></li>
+			
+			<li><%= link_to "Box Office" , boxoffice_path%></li>
+			<%if cookies.signed['auth']%>
+			<li>
+				<%=form_tag '/buddies' ,:style=>"margin:0;" do%>
+					<input id="request" name="request" type="text" placeholder="Send requests to your buddies">
+					<button id="bt_find_friends" name="commit" class="icon-search" type="submit" title="Send requests to your buddies"></button>
+				<%end%>
+			</li>
+			<%else%>
+			<%end%>
+			-->
+
+			<!--
+			<%if (!cookies.signed[:auth])%>
+				<li>
+		
+					<a href="#myModal" data-toggle="modal" data-backdrop="true" class="title" >Log In</a>
+					<div id="myModal" class="modal fade hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-header">
+		    				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		    				<h3 class="title">Log In</h3>
+		    			</div>
+		    			<div class="modal-body">
+		    				<%if flash[:error]%><div class="alert"><%= flash[:error]%></div><%end%>
+							<%= form_tag '/checklogin' ,:class=>"form-horizontal" do %>
+						        <div class="control-group">
+						          <label class="control-label" for="inputEmail">Login</label>
+						          <div class="controls">    
+						            <%= text_field_tag "login" ,nil,:placeholder=>"Username or Email"%>
+						          </div>
+						        </div>
+						        <div class="control-group">
+						          <label class="control-label" for="inputPassword">Password</label>
+						          <div class="controls">    
+						            <%= password_field_tag "password" ,nil,:placeholder=>"Password" %>
+						          </div>
+						        </div>
+						        <div class="control-group">
+						          <div class="controls">
+						            <label class="checkbox">
+						              <%=check_box("checkbox", "check")%>
+						              Remember me
+						            </label>
+						            <button name="confirm" id="confirm" value="confirm" type="submit" class="btn"> Login </button>  
+						          </div>  
+						        </div>
+						        <div class="control-group">
+						          <div class="controls">
+						          	<div id="forgot-password">
+						          		<%=link_to "forgot password?", forgot_password_path%>
+						          	</div>
+						          </div>  
+						        </div>
+						    <%end%>
+		  				</div>
+					</div>
+				</li>
+				<li>
+					<a href="/register" class="title">Register</a>
+				</li>
+			<%else%>
+
+			<li class="dropdown">
+				<a id="drop1" class="brand dropdown-toggle" href="#" role="button" data-toggle="dropdown">Your Welcome <%=cookies.signed['username']%> <span class="caret"></span></a>
+				<ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+					<li id="dropdown1" role="presentation"><a role="menuitem" tabindex="-1" href="/signout">Sign Out</a></li>
+					<!--<%#if%>
+					<li id="dropdown1" role="presentation"><a role="menuitem" tabindex="-1" href="/auth/facebook">Log in with Facebook</a></li>
+					<%#else%>
+					<%#end%>
+					<%if !cookies.signed[:social_accounts]%>
+					<li id="dropdown1" role="presentation"><a role="menuitem" tabindex="-1" href="/link_fb">Link to Facebook</a></li>
+					<%else%>
+					<li id="dropdown1" role="presentation"><a role="menuitem" tabindex="-1" href="/unlink_fb">Unlink from Facebook</a></li>
+					<%end%>
+				</ul>
+			</li>
+			<%end%>-->
+
+			
+			<!--Tabs-->
+			<ul class ="right">
+				
+				<%if @layout_type == "movies"%>
+					<li><a href="#interested" data-toggle="tab">Interested Movies</a></li>
+					<li class="active"><a href="#remaining" data-toggle="tab">Remaining Movies</a></li>
+					<li><a href="#not_interested" data-toggle="tab">Not Interested Movies</a></li>
+					<li><a href="#watched_lists" data-toggle="tab">Watched Lists</a></li>
+				<%elsif @layout_type == "theatres"%>
+					<li><a href="#liked" data-toggle="tab">Liked</a></li>
+					<li class="active"><a href="#nearby" data-toggle="tab">Nearby</a></li>
+					<li><a href="#unliked_th" data-toggle="tab">Unliked</a></li>
+				<%elsif @layout_type == "buddies"%>
+					<li class="active"><a href="#movie_buddies" data-toggle="tab">Movie Buddies</a></li>
+					<li><a href="#requests" data-toggle="tab">Requests(<%=@requests['total_entries']%>)</a></li>
+					<li><a href="#friends" data-toggle="tab">Friends</a></li>
+				<%elsif @layout_type == "preferences"%>
+					<li class="active"><a href="#genres_p" data-toggle="tab">Genres</a></li>
+					<li><a href="#directors_p" data-toggle="tab">Directors</a></li>
+					<li><a href="#actors_p" data-toggle="tab">Actors</a></li>
+				<%end%>
+			</ul>
+	</div><!--navbar-inner-->
+</div>

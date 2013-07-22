@@ -1,0 +1,307 @@
+html {
+	font-size: 100%;
+	overflow-y: scroll;
+}
+
+body.custom-background {
+	background-color: #000;
+	background-image: url('a2.jpg');
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: top center;
+}
+
+body {
+	font-family: "Helvetica Neue",Arial,Helvetica,Geneva,sans-serif;
+	background-color: #000;
+	color: white;
+	line-height: 1.6; 
+	font-size: 15px;
+}
+a {
+	outline: none;
+	text-decoration: none;
+}
+
+h11	{
+	color:black;
+	font-weight: normal;
+	font-size: 18px;
+	float: left;
+	margin: 0;
+	padding: 0 0 0 10px;
+	text-shadow: 0 1px 0 #fff;
+}
+
+h2 {
+	font-size: 15px;
+	line-height: 1.2;
+}
+
+#viewport {
+	width: 1080px;
+	margin:0 auto;
+	overflow: hidden;
+}
+
+#wrapper {
+	width: 1024px;
+	margin:0 auto;
+	position: relative;
+}
+
+#logo {
+	float: left;
+	width: 176;
+	margin: 0px;
+	padding-left: 20px;
+	font-size: 26px;
+	a {
+		color: white;
+		text-decoration: none;
+	}
+}
+
+
+#head {
+	height: 82px;
+	padding: 22px 35px 0 15px;
+	overflow: hidden;
+}
+
+#mainnav {
+	float: right;
+	text-align: right;
+	padding-top: 32px;
+	font: 20px DBHelvethaicaX55Regular,san-serif;
+
+
+	a {
+		color: #ccc;
+		text-decoration: none;
+		text-shadow: 1px 1px 0 rgba(0,0,0,.23);
+	}
+
+	li {
+		display: inline;
+		margin-left: 44px;
+	}
+
+	li.theatres-menu-item-1 {
+		margin: 0px;
+	}
+
+	li.movies-menu-item-1 {
+	}
+	
+}
+
+ul, li, ol {
+	padding: 0;
+	margin: 0;
+}
+
+nav ul, nav ol {
+	list-style: none;
+	list-style-image: none;
+	margin: 0;
+	padding: 0;
+}
+ul.main-menu {
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+#bar {
+	clear: both;
+	height: 46px;
+	border-radius: 5px 3px 0 0;
+	background-image: url('quick-bg.png');
+	box-shadow: 0 0 2px rgba(0,0,0,.2);
+	height: 46px;
+	h2 {
+		margin: 0;
+		text-indent: 300%;
+		white-space: nowrap;
+		overflow: hidden;
+		width: 237px;
+		height: 37px;
+		border-radius: 3px 0 0 0;
+		float: left;
+		color: black;
+		padding-top: 10px;
+		
+	}
+}
+
+body #bar h2 {
+	background-image: url('quick-head-en.png');
+}
+
+
+
+/*slide show*/
+#banner {
+  width: 1024px;
+  margin: 0 auto;
+}
+
+#banner .arrow.right {
+	position: absolute;
+	top: 135px;
+	right: 0px;
+	text-indent: 300%;
+	white-space: nowrap;
+	overflow: hidden;
+	background-color: none;
+	background: url('arrow-right.png') no-repeat;
+	width: 52px;
+	height: 50px;
+	opacity: 1;
+}
+
+#banner .arrow.left {
+	position: absolute;
+	top: 135px;
+	left: 0px;
+	text-indent: 300%;
+	white-space: nowrap;
+	overflow: hidden;
+	background-color: none;
+	background: url('arrow-left.png') no-repeat;
+	width: 52px;
+	height: 50px;
+	opacity: 1;
+}
+
+#slide {
+	padding: 0px;
+}
+
+.slider {
+  width: 1024px; /* Update to your slider width */
+  height: 350px; /* Update to your slider height */
+  position: relative;
+  overflow: hidden;
+}
+
+.slider li {
+  display: none;
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+}
+
+#main {
+	background-color: #eee;
+	box-shadow: 0 0 8px rgba(0,0,0,.2);
+	z-index: 1;
+	position: relative;
+	min-height: 700px;
+}
+
+#home-content {
+	float: right;
+	margin: 26px 26px 0 0;
+	width: 686px;
+}
+
+#box_tab h11 {
+	float: left;
+	margin: 0;
+	padding: 0 0 0 10px;
+	text-shadow: 0 1px 0 #fff;
+}
+
+#box_tab ul {
+	float: right;
+	margin: 0;
+	padding-right: 3px;
+}
+
+#box_tab ul li {
+	list-style: none;
+	display: inline;
+	float: left;
+}
+
+#box_tab li.ui-state-active a {
+	z-index: 11;
+	background-image: url('tab-active.png');
+	color: #a73e2a;
+	text-shadow: 0 1px 0 rgba(0,0,0,.31);
+	line-height: 40px;
+	font-size: 22px;
+}
+
+#box_tab li a{
+
+	display: block;
+	width: 147px;
+	height: 36px;
+	text-align: center;
+	background-image: url('tab.png');
+	font: 14px/36px 'DBHelvethaicaX55Regular';
+	color: #fff;
+	margin-left: -25px;
+	position: relative;
+	text-shadow: 0 -1px 0 rgba(0,0,0,.26);
+}
+
+#box_tab li.t1 a {
+	z-index: 10;
+}
+
+#box_tab li.t2 a {
+	z-index: 9;
+}
+
+#box_tab li.t3 a {
+	z-index: 8;
+}
+
+#box_tab .li {
+	padding: 13px 13px 10px;
+}
+
+#box_menu li{
+	display: inline;
+}
+
+div.hidden{
+	display:none;
+}
+
+#box_tab .panel {
+	clear: both;
+	border-radius: 3px;
+	padding: 7px 10px;
+	background-color: #fff;
+	box-shadow: 0 1px 3px rgba(25,25,25,.5);
+	margin-bottom: 26px;
+	min-height: 600px;
+}
+
+
+.group{
+	zoom:1;
+}
+
+#box_tab .movie_items {
+	padding: 13px 13px 10px;
+}
+
+.movie-item {
+	float: left;
+	padding: 5px;
+	margin: 3px;
+	border: 1px solid #fff;
+	border-radius: 3px;
+	display: block;
+	width: 142px;
+	height: 274px;
+	overflow: hidden;
+	position: relative;
+	text-shadow: 0 1px 0 #fff;
+}

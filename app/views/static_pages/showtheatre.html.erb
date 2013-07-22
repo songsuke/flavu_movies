@@ -1,0 +1,195 @@
+<div id="home-content">
+			<h1 class="title">
+				<%=@st['name']%>
+			</h1>
+	<div id="showtheatre-content">
+			<div id="showtheatre-info">
+				<ul>
+					<%if cookies.signed[:TLO_address]=="false"%>
+  			  		<%else%>
+					<li> Address : <%=@st['location']['address']%></li>
+					<li> City : <%=@st['location']['city']%></li>
+					<li> Country : <%=@st['location']['country']%></li>
+					<li> Postal Code : <%=@st['location']['postal_code']%></li>
+					<li> Province : <%=@st['location']['province']%></li>
+					<%end%>
+					<li> Latitude : <%=@st['location']['latitude']%></li>
+					<li> Longitude :<%=@st['location']['longitude']%></li>
+					<%if cookies.signed[:TLO_distance]=="false"%>
+  			  		<%else%>
+					<li> Distance : <%=@st['distance']%></li>
+					<%end%>
+					<%if cookies.signed[:TLO_phone_number]=="false"%>
+  			  		<%else%>
+					<li> Phone Number : <%=@st['phone_number']%></li>
+					<%end%>
+					<%if (@st['liked']==true && cookies.signed[:MO_liked_theatres]=="false")%>
+					<%elsif (@st['liked']==false && @st['not_interested']==false && cookies.signed[:MO_nearby_theatres]=="false")%>
+					<%elsif (@st['not_interested']==true && cookies.signed[:MO_disliked_theatres]=="false")%>
+					<%else%>	
+
+<!--Google Maps API-->
+<script type="text/javascript"src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=<%=ENV["NAME"]%>&sensor=false">
+</script>	
+
+<script>
+var directionsDisplay;
+var directionsService = new google.maps.DirectionsService();
+var map;
+
+function initialize() {
+  directionsDisplay = new google.maps.DirectionsRenderer();
+
+  var chicago = new google.maps.LatLng(<%=cookies.signed[:latitude]%>,<%=cookies.signed[:longitude]%>);
+  var mapOptions = {
+    zoom:14,
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    center: chicago
+  }
+  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+  directionsDisplay.setMap(map);
+}
+
+function calcRoute() {
+  var selectedMode = document.getElementById('mode').value;
+  var start = document.getElementById('start').value;
+  var end = "<%=@st['location']['latitude']%>, <%=@st['location']['longitude']%>";
+  var request = {
+      origin:start,
+      destination:end,
+      travelMode: google.maps.TravelMode[selectedMode]
+  };
+  directionsService.route(request, function(response, status) {
+    if (status == google.maps.DirectionsStatus.OK) {
+      directionsDisplay.setDirections(response);
+    }
+  });
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+
+<div id="showmap">
+    <div id="panel">
+    	<div id="map-search">
+		    <b>Start : </b>
+		    <select id="start" onchange="calcRoute();">
+		      <%if @lat_lng%>
+			      <option value="<%=@lat_lng[0]%>,<%=@lat_lng[1]%>">Your Current Position</option>
+			  <%end%>
+		      <option value="<%=cookies.signed[:latitude]%>,<%=cookies.signed[:longitude]%>">Approximately Estimated Location</option>
+		    </select>
+		</div>
+		<div id="map-search">
+	    <b>To : </b> <%=@st['name']%>
+		    <!--<select id="end" onchange="calcRoute();">
+		      <option value="<%=@st['location']['latitude']%>, <%=@st['location']['longitude']%>"><%=@st['name']%></option>
+		    </select>-->
+		</div>
+		<div id="map-mode">
+	    <b>Mode : </b>
+		    <select id="mode" onchange="calcRoute();">
+		      <option value="DRIVING">Driving</option>
+		      <option value="WALKING">Walking</option>
+		      <option value="BICYCLING">Bicycling</option>
+		      <option value="TRANSIT">Transit</option>
+		    </select>
+		</div>
+	    <p>**If you do not allow it to track you, your location will be estimated.</p>
+
+	    <%- unless @lat_lng %>
+			<script>
+			  	getGeoLocation();
+			</script>
+		<%- end %>
+	</div>
+</div>
+    <div id="map-canvas"></div>
+					<%end%>
+				</ul>
+			</div>
+		<div id="nowshowing-showtheatre">
+			<div class="group">
+				<%@st['movies'].each do |movie|%>
+					<div class="movie-items1">
+						<% if movie['photos'].length >0 %>
+		                   	<%photo = movie['photos'].first%> 
+		                    <%if photo['poster']==true%>
+				                <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid => movie['id'] do%>
+				                    <div class="movie-items2">
+										<div id="movie-items-pics">
+					                       	<img src="<%=photo['url']%>" class="img-rounded">
+					                    </div>
+					                    <div id="movie-items-info-tiny">
+						                    <p style="font-weight:bold;"><%=movie['title']%></p>		              
+					                      	<div id="hiding">
+						                   		<p>
+													<%movie['genres'].each do |a2|%>
+														<%=a2['name']%>
+													<%end%>
+												</p>
+												<p>
+													<%movie['directors'].each do |a2|%>
+														<%=a2['name']%>
+													<%end%>
+												</p>
+				                       		</div>
+				                    	</div>
+		                            </div>
+				                <%end%>
+				            <%else%>
+				                <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid => movie['id'] do%>
+				                    <div class="movie-items2">
+				                    	<div id="movie-items-pics">
+				                       		<img src="/assets/no_image.gif" class="img-rounded"> 
+										</div>
+					                    <div id="movie-items-info-tiny">
+						            	    <p style="font-weight:bold;"><%=movie['title']%></p>					 
+				                           	<div id="hiding">
+				                         		<p>
+													<%movie['genres'].each do |a2|%>
+														<%=a2['name']%>
+													<%end%>
+												</p>
+												<p>
+													<%movie['directors'].each do |a2|%>
+														<%=a2['name']%>
+													<%end%>
+												</p>
+				                            </div>
+				                        </div>
+				                    </div>                           
+				                <%end%>
+				            <%end%>
+		                <%elsif movie['photos'].length==0 %>
+				            <%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid => movie['id'] do%>
+				                <div class="movie-items2">
+				                   	<div id="movie-items-pics">
+				                       	<img src="/assets/no_image.gif" class="img-rounded">
+				               		</div>
+					                <div id="movie-items-info-tiny">
+							            <p style="font-weight:bold;"><%=movie['title']%></p>
+					                    <div id="hiding">
+					                       	<p>
+												<%movie['genres'].each do |a2|%>
+													<%=a2['name']%>
+												<%end%>
+											</p>
+											<p>
+												<%movie['directors'].each do |a2|%>
+													<%=a2['name']%>
+												<%end%>
+											</p>
+					                    </div>
+					                </div>
+				                </div>                         
+				       		<%end%>                 		
+		                <%end%>    
+		            </div>    	
+				<%end%>
+			</div>
+		</div>
+	</div>
+</div>
+
+

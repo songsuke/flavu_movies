@@ -1,0 +1,244 @@
+<div id="theatre-content">
+	<div id="content">
+		<h1 class="title"> Showtimes </h1>
+		<div id="theatre-show">
+			<div class="theatres-list group">
+				<div class="theatres-filters">
+					<div class="by-near">
+						<ul id="myTab">
+							<h2> Liked </h2>
+							<% @lt['theatres'].each do |liked| %>
+  								<li><a href="#<%=liked['id']%>"  data-toggle="tab"><%=liked['name']%></a></li>	
+							<%end%>
+
+							<h2> Nearby </h2>
+							<% @nt['theatres'].each do |nearby| %>
+  								<li><a href="#<%=nearby['id']%>"  data-toggle="tab"><%=nearby['name']%></a></li>	
+							<%end%>
+
+							<h2> Unliked </h2>
+							<% @nit['theatres'].each do |unliked| %>
+  								<li><a href="#<%=unliked['id']%>"  data-toggle="tab"><%=unliked['name']%></a></li>	
+							<%end%>
+						</ul>
+					</div><!--by-near-->
+				</div><!--theatres-filters-->
+			</div><!--theatres-list group-->
+
+				<div class="theatres-info1">
+					<!--liked theatres-->
+
+					<% @lt['theatres'].each do |liked| %>
+  						<div class="tab-pane" id="<%=liked['id']%>">
+  							<ul id="myTab2">
+  							<% liked['movies'].each do |movie|%>
+	  							<li>
+		  							<div class="movie-items1">
+		  								<% if(movie['photos'].length >0) %>
+					                    	<%photo = movie['photos'].first%> 
+					                    	<%if photo['poster']==true%>
+							                    <a href="#<%=movie['id']%><%=liked['id']%>" data-toggle="modal">
+							                        <div class="movie-items2">
+														<div id="movie-items-pics">
+								                           	<img src="<%=photo['url']%>" class="img-rounded">
+								                        </div>
+								                        <div id="movie-items-info-tiny">
+									                        <p style="font-weight:bold;"><%=movie['title']%></p>
+									                    </div>
+							                        </div>
+							                    </a>
+							                <%else%>
+							                    <a href="#<%=movie['id']%><%=liked['id']%>" data-toggle="modal">
+							                	    <div class="movie-items2">
+							                       		<div id="movie-items-pics">
+							                           		<img src="/assets/no_image.gif" class="img-rounded"> 
+							                           	</div>
+								                        <div id="movie-items-info-tiny">
+									                        <p style="font-weight:bold;"><%=movie['title']%></p>
+							                            </div>
+							                        </div>                    	 
+							                    </a>
+							                <%end%>
+					                  	<%elsif movie['photos'].length==0%>
+							            	<a href="#<%=movie['id']%><%=liked['id']%>" data-toggle="modal">
+							                    <div class="movie-items2">
+							                    	<div id="movie-items-pics">
+							                           	<img src="/assets/no_image.gif" class="img-rounded">          
+							                       	</div>
+								                    <div id="movie-items-info-tiny">
+									                        <p style="font-weight:bold;"><%=movie['title']%></p>
+								                    </div>
+							                    </div>                         
+							                </a>                 		
+					                  	<%end%>   
+			                  		</div>  
+			                  	</li>
+	                  		<%end%>  	
+	                  		</ul>		
+	                  		
+  							<% liked['movies'].each do |movie|%>				
+  								<div id="<%=movie['id']%><%=liked['id']%>" class="modal fade hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+										<%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid=>movie['id'] do%>
+				  						<h1 class="title"><%=movie['title']%></h1>
+				  						<%end%>
+				  					</div>
+				  					<div class="modal-body">
+				  						<%movie['showtimes'].each do |showtime|%>
+				  							<%if showtime['date'].to_date == Time.now.to_date%>
+					  								<p>Date : <%=showtime['date']%></p>
+					  								<p>Time : <%=showtime['start_time']%></p>
+					  						<%end%>
+				  						<%end%>
+				  					</div>
+								</div>
+							<%end%>
+  						</div>
+  					<%end%>
+  					
+  					<!--nearby-theatres-->
+  					
+					<% @nt['theatres'].each do |liked| %>
+  						<div class="tab-pane" id="<%=liked['id']%>">
+  							<ul id="myTab2">
+  							<% liked['movies'].each do |movie|%>
+	  							<li>
+		  							<div class="movie-items1">
+		  								<% if(movie['photos'].length >0) %>
+					                    	<%photo = movie['photos'].first%> 
+					                    	<%if photo['poster']==true%>
+							                    <a href="#<%=movie['id']%><%=liked['id']%>" data-toggle="modal">
+							                        <div class="movie-items2">
+														<div id="movie-items-pics">
+								                           	<img src="<%=photo['url']%>" class="img-rounded">
+								                        </div>
+								                        <div id="movie-items-info-tiny">
+									                        <p style="font-weight:bold;"><%=movie['title']%></p>
+									                    </div>
+							                        </div>
+							                    </a>
+							                <%else%>
+							                    <a href="#<%=movie['id']%><%=liked['id']%>" data-toggle="modal">
+							                	    <div class="movie-items2">
+							                       		<div id="movie-items-pics">
+							                           		<img src="/assets/no_image.gif" class="img-rounded"> 
+							                           	</div>
+								                        <div id="movie-items-info-tiny">
+									                        <p style="font-weight:bold;"><%=movie['title']%></p>
+							                            </div>
+							                        </div>                    	 
+							                    </a>
+							                <%end%>
+					                  	<%elsif movie['photos'].length==0%>
+							            	<a href="#<%=movie['id']%><%=liked['id']%>" data-toggle="modal">
+							                    <div class="movie-items2">
+							                    	<div id="movie-items-pics">
+							                           	<img src="/assets/no_image.gif" class="img-rounded">          
+							                       	</div>
+								                    <div id="movie-items-info-tiny">
+									                        <p style="font-weight:bold;"><%=movie['title']%></p>
+								                    </div>
+							                    </div>                         
+							                </a>                 		
+					                  	<%end%>   
+			                  		</div>  
+			                  	</li>
+	                  		<%end%>  	
+	                  		</ul>		
+	                  		
+  							<% liked['movies'].each do |movie|%>				
+  								<div id="<%=movie['id']%><%=liked['id']%>" class="modal fade hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+										<%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid=>movie['id'] do%>
+				  						<h1 class="title"><%=movie['title']%></h1>
+				  						<%end%>				  					
+				  					</div>
+				  					<div class="modal-body">
+				  						<%movie['showtimes'].each do |showtime|%>
+				  							<%if showtime['date'].to_date == Time.now.to_date%>
+					  							<p>Date : <%=showtime['date']%></p>
+					  							<p>Time : <%=showtime['start_time']%></p>
+				  							<%end%>
+				  						<%end%>
+				  					</div>
+								</div>
+							<%end%>
+  						</div>
+  					<%end%>
+  					
+  					<!--not-interested-theatres-->
+  					
+					<% @nit['theatres'].each do |liked| %>
+  						<div class="tab-pane" id="<%=liked['id']%>">
+  							<ul id="myTab2">
+  							<% liked['movies'].each do |movie|%>
+	  							<li>
+		  							<div class="movie-items1">
+		  								<% if(movie['photos'].length >0) %>
+					                    	<%photo = movie['photos'].first%> 
+					                    	<%if photo['poster']==true%>
+							                    <a href="#<%=movie['id']%><%=liked['id']%>" data-toggle="modal">
+							                        <div class="movie-items2">
+														<div id="movie-items-pics">
+								                           	<img src="<%=photo['url']%>" class="img-rounded">
+								                        </div>
+								                        <div id="movie-items-info-tiny">
+									                        <p style="font-weight:bold;"><%=movie['title']%></p>
+									                    </div>
+							                        </div>
+							                    </a>
+							                <%else%>
+							                    <a href="#<%=movie['id']%><%=liked['id']%>" data-toggle="modal">
+							                	    <div class="movie-items2">
+							                       		<div id="movie-items-pics">
+							                           		<img src="/assets/no_image.gif" class="img-rounded"> 
+							                           	</div>
+								                        <div id="movie-items-info-tiny">
+									                        <p style="font-weight:bold;"><%=movie['title']%></p>
+							                            </div>
+							                        </div>                    	 
+							                    </a>
+							                <%end%>
+					                  	<%elsif movie['photos'].length==0%>
+							            	<a href="#<%=movie['id']%><%=liked['id']%>" data-toggle="modal">
+							                    <div class="movie-items2">
+							                    	<div id="movie-items-pics">
+							                           	<img src="/assets/no_image.gif" class="img-rounded">          
+							                       	</div>
+								                    <div id="movie-items-info-tiny">
+									                        <p style="font-weight:bold;"><%=movie['title']%></p>
+								                    </div>
+							                    </div>                         
+							                </a>                 		
+					                  	<%end%>   
+			                  		</div>  
+			                  	</li>
+	                  		<%end%>  	
+	                  		</ul>		
+	                  		
+  							<% liked['movies'].each do |movie|%>				
+  								<div id="<%=movie['id']%><%=liked['id']%>" class="modal fade hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+										<%=link_to :action=>"showmovie" , :controller=>"static_pages" , :showid=>movie['id'] do%>
+				  						<h1 class="title"><%=movie['title']%></h1>
+				  						<%end%>				  					
+				  					</div>
+				  					<div class="modal-body">
+				  						<%movie['showtimes'].each do |showtime|%>
+				  					  		<%if showtime['date'].to_date == Time.now.to_date%>
+												<p>Date : <%=showtime['date']%></p>
+					  							<p>Time : <%=showtime['start_time']%></p>
+				  							<%end%>
+				  						<%end%>
+				  					</div>
+								</div>
+							<%end%>
+  						</div>
+  					<%end%>					
+				</div><!--theatres-info-->
+			</div><!--theatres-show-->
+	</div>
+</div><!--theatre-content-->

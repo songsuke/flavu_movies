@@ -1,0 +1,14 @@
+<div id="home-content">
+  <div id="content">
+    <h1 class="title"> Movies News </h1>
+    <div id="showmovie-content">
+      <div id="news-content">
+        <%@news['responseData']['results'].each do |news1|%>
+          <li style="font-weight:bold"><%=(news1['title']).html_safe%></li>
+          <li><%=(news1['content']).html_safe%></li>
+          <li> <%=link_to "Read More" ,news1['unescapedUrl'] %> </li>
+        <%end%>
+      </div>
+    </div>
+  </div>
+</div>

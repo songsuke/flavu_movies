@@ -1,0 +1,51 @@
+<div id="theatre-content">
+  <div id="content">
+    <h1 class="title"> Sign In </h1>
+    <div id="theatre-show">
+      <%if flash[:error]%><div class="alert"><%= flash[:error]%></div><%end%>
+      <%= form_tag '/signin' ,:class=>"form-horizontal" do %>
+        <div class="control-group">
+          <label class="control-label" for="inputEmail">Login</label>
+          <div class="controls">    
+            <%= text_field_tag "login" ,nil,:placeholder=>"Username or Email"%>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="inputPassword">Password</label>
+          <div class="controls">    
+            <%= password_field_tag "password" ,nil,:placeholder=>"Password" %>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="controls">
+            <label class="checkbox">
+              <%=check_box("checkbox", "check")%>
+              Remember me
+            </label>
+            <button name="confirm" id="confirm" value="confirm" type="submit" class="btn"> Login </button>  
+          </div>  
+        </div>
+        <div class="control-group">
+          <div class="controls">
+            <%=link_to "forgot password?", forgot_password_path%>
+          </div>  
+        </div>
+      <%end%>
+    <%=form_tag '/cover' ,:class=>"form-horizontal" do %>
+      <div class="control-group">
+        <div class="controls">
+            <p>or</p>
+            <button class="btn" name="guest"  value="true"> Enter the website </button>
+        </div>  
+      </div>
+    <%end%>
+    <div class="control-group">
+        <div class="controls">
+            <p>or</p>
+            <%= link_to "Sign in with Facebook", "/auth/facebook" %>
+        </div>  
+      </div>
+
+    </div>
+  </div>
+</div>

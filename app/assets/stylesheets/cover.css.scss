@@ -1,0 +1,199 @@
+// Place all the styles related to the cover controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "bootstrap";
+@import "bootstrap-responsive";
+@media (min-width: 980px) {
+
+	body {
+		background-color: black;
+		background-image: url('/assets/bg-black.jpg');
+		background-repeat: no-repeat;
+		background-position: top center;
+		background-attachment: fixed;
+	}
+
+	.wrapper {
+		margin: 0 auto;
+		width: 1024px;
+		position: relative;
+	}
+
+	#header {
+	margin-top: 50px;
+	margin-bottom: 2em;
+	}
+
+	#logo {
+		float: left;
+		margin-bottom: 30px;
+	}
+	#login-menu {
+		float: right;
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}
+
+	#password1, #login1 {
+		display: inline;
+		padding-right: 10px;
+		width: 140px;
+		label {
+			display: inline;
+			width: 140px;
+		}
+	}
+
+
+	.content {
+		clear: both;
+		margin: 0 auto;
+	}
+
+	#cover-content {
+		width: 960px;
+		height: 500px;
+		margin-bottom: 1em;
+		text-align: center;
+
+		#remember-but {
+			margin-top: 15px;
+		}				
+	}
+
+	#btn {
+		margin-bottom: 20px;
+	}
+
+	button.btn.btn-large {
+		width: 220px;
+		height: 70px;
+	}
+}
+
+@media (max-width: 767px) { 
+	body {
+		background-color: black;
+		background-repeat: no-repeat;
+		background-position: top center;
+		background-attachment: fixed;
+	}
+
+  input[type="text"],input[type="password"] {
+    height: 35px;
+    width: 100%;
+  }
+
+	#header {
+	margin-top: 10px;
+	margin-bottom: 0;
+	}
+
+	#logo { 
+	  	float: none; 
+	  	text-align: center !important; 
+	}
+
+	#password1, #login1 {
+		display: inline;
+		padding-right: 10px;
+		width: 140px;
+		label {
+			display: inline;
+			width: 140px;
+		}
+	}
+
+	.content {
+		clear: both;
+		margin: 0 auto;
+	}
+
+
+	#btn {
+		margin-bottom: 20px;
+	}
+
+	button.btn.btn-large {
+		width: 250px;
+		height: 50px;
+	}
+
+	#cover-content {
+		text-align: center;
+		margin: 5% 0 0 0;
+		.modal-body {
+			text-align: left;
+		}
+
+		#remember-but {
+			margin-top: 15px;
+			margin-bottom: 15px;
+		}		
+
+	}
+
+}
+
+
+
+@media (max-width: 480px) { 
+	body {
+		background-color: black;
+		background-repeat: no-repeat;
+		background-position: top center;
+		background-attachment: fixed;
+	}
+
+  input[type="text"],input[type="password"] {
+    height: 35px;
+    width: 100%;
+  }
+	#header {
+	margin-top: 50px;
+	margin-bottom: 2em;
+	}
+
+	#logo { 
+	  	float: none; 
+	  	text-align: center !important; 
+	}
+
+	#password1, #login1 {
+		display: inline;
+		padding-right: 10px;
+		width: 140px;
+		label {
+			display: inline;
+			width: 140px;
+		}
+	}
+
+	.content {
+		clear: both;
+		margin: 0 auto;
+	}
+
+
+	#btn {
+		margin-bottom: 20px;
+	}
+
+	button.btn.btn-large {
+		width: 190px;
+		height: 60px;
+	}
+
+	#cover-content {
+		text-align: center;
+		margin: 25% 0 0 0;
+		.modal-body {
+			text-align: left;
+		}
+		#remember-but {
+			margin-top: 15px;
+			margin-bottom: 15px;			
+		}		
+	}
+
+}
