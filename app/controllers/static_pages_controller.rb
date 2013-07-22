@@ -1,7 +1,7 @@
 class StaticPagesController < ApplicationController
 require 'httparty'
 require 'open-uri'
-before_filter :authenticate_user, :except => [:signin, :register, :facebook]
+    before_filter :authenticate_user, :except => [:signin, :register, :facebook, :idevice]
 
 
   def signin
