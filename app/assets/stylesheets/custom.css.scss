@@ -169,7 +169,7 @@ body {
   #jewel_container{
     background-image: linear-gradient(to bottom, #fff, rgb(240, 240, 240));
     background-image: -moz-linear-gradient(to bottom, #fff, rgb(240, 240, 240));
-    background-image: -webkit-linear-gradient(to bottom, #fff, rgb(240, 240, 240));
+    background-image: -webkit-gradient(linear,to bottom, #fff, rgb(240, 240, 240));
     border: 1px solid #D1D3D4;
     border-radius: 3px 3px 3px 3px;
     background-color: rgb(245,245,245);
@@ -250,7 +250,7 @@ body {
   border-radius: 3px 3px 3px 3px;
 
   background-image: linear-gradient(to bottom, rgb(240, 240, 240), rgb(200,200,200));
-  background-image: -webkit-linear-gradient(to bottom, rgb(240, 240, 240), rgb(200,200,200));
+  background-image: -webkit-gradient(linear,to bottom, rgb(240, 240, 240), rgb(200,200,200));
   background-image: -moz-gradient(to bottom, rgb(240, 240, 240), rgb(200,200,200));
   
 
@@ -296,7 +296,7 @@ body {
 }
 #navigation-bar {
   background-image: linear-gradient(to top , rgb(220, 220, 220), rgb(245, 245, 245));
-  background-image: -webkit-linear-gradient(to top , rgb(220, 220, 220), rgb(245, 245, 245));
+  background-image: -webkit-gradient(linear,to top , rgb(220, 220, 220), rgb(245, 245, 245));
   background-image: -moz-linear-gradient(to top , rgb(220, 220, 220), rgb(245, 245, 245));
 
   max-height: 50px;
@@ -349,7 +349,7 @@ body {
         .current {
           background-image: linear-gradient(to top , rgb(220, 220, 220), rgb(245, 245, 245)) inset;
           background-image: -moz-linear-gradient(to top , rgb(220, 220, 220), rgb(245, 245, 245)) inset;
-          background-image: -webkit-linear-gradient(to top , rgb(220, 220, 220), rgb(245, 245, 245)) inset;
+          background-image: -webkit-gradient(linear,to top , rgb(220, 220, 220), rgb(245, 245, 245)) inset;
           
           box-shadow: 0 0 3px 1px rgb(200,200,200) inset;
         }
