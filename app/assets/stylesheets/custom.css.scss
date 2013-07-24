@@ -167,7 +167,7 @@ body {
     }
   }
   #jewel_container{
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff', endColorstr='rgb(240, 240, 240'); /* for IE */
+    /*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff', endColorstr='rgb(240, 240, 240'); /* for IE */
     background-image: linear-gradient(to bottom, #fff, rgb(240, 240, 240));
     background-image: -moz-linear-gradient(to bottom, #fff, rgb(240, 240, 240));
     background-image: -webkit-gradient(linear,to bottom, #fff, rgb(240, 240, 240));
@@ -249,10 +249,10 @@ body {
   margin-top: 25px;
   clear: both;
   border-radius: 3px 3px 3px 3px;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='rgb(240, 240, 240)', endColorstr='rgb(200, 200, 200'); /* for IE */
+    /*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='rgb(240, 240, 240)', endColorstr='rgb(200, 200, 200'); /* for IE */
 
   background-image: linear-gradient(to bottom, rgb(240, 240, 240), rgb(200,200,200));
-  background-image: -webkit-gradient(linear,to bottom, rgb(240, 240, 240), rgb(200,200,200));
+  background-image: -/*-gradient(linear,to bottom, rgb(240, 240, 240), rgb(200,200,200));
   background-image: -moz-gradient(to bottom, rgb(240, 240, 240), rgb(200,200,200));
   
 
@@ -297,7 +297,7 @@ body {
   }
 }
 #navigation-bar {
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='rgb(245, 245, 245)', endColorstr='rgb(220, 220, 220'); /* for IE */
+   /* filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='rgb(245, 245, 245)', endColorstr='rgb(220, 220, 220');  for IE */
 
   background-image: linear-gradient(to top , rgb(220, 220, 220), rgb(245, 245, 245));
   background-image: -webkit-gradient(linear,to top , rgb(220, 220, 220), rgb(245, 245, 245));
