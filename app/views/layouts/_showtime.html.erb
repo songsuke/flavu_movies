@@ -118,26 +118,60 @@
 
 			
 			<!--Tabs-->
-			<ul class ="right">
+			
 				
 				<%if @layout_type == "movies"%>
-					<li><a href="#interested" data-toggle="tab">Interested Movies</a></li>
-					<li class="active"><a href="#remaining" data-toggle="tab">Remaining Movies</a></li>
-					<li><a href="#not_interested" data-toggle="tab">Not Interested Movies</a></li>
-					<li><a href="#watched_lists" data-toggle="tab">Watched Lists</a></li>
+				<ul class ="right">
+					<li><a href="#interested" data-toggle="tab">
+							Interested Movies
+					</a></li>
+					<li class="active"><a href="#remaining" data-toggle="tab">
+							Remaining Movies
+					</a></li>
+					<li><a href="#not_interested" data-toggle="tab">
+							Not Interested Movies
+					</a></li>
+					<li><a href="#watched_lists" data-toggle="tab">
+							Watched Lists
+					</a></li>
+				</ul>
 				<%elsif @layout_type == "theatres"%>
-					<li><a href="#liked" data-toggle="tab">Liked</a></li>
-					<li class="active"><a href="#nearby" data-toggle="tab">Nearby</a></li>
-					<li><a href="#unliked_th" data-toggle="tab">Unliked</a></li>
+				<ul class ="right">
+					<li><a href="#liked" data-toggle="tab">
+							Liked
+					</a></li>
+					<li class="active"><a href="#nearby" data-toggle="tab">
+							Nearby
+					</a></li>
+					<li><a href="#unliked_th" data-toggle="tab">
+							Unliked
+					</a></li>
+				</ul>
 				<%elsif @layout_type == "buddies"%>
-					<li class="active"><a href="#movie_buddies" data-toggle="tab">Movie Buddies</a></li>
-					<li><a href="#requests" data-toggle="tab">Requests(<%=@requests['total_entries']%>)</a></li>
-					<li><a href="#friends" data-toggle="tab">Friends</a></li>
+				<ul class ="right">
+					<li class="active"><a href="#movie_buddies" data-toggle="tab">
+							Movie Buddies
+					</a></li>
+					<li><a href="#requests" data-toggle="tab">
+							Requests(<%=@requests['total_entries']%>)
+					</a></li>
+					<li><a href="#friends" data-toggle="tab">
+							Friends
+					</a></li>
+				</ul>
 				<%elsif @layout_type == "preferences"%>
-					<li class="active"><a href="#genres_p" data-toggle="tab">Genres</a></li>
-					<li><a href="#directors_p" data-toggle="tab">Directors</a></li>
-					<li><a href="#actors_p" data-toggle="tab">Actors</a></li>
-				<%end%>
-			</ul>
+				<ul class ="right-taste">
+					<div id="taste_profile_search">
+						<%=form_tag '/search' do%>
+							<input type="text" id="taste" name="taste" placeholder="search your taste">
+							<button id="bt_search_taste" name="commit" class="icon-search" type="submit" ></button>
+						<%end%>
+					</div>
+					
+						<li class="active"><a href="#genres_p" data-toggle="tab">Genres</a></li>
+						<li ><a href="#directors_p" data-toggle="tab">Directors</a></li>
+						<li><a href="#actors_p" data-toggle="tab">Actors</a></li>
+					<%end%>
+				</ul>
 	</div><!--navbar-inner-->
 </div>

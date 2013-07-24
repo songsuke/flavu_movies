@@ -1,7 +1,7 @@
 class StaticPagesController < ApplicationController
 require 'httparty'
 require 'open-uri'
-before_filter :authenticate_user, :except => [:signin, :register, :facebook]
+before_filter :authenticate_user, :except => [:signin, :register, :facebook,:idevice]
 
 
   def signin
@@ -77,7 +77,7 @@ before_filter :authenticate_user, :except => [:signin, :register, :facebook]
             @check_register='false'
             flash[:error] = "#{params[:email]} has already been taken. Please try again"
           else
-            flash[:notice] = "Register is successful. Please check you email."
+            flash[:notice] = "Register is successful. Please check your email."
             redirect_to validate_path
           end
         end
@@ -418,6 +418,13 @@ request.remote_ip
           @actor_delete =HTTParty.delete("https://flavumovies.herokuapp.com/actor_preferences/1.json", body: {user: {auth_token: cookies.signed[:auth]}, actor_preference: {actor: params[:actor_update] ,score: params[:score]}}).parsed_response
         end
          
+
+      end
+      if params[:taste] =="taste"
+        puts "Tye"
+        puts params[:taste]
+@url_search="https://flavumovies.herokuapp.com/genre_preferences.json"
+        @taste_search = HTTParty.get(@url_search, body: {user: {auth_token: @token, search: params[:taste]}}).parsed_response
       end
       @url1 = "https://flavumovies.herokuapp.com/genre_preferences.json"
       @url2 = "https://flavumovies.herokuapp.com/director_preferences.json"
@@ -1394,10 +1401,7 @@ request.remote_ip
   end
 
   def validate
-    if (!flash[:notice])
-     redirect_to cover_path
-    else
-    end
+
   end
 
   def showtimes
@@ -1804,5 +1808,16 @@ request.remote_ip
   def myopinion
     
   end
+
+  def search
+    puts params[:taste]
+
+    
+    @url_search="https://flavumovies.herokuapp.com/directors.json?search=params[:taste]"
+    @director_preferences =HTTParty.get(@url2, body: {user: {auth_token: cookies[:auth]}}).parsed_response
+
+
+  end
+
 
 end

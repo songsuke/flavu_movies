@@ -346,16 +346,95 @@ body {
       }
     }
   }
+  .right-taste{
+    position: relative;
+    display: block;
+    float: right;
+    overflow: hidden;
+    margin-right: 23px;
+    form {
+      margin: 0px;
+    }
+    #taste_profile_search {
+      margin-top: 3px;
+      input[type="text"] {
+        width: auto;
+        height:15px;
+        width: 140px;
+        margin: 0;
+        padding: 0;
+      }
+      #bt_search_taste {
+        position: absolute;
+        padding: 0px;
+        border: 0px;
+        background-color: white;
+        top: 0;
+        right: 8px;
+        margin: 5px 5px 0 0px;
+        cursor: pointer;
+      }
+    }
+
+    li {
+      line-height: 20px;
+      display: inline;
+      margin-right: 10px;
+      a {
+        float: none;
+        font-size: 11px;
+        color: #6D6E71;
+        text-decoration: none;
+        text-shadow: 0 1px 0 #ffffff;
+      }
+      a:hover{
+        opacity: 0.5;
+      }
+    }
+    .active {
+      a{
+        color: black;
+        text-decoration: none;
+      }
+    }
+  }
+
   .right {
     position: relative;
     display: block;
-    margin: 20px;
     float: right;
     overflow: hidden;
+    margin: 23px;
+
+    form {
+      margin: 0px;
+    }
+    #taste_profile_search {
+      margin-top: 3px;
+      margin-right: 20px;
+      input[type="text"] {
+        width: auto;
+        height:15px;
+        width: 140px;
+        margin: 0;
+        padding: 0;
+      }
+      #bt_search_taste {
+        position: absolute;
+        padding: 0px;
+        border: 0px;
+        background-color: white;
+        top: 0;
+        right: 8px;
+        margin: 5px 5px 0 0px;
+        cursor: pointer;
+      }
+    }
+
     li {
-      line-height: 23px;
+      line-height: 20px;
       display: inline;
-      margin-left: 10px;
+      margin-right: 10px;
       a {
         float: none;
         font-size: 11px;

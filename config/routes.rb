@@ -19,6 +19,7 @@ EasilyxMovie::Application.routes.draw do
   match '/contact', to: 'static_pages#contact'
   match '/aboutus', to: 'static_pages#aboutus'
   match '/idevice', to: 'static_pages#idevice'
+    match '/search', to: 'static_pages#search'
 match '/auth/:provider/callback', to: 'static_pages#facebook'
     match '/link_fb', to: 'static_pages#link_fb'
         match '/unlink_fb', to: 'static_pages#unlink_fb'
