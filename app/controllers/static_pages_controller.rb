@@ -1,11 +1,7 @@
 class StaticPagesController < ApplicationController
 require 'httparty'
 require 'open-uri'
-<<<<<<< HEAD
 before_filter :authenticate_user, :except => [:signin, :register, :facebook,:idevice]
-=======
-    before_filter :authenticate_user, :except => [:signin, :register, :facebook, :idevice]
->>>>>>> 8dc3a2c1a942a026e8fea2ef4ddad67290ee32d0
 
 
   def signin
@@ -1815,12 +1811,7 @@ request.remote_ip
 
   def search
     puts params[:taste]
-
     
-    @url_search="https://flavumovies.herokuapp.com/directors.json?search=params[:taste]"
-    @director_preferences =HTTParty.get(@url2, body: {user: {auth_token: cookies[:auth]}}).parsed_response
-
-
   end
 
 
