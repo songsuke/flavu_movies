@@ -1500,7 +1500,7 @@ request.remote_ip
       @lt=@theatres['liked_theatres']
       @nt=@theatres['nearby_theatres']
       @nit=@theatres['not_interested_theatres']
-    end
+    end 
   end
 
   def showmovie
